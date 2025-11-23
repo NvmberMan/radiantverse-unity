@@ -6,6 +6,8 @@ public class CharacterSystem : MonoBehaviour
     public CharacterItem CharacterItem { get; private set; }
     public ICharacterInput InputHandler { get; private set; }
 
+    public GameObject graphics;
+
     protected virtual void Awake()
     {
         CharacterMovement = GetComponent<CharacterMovement>();
