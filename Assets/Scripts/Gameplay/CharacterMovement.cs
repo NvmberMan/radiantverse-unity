@@ -12,6 +12,7 @@ public class CharacterMovement : CharacterSystem
     [SerializeField] float groundCheckDistance = 0.3f;
 
     Rigidbody rb;
+    Animator anim;
     public bool _isGrounded;
 
     public float Acceleration
@@ -24,6 +25,7 @@ public class CharacterMovement : CharacterSystem
     {
         base.Awake();
         rb = GetComponent<Rigidbody>();
+        anim = graphics.GetComponent<Animator>();
         rb.freezeRotation = true;
     }
 
@@ -31,6 +33,8 @@ public class CharacterMovement : CharacterSystem
     {
         base.Update(); // RUN INPUT HERE
         CheckGround();
+
+        anim.SetBool("IsGrounded", _isGrounded);
     }
 
     void CheckGround()
@@ -49,8 +53,21 @@ public class CharacterMovement : CharacterSystem
         vel.z = direction.z * acceleration;
 
         //if (vel.z < 0) { vel.z = 0; }
+        anim.SetBool("Running", true);
 
         rb.linearVelocity = vel;
+    }
+
+    public void StopMoving()
+    {
+        //x y z
+        Vector3 vel = rb.linearVelocity;
+
+        vel.x = 0;
+        vel.z = 0;
+
+        rb.linearVelocity = vel;
+        anim.SetBool("Running", false);
     }
 
     public void Jump()
@@ -58,6 +75,7 @@ public class CharacterMovement : CharacterSystem
         if (_isGrounded)
         {
             rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
+            anim.SetTrigger("Jump");
         }
     }
 }

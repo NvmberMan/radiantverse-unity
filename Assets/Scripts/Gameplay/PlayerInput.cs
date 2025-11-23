@@ -23,7 +23,15 @@ public class PlayerInput : MonoBehaviour, ICharacterInput
         //Debug.Log("Input H:" + h + "  V:" + v);  // ← Tambahkan ini
 
         Vector3 dir = new Vector3(h, 0, v).normalized;
-        CharacterMovement.MoveToDir(dir);
+        
+
+        if (h != 0 || v != 0)
+        {
+            CharacterMovement.MoveToDir(dir);
+        }else
+        {
+            CharacterMovement.StopMoving();
+        }
     }
 
     public void HandleJumpInput()
