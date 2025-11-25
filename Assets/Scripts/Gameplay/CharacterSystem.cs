@@ -17,7 +17,6 @@ public class CharacterSystem : MonoBehaviour
 
     protected virtual void Update()
     {
-        InputHandler?.HandleMovementInput();
-        InputHandler?.HandleJumpInput();
+    
     }
 }

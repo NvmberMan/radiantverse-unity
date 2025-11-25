@@ -6,6 +6,7 @@ public class CharacterMovement : CharacterSystem
     [Header("Movement Settings")]
     [SerializeField] float acceleration = 8f;
     [SerializeField] float airAcceleration = 4f;
+    [SerializeField] float jumpForce = 4f;
 
     [Header("Detection Settings")]
     [SerializeField] Transform groundDetectorPoint;
@@ -31,7 +32,8 @@ public class CharacterMovement : CharacterSystem
 
     protected override void Update()
     {
-        base.Update(); // RUN INPUT HERE
+        base.Update();
+
         CheckGround();
 
         anim.SetBool("IsGrounded", _isGrounded);
@@ -74,7 +76,7 @@ public class CharacterMovement : CharacterSystem
     {
         if (_isGrounded)
         {
-            rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             anim.SetTrigger("Jump");
         }
     }
