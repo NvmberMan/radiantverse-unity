@@ -1,15 +1,19 @@
 using UnityEngine;
 
-public class ShopController : MonoBehaviour
+public class ShopController : Controller
 {
-    public GameObject panel;
-    public void Show()
+    [Header("Views")]
+    public ArradiusDollarView ArradiusDollarView;
+
+    public override void Show()
     {
-        panel.SetActive(true);
+        base.Show();
+
+        ArradiusDollarView.Initialization();
     }
 
-    public void Hide()
+    public override void Hide()
     {
-        panel.SetActive(false);
+        base.Hide();
     }
 }

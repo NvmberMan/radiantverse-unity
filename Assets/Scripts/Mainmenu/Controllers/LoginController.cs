@@ -1,6 +1,5 @@
-using Firebase.Auth;
-using System;
 using UnityEngine;
+using Firebase.Auth;
 
 public class LoginController : Controller
 {
@@ -16,34 +15,25 @@ public class LoginController : Controller
 
     public void Login()
     {
-        LoginUser("numberman3250@gmail.com", "tohpati123");
+        AuthModel.LoginUser(
+            "numberman3250@gmail.com",
+            "tohpati123",
+            onSuccess: (user) =>
+            {
+                Debug.Log($"Welcome, {user.Email}!");
+
+                // Setelah login sukses, arahkan ke Lobby/Menu
+                MenuManager.instance.DirectController("lobby");
+            },
+            onError: (errorMsg) =>
+            {
+                Debug.LogError($"Login Error: {errorMsg}");
+            }
+        );
     }
-
-    public async void LoginUser(string email, string password)
-    {
-        try
-        {
-            var result = await AuthManager.instance.auth.SignInWithEmailAndPasswordAsync(email, password);
-            FirebaseUser user = result.User;
-
-            Debug.Log($"Login successful: {user.Email}");
-
-            // Panggil setelah sukses login
-            MenuManager.instance.DirectController("lobby");
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Login failed: {ex.Message}");
-        }
-    }
-
 
     public void Logout()
     {
-        if (AuthManager.instance.auth.CurrentUser != null)
-        {
-            Debug.Log($"User {AuthManager.instance.auth.CurrentUser.Email} logout.");
-            AuthManager.instance.auth.SignOut();
-        }
+        AuthModel.LogoutUser();
     }
 }

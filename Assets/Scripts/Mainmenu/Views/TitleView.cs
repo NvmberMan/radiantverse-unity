@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class TitleView : MonoBehaviour
+public class TitleView : View
 {
-    public void UpdateTitle()
+    public override void Initialization()
     {
 
     }

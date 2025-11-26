@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class LobbyController : MonoBehaviour
+public class LobbyController : Controller
 {
-    public GameObject panel;
-    public void Show()
+    public override void Show()
     {
-        panel.SetActive(true);
+        base.Show();
     }
 
-    public void Hide()
+    public override void Hide()
     {
-        panel.SetActive(false);
+        base.Hide();
     }
 }
