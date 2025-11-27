@@ -1,10 +1,7 @@
-using Firebase.Auth;
-using System;
 using UnityEngine;
 
-public class LevelSelectorController : Controller
+public class LoadingPopupController : Controller
 {
-    //[Header("Controller Variables")]
     public override void Show()
     {
         base.Show();
@@ -14,4 +11,5 @@ public class LevelSelectorController : Controller
     {
         base.Hide();
     }
+
 }

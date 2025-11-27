@@ -21,18 +21,47 @@ public static class AuthModel
         }
     }
 
-    public static void LogoutUser()
+    public static async void RegisterUser(string email, string password, Action<FirebaseUser> onSuccess = null, Action<string> onError = null)
+    {
+        try
+        {
+            var result = await AuthManager.instance.auth.CreateUserWithEmailAndPasswordAsync(email, password);
+            FirebaseUser user = result.User;
+
+            Debug.Log($"Account created successfully: {user.Email}");
+            onSuccess?.Invoke(user);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Registration failed: {ex.Message}");
+            onError?.Invoke(ex.Message);
+        }
+    }
+
+
+    public static void LogoutUser(Action onSuccess = null, Action<string> onError = null)
     {
         var auth = AuthManager.instance.auth;
 
-        if (auth.CurrentUser != null)
+        try
         {
-            Debug.Log($"User {auth.CurrentUser.Email} logged out.");
-            auth.SignOut();
+            if (auth.CurrentUser != null)
+            {
+                Debug.Log($"User {auth.CurrentUser.Email} logged out.");
+                auth.SignOut();
+                onSuccess?.Invoke();
+            }
+            else
+            {
+                Debug.Log("No user currently logged in.");
+                onError?.Invoke("No user currently logged in.");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Debug.Log("No user currently logged in.");
+            Debug.LogError($"Logout failed: {ex.Message}");
+            onError?.Invoke(ex.Message);
         }
     }
+
 }

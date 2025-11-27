@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MenuManager : MonoBehaviour
@@ -34,13 +35,26 @@ public class MenuManager : MonoBehaviour
             Debug.LogWarning($"Controller dengan ID '{idTarget}' TIDAK ditemukan!");
 
         target.Show();
+
     }
 
     public void HideAllController()
     {
         for (int i = 0; i < ControllerList.Count; i++)
         {
+            if (ControllerList[i] == null)
+            {
+                Debug.LogError($"ControllerList[{i}] is NULL!");
+                continue;
+            }
+
             ControllerList[i].Hide();
         }
     }
+
+    public T GetController<T>() where T : Controller
+    {
+        return ControllerList.OfType<T>().FirstOrDefault();
+    }
+
 }

@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class ShopController : Controller
 {
-    [Header("Views")]
-    public ArradiusDollarView ArradiusDollarView;
+    //[Header("Controller Variables")]
 
     public override void Show()
     {
         base.Show();
 
-        ArradiusDollarView.Initialization();
     }
 
     public override void Hide()
