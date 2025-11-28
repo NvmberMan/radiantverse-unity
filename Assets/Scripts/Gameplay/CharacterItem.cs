@@ -5,6 +5,7 @@ public class CharacterItem : CharacterSystem
 {
     [Header("Trigger Settings")]
     [SerializeField] private float itemDetectorRange = 1f;
+    [SerializeField] private float destroyTime = 0.5f;
     [SerializeField] private Vector3 itemDetectorOffset = Vector3.zero;
     [SerializeField] private LayerMask itemDetectorLayer;
 
@@ -39,7 +40,7 @@ public class CharacterItem : CharacterSystem
 
 
             OnEquippedItem(pickup.itemData);
-            Destroy(other.gameObject, 2);
+            Destroy(other.gameObject, destroyTime);
         }
     }
 
