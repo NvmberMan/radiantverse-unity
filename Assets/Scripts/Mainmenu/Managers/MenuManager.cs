@@ -21,24 +21,24 @@ public class MenuManager : MonoBehaviour
 
     public void DirectController(int index)
     {
-        HideAllController();
+        HideAllView();
 
-        ControllerList[index].Show();
+        ControllerList[index].Activate("base");
     }
 
     public void DirectController(string idTarget)
     {
-        HideAllController();
+        HideAllView();
         var target = ControllerList.Find(controller => controller.id == idTarget);
 
         if (target == null)
             Debug.LogWarning($"Controller dengan ID '{idTarget}' TIDAK ditemukan!");
 
-        target.Show();
+        target.Activate("base");
 
     }
 
-    public void HideAllController()
+    public void HideAllView()
     {
         for (int i = 0; i < ControllerList.Count; i++)
         {
@@ -48,7 +48,7 @@ public class MenuManager : MonoBehaviour
                 continue;
             }
 
-            ControllerList[i].Hide();
+            ControllerList[i].DisactivateAll();
         }
     }
 

@@ -5,16 +5,6 @@ using TMPro;
 public class ProfileController : Controller
 {
     //[Header("Controller Variables")]
-    public override void Show()
-    {
-        base.Show();
-    }
-
-    public override void Hide()
-    {
-        base.Hide();
-    }
-
     public void Logout()
     {
         AuthModel.LogoutUser(

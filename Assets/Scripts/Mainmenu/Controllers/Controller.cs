@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Controller : MonoBehaviour
 {
     public string id = "New Controller";
-    public GameObject panel;
+    public List<View> viewList = new List<View>();
+
     public static T Get<T>() where T : Controller
     {
         if (MenuManager.instance == null)
@@ -14,11 +16,41 @@ public class Controller : MonoBehaviour
         return MenuManager.instance.GetController<T>();
     }
 
-    public virtual void Show() { panel.SetActive(true); }
+    public virtual void Activate(string targetView) 
+    {
+        var target = viewList.Find(view => view.id == targetView);
 
-    public virtual void Hide() { panel.SetActive(false); }
+        if(target == null)
+        {
+            Debug.LogError($"View {targetView}'s not found");
+            return;
+        }
 
-                
+        Debug.Log($"View {targetView}'s is showing");
+        target.Show();
+    }
+
+    public virtual void ActivateOneAndHidingAll(string targetView)
+    {
+        DisactivateAll();
+
+        Activate(targetView);
+    }
+
+    public virtual void Disactivate(string targetView) 
+    {
+        var target = viewList.Find(view => view.id == targetView);
+        target.Hide();
+    }
+
+    public virtual void DisactivateAll()
+    {
+        foreach (var view in viewList)
+        {
+            view.Hide();
+        }
+    }
+
     public virtual void Direct(string targetId) { MenuManager.instance.DirectController(targetId);  }
     public virtual void Direct(int index) { MenuManager.instance.DirectController(index); }
 }

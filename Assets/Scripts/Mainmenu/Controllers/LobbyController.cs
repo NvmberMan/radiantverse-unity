@@ -7,9 +7,9 @@ public class LobbyController : Controller
     [Header("Controller Variables")]
     [SerializeField] private TMP_Text arradiusDollarView;
 
-    public override void Show()
+    public override void Activate(string targetView)
     {
-        base.Show();
+        base.Activate(targetView);
         // Langsung pakai data lokal (instant)
         if (PlayerLocalData.IsPlayerStatsLoaded)
         {

@@ -9,19 +9,18 @@ public class RegisterController : Controller
     [SerializeField] TMP_InputField inputEmail;
     [SerializeField] TMP_InputField inputPassword;
 
-    public override void Show() => base.Show();
-    public override void Hide() => base.Hide();
 
     public void Register()
     {
-        LoadingPopupController popupController = Controller.Get<LoadingPopupController>();
-        popupController?.Show();
+        //LoadingPopupController popupController = Controller.Get<LoadingPopupController>();
+        //popupController?.view.Show();
+        Activate("loading");
 
         AuthModel.RegisterUser(inputEmail.text, inputPassword.text,
             onSuccess: (user) =>
             {
                 Debug.Log($"User registered: {user.Email}");
-                popupController?.Hide();
+                Disactivate("loading");
 
                 // Masuk ke loading screen dengan coroutine, sama seperti Login
                 StartCoroutine(InitializeAllPlayerDataCoroutine(user));
@@ -29,7 +28,7 @@ public class RegisterController : Controller
             onError: (error) =>
             {
                 Debug.LogError($"Register error: {error}");
-                popupController?.Hide();
+                Disactivate("loading");
             });
     }
 

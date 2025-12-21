@@ -5,13 +5,5 @@ using UnityEngine;
 public class LevelSelectorController : Controller
 {
     //[Header("Controller Variables")]
-    public override void Show()
-    {
-        base.Show();
-    }
 
-    public override void Hide()
-    {
-        base.Hide();
-    }
 }

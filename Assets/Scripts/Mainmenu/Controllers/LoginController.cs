@@ -17,25 +17,9 @@ public class LoginController : Controller
             StartCoroutine(LoadAllPlayerDataCoroutine(user));
         };
     }
-
-    public override void Show()
-    {
-        base.Show();
-    }
-
-    public override void Hide()
-    {
-        base.Hide();
-    }
-
     public void Login()
     {
-        LoadingPopupController popupController = Controller.Get<LoadingPopupController>();
-
-        if (popupController != null)
-        {
-            popupController.Show();
-        }
+        Activate("loading");
 
         AuthModel.LoginUser(
             inputEmail.text,
@@ -44,10 +28,7 @@ public class LoginController : Controller
             {
                 Debug.Log($"Welcome, {user.Email}!");
 
-                if (popupController != null)
-                {
-                    popupController.Hide();
-                }
+                Disactivate("loading");
 
                 StartCoroutine(LoadAllPlayerDataCoroutine(user));
             },
@@ -55,10 +36,7 @@ public class LoginController : Controller
             {
                 Debug.LogError($"Login Error: {errorMsg}");
 
-                if (popupController != null)
-                {
-                    popupController.Hide();
-                }
+                Disactivate("loading");
             }
         );
     }
