@@ -1,84 +1,86 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterItem : CharacterSystem
-{
-    [Header("Trigger Settings")]
-    [SerializeField] private float itemDetectorRange = 1f;
-    [SerializeField] private float destroyTime = 0.5f;
-    [SerializeField] private Vector3 itemDetectorOffset = Vector3.zero;
-    [SerializeField] private LayerMask itemDetectorLayer;
-
-    [Header("Gizmos Settings")]
-    [SerializeField] private Color gizmosDetectorColor = Color.yellow;
-
-    private float originalSpeed;
-    private bool isUsingItem = false;
-
-
-    // ========== SESUAI CLASS DIAGRAM ==========
-    protected override void Awake()
+namespace Main.Gameplay { 
+    public class CharacterItem : CharacterSystem
     {
-        base.Awake();
-    }
+        [Header("Trigger Settings")]
+        [SerializeField] private float itemDetectorRange = 1f;
+        [SerializeField] private float destroyTime = 0.5f;
+        [SerializeField] private Vector3 itemDetectorOffset = Vector3.zero;
+        [SerializeField] private LayerMask itemDetectorLayer;
 
-    void Start()
-    {
-        originalSpeed = CharacterMovement.Acceleration;
-    }
+        [Header("Gizmos Settings")]
+        [SerializeField] private Color gizmosDetectorColor = Color.yellow;
 
-    // ========== SESUAI CLASS DIAGRAM (OnEquippedItem) ==========
-    private void OnTriggerEnter(Collider other)
-    {
-        ItemPickup pickup = other.GetComponent<ItemPickup>();
+        private float originalSpeed;
+        private bool isUsingItem = false;
 
-        if (pickup != null)
+
+        // ========== SESUAI CLASS DIAGRAM ==========
+        protected override void Awake()
         {
-            Debug.Log("Dapet Item");
-            Animator coinAnim = other.GetComponent<Animator>();
-            coinAnim.SetBool("Picked", true);
-
-
-            OnEquippedItem(pickup.itemData);
-            Destroy(other.gameObject, destroyTime);
+            base.Awake();
         }
-    }
 
-    // Class Diagram memiliki OnEquippedItem()
+        void Start()
+        {
+            originalSpeed = CharacterMovement.Acceleration;
+        }
+
+        // ========== SESUAI CLASS DIAGRAM (OnEquippedItem) ==========
+        private void OnTriggerEnter(Collider other)
+        {
+            ItemPickup pickup = other.GetComponent<ItemPickup>();
+
+            if (pickup != null)
+            {
+                Debug.Log("Dapet Item");
+                Animator coinAnim = other.GetComponent<Animator>();
+                coinAnim.SetBool("Picked", true);
 
 
-    public void OnEquippedItem(MovementItemData data)
-    {
-        if (isUsingItem) return;
+                OnEquippedItem(pickup.itemData);
+                Destroy(other.gameObject, destroyTime);
+            }
+        }
 
-        StartCoroutine(ApplyItem(data));
-    }
+        // Class Diagram memiliki OnEquippedItem()
 
-    // ========== Apply Effect ==========
-    private IEnumerator ApplyItem(MovementItemData data)
-    {
-        isUsingItem = true;
 
-        float boostedSpeed = originalSpeed + data.speedBonus;
-        CharacterMovement.Acceleration = boostedSpeed;
+        public void OnEquippedItem(MovementItemData data)
+        {
+            if (isUsingItem) return;
 
-        Debug.Log($"[ITEM] {data.itemName} applied → speed: {boostedSpeed}");
+            StartCoroutine(ApplyItem(data));
+        }
 
-        yield return new WaitForSeconds(data.duration);
+        // ========== Apply Effect ==========
+        private IEnumerator ApplyItem(MovementItemData data)
+        {
+            isUsingItem = true;
 
-        CharacterMovement.Acceleration = originalSpeed;
-        isUsingItem = false;
+            float boostedSpeed = originalSpeed + data.speedBonus;
+            CharacterMovement.Acceleration = boostedSpeed;
 
-        Debug.Log($"[ITEM] {data.itemName} ended → speed restored: {originalSpeed}");
-    }
+            Debug.Log($"[ITEM] {data.itemName} applied → speed: {boostedSpeed}");
 
-    // ========== Gizmos, SESUAI CLASS DIAGRAM ==========
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = gizmosDetectorColor;
-        Gizmos.DrawWireSphere(
-            transform.position + itemDetectorOffset,
-            itemDetectorRange
-        );
+            yield return new WaitForSeconds(data.duration);
+
+            CharacterMovement.Acceleration = originalSpeed;
+            isUsingItem = false;
+
+            Debug.Log($"[ITEM] {data.itemName} ended → speed restored: {originalSpeed}");
+        }
+
+        // ========== Gizmos, SESUAI CLASS DIAGRAM ==========
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = gizmosDetectorColor;
+            Gizmos.DrawWireSphere(
+                transform.position + itemDetectorOffset,
+                itemDetectorRange
+            );
+        }
     }
 }

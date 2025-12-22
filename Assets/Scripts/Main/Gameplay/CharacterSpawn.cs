@@ -1,58 +1,61 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSpawn : MonoBehaviour
+namespace Main.Gameplay
 {
-    public float fallThreshold = -15f;
-
-    // RESPawn final (dipakai semua)
-    public Vector3 spawnPoint;
-
-    void Start()
+    public class CharacterSpawn : MonoBehaviour
     {
-        // 1. Random Spawn awal game
-        GameObject[] spawnObjects = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        public float fallThreshold = -15f;
 
-        List<SpawnPoint> availableSpawns = new List<SpawnPoint>();
+        // RESPawn final (dipakai semua)
+        public Vector3 spawnPoint;
 
-        foreach (GameObject obj in spawnObjects)
+        void Start()
         {
-            SpawnPoint sp = obj.GetComponent<SpawnPoint>();
-            if (sp != null && !sp.isTaken)
+            // 1. Random Spawn awal game
+            GameObject[] spawnObjects = GameObject.FindGameObjectsWithTag("SpawnPoint");
+
+            List<SpawnPoint> availableSpawns = new List<SpawnPoint>();
+
+            foreach (GameObject obj in spawnObjects)
             {
-                availableSpawns.Add(sp);
+                SpawnPoint sp = obj.GetComponent<SpawnPoint>();
+                if (sp != null && !sp.isTaken)
+                {
+                    availableSpawns.Add(sp);
+                }
+            }
+
+            if (availableSpawns.Count > 0)
+            {
+                int randomIndex = Random.Range(0, availableSpawns.Count);
+
+                SpawnPoint chosen = availableSpawns[randomIndex];
+                chosen.isTaken = true;
+
+                // ini spawn awal player
+                spawnPoint = chosen.transform.position;
+
+                transform.position = spawnPoint;
+            }
+            else
+            {
+                // fallback: jika tidak ada spawnpoint
+                spawnPoint = transform.position;
             }
         }
 
-        if (availableSpawns.Count > 0)
+        private void Update()
         {
-            int randomIndex = Random.Range(0, availableSpawns.Count);
+            if (transform.position.y < fallThreshold)
+            {
+                Respawn();
+            }
+        }
 
-            SpawnPoint chosen = availableSpawns[randomIndex];
-            chosen.isTaken = true;
-
-            // ini spawn awal player
-            spawnPoint = chosen.transform.position;
-
+        public void Respawn()
+        {
             transform.position = spawnPoint;
         }
-        else
-        {
-            // fallback: jika tidak ada spawnpoint
-            spawnPoint = transform.position;
-        }
-    }
-
-    private void Update()
-    {
-        if (transform.position.y < fallThreshold)
-        {
-            Respawn();
-        }
-    }
-
-    public void Respawn()
-    {
-        transform.position = spawnPoint;
     }
 }

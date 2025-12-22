@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class Checkpoint : MonoBehaviour
+namespace Main.Gameplay
 {
-    public BoxCollider trigger;
-
-    private void OnTriggerEnter(Collider other)
+    public class Checkpoint : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        public BoxCollider trigger;
+
+        private void OnTriggerEnter(Collider other)
         {
-            other.GetComponent<CharacterSpawn>().spawnPoint = transform.position;
-            
-            gameObject.SetActive(false);
+            if (other.CompareTag("Player"))
+            {
+                other.GetComponent<CharacterSpawn>().spawnPoint = transform.position;
+
+                gameObject.SetActive(false);
+            }
         }
     }
 }

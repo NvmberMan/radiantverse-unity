@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public class ItemPickup : MonoBehaviour
+namespace Main.Gameplay
 {
-    public MovementItemData itemData;
+    public class ItemPickup : MonoBehaviour
+    {
+        public MovementItemData itemData;
+    }
+
 }

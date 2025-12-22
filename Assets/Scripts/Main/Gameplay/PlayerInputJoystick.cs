@@ -1,43 +1,46 @@
 using UnityEngine;
 
-public class PlayerInputJoystick : MonoBehaviour, ICharacterInput
+namespace Main.Gameplay
 {
-    CharacterMovement characterMovement;
-
-    public Joystick joystick;
-
-    private void Awake()
+    public class PlayerInputJoystick : MonoBehaviour, ICharacterInput
     {
-        characterMovement = GetComponent<CharacterMovement>();
-    }
+        CharacterMovement characterMovement;
 
-    private void Update()
-    {
-        HandleMovementInput();
-        //HandleJumpInput();
-    }
+        public Joystick joystick;
 
-    public void HandleMovementInput()
-    {
-        float h = joystick.Horizontal;
-        float v = joystick.Vertical;
-
-        //Debug.Log("Joystick H: " + h + " V: " + v);
-
-        Vector3 dir = new Vector3(h, 0, v).normalized;
-
-        if (h != 0 || v != 0)
+        private void Awake()
         {
-            characterMovement.MoveToDir(dir);
+            characterMovement = GetComponent<CharacterMovement>();
         }
-        else
-        {
-            characterMovement.StopMoving();
-        }
-    }
 
-    public void HandleJumpInput()
-    {
-        characterMovement.Jump();
+        private void Update()
+        {
+            HandleMovementInput();
+            //HandleJumpInput();
+        }
+
+        public void HandleMovementInput()
+        {
+            float h = joystick.Horizontal;
+            float v = joystick.Vertical;
+
+            //Debug.Log("Joystick H: " + h + " V: " + v);
+
+            Vector3 dir = new Vector3(h, 0, v).normalized;
+
+            if (h != 0 || v != 0)
+            {
+                characterMovement.MoveToDir(dir);
+            }
+            else
+            {
+                characterMovement.StopMoving();
+            }
+        }
+
+        public void HandleJumpInput()
+        {
+            characterMovement.Jump();
+        }
     }
 }

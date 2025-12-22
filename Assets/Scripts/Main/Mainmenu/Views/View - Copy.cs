@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class LoginView : MonoBehaviour
+namespace Main.Mainmenu
 {
+    public class LoginView : MonoBehaviour
+    {
 
+    }
 }

@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class ShopController : Controller
+namespace Main.Mainmenu
 {
-    //[Header("Controller Variables")]
+    public class ShopController : Controller
+    {
+        //[Header("Controller Variables")]
 
+    }
 }

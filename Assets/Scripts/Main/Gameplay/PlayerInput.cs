@@ -1,44 +1,48 @@
 ﻿using UnityEngine;
 
-public class PlayerInput : MonoBehaviour, ICharacterInput
+namespace Main.Gameplay
 {
-    CharacterMovement CharacterMovement;
-
-    void Awake()
+    public class PlayerInput : MonoBehaviour, ICharacterInput
     {
-        CharacterMovement = GetComponent<CharacterMovement>();
-    }
+        CharacterMovement CharacterMovement;
 
-    private void Update()
-    {
-        HandleMovementInput();
-        HandleJumpInput();
-    }
-
-    public void HandleMovementInput()
-    {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-
-        //Debug.Log("Input H:" + h + "  V:" + v);  // ← Tambahkan ini
-
-        Vector3 dir = new Vector3(h, 0, v).normalized;
-        
-
-        if (h != 0 || v != 0)
+        void Awake()
         {
-            CharacterMovement.MoveToDir(dir);
-        }else
-        {
-            CharacterMovement.StopMoving();
+            CharacterMovement = GetComponent<CharacterMovement>();
         }
-    }
 
-    public void HandleJumpInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        private void Update()
         {
-            CharacterMovement.Jump();
+            HandleMovementInput();
+            HandleJumpInput();
+        }
+
+        public void HandleMovementInput()
+        {
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
+
+            //Debug.Log("Input H:" + h + "  V:" + v);  // ← Tambahkan ini
+
+            Vector3 dir = new Vector3(h, 0, v).normalized;
+
+
+            if (h != 0 || v != 0)
+            {
+                CharacterMovement.MoveToDir(dir);
+            }
+            else
+            {
+                CharacterMovement.StopMoving();
+            }
+        }
+
+        public void HandleJumpInput()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                CharacterMovement.Jump();
+            }
         }
     }
 }

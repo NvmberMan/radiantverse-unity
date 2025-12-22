@@ -1,7 +1,11 @@
 using UnityEngine;
 
-public interface ICharacterInput
+namespace Main.Gameplay
 {
-    void HandleMovementInput();
-    void HandleJumpInput();
+    public interface ICharacterInput
+    {
+        void HandleMovementInput();
+        void HandleJumpInput();
+    }
+
 }

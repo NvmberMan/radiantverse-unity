@@ -1,56 +1,59 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Controller : MonoBehaviour
+namespace Main.Mainmenu
 {
-    public string id = "New Controller";
-    public List<View> viewList = new List<View>();
-
-    public static T Get<T>() where T : Controller
+    public class Controller : MonoBehaviour
     {
-        if (MenuManager.instance == null)
-        {
-            Debug.LogError("MenuManager instance is not set!");
-            return null;
-        }
-        return MenuManager.instance.GetController<T>();
-    }
+        public string id = "New Controller";
+        public List<View> viewList = new List<View>();
 
-    public virtual void Activate(string targetView) 
-    {
-        var target = viewList.Find(view => view.id == targetView);
-
-        if(target == null)
+        public static T Get<T>() where T : Controller
         {
-            Debug.LogError($"View {targetView}'s not found");
-            return;
+            if (MenuManager.instance == null)
+            {
+                Debug.LogError("MenuManager instance is not set!");
+                return null;
+            }
+            return MenuManager.instance.GetController<T>();
         }
 
-        Debug.Log($"View {targetView}'s is showing");
-        target.Show();
-    }
-
-    public virtual void ActivateOneAndHidingAll(string targetView)
-    {
-        DisactivateAll();
-
-        Activate(targetView);
-    }
-
-    public virtual void Disactivate(string targetView) 
-    {
-        var target = viewList.Find(view => view.id == targetView);
-        target.Hide();
-    }
-
-    public virtual void DisactivateAll()
-    {
-        foreach (var view in viewList)
+        public virtual void Activate(string targetView)
         {
-            view.Hide();
-        }
-    }
+            var target = viewList.Find(view => view.id == targetView);
 
-    public virtual void Direct(string targetId) { MenuManager.instance.DirectController(targetId);  }
-    public virtual void Direct(int index) { MenuManager.instance.DirectController(index); }
+            if (target == null)
+            {
+                Debug.LogError($"View {targetView}'s not found");
+                return;
+            }
+
+            Debug.Log($"View {targetView}'s is showing");
+            target.Show();
+        }
+
+        public virtual void ActivateOneAndHidingAll(string targetView)
+        {
+            DisactivateAll();
+
+            Activate(targetView);
+        }
+
+        public virtual void Disactivate(string targetView)
+        {
+            var target = viewList.Find(view => view.id == targetView);
+            target.Hide();
+        }
+
+        public virtual void DisactivateAll()
+        {
+            foreach (var view in viewList)
+            {
+                view.Hide();
+            }
+        }
+
+        public virtual void Direct(string targetId) { MenuManager.instance.DirectController(targetId); }
+        public virtual void Direct(int index) { MenuManager.instance.DirectController(index); }
+    }
 }

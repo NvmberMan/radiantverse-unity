@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class LookAtCamera : MonoBehaviour
+namespace Main.Gameplay
 {
-    void LateUpdate()
+    public class LookAtCamera : MonoBehaviour
     {
-        if (Camera.main == null) return;
+        void LateUpdate()
+        {
+            if (Camera.main == null) return;
 
-        Vector3 dir = transform.position - Camera.main.transform.position;
-        transform.rotation = Quaternion.LookRotation(dir);
+            Vector3 dir = transform.position - Camera.main.transform.position;
+            transform.rotation = Quaternion.LookRotation(dir);
+        }
     }
 }

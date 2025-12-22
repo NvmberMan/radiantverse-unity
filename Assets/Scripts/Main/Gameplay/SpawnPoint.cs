@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class SpawnPoint : MonoBehaviour
+namespace Main.Gameplay
 {
-    public bool isTaken = false; // status apakah spawn ini sudah dipakai.
+    public class SpawnPoint : MonoBehaviour
+    {
+        public bool isTaken = false; // status apakah spawn ini sudah dipakai.
+    }
 }

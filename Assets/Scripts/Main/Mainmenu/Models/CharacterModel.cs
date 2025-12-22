@@ -1,10 +1,14 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Menu/CharacterModel")]
-public class CharacterModel : ScriptableObject
+
+namespace Main.Mainmenu
 {
-    public string characterName;
-    public Sprite portrait;
-    public RuntimeAnimatorController animatorController;
-    public Vector3 previewPosition;
+    [CreateAssetMenu(menuName = "Menu/CharacterModel")]
+    public class CharacterModel : ScriptableObject
+    {
+        public string characterName;
+        public Sprite portrait;
+        public RuntimeAnimatorController animatorController;
+        public Vector3 previewPosition;
+    }
 }

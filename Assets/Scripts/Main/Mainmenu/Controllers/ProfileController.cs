@@ -2,21 +2,24 @@ using UnityEngine;
 using Firebase.Auth;
 using TMPro;
 
-public class ProfileController : Controller
+namespace Main.Mainmenu
 {
-    //[Header("Controller Variables")]
-    public void Logout()
+    public class ProfileController : Controller
     {
-        AuthModel.LogoutUser(
-           onSuccess: () =>
-           {
-               Debug.Log("Logout success, moving to Login Page...");
-               MenuManager.instance.DirectController("login");
-           },
-           onError: (error) =>
-           {
-               Debug.LogError("Logout error: " + error);
-           }
-       );
+        //[Header("Controller Variables")]
+        public void Logout()
+        {
+            AuthModel.LogoutUser(
+               onSuccess: () =>
+               {
+                   Debug.Log("Logout success, moving to Login Page...");
+                   MenuManager.instance.DirectController("login");
+               },
+               onError: (error) =>
+               {
+                   Debug.LogError("Logout error: " + error);
+               }
+           );
+        }
     }
 }
