@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelLoader : MonoBehaviour
+namespace Main.Gameplay
 {
-    // Fungsi ini bisa dipanggil lewat Inspector (Unity Event)
-    public void LoadLevelByName(string sceneName)
+    public class LevelLoader : MonoBehaviour
     {
-        Debug.Log("🚀 Memuat Scene: " + sceneName);
-        SceneManager.LoadScene(sceneName);
+        // Fungsi ini bisa dipanggil lewat Inspector (Unity Event)
+        public void LoadLevelByName(string sceneName)
+        {
+            Debug.Log("🚀 Memuat Scene: " + sceneName);
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }

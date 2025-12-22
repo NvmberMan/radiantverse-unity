@@ -1,13 +1,17 @@
 using UnityEngine;
 
-public class FinishLineTrigger : MonoBehaviour
+
+namespace Main.Gameplay
 {
-    private void OnTriggerEnter(Collider other)
+    public class FinishLineTrigger : MonoBehaviour
     {
-        if (other.CompareTag("Player") || other.CompareTag("NPC"))
+        private void OnTriggerEnter(Collider other)
         {
-            // Kirim GameObject yang menabrak (other.gameObject)
-            GameManager.Instance.OnFinishLineCrossed(other.gameObject);
+            if (other.CompareTag("Player") || other.CompareTag("NPC"))
+            {
+                // Kirim GameObject yang menabrak (other.gameObject)
+                GameManager.Instance.OnFinishLineCrossed(other.gameObject);
+            }
         }
     }
 }
