@@ -14,8 +14,6 @@ namespace Main.Mainmenu
 
         public void Register()
         {
-            //LoadingPopupController popupController = Controller.Get<LoadingPopupController>();
-            //popupController?.view.Show();
             Activate("loading");
 
             AuthModel.RegisterUser(inputEmail.text, inputPassword.text,
@@ -24,20 +22,23 @@ namespace Main.Mainmenu
                     Debug.Log($"User registered: {user.Email}");
                     Disactivate("loading");
 
-                    // Masuk ke loading screen dengan coroutine, sama seperti Login
                     StartCoroutine(InitializeAllPlayerDataCoroutine(user));
                 },
                 onError: (error) =>
                 {
-                    Debug.LogError($"Register error: {error}");
                     Disactivate("loading");
+
+                    ErrorView errorView = (ErrorView)GetView("error");
+                    errorView.ErrorSetup("Failed to create new account!", error.ToString());
+
+                    Activate("error");
                 });
         }
 
         private IEnumerator InitializeAllPlayerDataCoroutine(FirebaseUser user)
         {
             LoadingController loadingController = Controller.Get<LoadingController>();
-            Direct("loading"); // pindah ke loading page
+            Direct("loading");
 
             const float MIN_DELAY_PER_ITEM = 0.2f;
             int loadedCount = 0;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Main.Mainmenu
 {
@@ -16,6 +17,11 @@ namespace Main.Mainmenu
                 return null;
             }
             return MenuManager.instance.GetController<T>();
+        }
+
+        public View GetView(string targetId)
+        {
+            return viewList.Find(x => x.id == targetId);
         }
 
         public virtual void Activate(string targetView)

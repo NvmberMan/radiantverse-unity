@@ -36,9 +36,12 @@ namespace Main.Mainmenu
                 },
                 onError: (errorMsg) =>
                 {
-                    Debug.LogError($"Login Error: {errorMsg}");
-
                     Disactivate("loading");
+
+                    ErrorView errorView = (ErrorView)GetView("error");
+                    errorView.ErrorSetup("Failed to login!", errorMsg);
+
+                    errorView.Show();
                 }
             );
         }
