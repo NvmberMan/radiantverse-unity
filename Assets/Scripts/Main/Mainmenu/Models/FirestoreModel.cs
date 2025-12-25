@@ -222,23 +222,26 @@ namespace Main.Mainmenu
             });
         }
 
-        //public static void InitializeInventoryData(FirebaseUser user)
-        //{
-        //    DocumentReference docRef = db.Collection("inventoryData").Document(user.UserId);
+        public static void CheckUsernameExists(string username, Action<bool> onResult)
+        {
+            db.Collection("users").WhereEqualTo("Username", username).GetSnapshotAsync()
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    QuerySnapshot snapshot = task.Result;
 
-        //    InventoryData data = new InventoryData
-        //    {
-        //        UnlockedAchievements = new List<string>()
-        //    };
+                    bool exists = snapshot.Count > 0;
 
-        //    docRef.SetAsync(data).ContinueWithOnMainThread(task =>
-        //    {
-        //        if (task.IsCompletedSuccessfully)
-        //            Debug.Log("InventoryData created in Firestore!");
-        //        else
-        //            Debug.LogError($"Failed to save data: {task.Exception}");
-        //    });
-        //}
+                    onResult?.Invoke(exists);
+                }
+                else
+                {
+                    Debug.LogError("Gagal mengecek username: " + task.Exception);
+                    onResult?.Invoke(false);
+                }
+            });
+        }
 
         public static void InitializeInventoryData(FirebaseUser user)
         {

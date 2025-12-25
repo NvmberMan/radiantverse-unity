@@ -63,7 +63,7 @@ namespace Main.Mainmenu
                     loadingController.SetLoadingText("Account setup completed!");
                     loadingController.SetLoadingProgress(100);
                     yield return new WaitForSeconds(0.5f);
-                    Direct("lobby");
+                    Direct("create username");
                 }
             }
 
