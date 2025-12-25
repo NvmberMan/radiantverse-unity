@@ -36,8 +36,8 @@ namespace Main.Gameplay {
             if (pickup != null)
             {
                 Debug.Log("Dapet Item");
-                Animator coinAnim = other.GetComponent<Animator>();
-                coinAnim.SetBool("Picked", true);
+                Animator itemAnim = other.GetComponentInChildren<Animator>();
+                itemAnim.SetBool("Picked", true);
 
 
                 OnEquippedItem(pickup.itemData);
