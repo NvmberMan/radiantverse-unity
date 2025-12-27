@@ -4,13 +4,18 @@ namespace Main.Gameplay
 {
     public class Checkpoint : MonoBehaviour
     {
-        public BoxCollider trigger;
+        private BoxCollider trigger;
+
+        private void Awake()
+        {
+            trigger = GetComponent<BoxCollider>();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<CharacterSpawn>().spawnPoint = transform.position;
+                other.GetComponent<CharacterSpawn>().SetSpawnPoint(transform.position);
 
                 gameObject.SetActive(false);
             }

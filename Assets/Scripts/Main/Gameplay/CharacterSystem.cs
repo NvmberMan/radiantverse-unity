@@ -9,13 +9,21 @@ namespace Main.Gameplay
         public CharacterItem CharacterItem { get; private set; }
         public ICharacterInput InputHandler { get; private set; }
 
-        public GameObject graphics;
+        protected Transform graphics;
 
         protected virtual void Awake()
         {
             CharacterMovement = GetComponent<CharacterMovement>();
             CharacterItem = GetComponent<CharacterItem>();
             InputHandler = GetComponent<ICharacterInput>();
+
+            graphics = GetComponentInChildren<Animator>()?.transform;
+
+            if(graphics == null)
+            {
+                Debug.LogError("Graphics (Animator) tidak ditemukan di child!");
+            }
+
         }
 
         protected virtual void Update()

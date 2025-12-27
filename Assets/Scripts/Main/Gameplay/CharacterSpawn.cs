@@ -7,8 +7,8 @@ namespace Main.Gameplay
     {
         public float fallThreshold = -15f;
 
-        // RESPawn final (dipakai semua)
-        public Vector3 spawnPoint;
+        // RESPAWN final (dipakai semua)
+        private Vector3 spawnPoint;
 
         void Start()
         {
@@ -34,14 +34,13 @@ namespace Main.Gameplay
                 chosen.isTaken = true;
 
                 // ini spawn awal player
-                spawnPoint = chosen.transform.position;
-
+                SetSpawnPoint(chosen.transform.position);
                 transform.position = spawnPoint;
             }
             else
             {
                 // fallback: jika tidak ada spawnpoint
-                spawnPoint = transform.position;
+                SetSpawnPoint(transform.position);
             }
         }
 
@@ -51,6 +50,11 @@ namespace Main.Gameplay
             {
                 Respawn();
             }
+        }
+
+        public void SetSpawnPoint(Vector3 newSpawnPoint)
+        {
+            spawnPoint = newSpawnPoint;
         }
 
         public void Respawn()
