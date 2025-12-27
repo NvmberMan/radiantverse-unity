@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpawnPoint
   - NPC
+  - Obstacle
   layers:
   - Default
   - TransparentFX
