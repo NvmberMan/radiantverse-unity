@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -189,7 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8442baef3ccd242873247ff0c8dfee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterMovement
-  graphics: {fileID: 9082721907381250010}
   itemDetectorRange: 1
   destroyTime: 0.5
   itemDetectorOffset: {x: 0, y: 0, z: 0}
@@ -209,7 +208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef53634a371ae949a60b77de2f45696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterItem
-  graphics: {fileID: 9082721907381250010}
   acceleration: 4
   airAcceleration: 4
   jumpForce: 4
@@ -233,7 +231,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   fallThreshold: -15
-  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1099234911077681184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +347,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
