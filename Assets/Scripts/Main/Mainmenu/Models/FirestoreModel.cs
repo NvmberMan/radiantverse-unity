@@ -222,24 +222,51 @@ namespace Main.Mainmenu
             });
         }
 
+        public static void CheckUsernameExists(string username, Action<bool> onResult)
+        {
+            db.Collection("users").WhereEqualTo("Username", username).GetSnapshotAsync()
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    QuerySnapshot snapshot = task.Result;
+
+                    bool exists = snapshot.Count > 0;
+
+                    onResult?.Invoke(exists);
+                }
+                else
+                {
+                    Debug.LogError("Gagal mengecek username: " + task.Exception);
+                    onResult?.Invoke(false);
+                }
+            });
+        }
+
         public static void InitializeInventoryData(FirebaseUser user)
         {
             DocumentReference docRef = db.Collection("inventoryData").Document(user.UserId);
 
             InventoryData data = new InventoryData
             {
-                OwnedCharacters = new List<string>(),
+                UnlockedAccessories = new List<string> { "body/body_default", "head/head_default" }, // Skin awal
+                SelectedSkins = new List<string> { "body/body_default", "head/head_default" },
                 UnlockedAchievements = new List<string>()
             };
 
-            docRef.SetAsync(data).ContinueWithOnMainThread(task =>
-            {
-                if (task.IsCompletedSuccessfully)
-                    Debug.Log("InventoryData created in Firestore!");
-                else
-                    Debug.LogError($"Failed to save data: {task.Exception}");
+            docRef.SetAsync(data).ContinueWithOnMainThread(task => {
+                if (task.IsCompletedSuccessfully) Debug.Log("Inventory Initialized!");
             });
         }
         #endregion
+
+        public static void UpdateSelectedSkins(string uid, List<string> newSkins)
+        {
+            Dictionary<string, object> updates = new Dictionary<string, object>
+            {
+                { "SelectedSkins", newSkins }
+            };
+            SaveInventoryData(uid, updates);
+        }
     }
 }
