@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8758888183437201531}
   - component: {fileID: 3853134426235723048}
-  - component: {fileID: 1878869897843830243}
   m_Layer: 0
   m_Name: Tree A
   m_TagString: Untagged
@@ -140,7 +139,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6604124, y: 1.6604124, z: 2.382911}
+  m_LocalScale: {x: 1.6614687, y: -1.711987, z: 2.282161}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7053496372504651737}
@@ -169,15 +168,3 @@ CapsuleCollider:
   m_Height: 6.8
   m_Direction: 1
   m_Center: {x: 0, y: 3, z: 0}
---- !u!114 &1878869897843830243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8758888183437167707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89a17db071e1ba84db6128de53dab1a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.LookAtCamera

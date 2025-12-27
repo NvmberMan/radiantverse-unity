@@ -40,7 +40,7 @@ namespace Main.Gameplay
 
             CheckGround();
 
-            anim.SetBool("IsGrounded", _isGrounded);
+            anim?.SetBool("IsGrounded", _isGrounded);
         }
 
         void CheckGround()
@@ -72,7 +72,7 @@ namespace Main.Gameplay
             vel.z = direction.z * accel;
 
             //if (vel.z < 0) { vel.z = 0; }
-            anim.SetBool("Running", true);
+            anim?.SetBool("Running", true);
 
             rb.linearVelocity = vel;
         }
@@ -86,7 +86,7 @@ namespace Main.Gameplay
             vel.z = 0;
 
             rb.linearVelocity = vel;
-            anim.SetBool("Running", false);
+            anim?.SetBool("Running", false);
         }
 
         public void Jump()
@@ -94,7 +94,7 @@ namespace Main.Gameplay
             if (_isGrounded)
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                anim.SetTrigger("Jump");
+                anim?.SetTrigger("Jump");
             }
         }
 
