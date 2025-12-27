@@ -63,14 +63,14 @@ namespace Main.Gameplay {
             float boostedSpeed = originalSpeed + data.speedBonus;
             CharacterMovement.Acceleration = boostedSpeed;
 
-            Debug.Log($"[ITEM] {data.itemName} applied → speed: {boostedSpeed}");
+            Debug.Log($"[ITEM] {data.name} applied → speed: {boostedSpeed}");
 
             yield return new WaitForSeconds(data.duration);
 
             CharacterMovement.Acceleration = originalSpeed;
             isUsingItem = false;
 
-            Debug.Log($"[ITEM] {data.itemName} ended → speed restored: {originalSpeed}");
+            Debug.Log($"[ITEM] {data.name} ended → speed restored: {originalSpeed}");
         }
 
         // ========== Gizmos, SESUAI CLASS DIAGRAM ==========
