@@ -22,8 +22,6 @@ namespace Main.Gameplay
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
 
-            //Debug.Log("Input H:" + h + "  V:" + v);  // ← Tambahkan ini
-
             Vector3 dir = new Vector3(h, 0, v).normalized;
 
 

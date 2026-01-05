@@ -8,9 +8,15 @@ namespace Main.Gameplay
         public float fallThreshold = -15f;
 
         // RESPAWN final (dipakai semua)
-        private Vector3 spawnPoint;
+        public Vector3 startPoint;
+        public Vector3 spawnPoint;
 
-        void Start()
+        private void Start()
+        {
+            SetupStartPoint();
+        }
+
+        public void SetupStartPoint()
         {
             // 1. Random Spawn awal game
             GameObject[] spawnObjects = GameObject.FindGameObjectsWithTag("SpawnPoint");
@@ -34,13 +40,15 @@ namespace Main.Gameplay
                 chosen.isTaken = true;
 
                 // ini spawn awal player
-                SetSpawnPoint(chosen.transform.position);
+                spawnPoint = chosen.transform.position;
+                startPoint = chosen.transform.position;
                 transform.position = spawnPoint;
             }
             else
             {
                 // fallback: jika tidak ada spawnpoint
-                SetSpawnPoint(transform.position);
+                spawnPoint = transform.position;
+                startPoint = transform.position;
             }
         }
 
@@ -48,7 +56,7 @@ namespace Main.Gameplay
         {
             if (transform.position.y < fallThreshold)
             {
-                Respawn();
+                transform.position = spawnPoint;
             }
         }
 
@@ -57,7 +65,11 @@ namespace Main.Gameplay
             spawnPoint = newSpawnPoint;
         }
 
-        public void Respawn()
+        public void RespawnToCheckpoint()
+        {
+            transform.position = spawnPoint;
+        }
+        public void RespawnToStartPoint()
         {
             transform.position = spawnPoint;
         }
