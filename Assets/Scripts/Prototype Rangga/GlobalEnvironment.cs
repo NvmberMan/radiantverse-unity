@@ -12,6 +12,11 @@ namespace Main.Gameplay.AI
         private void Awake()
         {
             instance = this;
+
+            foreach(Transform point  in targetPoints)
+            {
+                point.gameObject.SetActive(false);
+            }
         }
     }
 }
