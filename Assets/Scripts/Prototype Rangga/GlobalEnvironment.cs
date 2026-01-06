@@ -5,7 +5,7 @@ namespace Main.Gameplay.AI
     public class GlobalEnvironment : MonoBehaviour
     {
         public AIInput[] bots;
-        public Transform[] targetPoints;
+        public TargetPoint[] targetPoints;
 
         public static GlobalEnvironment instance;
 
@@ -13,9 +13,10 @@ namespace Main.Gameplay.AI
         {
             instance = this;
 
-            foreach(Transform point  in targetPoints)
+            for(int i = 0; i < targetPoints.Length; i++)
             {
-                point.gameObject.SetActive(false);
+                TargetPoint point = targetPoints[i];
+                point.targetIndex = i;
             }
         }
     }

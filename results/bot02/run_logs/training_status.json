@@ -36,15 +36,24 @@
                 "auxillary_file_paths": [
                     "results\\bot02\\MoveToGoal\\MoveToGoal-563655.pt"
                 ]
+            },
+            {
+                "steps": 568406,
+                "file_path": "results\\bot02\\MoveToGoal\\MoveToGoal-568406.onnx",
+                "reward": -10.025665841065347,
+                "creation_time": 1767605059.723444,
+                "auxillary_file_paths": [
+                    "results\\bot02\\MoveToGoal\\MoveToGoal-568406.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 563655,
+            "steps": 568406,
             "file_path": "results\\bot02\\MoveToGoal.onnx",
-            "reward": 0.2950929752711592,
-            "creation_time": 1767583158.4782476,
+            "reward": -10.025665841065347,
+            "creation_time": 1767605059.723444,
             "auxillary_file_paths": [
-                "results\\bot02\\MoveToGoal\\MoveToGoal-563655.pt"
+                "results\\bot02\\MoveToGoal\\MoveToGoal-568406.pt"
             ]
         }
     },

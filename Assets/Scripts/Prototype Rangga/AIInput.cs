@@ -29,8 +29,8 @@ namespace Main.Gameplay.AI
         public override void OnEpisodeBegin()
         {
             checkpointIndex = 0;
-            currentTarget = GlobalEnvironment.instance.targetPoints[0];
-            currentTarget.gameObject.SetActive(true);
+            currentTarget = GlobalEnvironment.instance.targetPoints[0].transform;
+
             CharacterSpawn.RespawnToStartPoint();
 
             previousDistanceToTarget = Vector3.Distance(
@@ -72,14 +72,14 @@ namespace Main.Gameplay.AI
             float currentDistance = Vector3.Distance(transform.position, currentTarget.position);
             float diff = previousDistanceToTarget - currentDistance;
 
-            AddReward(diff * 0.01f);
+            AddReward(diff * 0.05f);
 
             if (currentDistance < previousDistanceToTarget)
             {
                 previousDistanceToTarget = currentDistance;
             }
 
-            AddReward(-0.0005f);
+            AddReward(-0.002f);
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
@@ -122,16 +122,36 @@ namespace Main.Gameplay.AI
             );
         }
 
+        private void AdvanceToNextTarget()
+        {
+            checkpointIndex++;
 
+            if (checkpointIndex < GlobalEnvironment.instance.targetPoints.Length)
+            {
+                currentTarget = GlobalEnvironment.instance.targetPoints[checkpointIndex].transform;
+
+                previousDistanceToTarget = Vector3.Distance(
+                    transform.position,
+                    currentTarget.position
+                );
+
+                AddReward(5f);
+            }
+            else
+            {
+                AddReward(10f);
+                EndEpisode();
+            }
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.tag == "Wall")
+            if (other.gameObject.tag == "Wall")
             {
-                AddReward(-3f);
+                AddReward(-5f);
                 EndEpisode();
             }
-            else if(other.gameObject.tag == "Wall_low")
+            else if (other.gameObject.tag == "Wall_low")
             {
                 AddReward(-1f);
             }
@@ -147,40 +167,10 @@ namespace Main.Gameplay.AI
             }
             else if (other.gameObject.tag == "TargetPoint")
             {
-                AdvanceToNextTarget();
-            }
-            else if (other.gameObject.tag == "FinishPoint")
-            {
-                AddReward(5f);
-                EndEpisode();
-            }
-        }
+                TargetPoint point = other.GetComponent<TargetPoint>();
 
-        private void AdvanceToNextTarget()
-        {
-            currentTarget.gameObject.SetActive(false);
-            checkpointIndex++;
-
-            // Kalau masih ada target berikutnya
-            if (checkpointIndex < GlobalEnvironment.instance.targetPoints.Length)
-            {
-                currentTarget = GlobalEnvironment.instance.targetPoints[checkpointIndex];
-                currentTarget.gameObject.SetActive(true);
-
-                // reset distance supaya reward shaping tidak rusak
-                previousDistanceToTarget = Vector3.Distance(
-                    transform.position,
-                    currentTarget.position
-                );
-
-                // reward kecil biar agent sadar ini progres
-                AddReward(1.5f);
-            }
-            else
-            {
-                // Semua checkpoint selesai
-                AddReward(5f);
-                EndEpisode();
+                if (point.targetIndex == checkpointIndex)
+                    AdvanceToNextTarget();
             }
         }
 
@@ -189,8 +179,7 @@ namespace Main.Gameplay.AI
         {
             if (collision.gameObject.tag == "Wall")
             {
-                AddReward(-3f);
-                EndEpisode();
+                AddReward(-5f);
             }
             else if (collision.gameObject.tag == "Wall_low")
             {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6695680271682026836}
   - component: {fileID: 7941813950297416731}
   - component: {fileID: 5871697596022176444}
+  - component: {fileID: 882614923284947434}
   m_Layer: 8
   m_Name: TargetPoint
   m_TagString: TargetPoint
@@ -111,3 +112,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &882614923284947434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452465897441121631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7835436dc16f54a479a9b9d504b77e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  targetIndex: 0
