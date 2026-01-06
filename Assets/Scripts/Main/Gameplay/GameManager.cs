@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro; // Untuk UI
-using System.Collections.Generic; // Untuk List
-
 
 namespace Main.Gameplay
 {
@@ -10,19 +10,29 @@ namespace Main.Gameplay
     {
         public static GameManager Instance;
 
-        [Header("Game States")]
+        [Header("Game State")]
         public bool isGameActive = true;
-        public int totalRacers = 8; // Default 8 pelari
-        public int currentRank = 1; // Urutan finish saat ini
+        public int currentFinishRank = 1;
 
-        [Header("UI References")]
-        public GameObject winPanel;
-        public GameObject losePanel;
-        public TextMeshProUGUI rankUIText; // UI di pojok layar (Contoh: "Pos: 1/8")
-        public TextMeshProUGUI finalRankText; // Teks di panel kalah (Contoh: "You finished #3")
+        [Header("UI Timing")]
+        public float resultDelay = 3f;
 
-        // Mencegah satu orang finish berkali-kali
-        private List<GameObject> finishedRacers = new List<GameObject>();
+        [Header("UI")]
+        public GameObject winCanvas;
+        public GameObject loseCanvas;
+        public SummaryUI summaryPopup;
+        public TextMeshProUGUI rankUIText;
+        public TextMeshProUGUI loseRankText;
+
+        [Header("Rank Rewards")]
+        public List<RankReward> rankRewards = new List<RankReward>();
+
+        private HashSet<GameObject> finishedRacers = new HashSet<GameObject>();
+
+        // Data player (disimpan untuk summary)
+        private int playerFinalRank;
+        private int playerExp;
+        private int playerCoin;
 
         private void Awake()
         {
@@ -32,80 +42,130 @@ namespace Main.Gameplay
 
         private void Start()
         {
-            // Pastikan waktu berjalan
             Time.timeScale = 1;
-            currentRank = 1;
+            isGameActive = true;
+            currentFinishRank = 1;
             finishedRacers.Clear();
+
+            if (winCanvas) winCanvas.SetActive(false);
+            if (loseCanvas) loseCanvas.SetActive(false);
+            if (summaryPopup) summaryPopup.gameObject.SetActive(false);
         }
 
+        // DIPANGGIL SAAT FINISH LINE
         public void OnFinishLineCrossed(GameObject racer)
         {
-            // 1. Cek apakah racer ini sudah pernah finish sebelumnya?
             if (finishedRacers.Contains(racer)) return;
 
-            // 2. Masukkan ke daftar finish
             finishedRacers.Add(racer);
-            Debug.Log($"🏁 {racer.name} Finish di posisi #{currentRank}");
 
-            // 3. Cek Siapa yang Finish
+            int finishRank = currentFinishRank;
+            currentFinishRank++;
+
+            Debug.Log($"{racer.name} finish di posisi #{finishRank}");
+
             if (racer.CompareTag("Player"))
             {
-                // --- PLAYER FINISH ---
-                HandlePlayerFinish(currentRank);
-            }
-            else if (racer.CompareTag("NPC"))
-            {
-                // --- BOT FINISH ---
-                // Game TIDAK berhenti, cuma ranking bertambah
-                // Opsional: Matikan AI bot biar dia diam setelah finish
-                // racer.GetComponent<AI_Script>().enabled = false; 
-                currentRank++;
+                HandlePlayerFinish(finishRank);
             }
         }
 
         private void HandlePlayerFinish(int rank)
         {
             isGameActive = false;
-            Time.timeScale = 0; // Game berhenti HANYA jika player finish
+            Time.timeScale = 0;
 
-            if (rank == 1)
+            playerFinalRank = rank;
+
+            // Hitung reward
+            var reward = rankRewards.Find(r => r.rank == rank);
+            if (reward != null)
             {
-                // JUARA 1 = MENANG
-                Debug.Log("✨ PLAYER JUARA 1!");
-
-                // Reward: Unlock Level, Gold, XP
-                PlayerPrefs.SetInt("Level2_Unlocked", 1);
-                PlayerPrefs.SetInt("Gold", PlayerPrefs.GetInt("Gold") + 100);
-                PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + 500);
-                PlayerPrefs.Save();
-
-                if (winPanel != null) winPanel.SetActive(true);
+                playerExp = reward.exp;
+                playerCoin = reward.coin;
             }
             else
             {
-                // JUARA 2 DST = KALAH (Tapi tetap dapat XP)
-                Debug.Log($"💀 PLAYER KALAH (Posisi {rank})");
+                playerExp = 0;
+                playerCoin = 0;
+            }
 
-                // Reward: XP Only (Penghibur)
-                PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + 100);
-                PlayerPrefs.Save();
+            if (rank == 1)
+                winCanvas.SetActive(true);
+            else
+            {
+                loseCanvas.SetActive(true);
+                // ✅ SET RANK TEXT DI LOSE PANEL
+                if (loseRankText != null)
+                {
+                    loseRankText.text = $"{GetRankSuffix(rank)}";
+                }
+            }
+            // ⏳ TUNGGU 3 DETIK → SUMMARY
+            StartCoroutine(ShowSummaryAfterDelay());
+        }
 
-                if (finalRankText != null)
-                    finalRankText.text = $"You Finished #{rank}";
+        private IEnumerator ShowSummaryAfterDelay()
+        {
+            yield return new WaitForSecondsRealtime(resultDelay);
 
-                if (losePanel != null) losePanel.SetActive(true);
+            if (winCanvas) winCanvas.SetActive(false);
+            if (loseCanvas) loseCanvas.SetActive(false);
+
+            if (summaryPopup != null)
+            {
+                summaryPopup.Show(playerFinalRank, playerExp, playerCoin);
             }
         }
 
+
+        private string GetRankSuffix(int rank)
+        {
+            if (rank % 100 >= 11 && rank % 100 <= 13)
+                return $"{rank}th";
+
+            switch (rank % 10)
+            {
+                case 1: return $"{rank}st";
+                case 2: return $"{rank}nd";
+                case 3: return $"{rank}rd";
+                default: return $"{rank}th";
+            }
+        }
+
+        // DIPANGGIL BUTTON SUMMARY
+        public void ShowSummary()
+        {
+            Debug.Log("🔥 SHOW SUMMARY DIPANGGIL");
+
+            if (winCanvas) winCanvas.SetActive(false);
+            if (loseCanvas) loseCanvas.SetActive(false);
+
+            if (summaryPopup != null)
+            {
+                summaryPopup.Show(playerFinalRank, playerExp, playerCoin);
+            }
+            else
+            {
+                Debug.LogError("❌ SummaryPopup NULL");
+            }
+        }
+
+
+
+        // DIPANGGIL BUTTON RESET
         public void RestartGame()
         {
-            Debug.Log("🔄 Restarting Game...");
-
-            // Penting: Kembalikan waktu ke normal sebelum reload
             Time.timeScale = 1;
-
-            // Reload Scene saat ini
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    [System.Serializable]
+    public class RankReward
+    {
+        public int rank;
+        public int exp;
+        public int coin;
     }
 }
