@@ -531,6 +531,7 @@ GameObject:
   - component: {fileID: 3521847084942252782}
   - component: {fileID: 2891987450524036955}
   - component: {fileID: 5816925660014595431}
+  - component: {fileID: 595405871636053706}
   m_Layer: 10
   m_Name: AI
   m_TagString: NPC
@@ -646,6 +647,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  idleAnimation: Idle
+  walkAnimation: Run
+  jumpAnimation: Run
   rb: {fileID: 0}
   _isGrounded: 1
 --- !u!114 &1404514488036837324
@@ -798,6 +802,25 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   nextWaypoint: {fileID: 0}
+--- !u!114 &595405871636053706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799699114336209515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeacfacdbc126024d910e42621f82775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterCustomization
+  skinSource: 1
+  manualSkins:
+  - Component/Hairs/Type4
+  - Component/Faces/Boy
+  - Component/Shirts/Kemeja&dasi-hitam
+  - Component/Pants/Cream-formal
+  - Component/Shoes/Black-formal
 --- !u!1 &7973960389431970234
 GameObject:
   m_ObjectHideFlags: 0

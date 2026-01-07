@@ -1,3 +1,4 @@
+using Spine.Unity;
 using UnityEngine;
 
 namespace Main.Gameplay
@@ -17,10 +18,15 @@ namespace Main.Gameplay
         [SerializeField] float groundCheckDistance = 0.3f;
         [SerializeField] LayerMask groundLayer;
 
+        [Header("Spine Settings")]
+        [SpineAnimation] public string idleAnimation = "idle";
+        [SpineAnimation] public string walkAnimation = "run";
+        [SpineAnimation] public string jumpAnimation = "jump";
+
         [HideInInspector] public Rigidbody rb;
-        Animator anim;
         public bool _isGrounded;
         private float nextJumpTime = 0f;
+        private string currentAnimation = "";
 
         public float Acceleration
         {
@@ -32,7 +38,6 @@ namespace Main.Gameplay
         {
             base.Awake();
             rb = GetComponent<Rigidbody>();
-            anim = graphics.GetComponent<Animator>();
             rb.freezeRotation = true;
         }
 
@@ -41,8 +46,6 @@ namespace Main.Gameplay
             base.Update();
 
             CheckGround();
-
-            anim?.SetBool("IsGrounded", _isGrounded);
 
             if (GameManager.Instance.isPaused)
                 StopMoving();
@@ -78,10 +81,9 @@ namespace Main.Gameplay
             vel.x = direction.x * accel;
             vel.z = direction.z * accel;
 
-            //if (vel.z < 0) { vel.z = 0; }
-            anim?.SetBool("Running", true);
-
             rb.linearVelocity = vel;
+
+            SetAnimation(walkAnimation, true);
         }
 
         public void StopMoving()
@@ -93,7 +95,8 @@ namespace Main.Gameplay
             vel.z = 0;
 
             rb.linearVelocity = vel;
-            anim?.SetBool("Running", false);
+
+            SetAnimation(idleAnimation, true);
         }
 
         public void Jump()
@@ -108,7 +111,17 @@ namespace Main.Gameplay
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
                 nextJumpTime = Time.time + jumpCooldown;
+
+                SetAnimation(jumpAnimation, false);
             }
+        }
+
+        private void SetAnimation(string animName, bool loop)
+        {
+            if (currentAnimation == animName) return;
+
+            skeletonAnimation.AnimationState.SetAnimation(0, animName, loop);
+            currentAnimation = animName;
         }
 
 

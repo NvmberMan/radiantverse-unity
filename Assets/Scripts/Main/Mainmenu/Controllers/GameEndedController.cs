@@ -54,7 +54,7 @@ namespace Main.Mainmenu
                 rankPreviewView.Hide();
 
                 LosePopupView losePopupView = (LosePopupView)GetView("lose popup");
-                losePopupView.UpdateSummary(reward.exp, reward.coin);
+                losePopupView.UpdateSummary(reward.exp, reward.coin, reward.rankPreviewImage);
                 losePopupView.Show();
             }
         }
