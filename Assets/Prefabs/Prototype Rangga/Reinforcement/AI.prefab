@@ -105,6 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a17db071e1ba84db6128de53dab1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LookAtCamera
+  lockX: 0
+  lockY: 0
+  lockZ: 0
 --- !u!95 &26853820331645087
 Animator:
   serializedVersion: 7
@@ -140,6 +143,7 @@ GameObject:
   - component: {fileID: 4450720995425349180}
   - component: {fileID: 5463582378591380892}
   - component: {fileID: 4702972309026837759}
+  - component: {fileID: 2313893011632780432}
   m_Layer: 10
   m_Name: SpineObject
   m_TagString: Untagged
@@ -277,6 +281,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2313893011632780432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402450829669505213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a17db071e1ba84db6128de53dab1a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.LookAtCamera
+  lockX: 0
+  lockY: 1
+  lockZ: 0
 --- !u!1 &2630966071120140173
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputJoystick
   joystick: {fileID: 0}
+  cameraTransform: {fileID: 0}
 --- !u!114 &8639560532452943504
 MonoBehaviour:
   m_ObjectHideFlags: 0

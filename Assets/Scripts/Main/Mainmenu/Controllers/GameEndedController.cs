@@ -17,6 +17,7 @@ namespace Main.Mainmenu
         public float showSummaryDelay = 2f;
         public void GameEnded(int rank)
         {
+            GameManager.Instance.isPaused = true;
             StartCoroutine(InitializedSummary(rank));
         }
 
