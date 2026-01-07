@@ -4,3 +4,4 @@ Assets/External/Firebase/Plugins/x86_64/*.bundle filter=lfs diff=lfs merge=lfs -
 Assets/External/Firebase/Plugins/x86_64/*.so filter=lfs diff=lfs merge=lfs -text
 *.bundle filter=lfs diff=lfs merge=lfs -text
 *.so filter=lfs diff=lfs merge=lfs -text
+BLI[[:space:]]-[[:space:]]Tambud.unity filter=lfs diff=lfs merge=lfs -text
