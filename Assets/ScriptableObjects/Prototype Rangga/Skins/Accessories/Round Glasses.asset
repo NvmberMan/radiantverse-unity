@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Round Glasses
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Faces/Glasses-Type1
+  spineSkinName: Component/Accessories/Glasses-Type1
   displayName: Round Glasses
   icon: {fileID: 21300000, guid: 4bf754cc2715f0646947effae07641a0, type: 3}
   category: accessories
