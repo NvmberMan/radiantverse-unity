@@ -17,6 +17,7 @@ TagManager:
   - Border
   - Undefined
   - Sensor_void
+  - Waypoint
   layers:
   - Default
   - TransparentFX

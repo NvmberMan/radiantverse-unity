@@ -1148,7 +1148,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -1199,7 +1199,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1242,7 +1242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d63aa1e126cbd1e4fab38ac90d699fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.EffectZoneObstacle
-  effectData: {fileID: 11400000, guid: 77e91e1c76163cd468a2fae82c0b8ed3, type: 2}
+  effectData: {fileID: 11400000, guid: 6bf7d4a3efcb2304d8f7e9f2a5c1b3c6, type: 2}
 --- !u!114 &564663777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2100,7 +2100,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2260,7 +2260,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3289,6 +3289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item(Spin)
       objectReference: {fileID: 0}
+    - target: {fileID: 8824389529608089755, guid: 7a26a97036914f64db64bb83e9b5fa72, type: 3}
+      propertyPath: itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 77e91e1c76163cd468a2fae82c0b8ed3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3359,6 +3363,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 201129064216426404, guid: dcb91181d6a721c48a212ad549dff92c, type: 3}
+      propertyPath: itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: fd03f2f6cacdd0443b0934b84d57b81f, type: 2}
     - target: {fileID: 4309182664997299582, guid: dcb91181d6a721c48a212ad549dff92c, type: 3}
       propertyPath: m_Name
       value: Item(UpDown)
