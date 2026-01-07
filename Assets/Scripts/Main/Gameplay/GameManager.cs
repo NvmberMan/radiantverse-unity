@@ -13,6 +13,7 @@ namespace Main.Gameplay
 
         [Header("Game State")]
         public bool isGameActive = true;
+        public bool isPaused = false;
         public int currentFinishRank = 1;
 
         public Transform playerTransform;
@@ -51,29 +52,52 @@ namespace Main.Gameplay
             gameplayController.Activate("gameplay gui");
 
             yield return StartCoroutine(StartCountdown(gameplayController));
-
-            isGameActive = true;
-            currentFinishRank = 1;
-            finishedRacers.Clear();
         }
 
         IEnumerator StartCountdown(GameplayController gameplayController)
         {
-            CountDownView countDownView = (CountDownView)gameplayController.GetView("countdown");
+            CountDownView countDownView =
+                (CountDownView)gameplayController.GetView("countdown");
+
             countDownView.Show();
-            countDownView.UpdateCount(3);
 
-            yield return new WaitForSeconds(1);
+            int countdownValue = 3;
 
-            countDownView.UpdateCount(2);
+            while (countdownValue > 0)
+            {
+                countDownView.UpdateText(countdownValue.ToString());
 
-            yield return new WaitForSeconds(1);
+                yield return StartCoroutine(WaitForSecondsRealtimeWithPause(0.5f));
 
-            countDownView.UpdateCount(1);
+                countdownValue--;
+            }
 
-            yield return new WaitForSeconds(1);
+            countDownView.UpdateText("GO!");
+            isGameActive = true;
+            currentFinishRank = 1;
+            finishedRacers.Clear();
+
+            yield return StartCoroutine(WaitForSecondsRealtimeWithPause(0.5f));
+
             countDownView.Hide();
         }
+
+        IEnumerator WaitForSecondsRealtimeWithPause(float duration)
+        {
+            float timeLeft = duration;
+
+            while (timeLeft > 0f)
+            {
+                yield return new WaitWhile(() => isPaused);
+
+                float delta = Mathf.Min(Time.unscaledDeltaTime, timeLeft);
+                timeLeft -= delta;
+
+                yield return null;
+            }
+        }
+
+
 
 
         public void OnFinishLineCrossed(GameObject racer)
@@ -91,12 +115,6 @@ namespace Main.Gameplay
 
                 gameEndedController.GameEnded(finishRank);
             }
-        }
-      
-        public void RestartGame()
-        {
-            Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

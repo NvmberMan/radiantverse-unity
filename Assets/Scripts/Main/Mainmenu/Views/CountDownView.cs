@@ -6,9 +6,9 @@ namespace Main.Mainmenu
     {
         public TMP_Text countText;
 
-        public void UpdateCount(int value)
+        public void UpdateText(string value)
         {
-            countText.text = value.ToString();
+            countText.text = value;
         }
     }
 }

@@ -43,6 +43,9 @@ namespace Main.Gameplay
             CheckGround();
 
             anim?.SetBool("IsGrounded", _isGrounded);
+
+            if (GameManager.Instance.isPaused)
+                StopMoving();
         }
 
         void CheckGround()
@@ -66,7 +69,7 @@ namespace Main.Gameplay
 
         public void MoveToDir(Vector3 direction)
         {
-            if (!GameManager.Instance.isGameActive) return;
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused) return;
 
             Vector3 vel = rb.linearVelocity;
 
@@ -95,7 +98,7 @@ namespace Main.Gameplay
 
         public void Jump()
         {
-            if (!GameManager.Instance.isGameActive) return;
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused) return;
 
 
             if (_isGrounded && Time.time >= nextJumpTime)

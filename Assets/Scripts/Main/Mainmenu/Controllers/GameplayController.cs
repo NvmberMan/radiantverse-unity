@@ -15,5 +15,11 @@ namespace Main.Mainmenu
         {
             characterMovement.Jump();
         }
+
+        public void Pause()
+        {
+            MenuManager.instance.GetController<PauseController>().Activate("base");
+            GameManager.Instance.isPaused = true;
+        }
     }
 }
