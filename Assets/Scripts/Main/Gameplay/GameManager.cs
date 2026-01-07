@@ -46,11 +46,35 @@ namespace Main.Gameplay
 
             yield return new WaitForSeconds(1);
             loadingMapPreviewController.DisactivateAll();
-            MenuManager.instance.GetController<GameplayController>().Activate("gameplay gui");
+
+            GameplayController gameplayController = MenuManager.instance.GetController<GameplayController>();
+            gameplayController.Activate("gameplay gui");
+
+            yield return StartCoroutine(StartCountdown(gameplayController));
+
             isGameActive = true;
             currentFinishRank = 1;
             finishedRacers.Clear();
         }
+
+        IEnumerator StartCountdown(GameplayController gameplayController)
+        {
+            CountDownView countDownView = (CountDownView)gameplayController.GetView("countdown");
+            countDownView.Show();
+            countDownView.UpdateCount(3);
+
+            yield return new WaitForSeconds(1);
+
+            countDownView.UpdateCount(2);
+
+            yield return new WaitForSeconds(1);
+
+            countDownView.UpdateCount(1);
+
+            yield return new WaitForSeconds(1);
+            countDownView.Hide();
+        }
+
 
         public void OnFinishLineCrossed(GameObject racer)
         {

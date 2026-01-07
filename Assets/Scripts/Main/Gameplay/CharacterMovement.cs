@@ -66,6 +66,8 @@ namespace Main.Gameplay
 
         public void MoveToDir(Vector3 direction)
         {
+            if (!GameManager.Instance.isGameActive) return;
+
             Vector3 vel = rb.linearVelocity;
 
             float accel = _isGrounded ? acceleration : airAcceleration;
@@ -93,6 +95,9 @@ namespace Main.Gameplay
 
         public void Jump()
         {
+            if (!GameManager.Instance.isGameActive) return;
+
+
             if (_isGrounded && Time.time >= nextJumpTime)
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
