@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ namespace Main.Mainmenu
         [SerializeField] private TMP_Text mapNameText;
         [SerializeField] private TMP_Text mapDescriptionText;
         [SerializeField] private Button startButton;
+        [SerializeField] private Image mapPreview;
 
         public void Setup(Map map)
         {
@@ -18,11 +20,22 @@ namespace Main.Mainmenu
 
             mapNameText.text = map.mapName;
             mapDescriptionText.text = map.mapDescription;
+            mapPreview.sprite = map.mapPreview;
 
             startButton.onClick.AddListener(() =>
             {
-                SceneManager.LoadScene(map.mapSceneName);
+                StartCoroutine(InitializeMapPreview(map));
             });
+        }
+
+        IEnumerator InitializeMapPreview(Map map)
+        {
+            LoadingMapPreviewController loadingMapPreviewController = MenuManager.instance.GetController<LoadingMapPreviewController>();
+            loadingMapPreviewController.Activate("base");
+            loadingMapPreviewController.SetLoading(map.mapName, map.mapDescription, map.mapPreview, 20);
+
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene(map.mapSceneName);
         }
     }
 }

@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 5463582378591380892}
   - component: {fileID: 4702972309026837759}
   m_Layer: 10
-  m_Name: Spine GameObject (skeleton)
+  m_Name: SpineObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +195,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a879d5fec92c7ae4a8625b13be3c1ee4, type: 2}
+  - {fileID: 2100000, guid: 30633eb439a83664d950e499f1731eb1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -230,8 +230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: spine-unity::Spine.Unity.SkeletonAnimation
-  skeletonDataAsset: {fileID: 11400000, guid: 061548de0b1400e40b6c8399f8a014eb, type: 2}
-  initialSkinName: unity_default
+  skeletonDataAsset: {fileID: 11400000, guid: a406bc3a79477d04993ad8b230e579a2, type: 2}
+  initialSkinName: Template/Base-boy
   initialFlipX: 0
   initialFlipY: 0
   updateWhenInvisible: 3
@@ -252,7 +252,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: idle
+  _animationName: Run
   loop: 1
   timeScale: 1
 --- !u!95 &4702972309026837759
@@ -511,9 +511,10 @@ GameObject:
   - component: {fileID: 1000346524155622871}
   - component: {fileID: 3521847084942252782}
   - component: {fileID: 2891987450524036955}
+  - component: {fileID: 5816925660014595431}
   m_Layer: 10
   m_Name: AI
-  m_TagString: Player
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -668,6 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563dcdfd8226e554a839ab8822a06532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+  cameraTransform: {fileID: 0}
 --- !u!114 &8068450461898297385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +752,32 @@ MonoBehaviour:
   NumStepsToRecord: 0
   DemonstrationName: Demo02
   DemonstrationDirectory: Demo
+--- !u!114 &5816925660014595431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799699114336209515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b947784a879a0428033d01079ae1e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.RacerProgress
+  currentWaypointIndex: 0
+  distanceToNextWaypoint: 0
+  allWaypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  nextWaypoint: {fileID: 0}
 --- !u!1 &7973960389431970234
 GameObject:
   m_ObjectHideFlags: 0

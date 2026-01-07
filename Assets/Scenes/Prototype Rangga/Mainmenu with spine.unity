@@ -908,81 +908,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37052389}
   m_CullTransparentMesh: 1
---- !u!1 &43983447
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 43983448}
-  - component: {fileID: 43983450}
-  - component: {fileID: 43983449}
-  m_Layer: 5
-  m_Name: Achievement Preview
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &43983448
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43983447}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2010057621}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 194, y: 45.084}
-  m_SizeDelta: {x: 103.96, y: 204.72}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &43983449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43983447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.85098046, g: 0.85098046, b: 0.85098046, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -5177388603050735206, guid: 9bdf4721a8594ed40b886efe2ff6a68f, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.3
---- !u!222 &43983450
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43983447}
-  m_CullTransparentMesh: 1
 --- !u!1 &44816741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,8 +1648,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -46.251, y: 45.084}
-  m_SizeDelta: {x: 355.8285, y: 204.7229}
+  m_AnchoredPosition: {x: 10.907, y: 55.0075}
+  m_SizeDelta: {x: 470.14, y: 224.5699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &83570843
 MonoBehaviour:
@@ -6177,7 +6102,6 @@ MonoBehaviour:
   mapSceneName: BLI-Tambud
   containerShowPosition: {x: 29, y: 11}
   mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
   clickButton: {fileID: 464180555}
 --- !u!114 &464180555
 MonoBehaviour:
@@ -10809,7 +10733,6 @@ MonoBehaviour:
   mapSceneName: map-world2
   containerShowPosition: {x: -81, y: -30}
   mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
   clickButton: {fileID: 837685566}
 --- !u!114 &837685566
 MonoBehaviour:
@@ -18050,7 +17973,6 @@ MonoBehaviour:
   mapSceneName: Tambud-Mall
   containerShowPosition: {x: 362, y: -181}
   mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
   clickButton: {fileID: 1289905816}
 --- !u!114 &1289905816
 MonoBehaviour:
@@ -25375,7 +25297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1793770579
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26527,10 +26449,9 @@ MonoBehaviour:
   mapId: map-001
   mapName: RTB
   mapDescription: berangkat kuliah ke BLI
-  mapSceneName: RTB-BLI
+  mapSceneName: Level 1
   containerShowPosition: {x: 445, y: 225}
-  mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
+  mapPreview: {fileID: 21300000, guid: 5eefd9a697c6ade4a9e7153eb1a6d314, type: 3}
   clickButton: {fileID: 1857118641}
 --- !u!114 &1857118641
 MonoBehaviour:
@@ -29104,7 +29025,6 @@ RectTransform:
   m_Children:
   - {fileID: 423022728}
   - {fileID: 83570842}
-  - {fileID: 43983448}
   - {fileID: 786964475}
   - {fileID: 269592610}
   - {fileID: 1942871745}
@@ -29141,6 +29061,7 @@ MonoBehaviour:
   mapNameText: {fileID: 786964476}
   mapDescriptionText: {fileID: 1767577598}
   startButton: {fileID: 463794597}
+  mapPreview: {fileID: 83570843}
 --- !u!1 &2010162547
 GameObject:
   m_ObjectHideFlags: 0
