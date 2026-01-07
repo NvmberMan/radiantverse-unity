@@ -15,7 +15,7 @@ namespace Main.Gameplay
         public bool isGameActive = true;
         public int currentFinishRank = 1;
 
-        public TextMeshProUGUI rankUIText;
+        public Transform playerTransform;
 
         private HashSet<GameObject> finishedRacers = new HashSet<GameObject>();
         private GameEndedController gameEndedController;
@@ -45,7 +45,8 @@ namespace Main.Gameplay
             loadingMapPreviewController.SetLoadingProgress(80);
 
             yield return new WaitForSeconds(1);
-            MenuManager.instance.DirectController("gameplay");
+            loadingMapPreviewController.DisactivateAll();
+            MenuManager.instance.GetController<GameplayController>().Activate("gameplay gui");
             isGameActive = true;
             currentFinishRank = 1;
             finishedRacers.Clear();

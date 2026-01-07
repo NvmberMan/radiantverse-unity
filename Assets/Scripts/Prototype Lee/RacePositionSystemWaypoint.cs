@@ -2,14 +2,21 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Main.Mainmenu;
 
 namespace Main.Gameplay
 {
     public class RacePositionSystemWaypoint : MonoBehaviour
     {
         [Header("References")]
-        public Transform playerTransform;
         public List<RacerProgress> allRacers;
+
+
+        private GameplayGUIView gameplayGUIView;
+        private void Start()
+        {
+            gameplayGUIView = (GameplayGUIView)MenuManager.instance.GetController<GameplayController>().GetView("gameplay gui");
+        }
 
         private void Update()
         {
@@ -22,13 +29,9 @@ namespace Main.Gameplay
                 .ToList();
 
             int playerRank = allRacers
-                .FindIndex(r => r.transform == playerTransform) + 1;
+                .FindIndex(r => r.transform == GameManager.Instance.playerTransform) + 1;
 
-            if (GameManager.Instance.rankUIText != null)
-            {
-                GameManager.Instance.rankUIText.text =
-                    $"Position: {playerRank}/{allRacers.Count}";
-            }
+            gameplayGUIView.UpdateRank(playerRank, allRacers.Count);
         }
     }
 }

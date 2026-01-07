@@ -91,26 +91,14 @@ namespace Main.Gameplay
             anim?.SetBool("Running", false);
         }
 
-        //public void Jump()
-        //{
-        //    if (_isGrounded)
-        //    {
-        //        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        //        anim?.SetTrigger("Jump");
-        //    }
-        //}
-
         public void Jump()
         {
-            // Cek Ground DAN Cek Cooldown agar tidak terjadi Double/Triple Jump dalam waktu singkat
             if (_isGrounded && Time.time >= nextJumpTime)
             {
-                // RESET Y Velocity sebelum lompat agar kekuatannya selalu sama
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-                // Set waktu kapan boleh lompat lagi
                 nextJumpTime = Time.time + jumpCooldown;
             }
         }
