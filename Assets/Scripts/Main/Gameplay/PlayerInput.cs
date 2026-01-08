@@ -5,6 +5,8 @@ namespace Main.Gameplay
     public class PlayerInput : MonoBehaviour, ICharacterInput
     {
         CharacterMovement CharacterMovement;
+        [Header("Camera Reference")]
+        [SerializeField] Transform cameraTransform;
 
         void Awake()
         {
@@ -22,10 +24,24 @@ namespace Main.Gameplay
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
 
-            Vector3 dir = new Vector3(h, 0, v).normalized;
+            if (!cameraTransform)
+            {
+                Debug.LogWarning("Camera Transform belum di-assign");
+                return;
+            }
 
+            Vector3 camForward = cameraTransform.forward;
+            Vector3 camRight = cameraTransform.right;
 
-            if (h != 0 || v != 0)
+            camForward.y = 0;
+            camRight.y = 0;
+
+            camForward.Normalize();
+            camRight.Normalize();
+
+            Vector3 dir = (camForward * v + camRight * h).normalized;
+
+            if (dir.magnitude > 0.1f)
             {
                 CharacterMovement.MoveToDir(dir);
             }

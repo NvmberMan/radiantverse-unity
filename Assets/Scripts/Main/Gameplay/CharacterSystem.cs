@@ -1,3 +1,4 @@
+using Spine.Unity;
 using UnityEngine;
 
 
@@ -9,7 +10,7 @@ namespace Main.Gameplay
         public CharacterItem CharacterItem { get; private set; }
         public ICharacterInput InputHandler { get; private set; }
 
-        protected Transform graphics;
+        protected SkeletonAnimation skeletonAnimation;
 
         protected virtual void Awake()
         {
@@ -17,9 +18,9 @@ namespace Main.Gameplay
             CharacterItem = GetComponent<CharacterItem>();
             InputHandler = GetComponent<ICharacterInput>();
 
-            graphics = GetComponentInChildren<Animator>()?.transform;
+            skeletonAnimation = GetComponentInChildren<SkeletonAnimation>();
 
-            if(graphics == null)
+            if(skeletonAnimation == null)
             {
                 Debug.LogError("Graphics (Animator) tidak ditemukan di child!");
             }

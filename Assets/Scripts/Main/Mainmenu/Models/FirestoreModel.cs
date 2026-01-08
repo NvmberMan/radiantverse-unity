@@ -249,8 +249,18 @@ namespace Main.Mainmenu
 
             InventoryData data = new InventoryData
             {
-                UnlockedAccessories = new List<string> { "body/body_default", "head/head_default" }, // Skin awal
-                SelectedSkins = new List<string> { "body/body_default", "head/head_default" },
+                UnlockedAccessories = new List<string> { 
+                    "Component/Faces/Boy", 
+                    "Component/Hairs/Type1",
+                    "Component/Pants/Sporty-short-blue", 
+                    "Component/Shirts/Sporty-blue"
+                },
+                SelectedSkins = new List<string> {
+                    "Component/Faces/Boy", 
+                    "Component/Hairs/Type1", 
+                    "Component/Pants/Sporty-short-blue", 
+                    "Component/Shirts/Sporty-blue"
+                },
                 UnlockedAchievements = new List<string>()
             };
 

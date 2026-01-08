@@ -60,5 +60,10 @@ namespace Main.Mainmenu
             return ControllerList.OfType<T>().FirstOrDefault();
         }
 
+        public Controller GetController(string targetController)
+        {
+            return ControllerList.Find((c) => c.id == targetController);
+        }
+
     }
 }
