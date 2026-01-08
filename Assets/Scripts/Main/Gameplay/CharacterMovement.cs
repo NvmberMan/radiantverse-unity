@@ -9,6 +9,7 @@ namespace Main.Gameplay
         [SerializeField] float acceleration = 8f;
         [SerializeField] float airAcceleration = 4f;
         [SerializeField] float jumpForce = 4f;
+        [SerializeField] float jumpCooldown = 0.2f;
 
         [Header("Detection Settings")]
         [SerializeField] Transform groundDetectorPoint;
@@ -16,9 +17,10 @@ namespace Main.Gameplay
         [SerializeField] float groundCheckDistance = 0.3f;
         [SerializeField] LayerMask groundLayer;
 
-        Rigidbody rb;
+        [HideInInspector] public Rigidbody rb;
         Animator anim;
         public bool _isGrounded;
+        private float nextJumpTime = 0f;
 
         public float Acceleration
         {
@@ -89,12 +91,27 @@ namespace Main.Gameplay
             anim?.SetBool("Running", false);
         }
 
+        //public void Jump()
+        //{
+        //    if (_isGrounded)
+        //    {
+        //        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        //        anim?.SetTrigger("Jump");
+        //    }
+        //}
+
         public void Jump()
         {
-            if (_isGrounded)
+            // Cek Ground DAN Cek Cooldown agar tidak terjadi Double/Triple Jump dalam waktu singkat
+            if (_isGrounded && Time.time >= nextJumpTime)
             {
+                // RESET Y Velocity sebelum lompat agar kekuatannya selalu sama
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                anim?.SetTrigger("Jump");
+
+                // Set waktu kapan boleh lompat lagi
+                nextJumpTime = Time.time + jumpCooldown;
             }
         }
 
