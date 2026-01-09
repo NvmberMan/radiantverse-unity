@@ -34,7 +34,6 @@ namespace Main.Mainmenu
                 return;
             }
 
-            Debug.Log($"View {targetView}'s is showing");
             target.Show();
         }
 

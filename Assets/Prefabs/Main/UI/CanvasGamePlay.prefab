@@ -1757,7 +1757,7 @@ MonoBehaviour:
     rankPreviewImage: {fileID: 21300000, guid: 393b867274ddcfc4f9b441d797e65817, type: 3}
     mapUnlockedName: null
     mapUnlockedImage: {fileID: 0}
-  - rank: 5
+  - rank: 6
     exp: 20
     coin: 5
     rankPreviewImage: {fileID: 21300000, guid: 393b867274ddcfc4f9b441d797e65817, type: 3}
@@ -3467,7 +3467,7 @@ GameObject:
   - component: {fileID: 945151106313994536}
   - component: {fileID: 7310568697047072255}
   m_Layer: 5
-  m_Name: 1st
+  m_Name: RankImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3520,7 +3520,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1acd9c8388db33646a85e667dc6021ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6c7167b290f5e24fad978eba36d39bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4934,6 +4934,7 @@ MonoBehaviour:
   panel: {fileID: 6151021951241244038}
   expText: {fileID: 610353102713146205}
   arradiusDollarText: {fileID: 5624130560571214195}
+  rankImage: {fileID: 7310568697047072255}
 --- !u!1 &6215268086911681728
 GameObject:
   m_ObjectHideFlags: 0
@@ -5145,6 +5146,7 @@ MonoBehaviour:
   baseSensitivity: 1
   pcRotationSpeed: 300
   mobileRotationMultiplier: 180
+  joystick: {fileID: 3928459089405830042}
   orbitalFollow: {fileID: 0}
   sensitivitySlider: {fileID: 273851798554902130}
 --- !u!1 &6501833712352281122
@@ -6620,3 +6622,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 2171434124494525029}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3928459089405830042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+  m_PrefabInstance: {fileID: 2171434124494525029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

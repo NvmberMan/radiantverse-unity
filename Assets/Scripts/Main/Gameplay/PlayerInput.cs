@@ -4,13 +4,17 @@ namespace Main.Gameplay
 {
     public class PlayerInput : MonoBehaviour, ICharacterInput
     {
-        CharacterMovement CharacterMovement;
-        [Header("Camera Reference")]
-        [SerializeField] Transform cameraTransform;
+        private CharacterMovement CharacterMovement;
+        private Transform cameraTransform;
 
         void Awake()
         {
             CharacterMovement = GetComponent<CharacterMovement>();
+        }
+
+        private void Start()
+        {
+            cameraTransform = Camera.main.transform;
         }
 
         private void Update()

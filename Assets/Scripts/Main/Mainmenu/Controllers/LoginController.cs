@@ -14,6 +14,13 @@ namespace Main.Mainmenu
 
         private void Start()
         {
+            if (AuthManager.instance.CurrentUser != null && PlayerLocalData.userData != null)
+            {
+                Debug.Log("direct to lobby");
+                Direct("lobby");
+                return;
+            }
+
             AuthManager.instance.OnUserLoggedIn += (user) =>
             {
                 StartCoroutine(LoadAllPlayerDataCoroutine(user));
@@ -72,7 +79,7 @@ namespace Main.Mainmenu
 
                 if (userDataLoaded && statsLoaded && inventoryDataLoaded)
                 {
-                    loadingController.SetLoadingText("Data loaded successfully!");
+                    loadingController.SetLoadingText("Ready to go!");
                     loadingController.SetLoadingProgress(100);
 
                     yield return new WaitForSeconds(0.5f);
@@ -82,7 +89,7 @@ namespace Main.Mainmenu
 
 
             // 1. Load UserData
-            loadingController.SetLoadingText("Loading User Profile Data...");
+            loadingController.SetLoadingText("Preparing your experience...");
 
             // Memastikan proses pemuatan selesai sebelum melanjutkan ke item berikutnya
             yield return StartCoroutine(WaitForUserData(user,
@@ -95,7 +102,7 @@ namespace Main.Mainmenu
 
 
             // 2. Load PlayerStats
-            loadingController.SetLoadingText("Loading Player Statistics...");
+            loadingController.SetLoadingText("Loading your data...");
 
             yield return StartCoroutine(WaitForPlayerStats(user,
                 () => { statsLoaded = true; },
@@ -106,7 +113,7 @@ namespace Main.Mainmenu
 
 
             // 3. Load InventoryData
-            loadingController.SetLoadingText("Loading Player Inventory...");
+            loadingController.SetLoadingText("Setting things up...");
 
             yield return StartCoroutine(WaitForInventoryData(user,
                 () => { inventoryDataLoaded = true; },

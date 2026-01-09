@@ -1,16 +1,23 @@
+using Main.Mainmenu;
 using UnityEngine;
 
 namespace Main.Gameplay
 {
     public class PlayerInputJoystick : MonoBehaviour, ICharacterInput
     {
-        public Joystick joystick;
-        [SerializeField] Transform cameraTransform;
+        private Joystick joystick;
+        private Transform cameraTransform;
 
         CharacterMovement CharacterMovement;
         private void Awake()
         {
             CharacterMovement = GetComponent<CharacterMovement>();
+        }
+
+        private void Start()
+        {
+            joystick = MenuManager.instance.GetController<GameplayController>().joystick;
+            cameraTransform = Camera.main.transform;
         }
 
         private void Update()

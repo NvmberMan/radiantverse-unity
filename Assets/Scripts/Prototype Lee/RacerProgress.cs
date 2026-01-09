@@ -10,7 +10,6 @@ namespace Main.Gameplay
         public float distanceToNextWaypoint;
 
         [Header("Waypoint References")]
-        public List<Waypoint> allWaypoints;   // isi berurutan 0 → akhir
         public Transform nextWaypoint;
 
         private void Start()
@@ -44,9 +43,9 @@ namespace Main.Gameplay
 
         private void UpdateNextWaypoint()
         {
-            if (currentWaypointIndex < allWaypoints.Count)
+            if (currentWaypointIndex < RacePositionSystemWaypoint.instance.allWaypoints.Count)
             {
-                nextWaypoint = allWaypoints[currentWaypointIndex].transform;
+                nextWaypoint = RacePositionSystemWaypoint.instance.allWaypoints[currentWaypointIndex].transform;
             }
             else
             {

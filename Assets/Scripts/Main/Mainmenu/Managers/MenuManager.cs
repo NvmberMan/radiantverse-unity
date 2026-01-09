@@ -15,10 +15,6 @@ namespace Main.Mainmenu
         private void Awake()
         {
             instance = this;
-        }
-
-        private void Start()
-        {
             DirectController(ActiveIndex);
         }
 

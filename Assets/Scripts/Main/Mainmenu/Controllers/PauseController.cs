@@ -6,6 +6,11 @@ namespace Main.Mainmenu
 {
     public class PauseController : Controller
     {
+
+        private void Update()
+        {
+
+        }
         public void RestartGame()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

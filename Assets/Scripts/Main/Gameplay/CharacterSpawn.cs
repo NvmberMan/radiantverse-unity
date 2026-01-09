@@ -11,19 +11,11 @@ namespace Main.Gameplay
         public Vector3 startPoint;
         public Vector3 spawnPoint;
 
-        private void Start()
-        {
-            SetupStartPoint();
-        }
-
         public void SetupStartPoint()
         {
-            // 1. Random Spawn awal game
-            GameObject[] spawnObjects = GameObject.FindGameObjectsWithTag("SpawnPoint");
-
             List<SpawnPoint> availableSpawns = new List<SpawnPoint>();
 
-            foreach (GameObject obj in spawnObjects)
+            foreach (GameObject obj in GameManager.Instance.spawnPoints)
             {
                 SpawnPoint sp = obj.GetComponent<SpawnPoint>();
                 if (sp != null && !sp.isTaken)

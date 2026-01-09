@@ -28,8 +28,28 @@ namespace Main.Gameplay.AI
 
         public override void OnEpisodeBegin()
         {
+            if (GlobalEnvironment.instance == null)
+            {
+                Debug.LogError("GlobalEnvironment.instance NULL");
+                return;
+            }
+
+            var env = GlobalEnvironment.instance;
+
+            if (env.targetPoints == null || env.targetPoints.Length == 0)
+            {
+                Debug.LogError("TargetPoints belum diinisialisasi");
+                return;
+            }
+
+            if (CharacterSpawn == null)
+            {
+                Debug.LogError("CharacterSpawn NULL");
+                return;
+            }
+
             checkpointIndex = 0;
-            currentTarget = GlobalEnvironment.instance.targetPoints[0].transform;
+            currentTarget = env.targetPoints[0].transform;
 
             CharacterSpawn.RespawnToStartPoint();
 
@@ -38,6 +58,7 @@ namespace Main.Gameplay.AI
                 currentTarget.position
             );
         }
+
 
         private void FixedUpdate()
         {
@@ -48,11 +69,17 @@ namespace Main.Gameplay.AI
         public override void CollectObservations(VectorSensor sensor)
         {
             sensor.AddObservation(CharacterMovement._isGrounded);
-
             sensor.AddObservation(transform.InverseTransformDirection(CharacterMovement.rb.linearVelocity));
 
-            Vector3 relativeTargetPos = transform.InverseTransformPoint(currentTarget.position);
-            sensor.AddObservation(relativeTargetPos);
+            if (currentTarget != null)
+            {
+                Vector3 relativeTargetPos = transform.InverseTransformPoint(currentTarget.position);
+                sensor.AddObservation(relativeTargetPos);
+            }
+            else
+            {
+                sensor.AddObservation(Vector3.zero);
+            }
         }
 
         public override void OnActionReceived(ActionBuffers actions)

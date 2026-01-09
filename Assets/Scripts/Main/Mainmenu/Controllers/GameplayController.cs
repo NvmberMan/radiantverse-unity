@@ -31,6 +31,8 @@ namespace Main.Mainmenu
         [Header("Mobile Settings")]
         [Tooltip("Rotation multiplier for Mobile")]
         public float mobileRotationMultiplier = 180f;
+        public Joystick joystick;
+
 
         [Header("Cinemachine")]
         public CinemachineOrbitalFollow orbitalFollow;
@@ -72,8 +74,17 @@ namespace Main.Mainmenu
 
         void Update()
         {
-            if (GameManager.Instance.isPaused)
-                return;
+            if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused)
+            {
+                if (!GameManager.Instance.isPaused)
+                {
+                    Pause();
+                }
+                else
+                {
+                    Resume();
+                }
+            }
 
             switch (cameraMode)
             {
@@ -84,7 +95,9 @@ namespace Main.Mainmenu
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
 
-                    HandleMobileCamera();
+                    if(!GameManager.Instance.isPaused)
+                        HandleMobileCamera();
+
                     break;
 
                 case CameraControlMode.PC:
@@ -102,7 +115,8 @@ namespace Main.Mainmenu
                         Cursor.lockState = CursorLockMode.None;
                     }
 
-                    HandlePCCamera();
+                    if (!GameManager.Instance.isPaused)
+                        HandlePCCamera();
                     break;
             }
         }
@@ -232,6 +246,14 @@ namespace Main.Mainmenu
                 .Activate("base");
 
             GameManager.Instance.isPaused = true;
+        }
+
+        public void Resume()
+        {
+            MenuManager.instance.GetController<PauseController>()
+                .Disactivate("base");
+
+            GameManager.Instance.isPaused = false;
         }
 
         public void SetCameraModePC()

@@ -8,11 +8,26 @@ namespace Main.Gameplay
 {
     public class RacePositionSystemWaypoint : MonoBehaviour
     {
+        public static RacePositionSystemWaypoint instance;
+
         [Header("References")]
-        public List<RacerProgress> allRacers;
-
-
+        [HideInInspector] public List<RacerProgress> allRacers;
+        public List<Waypoint> allWaypoints;
         private GameplayGUIView gameplayGUIView;
+
+        public void SetupPositionAllRacer()
+        {
+            foreach(var racer in allRacers)
+            {
+                racer.GetComponent<CharacterSpawn>().SetupStartPoint();
+            }
+        }
+
+        private void Awake()
+        {
+            instance = this;
+        }
+
         private void Start()
         {
             gameplayGUIView = (GameplayGUIView)MenuManager.instance.GetController<GameplayController>().GetView("gameplay gui");

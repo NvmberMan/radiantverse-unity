@@ -8,6 +8,7 @@ namespace Main.Mainmenu
     public class AuthManager : MonoBehaviour
     {
         public static AuthManager instance;
+        public bool HasInitiallyLoaded { get; private set; } = false;
         public FirebaseAuth auth;
 
         public FirebaseUser CurrentUser => auth?.CurrentUser;
@@ -21,6 +22,13 @@ namespace Main.Mainmenu
             else Destroy(gameObject);
 
             DontDestroyOnLoad(gameObject);
+        }
+
+        public void ResetInitialLoad()
+        {
+            HasInitiallyLoaded = false;
+
+            PlayerLocalData.Clear();
         }
 
         private void Start()
@@ -51,6 +59,8 @@ namespace Main.Mainmenu
         {
             if (auth.CurrentUser != null)
             {
+                if (HasInitiallyLoaded) return;
+
                 try
                 {
                     var token = await auth.CurrentUser.TokenAsync(true);
@@ -62,6 +72,7 @@ namespace Main.Mainmenu
                         // ? Jangan panggil event langsung di thread Firebase
                         UnityMainThreadDispatcher.Instance.Enqueue(() =>
                         {
+                            HasInitiallyLoaded = true;
                             OnUserLoggedIn?.Invoke(auth.CurrentUser);
                         });
                     }

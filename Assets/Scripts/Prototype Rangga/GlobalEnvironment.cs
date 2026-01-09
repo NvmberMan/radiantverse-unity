@@ -1,23 +1,30 @@
+using System.Linq;
 using UnityEngine;
 
-namespace Main.Gameplay.AI
+public class GlobalEnvironment : MonoBehaviour
 {
-    public class GlobalEnvironment : MonoBehaviour
+    public static GlobalEnvironment instance;
+
+    [HideInInspector] public TargetPoint[] targetPoints;
+
+    private void Awake()
     {
-        public AIInput[] bots;
-        public TargetPoint[] targetPoints;
-
-        public static GlobalEnvironment instance;
-
-        private void Awake()
+        if (instance == null)
         {
             instance = this;
-
-            for(int i = 0; i < targetPoints.Length; i++)
-            {
-                TargetPoint point = targetPoints[i];
-                point.targetIndex = i;
-            }
+            DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    public void RefreshTargetPoints()
+    {
+        targetPoints = FindObjectsOfType<TargetPoint>()
+            .OrderBy(t => t.targetIndex)
+            .ToArray();
     }
 }
