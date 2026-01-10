@@ -27,6 +27,7 @@ namespace Main.Gameplay
         public bool _isGrounded;
         private float nextJumpTime = 0f;
         private string currentAnimation = "";
+        private bool _wasGrounded;
 
         public float Acceleration
         {
@@ -53,6 +54,8 @@ namespace Main.Gameplay
 
         void CheckGround()
         {
+            _wasGrounded = _isGrounded;
+
             Vector3 origin = groundDetectorPoint.position;
 
             // BoxCast downward
@@ -68,6 +71,11 @@ namespace Main.Gameplay
             );
 
             _isGrounded = grounded;
+
+            if (_isGrounded && !_wasGrounded)
+            {
+                AudioManager.Instance.PlaySFX("Landing");
+            }
         }
 
         public void MoveToDir(Vector3 direction)
@@ -113,6 +121,8 @@ namespace Main.Gameplay
                 nextJumpTime = Time.time + jumpCooldown;
 
                 SetAnimation(jumpAnimation, false);
+
+                AudioManager.Instance.PlaySFX("Jump");
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using Main.Gameplay.AI;
 using Main.Mainmenu;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,12 +87,19 @@ namespace Main.Gameplay
             while (countdownValue > 0)
             {
                 countDownView.UpdateText(countdownValue.ToString());
+                if (countdownValue == 3)
+                    AudioManager.Instance.PlaySFX("3");
+                if (countdownValue == 2)
+                    AudioManager.Instance.PlaySFX("2");
+                if (countdownValue == 1)
+                    AudioManager.Instance.PlaySFX("1");
 
                 yield return StartCoroutine(WaitForSecondsRealtimeWithPause(0.5f));
-
                 countdownValue--;
             }
 
+            AudioManager.Instance.PlaySFX("Go!");
+            AudioManager.Instance.PlaySFX("Cheers");
             countDownView.UpdateText("GO!");
             isGameActive = true;
             currentFinishRank = 1;

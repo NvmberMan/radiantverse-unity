@@ -56,6 +56,70 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!1 &1993248746642577063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1984781702299144722}
+  - component: {fileID: 1354575685753961784}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1984781702299144722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993248746642577063}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7189746104003800516}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1354575685753961784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993248746642577063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ddad4a369d4ec489c30dad6d88deeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  mainMixer: {fileID: 24100000, guid: b9fe1d71099cc0e4581dd4ca00c04b9e, type: 2}
+  musicGroup: {fileID: -6873860582421299826, guid: b9fe1d71099cc0e4581dd4ca00c04b9e, type: 2}
+  sfxGroup: {fileID: -8552448085217466732, guid: b9fe1d71099cc0e4581dd4ca00c04b9e, type: 2}
+  voiceGroup: {fileID: 266937230634874335, guid: b9fe1d71099cc0e4581dd4ca00c04b9e, type: 2}
+  ambienceGroup: {fileID: -2843292308005177889, guid: b9fe1d71099cc0e4581dd4ca00c04b9e, type: 2}
+  soundLibrary:
+  - name: 3
+    clip: {fileID: 8300000, guid: 509a25ec5d172d74aa4b545b09dd8e83, type: 3}
+  - name: 2
+    clip: {fileID: 8300000, guid: c72b7fc8bd5905742a1d3ffca305db7a, type: 3}
+  - name: 1
+    clip: {fileID: 8300000, guid: 6cae6bbf910bca34dbc5dd724c21ac9f, type: 3}
+  - name: Go!
+    clip: {fileID: 8300000, guid: c22cea1c03dc6e242b2c2c22cb84f559, type: 3}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 61b2daaf462a0e749a19a1349bf220d8, type: 3}
+  - name: Landing
+    clip: {fileID: 8300000, guid: 00c9521dde79c1f428c88efe536e3ba1, type: 3}
+  - name: Cheers
+    clip: {fileID: 8300000, guid: 4bcc599060ce8e141bfafb52c292854f, type: 3}
 --- !u!1 &2275927169699654206
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,5 +298,6 @@ Transform:
   - {fileID: 3507223447297911604}
   - {fileID: 1084017942552413370}
   - {fileID: 4959437499241262759}
+  - {fileID: 1984781702299144722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
