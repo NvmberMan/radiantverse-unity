@@ -47,6 +47,8 @@ namespace Main.Mainmenu
                     continue;
                 }
 
+                if (ControllerList[i].id == "universal") continue;
+
                 ControllerList[i].DisactivateAll();
             }
         }

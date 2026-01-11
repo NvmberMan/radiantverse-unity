@@ -79,6 +79,7 @@ namespace Main.Mainmenu
 
                 if (userDataLoaded && statsLoaded && inventoryDataLoaded)
                 {
+
                     loadingController.SetLoadingText("Ready to go!");
                     loadingController.SetLoadingProgress(100);
 

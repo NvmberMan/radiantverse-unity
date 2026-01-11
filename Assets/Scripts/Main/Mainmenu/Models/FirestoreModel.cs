@@ -278,5 +278,20 @@ namespace Main.Mainmenu
             };
             SaveInventoryData(uid, updates);
         }
+
+        public static void UnlockAchievement(string achievementId)
+        {
+            if (PlayerLocalData.inventoryData.UnlockedAchievements.Contains(achievementId)) return;
+
+            PlayerLocalData.inventoryData.UnlockedAchievements.Add(achievementId);
+
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            DocumentReference docRef = FirebaseFirestore.DefaultInstance.Collection("inventoryData").Document(uid);
+
+            docRef.UpdateAsync("UnlockedAchievements", FieldValue.ArrayUnion(achievementId))
+                .ContinueWithOnMainThread(task => {
+                    if (task.IsCompletedSuccessfully) Debug.Log($"Cloud Updated: {achievementId}");
+                });
+        }
     }
 }
