@@ -34,7 +34,7 @@ namespace Main.Mainmenu
             {
                 if (task.IsCompletedSuccessfully)
                 {
-                    Debug.Log($"{collection} successfully saved!");
+                    //Debug.Log($"{collection} successfully saved!");
                 }
                 else
                 {
@@ -53,7 +53,7 @@ namespace Main.Mainmenu
             {
                 if (task.IsCompletedSuccessfully)
                 {
-                    Debug.Log($"PlayerStats updated!");
+                    //Debug.Log($"PlayerStats updated!");
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace Main.Mainmenu
             {
                 if (task.IsCompletedSuccessfully)
                 {
-                    Debug.Log($"UserData updated!");
+                    //Debug.Log($"UserData updated!");
                 }
                 else
                 {

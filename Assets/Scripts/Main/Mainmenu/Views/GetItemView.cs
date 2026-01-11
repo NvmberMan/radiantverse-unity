@@ -1,11 +1,10 @@
-using Google.Protobuf.WellKnownTypes;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Main.Mainmenu
 {
-    public class AchievementUnlockedView : View
+    public class GetItemView : View
     {
         public Image previewImage;
         [HideInInspector] public Animator animator;
@@ -15,10 +14,9 @@ namespace Main.Mainmenu
             animator = GetComponent<Animator>();
         }
 
-        public void Init(AchievementItem unloackedAchievement, float duration = 2f)
+        public void Init(AccessoryData item, float duration = 2f)
         {
-            if(unloackedAchievement != null)
-                previewImage.sprite = unloackedAchievement.iconPreview;
+            previewImage.sprite = item.icon;
 
             if (duration > 0)
             {

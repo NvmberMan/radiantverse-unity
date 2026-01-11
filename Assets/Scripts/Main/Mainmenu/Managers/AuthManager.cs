@@ -7,6 +7,8 @@ namespace Main.Mainmenu
 {
     public class AuthManager : MonoBehaviour
     {
+        public bool IsDebug;
+
         public static AuthManager instance;
         public bool HasInitiallyLoaded { get; private set; } = false;
         public FirebaseAuth auth;
@@ -15,6 +17,7 @@ namespace Main.Mainmenu
 
         public event Action<FirebaseUser> OnUserLoggedIn;
         public event Action OnUserLoggedOut;
+
 
         private void Awake()
         {
@@ -43,14 +46,17 @@ namespace Main.Mainmenu
                 if (task.Result == DependencyStatus.Available)
                 {
                     auth = FirebaseAuth.DefaultInstance;
-                    Debug.Log("Firebase initialized!");
+
+                    if(IsDebug)
+                        Debug.Log("Firebase initialized!");
 
                     auth.StateChanged += OnAuthStateChanged;
                     OnAuthStateChanged(this, null);
                 }
                 else
                 {
-                    Debug.LogError($"Firebase dependency error: {task.Result}");
+                    if (IsDebug)
+                        Debug.LogError($"Firebase dependency error: {task.Result}");
                 }
             });
         }
@@ -67,7 +73,8 @@ namespace Main.Mainmenu
 
                     if (!string.IsNullOrEmpty(token))
                     {
-                        Debug.Log($"User is still logged in: {auth.CurrentUser.Email}");
+                        if (IsDebug)
+                            Debug.Log($"User is still logged in: {auth.CurrentUser.Email}");
 
                         // ? Jangan panggil event langsung di thread Firebase
                         UnityMainThreadDispatcher.Instance.Enqueue(() =>
@@ -79,7 +86,8 @@ namespace Main.Mainmenu
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError($"Auth validation failed: {ex.Message}");
+                    if (IsDebug)
+                        Debug.LogError($"Auth validation failed: {ex.Message}");
                 }
             }
             else
