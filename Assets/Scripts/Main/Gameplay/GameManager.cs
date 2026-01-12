@@ -5,7 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 namespace Main.Gameplay
@@ -25,6 +27,11 @@ namespace Main.Gameplay
         private HashSet<GameObject> finishedRacers = new HashSet<GameObject>();
         [HideInInspector] public GameObject[] spawnPoints;
         private GameEndedController gameEndedController;
+
+
+        [Header("Cinemachine")]
+        public CinemachineOrbitalFollow orbitalFollow;
+        public PlayableDirector cinematicDirector;
 
 
         private void Awake()
@@ -62,17 +69,21 @@ namespace Main.Gameplay
 
             RacePositionSystemWaypoint.instance.SetupPositionAllRacer();
 
-
             yield return new WaitForSeconds(0.5f);
             loadingMapPreviewController.SetLoadingProgress(80);
 
             yield return new WaitForSeconds(1);
             loadingMapPreviewController.DisactivateAll();
+            cinematicDirector.gameObject.SetActive(true);
+            orbitalFollow.gameObject.SetActive(true);
+        }
 
+        public void OnCinematicFinished()
+        {
             GameplayController gameplayController = MenuManager.instance.GetController<GameplayController>();
             gameplayController.Activate("gameplay gui");
 
-            yield return StartCoroutine(StartCountdown(gameplayController));
+            StartCoroutine(StartCountdown(gameplayController));
         }
 
         IEnumerator StartCountdown(GameplayController gameplayController)

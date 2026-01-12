@@ -33,10 +33,6 @@ namespace Main.Mainmenu
         public float mobileRotationMultiplier = 180f;
         public Joystick joystick;
 
-
-        [Header("Cinemachine")]
-        public CinemachineOrbitalFollow orbitalFollow;
-
         [Header("UI")]
         public Slider sensitivitySlider;
 
@@ -174,10 +170,10 @@ namespace Main.Mainmenu
 
         void RotateCameraPC(Vector2 delta)
         {
-            orbitalFollow.HorizontalAxis.Value +=
+            GameManager.Instance.orbitalFollow.HorizontalAxis.Value +=
                 delta.x * pcRotationSpeed * baseSensitivity * Time.deltaTime;
 
-            orbitalFollow.VerticalAxis.Value -=
+            GameManager.Instance.orbitalFollow.VerticalAxis.Value -=
                 delta.y * pcRotationSpeed * baseSensitivity * Time.deltaTime;
 
             ClampVertical();
@@ -185,10 +181,10 @@ namespace Main.Mainmenu
 
         void RotateCameraMobile(Vector2 normalizedDelta)
         {
-            orbitalFollow.HorizontalAxis.Value +=
+            GameManager.Instance.orbitalFollow.HorizontalAxis.Value +=
                 normalizedDelta.x * mobileRotationMultiplier * baseSensitivity;
 
-            orbitalFollow.VerticalAxis.Value -=
+            GameManager.Instance.orbitalFollow.VerticalAxis.Value -=
                 normalizedDelta.y * mobileRotationMultiplier * baseSensitivity;
 
             ClampVertical();
@@ -196,10 +192,10 @@ namespace Main.Mainmenu
 
         void ClampVertical()
         {
-            orbitalFollow.VerticalAxis.Value = Mathf.Clamp(
-                orbitalFollow.VerticalAxis.Value,
-                orbitalFollow.VerticalAxis.Range.x,
-                orbitalFollow.VerticalAxis.Range.y
+            GameManager.Instance.orbitalFollow.VerticalAxis.Value = Mathf.Clamp(
+                GameManager.Instance.orbitalFollow.VerticalAxis.Value,
+                GameManager.Instance.orbitalFollow.VerticalAxis.Range.x,
+                GameManager.Instance.orbitalFollow.VerticalAxis.Range.y
             );
         }
 
