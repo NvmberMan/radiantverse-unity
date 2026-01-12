@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Sporty Blue
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Shirts/Sporty-blue
   displayName: Sporty Blue
   icon: {fileID: 21300000, guid: bde4180aed7eb6d4b8047a183eba08a4, type: 3}
-  category: shirts
   price: 0
+  spineSkinName: Component/Shirts/Sporty-blue
+  category: Shirts

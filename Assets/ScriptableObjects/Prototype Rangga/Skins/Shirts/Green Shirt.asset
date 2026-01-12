@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Green Shirt
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Shirts/Green-shirt
   displayName: Green Shirt
   icon: {fileID: 21300000, guid: 9184e4ac139b91848b05d4a9226c63cc, type: 3}
-  category: shirts
   price: 0
+  spineSkinName: Component/Shirts/Green-shirt
+  category: Shirts

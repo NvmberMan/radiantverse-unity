@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Faces 2
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Faces/Girl
   displayName: Face 1
   icon: {fileID: 21300000, guid: ab15f69a82c69d9479b092ba39667d13, type: 3}
-  category: faces
   price: 0
+  spineSkinName: Component/Faces/Girl
+  category: Faces

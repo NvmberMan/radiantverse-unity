@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Half Zip ARRADIUS
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Shirts/Half-zip-ARRADIUS
   displayName: Half Zip ARRADIUS
   icon: {fileID: 21300000, guid: 6e70610df54d7834e8e5b7e44c8ec232, type: 3}
-  category: shirts
   price: 0
+  spineSkinName: Component/Shirts/Half-zip-ARRADIUS
+  category: Shirts

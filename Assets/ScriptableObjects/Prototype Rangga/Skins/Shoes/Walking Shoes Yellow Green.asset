@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Walking Shoes Yellow Green
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Shoes/walking-shoes-yellow-green
   displayName: Walking Shoes Yellow Green
   icon: {fileID: 21300000, guid: 4bad88ac3fcbe6f488a413f5ba11f69c, type: 3}
-  category: shoes
   price: 0
+  spineSkinName: Component/Shoes/walking-shoes-yellow-green
+  category: Shoes

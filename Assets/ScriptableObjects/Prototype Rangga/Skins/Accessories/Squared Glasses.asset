@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Squared Glasses
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Accessories/Glasses-Type2
   displayName: Squared Glasses
   icon: {fileID: 21300000, guid: aab22157351654c41a19ffd920f4270a, type: 3}
-  category: accessories
   price: 0
+  spineSkinName: Component/Accessories/Glasses-Type2
+  category: Accessories

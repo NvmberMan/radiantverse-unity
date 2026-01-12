@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Hairs 2
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Hairs/Type2
   displayName: Hairs 2
   icon: {fileID: 21300000, guid: 646649e83ec3e5642adbf5600c678e7a, type: 3}
-  category: hairs
   price: 0
+  spineSkinName: Component/Hairs/Type2
+  category: Hairs

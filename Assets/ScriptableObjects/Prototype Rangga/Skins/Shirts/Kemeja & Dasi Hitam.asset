@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Kemeja & Dasi Hitam
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Shirts/Kemeja&dasi-hitam
   displayName: Kemeja & Dasi Hitam
   icon: {fileID: 21300000, guid: 3f3ccbe24565ccb42a18b4e50427675f, type: 3}
-  category: shirts
   price: 0
+  spineSkinName: Component/Shirts/Kemeja&dasi-hitam
+  category: Shirts

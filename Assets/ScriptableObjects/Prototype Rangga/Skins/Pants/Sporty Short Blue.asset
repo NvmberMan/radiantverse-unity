@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Sporty Short Blue
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Pants/Sporty-short-blue
   displayName: Sporty Short Blue
   icon: {fileID: 21300000, guid: 0f2604280c9ae244e92967327dc5a736, type: 3}
-  category: pants
   price: 0
+  spineSkinName: Component/Pants/Sporty-short-blue
+  category: Pants

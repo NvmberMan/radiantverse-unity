@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Baju Capy
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Shirts/Baju-capy
   displayName: Baju Capy
   icon: {fileID: 21300000, guid: 7ea39d04423ccf145902c5c3a94b7b93, type: 3}
-  category: shirts
   price: 0
+  spineSkinName: Component/Shirts/Baju-capy
+  category: Shirts

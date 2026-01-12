@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Shirt & Vest Biru
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Shirts/Shirt&vest-biru
   displayName: Shirt & Vest Biru
   icon: {fileID: 21300000, guid: 33cb0eeda3aeff04392976caa8745d36, type: 3}
-  category: shirts
   price: 0
+  spineSkinName: Component/Shirts/Shirt&vest-biru
+  category: Shirts

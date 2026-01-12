@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
   m_Name: Vintage Glasses
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  spineSkinName: Component/Accessories/Glasses-Type3
   displayName: Vintage Glasses
   icon: {fileID: 21300000, guid: 4145d4fc6096b1b4c8f7295891b4b947, type: 3}
-  category: accessories
   price: 0
+  spineSkinName: Component/Accessories/Glasses-Type3
+  category: Accessories
