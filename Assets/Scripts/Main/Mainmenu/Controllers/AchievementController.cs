@@ -6,7 +6,7 @@ namespace Main.Mainmenu
 {
     public class AchievementController : Controller
     {
-        [SerializeField] private Transform container; 
+        [SerializeField] private AchievementItemUI[] items; 
         [SerializeField] private GameObject achievementPrefab; 
         [SerializeField] private AchievementDetailUI achievementDetail;
 
@@ -28,8 +28,6 @@ namespace Main.Mainmenu
 
         public void RefreshUI()
         {
-            AchievementItemUI[] items = container.GetComponentsInChildren<AchievementItemUI>();
-
             foreach (AchievementItemUI item in items)
             {
                 bool isUnlocked = PlayerLocalData.inventoryData.UnlockedAchievements.Contains(item.achievementItem.id);

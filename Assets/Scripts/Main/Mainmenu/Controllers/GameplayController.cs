@@ -46,11 +46,11 @@ namespace Main.Mainmenu
         // ================= INIT =================
         private void Awake()
         {
-#if UNITY_STANDALONE || UNITY_EDITOR
-            cameraMode = CameraControlMode.PC;
-#else
-            cameraMode = CameraControlMode.Mobile;
-#endif
+//#if UNITY_STANDALONE || UNITY_EDITOR
+//            cameraMode = CameraControlMode.PC;
+//#else
+//            cameraMode = CameraControlMode.Mobile;
+//#endif
         }
 
         private void Start()
@@ -119,32 +119,15 @@ namespace Main.Mainmenu
 
         void HandleMobileCamera()
         {
-#if UNITY_EDITOR
-            if (Input.GetMouseButtonDown(0))
+            for (int i = 0; i < Input.touchCount; i++)
             {
-                if (Input.mousePosition.x < Screen.width * cameraAreaStart)
-                    return;
+                Touch touch = Input.GetTouch(i);
 
-                lastInputPos = Input.mousePosition;
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                if (Input.mousePosition.x < Screen.width * cameraAreaStart)
-                    return;
-
-                Vector2 delta = (Vector2)Input.mousePosition - lastInputPos;
-                lastInputPos = Input.mousePosition;
-
-                RotateCameraMobile(NormalizeDelta(delta));
-            }
-#else
-            if (Input.touchCount == 1)
-            {
-                Touch touch = Input.GetTouch(0);
-
+                // Abaikan jari yang berada di area Joystick (sisi kiri)
                 if (touch.position.x < Screen.width * cameraAreaStart)
-                    return;
+                    continue;
 
+                // Jika jari ada di area kamera (sisi kanan)
                 if (touch.phase == TouchPhase.Began)
                 {
                     lastInputPos = touch.position;
@@ -156,8 +139,8 @@ namespace Main.Mainmenu
 
                     RotateCameraMobile(NormalizeDelta(delta));
                 }
+                break;
             }
-#endif
         }
 
         void HandlePCCamera()
