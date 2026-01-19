@@ -12,6 +12,11 @@ namespace Main.Gameplay
         [Header("Duration (Pickup Only)")]
         public float duration = 10f;
 
+        [Header("Camera Effect")]
+        public bool useCameraShake = true;
+        public float shakeStrength = 0.4f;
+
+
         // ============================
         // APPLY EFFECT
         // ============================
@@ -39,8 +44,16 @@ namespace Main.Gameplay
         private IEnumerator EffectRoutine(CharacterMovement movement)
         {
             Apply(movement);
+
+            if (useCameraShake && CameraImpulseManager.Instance != null)
+            {
+                CameraImpulseManager.Instance.Shake(shakeStrength);
+            }
+
             yield return new WaitForSeconds(duration);
+
             Remove(movement);
         }
+
     }
 }

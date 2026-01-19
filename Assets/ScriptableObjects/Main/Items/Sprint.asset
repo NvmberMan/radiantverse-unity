@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249b20ca5c96dd946b3c83bb4d8965cf, type: 3}
   m_Name: Sprint
   m_EditorClassIdentifier: Assembly-CSharp::MovementItemData
-  itemName: 
   speedBonus: 2
   duration: 10
+  useCameraShake: 1
+  shakeStrength: 10

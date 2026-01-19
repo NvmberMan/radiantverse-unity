@@ -167,6 +167,7 @@ namespace Main.Gameplay.AI
             else
             {
                 AddReward(10f);
+                //CharacterMovement._isFreeze = true;
                 EndEpisode();
             }
         }

@@ -25,6 +25,7 @@ namespace Main.Gameplay
 
         [HideInInspector] public Rigidbody rb;
         public bool _isGrounded;
+        public bool _isFreeze;
         private float nextJumpTime = 0f;
         private string currentAnimation = "";
         private bool _wasGrounded;
@@ -163,7 +164,7 @@ namespace Main.Gameplay
 
         public void MoveToDir(Vector3 direction)
         {
-            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused) return;
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused || _isFreeze) return;
 
             Vector3 vel = rb.linearVelocity;
 
