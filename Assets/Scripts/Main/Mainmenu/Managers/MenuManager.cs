@@ -15,7 +15,9 @@ namespace Main.Mainmenu
         private void Awake()
         {
             instance = this;
-            DirectController(ActiveIndex);
+
+            if(ActiveIndex >= 0 && ActiveIndex < ControllerList.Count)
+                DirectController(ActiveIndex);
         }
 
         public void DirectController(int index)
