@@ -20,6 +20,7 @@ namespace Main.Gameplay
         public bool isGameActive = true;
         public bool isPaused = false;
         public int currentFinishRank = 1;
+        public bool isTesting = false;
 
         public Transform playerTransform;
         [SerializeField] private GameObject aiAgentPrefab;
@@ -44,7 +45,31 @@ namespace Main.Gameplay
         {
             Time.timeScale = 1;
             gameEndedController = MenuManager.instance.GetController<GameEndedController>();
-            StartCoroutine(InitializeMap());
+
+            if(isTesting)
+            {
+                GlobalEnvironment.instance.RefreshTargetPoints();
+                spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+
+                RacePositionSystemWaypoint.instance.allRacers.Add(playerTransform.GetComponent<RacerProgress>());
+
+                for (int i = 0; i < spawnPoints.Length - 1; i++)
+                {
+                    GameObject AiAgent = Instantiate(aiAgentPrefab);
+                    RacePositionSystemWaypoint.instance.allRacers.Add(AiAgent.GetComponent<RacerProgress>());
+                }
+
+                RacePositionSystemWaypoint.instance.SetupPositionAllRacer();
+
+                GameplayController gameplayController = MenuManager.instance.GetController<GameplayController>();
+                gameplayController.Activate("gameplay gui");
+
+                isGameActive = true;
+                currentFinishRank = 1;
+                finishedRacers.Clear();
+            }
+            else
+                StartCoroutine(InitializeMap());
         }
 
 
