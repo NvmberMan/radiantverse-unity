@@ -16,3 +16,6 @@ MonoBehaviour:
   duration: 10
   useCameraShake: 1
   shakeStrength: 10
+  usePostProcess: 1
+  effectColor: {r: 0, g: 1, b: 1, a: 1}
+  visualIntensity: 1.2

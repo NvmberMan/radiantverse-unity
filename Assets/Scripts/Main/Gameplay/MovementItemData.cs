@@ -16,6 +16,12 @@ namespace Main.Gameplay
         public bool useCameraShake = true;
         public float shakeStrength = 0.4f;
 
+        [Header("Post Processing")]
+        public bool usePostProcess = true;
+        [ColorUsage(true, true)]
+        public Color effectColor = Color.cyan;
+
+
 
         // ============================
         // APPLY EFFECT
@@ -38,17 +44,26 @@ namespace Main.Gameplay
         // ============================
         public void ApplyWithDuration(CharacterMovement movement, MonoBehaviour runner)
         {
+            if (useCameraShake && CameraShake.Instance != null)
+            {
+                CameraShake.Instance.ShakeForDuration(shakeStrength, duration);
+            }
+
+            if (usePostProcess && PostProcessController.Instance != null)
+            {
+                PostProcessController.Instance.PlayEffect(duration, effectColor);
+            }
+
+
+
             runner.StartCoroutine(EffectRoutine(movement));
         }
+
+
 
         private IEnumerator EffectRoutine(CharacterMovement movement)
         {
             Apply(movement);
-
-            if (useCameraShake && CameraImpulseManager.Instance != null)
-            {
-                CameraImpulseManager.Instance.Shake(shakeStrength);
-            }
 
             yield return new WaitForSeconds(duration);
 
