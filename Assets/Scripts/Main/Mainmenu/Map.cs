@@ -7,7 +7,7 @@ namespace Main.Mainmenu
 {
     public class Map: MonoBehaviour
     {
-        public string worldId;
+        [HideInInspector] public string worldId;
 
         public string mapId;
         public string mapName;
@@ -17,7 +17,6 @@ namespace Main.Mainmenu
         [Space(10)]
         public Vector2 containerShowPosition;
         public Sprite mapPreview;
-        public Sprite achievementPreview;
 
         [Space(10)]
         public Button clickButton;

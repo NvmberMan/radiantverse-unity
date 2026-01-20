@@ -14,7 +14,7 @@ namespace Main.Mainmenu
         public TextMeshProUGUI playerMoneyText;
 
         [Header("Database")]
-        public List<AccessoryData> shopDatabase;
+        public List<ShopItemData> shopDatabase;
 
         public override void Show()
         {
@@ -31,40 +31,59 @@ namespace Main.Mainmenu
 
             foreach (var item in shopDatabase)
             {
-                bool isOwned = PlayerLocalData.inventoryData.UnlockedAccessories.Contains(item.spineSkinName);
+                bool isOwned = false;
+                if (item is AccessoryData acc)
+                    isOwned = PlayerLocalData.inventoryData.UnlockedAccessories.Contains(acc.spineSkinName);
+
                 ShopItemUI newItem = Instantiate(itemPrefab, itemContainer);
                 newItem.Setup(item, this, isOwned);
             }
         }
 
-        public void TryBuyItem(AccessoryData item)
+        private void GrantAccessory(AccessoryData accessory)
+        {
+            var inventory = PlayerLocalData.inventoryData;
+            if (!inventory.UnlockedAccessories.Contains(accessory.spineSkinName))
+            {
+                inventory.UnlockedAccessories.Add(accessory.spineSkinName);
+            }
+        }
+
+        public void TryBuy(ShopItemData item)
         {
             var stats = PlayerLocalData.playerStats;
-            var inventory = PlayerLocalData.inventoryData;
+            if (stats.ArradiusDollar < item.price)
+            {
+                Debug.LogError("Money not enough!");
+                return;
+            }
+
+            stats.ArradiusDollar -= item.price;
+
+            if (item is CrateData crate)
+            {
+                MenuManager.instance.GetController<UniversalController>().ShowCratePopup(crate);
+
+
+            }
+            else if (item is AccessoryData accessory)
+            {
+                GrantAccessory(accessory);
+            }
+
+            UpdateDatabaseSync();
+            RefreshShopUI();
+        }
+
+        private void UpdateDatabaseSync()
+        {
             string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
-            if (stats.ArradiusDollar >= item.price)
-            {
-                stats.ArradiusDollar -= item.price;
-                inventory.UnlockedAccessories.Add(item.spineSkinName);
+            var statsUpdates = new Dictionary<string, object> { { "ArradiusDollar", PlayerLocalData.playerStats.ArradiusDollar } };
+            FirestoreModel.SavePlayerStats(uid, statsUpdates);
 
-                Dictionary<string, object> statsUpdates = new Dictionary<string, object> {
-                    { "ArradiusDollar", stats.ArradiusDollar }
-                };
-                FirestoreModel.SavePlayerStats(uid, statsUpdates);
-
-                Dictionary<string, object> invUpdates = new Dictionary<string, object> {
-                    { "UnlockedAccessories", inventory.UnlockedAccessories }
-                };
-                FirestoreModel.SaveInventoryData(uid, invUpdates);
-
-                Debug.Log($"Purchased {item.displayName}!");
-                RefreshShopUI();
-            }
-            else
-            {
-                Debug.LogError("Not enough money!");
-            }
+            var invUpdates = new Dictionary<string, object> { { "UnlockedAccessories", PlayerLocalData.inventoryData.UnlockedAccessories } };
+            FirestoreModel.SaveInventoryData(uid, invUpdates);
         }
     }
 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aacd85a6694f29040aec468a67cc1a54, type: 3}
+  m_Name: Basic Hair
+  m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.CrateData
+  displayName: Basic Hair
+  icon: {fileID: 21300000, guid: e54b4aa249981e14f9f6b486b1c3cfa1, type: 3}
+  price: 0
+  iconNoBackground: {fileID: 21300000, guid: 7307656e91653d04b8db8f3ad58734ad, type: 3}
+  rewardPool:
+  - {fileID: 11400000, guid: 75bb6055423905e429485f1e177134fd, type: 2}
+  - {fileID: 11400000, guid: 5d6f0d9d743bc234d922b43226f6ef9f, type: 2}
+  - {fileID: 11400000, guid: d2e02a8e27d7d8944a4aa3d3c45f58c4, type: 2}
+  - {fileID: 11400000, guid: 51dc06cced62b3e48ac63c6af368396c, type: 2}
+  - {fileID: 11400000, guid: 3487e4990eac4dd4d80a12dfee79418a, type: 2}

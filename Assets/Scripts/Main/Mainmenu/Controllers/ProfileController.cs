@@ -12,6 +12,7 @@ namespace Main.Mainmenu
             AuthModel.LogoutUser(
                onSuccess: () =>
                {
+                   AuthManager.instance.ResetInitialLoad();
                    Debug.Log("Logout success, moving to Login Page...");
                    MenuManager.instance.DirectController("login");
                },

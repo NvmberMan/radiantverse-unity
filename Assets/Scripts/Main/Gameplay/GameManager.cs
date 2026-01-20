@@ -1,8 +1,14 @@
-﻿using UnityEngine;
+﻿using Main.Gameplay.AI;
+using Main.Mainmenu;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using Unity.Cinemachine;
+using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
-using TMPro; // Untuk UI
-using System.Collections.Generic; // Untuk List
-
 
 namespace Main.Gameplay
 {
@@ -10,19 +16,24 @@ namespace Main.Gameplay
     {
         public static GameManager Instance;
 
-        [Header("Game States")]
+        [Header("Game State")]
         public bool isGameActive = true;
-        public int totalRacers = 8; // Default 8 pelari
-        public int currentRank = 1; // Urutan finish saat ini
+        public bool isPaused = false;
+        public int currentFinishRank = 1;
+        public bool isTesting = false;
 
-        [Header("UI References")]
-        public GameObject winPanel;
-        public GameObject losePanel;
-        public TextMeshProUGUI rankUIText; // UI di pojok layar (Contoh: "Pos: 1/8")
-        public TextMeshProUGUI finalRankText; // Teks di panel kalah (Contoh: "You finished #3")
+        public Transform playerTransform;
+        [SerializeField] private GameObject aiAgentPrefab;
 
-        // Mencegah satu orang finish berkali-kali
-        private List<GameObject> finishedRacers = new List<GameObject>();
+        private HashSet<GameObject> finishedRacers = new HashSet<GameObject>();
+        [HideInInspector] public GameObject[] spawnPoints;
+        private GameEndedController gameEndedController;
+
+
+        [Header("Cinemachine")]
+        public CinemachineOrbitalFollow orbitalFollow;
+        public PlayableDirector cinematicDirector;
+
 
         private void Awake()
         {
@@ -32,80 +43,144 @@ namespace Main.Gameplay
 
         private void Start()
         {
-            // Pastikan waktu berjalan
             Time.timeScale = 1;
-            currentRank = 1;
-            finishedRacers.Clear();
+            gameEndedController = MenuManager.instance.GetController<GameEndedController>();
+
+            if(isTesting)
+            {
+                GlobalEnvironment.instance.RefreshTargetPoints();
+                spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+
+                RacePositionSystemWaypoint.Instance.allRacers.Add(playerTransform.GetComponent<RacerProgress>());
+
+                for (int i = 0; i < spawnPoints.Length - 1; i++)
+                {
+                    GameObject AiAgent = Instantiate(aiAgentPrefab);
+                    RacePositionSystemWaypoint.Instance.allRacers.Add(AiAgent.GetComponent<RacerProgress>());
+                }
+
+                RacePositionSystemWaypoint.Instance.SetupPositionAllRacer();
+
+                GameplayController gameplayController = MenuManager.instance.GetController<GameplayController>();
+                gameplayController.Activate("gameplay gui");
+
+                isGameActive = true;
+                currentFinishRank = 1;
+                finishedRacers.Clear();
+            }
+            else
+                StartCoroutine(InitializeMap());
         }
+
+
+        IEnumerator InitializeMap()
+        {
+            LoadingMapPreviewController loadingMapPreviewController = MenuManager.instance.GetController<LoadingMapPreviewController>();
+            loadingMapPreviewController.Activate("base");
+            loadingMapPreviewController.SetLoadingProgress(50);
+
+
+            // spawn agent
+            GlobalEnvironment.instance.RefreshTargetPoints();
+            spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+
+            RacePositionSystemWaypoint.Instance.allRacers.Add(playerTransform.GetComponent<RacerProgress>());
+
+            for(int i = 0; i < spawnPoints.Length - 1; i++)
+            {
+                GameObject AiAgent = Instantiate(aiAgentPrefab);
+                RacePositionSystemWaypoint.Instance.allRacers.Add(AiAgent.GetComponent<RacerProgress>());
+            }
+
+            RacePositionSystemWaypoint.Instance.SetupPositionAllRacer();
+
+            yield return new WaitForSeconds(0.5f);
+            loadingMapPreviewController.SetLoadingProgress(80);
+
+            yield return new WaitForSeconds(1);
+            loadingMapPreviewController.DisactivateAll();
+            cinematicDirector.gameObject.SetActive(true);
+            orbitalFollow.gameObject.SetActive(true);
+        }
+
+        public void OnCinematicFinished()
+        {
+            GameplayController gameplayController = MenuManager.instance.GetController<GameplayController>();
+            gameplayController.Activate("gameplay gui");
+
+            StartCoroutine(StartCountdown(gameplayController));
+        }
+
+        IEnumerator StartCountdown(GameplayController gameplayController)
+        {
+            CountDownView countDownView =
+                (CountDownView)gameplayController.GetView("countdown");
+
+            countDownView.Show();
+
+            int countdownValue = 3;
+
+            while (countdownValue > 0)
+            {
+                countDownView.UpdateText(countdownValue.ToString());
+                if (countdownValue == 3)
+                    AudioManager.Instance.PlaySFX("3");
+                if (countdownValue == 2)
+                    AudioManager.Instance.PlaySFX("2");
+                if (countdownValue == 1)
+                    AudioManager.Instance.PlaySFX("1");
+
+                yield return StartCoroutine(WaitForSecondsRealtimeWithPause(0.5f));
+                countdownValue--;
+            }
+
+            AudioManager.Instance.PlaySFX("Go!");
+            AudioManager.Instance.PlaySFX("Cheers");
+            countDownView.UpdateText("GO!");
+            isGameActive = true;
+            currentFinishRank = 1;
+            finishedRacers.Clear();
+
+            yield return StartCoroutine(WaitForSecondsRealtimeWithPause(0.5f));
+
+            countDownView.Hide();
+        }
+
+        IEnumerator WaitForSecondsRealtimeWithPause(float duration)
+        {
+            float timeLeft = duration;
+
+            while (timeLeft > 0f)
+            {
+                yield return new WaitWhile(() => isPaused);
+
+                float delta = Mathf.Min(Time.unscaledDeltaTime, timeLeft);
+                timeLeft -= delta;
+
+                yield return null;
+            }
+        }
+
+
+
 
         public void OnFinishLineCrossed(GameObject racer)
         {
-            // 1. Cek apakah racer ini sudah pernah finish sebelumnya?
             if (finishedRacers.Contains(racer)) return;
 
-            // 2. Masukkan ke daftar finish
             finishedRacers.Add(racer);
-            Debug.Log($"🏁 {racer.name} Finish di posisi #{currentRank}");
 
-            // 3. Cek Siapa yang Finish
+            int finishRank = currentFinishRank;
+            currentFinishRank++;
+
             if (racer.CompareTag("Player"))
             {
-                // --- PLAYER FINISH ---
-                HandlePlayerFinish(currentRank);
+                isGameActive = false;
+
+                gameEndedController.GameEnded(finishRank);
             }
-            else if (racer.CompareTag("NPC"))
-            {
-                // --- BOT FINISH ---
-                // Game TIDAK berhenti, cuma ranking bertambah
-                // Opsional: Matikan AI bot biar dia diam setelah finish
-                // racer.GetComponent<AI_Script>().enabled = false; 
-                currentRank++;
-            }
-        }
-
-        private void HandlePlayerFinish(int rank)
-        {
-            isGameActive = false;
-            Time.timeScale = 0; // Game berhenti HANYA jika player finish
-
-            if (rank == 1)
-            {
-                // JUARA 1 = MENANG
-                Debug.Log("✨ PLAYER JUARA 1!");
-
-                // Reward: Unlock Level, Gold, XP
-                PlayerPrefs.SetInt("Level2_Unlocked", 1);
-                PlayerPrefs.SetInt("Gold", PlayerPrefs.GetInt("Gold") + 100);
-                PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + 500);
-                PlayerPrefs.Save();
-
-                if (winPanel != null) winPanel.SetActive(true);
-            }
-            else
-            {
-                // JUARA 2 DST = KALAH (Tapi tetap dapat XP)
-                Debug.Log($"💀 PLAYER KALAH (Posisi {rank})");
-
-                // Reward: XP Only (Penghibur)
-                PlayerPrefs.SetInt("XP", PlayerPrefs.GetInt("XP") + 100);
-                PlayerPrefs.Save();
-
-                if (finalRankText != null)
-                    finalRankText.text = $"You Finished #{rank}";
-
-                if (losePanel != null) losePanel.SetActive(true);
-            }
-        }
-
-        public void RestartGame()
-        {
-            Debug.Log("🔄 Restarting Game...");
-
-            // Penting: Kembalikan waktu ke normal sebelum reload
-            Time.timeScale = 1;
-
-            // Reload Scene saat ini
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
+
 }

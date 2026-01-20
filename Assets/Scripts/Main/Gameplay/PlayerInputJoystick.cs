@@ -1,22 +1,28 @@
+using Main.Mainmenu;
 using UnityEngine;
 
 namespace Main.Gameplay
 {
     public class PlayerInputJoystick : MonoBehaviour, ICharacterInput
     {
-        CharacterMovement characterMovement;
+        private Joystick joystick;
+        private Transform cameraTransform;
 
-        public Joystick joystick;
-
+        CharacterMovement CharacterMovement;
         private void Awake()
         {
-            characterMovement = GetComponent<CharacterMovement>();
+            CharacterMovement = GetComponent<CharacterMovement>();
+        }
+
+        private void Start()
+        {
+            joystick = MenuManager.instance.GetController<GameplayController>().joystick;
+            cameraTransform = Camera.main.transform;
         }
 
         private void Update()
         {
             HandleMovementInput();
-            //HandleJumpInput();
         }
 
         public void HandleMovementInput()
@@ -24,23 +30,36 @@ namespace Main.Gameplay
             float h = joystick.Horizontal;
             float v = joystick.Vertical;
 
-            //Debug.Log("Joystick H: " + h + " V: " + v);
-
-            Vector3 dir = new Vector3(h, 0, v).normalized;
-
-            if (h != 0 || v != 0)
+            if (!cameraTransform)
             {
-                characterMovement.MoveToDir(dir);
+                Debug.LogWarning("Camera Transform belum di-assign");
+                return;
+            }
+
+            Vector3 camForward = cameraTransform.forward;
+            Vector3 camRight = cameraTransform.right;
+
+            camForward.y = 0;
+            camRight.y = 0;
+
+            camForward.Normalize();
+            camRight.Normalize();
+
+            Vector3 dir = (camForward * v + camRight * h).normalized;
+
+            if (dir.magnitude > 0.1f)
+            {
+                CharacterMovement.MoveToDir(dir);
             }
             else
             {
-                characterMovement.StopMoving();
+                CharacterMovement.StopMoving();
             }
         }
 
         public void HandleJumpInput()
         {
-            characterMovement.Jump();
+            CharacterMovement.Jump();
         }
     }
 }

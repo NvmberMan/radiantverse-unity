@@ -15,11 +15,9 @@ namespace Main.Mainmenu
         private void Awake()
         {
             instance = this;
-        }
 
-        private void Start()
-        {
-            DirectController(ActiveIndex);
+            if(ActiveIndex >= 0 && ActiveIndex < ControllerList.Count)
+                DirectController(ActiveIndex);
         }
 
         public void DirectController(int index)
@@ -51,6 +49,8 @@ namespace Main.Mainmenu
                     continue;
                 }
 
+                if (ControllerList[i].id == "universal") continue;
+
                 ControllerList[i].DisactivateAll();
             }
         }
@@ -58,6 +58,11 @@ namespace Main.Mainmenu
         public T GetController<T>() where T : Controller
         {
             return ControllerList.OfType<T>().FirstOrDefault();
+        }
+
+        public Controller GetController(string targetController)
+        {
+            return ControllerList.Find((c) => c.id == targetController);
         }
 
     }

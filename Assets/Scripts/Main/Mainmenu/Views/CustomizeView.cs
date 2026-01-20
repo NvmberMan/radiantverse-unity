@@ -13,13 +13,20 @@ namespace Main.Mainmenu
         public SkeletonGraphic skeletonGraphic;
 
         [Header("Category Panels")]
-        // Daftarkan GameObject induk dari Scroll View masing-masing
-        public GameObject headPanel;
-        public GameObject bodyPanel;
+        public GameObject accessoriesPanel;
+        public GameObject facesPanel;
+        public GameObject hairsPanel;
+        public GameObject pantsPanel;
+        public GameObject shirtsPanel;
+        public GameObject shoesPanel;
 
         [Header("UI Containers")]
-        public Transform headContainer;
-        public Transform bodyContainer;
+        public Transform accessoriesContainer;
+        public Transform facesContainer;
+        public Transform hairsContainer;
+        public Transform pantsContainer;
+        public Transform shirtsContainer;
+        public Transform shoesContainer;
 
         [Header("Settings")]
         public AccessoryItemUI itemPrefab;
@@ -34,31 +41,53 @@ namespace Main.Mainmenu
             draftSkins = new List<string>(PlayerLocalData.inventoryData.SelectedSkins);
 
             saveButton.SetActive(false);
-            SwitchCategory("head");
+            SwitchCategory("Faces");
             RefreshUI();
             RefreshCharacterPreview();
         }
 
         public void SwitchCategory(string category)
         {
-            headPanel.SetActive(false);
-            bodyPanel.SetActive(false);
+            accessoriesPanel.SetActive(false);
+            facesPanel.SetActive(false);
+            hairsPanel.SetActive(false);
+            pantsPanel.SetActive(false);
+            shirtsPanel.SetActive(false);
+            shoesPanel.SetActive(false);
 
-            switch (category.ToLower())
+
+            switch (category)
             {
-                case "head":
-                    headPanel.SetActive(true);
+                case "Accessories":
+                    accessoriesPanel.SetActive(true);
                     break;
-                case "body":
-                    bodyPanel.SetActive(true);
+                case "Faces":
+                    Debug.Log(category);
+                    facesPanel.SetActive(true);
+                    break;
+                case "Hairs":
+                    hairsPanel.SetActive(true);
+                    break;
+                case "Pants":
+                    pantsPanel.SetActive(true);
+                    break;
+                case "Shirts":
+                    shirtsPanel.SetActive(true);
+                    break;
+                case "Shoes":
+                    shoesPanel.SetActive(true);
                     break;
             }
         }
 
         public void RefreshUI()
         {
-            ClearContainer(headContainer);
-            ClearContainer(bodyContainer);
+            ClearContainer(accessoriesContainer);
+            ClearContainer(facesContainer);
+            ClearContainer(hairsContainer);
+            ClearContainer(pantsContainer);
+            ClearContainer(shirtsContainer);
+            ClearContainer(shoesContainer);
 
             if (PlayerLocalData.inventoryData == null) return;
 
@@ -76,16 +105,24 @@ namespace Main.Mainmenu
                 }
             }
 
-            LayoutRebuilder.ForceRebuildLayoutImmediate(headContainer.GetComponent<RectTransform>());
-            LayoutRebuilder.ForceRebuildLayoutImmediate(bodyContainer.GetComponent<RectTransform>());
+            LayoutRebuilder.ForceRebuildLayoutImmediate(accessoriesContainer.GetComponent<RectTransform>());
+            LayoutRebuilder.ForceRebuildLayoutImmediate(facesContainer.GetComponent<RectTransform>());
+            LayoutRebuilder.ForceRebuildLayoutImmediate(hairsContainer.GetComponent<RectTransform>());
+            LayoutRebuilder.ForceRebuildLayoutImmediate(pantsContainer.GetComponent<RectTransform>());
+            LayoutRebuilder.ForceRebuildLayoutImmediate(shirtsContainer.GetComponent<RectTransform>());
+            LayoutRebuilder.ForceRebuildLayoutImmediate(shoesContainer.GetComponent<RectTransform>());
         }
 
         private Transform GetTargetContainer(string category)
         {
-            switch (category.ToLower())
+            switch (category)
             {
-                case "head": return headContainer;
-                case "body": return bodyContainer;
+                case "Accessories": return accessoriesContainer;
+                case "Faces": return facesContainer;
+                case "Hairs": return hairsContainer;
+                case "Pants": return pantsContainer;
+                case "Shirts": return shirtsContainer;
+                case "Shoes": return shoesContainer;
                 default: return null;
             }
         }
@@ -98,11 +135,10 @@ namespace Main.Mainmenu
 
         public void OnItemClicked(string category, string skinName)
         {
-            int index = draftSkins.FindIndex(s => s.StartsWith(category + "/"));
+            int index = draftSkins.FindIndex(s => s.StartsWith("Component/" + category + "/"));
             if (index != -1) draftSkins[index] = skinName;
             else draftSkins.Add(skinName);
 
-            // Cek apakah draft berbeda dengan data asli yang tersimpan
             bool isModified = !IsListEqual(draftSkins, PlayerLocalData.inventoryData.SelectedSkins);
             saveButton.SetActive(isModified);
 

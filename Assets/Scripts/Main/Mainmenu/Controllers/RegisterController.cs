@@ -10,10 +10,15 @@ namespace Main.Mainmenu
         [Header("Controller Variables")]
         [SerializeField] TMP_InputField inputEmail;
         [SerializeField] TMP_InputField inputPassword;
-
+        [SerializeField] TMP_InputField inputConfirmPassword;
 
         public void Register()
         {
+            if (!ValidatePasswords())
+            {
+                return;
+            }
+
             Activate("loading");
 
             AuthModel.RegisterUser(inputEmail.text, inputPassword.text,
@@ -21,18 +26,48 @@ namespace Main.Mainmenu
                 {
                     Debug.Log($"User registered: {user.Email}");
                     Disactivate("loading");
-
                     StartCoroutine(InitializeAllPlayerDataCoroutine(user));
                 },
                 onError: (error) =>
                 {
                     Disactivate("loading");
-
                     ErrorView errorView = (ErrorView)GetView("error");
                     errorView.ErrorSetup("Failed to create new account!", error.ToString());
-
                     Activate("error");
                 });
+        }
+
+        private bool ValidatePasswords()
+        {
+            string pass = inputPassword.text;
+            string confirmPass = inputConfirmPassword.text;
+
+            if (string.IsNullOrEmpty(pass) || string.IsNullOrEmpty(confirmPass))
+            {
+                ShowError("Validation Error", "Password fields cannot be empty!");
+                return false;
+            }
+
+            if (pass != confirmPass)
+            {
+                ShowError("Password Mismatch", "Passwords do not match. Please try again.");
+                return false;
+            }
+
+            if (pass.Length < 6)
+            {
+                ShowError("Weak Password", "Password must be at least 6 characters long.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ShowError(string title, string message)
+        {
+            ErrorView errorView = (ErrorView)GetView("error");
+            errorView.ErrorSetup(title, message);
+            Activate("error");
         }
 
         private IEnumerator InitializeAllPlayerDataCoroutine(FirebaseUser user)
@@ -55,7 +90,6 @@ namespace Main.Mainmenu
                 loadedCount++;
                 int progress = (int)((float)loadedCount / totalItemsToLoad * 100);
                 loadingController.SetLoadingProgress(progress);
-
                 yield return new WaitForSeconds(MIN_DELAY_PER_ITEM);
 
                 if (userDataCreated && statsCreated && inventoryCreated)
@@ -79,7 +113,6 @@ namespace Main.Mainmenu
             yield return StartCoroutine(GenerateInventoryData(user, () => { inventoryCreated = true; }));
             yield return StartCoroutine(UpdateProgressAndCheckLobby());
         }
-
 
         private IEnumerator GenerateUserData(FirebaseUser user, System.Action onComplete)
         {

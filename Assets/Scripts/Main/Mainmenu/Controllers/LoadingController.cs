@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Main.Mainmenu
 {
@@ -8,6 +9,7 @@ namespace Main.Mainmenu
         [Header("Loading View Elements")]
         [SerializeField] private TMP_Text loadingTextView;
         [SerializeField] private TMP_Text progressTextView;
+        [SerializeField] private Slider progressSliderView;
 
         private const string DefaultLoadingMessage = "Loading...";
 
@@ -46,6 +48,10 @@ namespace Main.Mainmenu
             if (progressTextView != null)
             {
                 progressTextView.text = $"{clampedProgress}%";
+            }
+            if (progressSliderView)
+            {
+                progressSliderView.value = clampedProgress;
             }
         }
     }

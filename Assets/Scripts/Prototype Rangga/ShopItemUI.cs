@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopItemUI : MonoBehaviour
@@ -9,24 +9,30 @@ public class ShopItemUI : MonoBehaviour
     public Image itemIcon;
     public Button buyButton;
 
-    private Main.Mainmenu.AccessoryData data;
+    private ShopItemData itemData;
     private Main.Mainmenu.ShopView shopView;
 
-    public void Setup(Main.Mainmenu.AccessoryData itemData, Main.Mainmenu.ShopView view, bool isOwned)
+    public void Setup(ShopItemData data, Main.Mainmenu.ShopView view, bool isOwned)
     {
-        data = itemData;
+        itemData = data;
         shopView = view;
 
         itemNameText.text = data.displayName;
-        priceText.text = isOwned ? "Owned" : data.price.ToString() + " $";
+
+        if (data is Main.Mainmenu.CrateData)
+        {
+            priceText.text = data.price + " $";
+            buyButton.interactable = true;
+        }
+        else
+        {
+            priceText.text = isOwned ? "Owned" : data.price + " $";
+            buyButton.interactable = !isOwned;
+        }
+
         if (itemIcon != null) itemIcon.sprite = data.icon;
 
-        buyButton.interactable = !isOwned;
         buyButton.onClick.RemoveAllListeners();
-
-        if (!isOwned)
-        {
-            buyButton.onClick.AddListener(() => shopView.TryBuyItem(data));
-        }
+        buyButton.onClick.AddListener(() => shopView.TryBuy(itemData));
     }
 }

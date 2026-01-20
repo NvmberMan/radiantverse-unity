@@ -1,3 +1,4 @@
+﻿using Spine.Unity;
 using UnityEngine;
 
 namespace Main.Gameplay
@@ -9,6 +10,7 @@ namespace Main.Gameplay
         [SerializeField] float acceleration = 8f;
         [SerializeField] float airAcceleration = 4f;
         [SerializeField] float jumpForce = 4f;
+        [SerializeField] float jumpCooldown = 0.2f;
 
         [Header("Detection Settings")]
         [SerializeField] Transform groundDetectorPoint;
@@ -16,9 +18,22 @@ namespace Main.Gameplay
         [SerializeField] float groundCheckDistance = 0.3f;
         [SerializeField] LayerMask groundLayer;
 
-        Rigidbody rb;
-        Animator anim;
+        [Header("Spine Settings")]
+        [SpineAnimation] public string idleAnimation = "idle";
+        [SpineAnimation] public string walkAnimation = "run";
+        [SpineAnimation] public string jumpAnimation = "jump";
+
+        [HideInInspector] public Rigidbody rb;
         public bool _isGrounded;
+        public bool _isFreeze;
+        private float nextJumpTime = 0f;
+        private string currentAnimation = "";
+        private bool _wasGrounded;
+
+        [Header("Slope Settings")]
+        [SerializeField] float maxSlopeAngle = 45f;
+        private Vector3 slopeNormal;
+
 
         public float Acceleration
         {
@@ -30,7 +45,6 @@ namespace Main.Gameplay
         {
             base.Awake();
             rb = GetComponent<Rigidbody>();
-            anim = graphics.GetComponent<Animator>();
             rb.freezeRotation = true;
         }
 
@@ -40,30 +54,118 @@ namespace Main.Gameplay
 
             CheckGround();
 
-            anim?.SetBool("IsGrounded", _isGrounded);
+            if (GameManager.Instance.isPaused)
+                StopMoving();
         }
+
+        //void CheckGround()
+        //{
+        //    _wasGrounded = _isGrounded;
+
+        //    Vector3 origin = groundDetectorPoint.position;
+        //    Vector3 halfExtents = groundBoxSize * 0.5f;
+
+        //    // 1️⃣ CEK kalau sudah menyentuh tanah (overlap)
+        //    bool grounded = Physics.CheckBox(
+        //        origin,
+        //        halfExtents,
+        //        Quaternion.identity,
+        //        groundLayer
+        //    );
+
+        //    // 2️⃣ Kalau belum kena, lakukan BoxCast ke bawah (untuk jarak kecil)
+        //    if (!grounded)
+        //    {
+        //        RaycastHit hit;
+        //        grounded = Physics.BoxCast(
+        //            origin,
+        //            halfExtents,
+        //            Vector3.down,
+        //            out hit,
+        //            Quaternion.identity,
+        //            groundCheckDistance,
+        //            groundLayer
+        //        );
+        //    }
+
+        //    _isGrounded = grounded;
+
+        //    // Landing sound
+        //    if (_isGrounded && !_wasGrounded)
+        //    {
+        //        AudioManager.Instance.PlaySFX("Landing");
+        //    }
+        //}
 
         void CheckGround()
         {
-            Vector3 origin = groundDetectorPoint.position;
+            _wasGrounded = _isGrounded;
 
-            // BoxCast downward
-            RaycastHit hit;
-            bool grounded = Physics.BoxCast(
+            Vector3 origin = groundDetectorPoint.position;
+            Vector3 halfExtents = groundBoxSize * 0.5f;
+
+            bool grounded = Physics.CheckBox(
                 origin,
-                groundBoxSize * 0.5f,
-                Vector3.down,
-                out hit,
+                halfExtents,
                 Quaternion.identity,
-                groundCheckDistance,
                 groundLayer
             );
 
-            _isGrounded = grounded;
+            RaycastHit hit;
+
+            // Kalau belum kena dari CheckBox, lakukan BoxCast
+            if (!grounded)
+            {
+                grounded = Physics.BoxCast(
+                    origin,
+                    halfExtents,
+                    Vector3.down,
+                    out hit,
+                    Quaternion.identity,
+                    groundCheckDistance,
+                    groundLayer
+                );
+            }
+            else
+            {
+                // Kalau CheckBox sudah grounded, kita tetap perlu normal tanah
+                Physics.Raycast(origin, Vector3.down, out hit, groundCheckDistance + 0.5f, groundLayer);
+            }
+
+            if (grounded)
+            {
+                if (hit.collider != null)
+                {
+                    slopeNormal = hit.normal;
+
+                    // Hitung sudut kemiringan tanah
+                    float slopeAngle = Vector3.Angle(slopeNormal, Vector3.up);
+
+                    // selama tidak lebih curam dari batas → tetap grounded
+                    _isGrounded = slopeAngle <= maxSlopeAngle;
+                }
+                else
+                {
+                    _isGrounded = true;
+                }
+            }
+            else
+            {
+                _isGrounded = false;
+            }
+
+            // Landing SFX
+            if (_isGrounded && !_wasGrounded)
+            {
+                AudioManager.Instance.PlaySFX("Landing");
+            }
         }
+
 
         public void MoveToDir(Vector3 direction)
         {
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused || _isFreeze) return;
+
             Vector3 vel = rb.linearVelocity;
 
             float accel = _isGrounded ? acceleration : airAcceleration;
@@ -71,10 +173,9 @@ namespace Main.Gameplay
             vel.x = direction.x * accel;
             vel.z = direction.z * accel;
 
-            //if (vel.z < 0) { vel.z = 0; }
-            anim?.SetBool("Running", true);
-
             rb.linearVelocity = vel;
+
+            SetAnimation(walkAnimation, true);
         }
 
         public void StopMoving()
@@ -86,16 +187,35 @@ namespace Main.Gameplay
             vel.z = 0;
 
             rb.linearVelocity = vel;
-            anim?.SetBool("Running", false);
+
+            SetAnimation(idleAnimation, true);
         }
 
         public void Jump()
         {
-            if (_isGrounded)
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused) return;
+
+
+            if (_isGrounded && Time.time >= nextJumpTime)
             {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                anim?.SetTrigger("Jump");
+
+                nextJumpTime = Time.time + jumpCooldown;
+
+                SetAnimation(jumpAnimation, false);
+
+                AudioManager.Instance.PlaySFX("Jump");
             }
+        }
+
+        private void SetAnimation(string animName, bool loop)
+        {
+            if (currentAnimation == animName) return;
+
+            skeletonAnimation.AnimationState.SetAnimation(0, animName, loop);
+            currentAnimation = animName;
         }
 
 
@@ -126,3 +246,4 @@ namespace Main.Gameplay
 
     }
 }
+

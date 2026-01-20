@@ -9,7 +9,7 @@ namespace Main.Gameplay
             CharacterSpawn spawn = player.GetComponent<CharacterSpawn>();
             if (spawn != null)
             {
-                spawn.Respawn();
+                spawn.RespawnToCheckpoint();
             }
         }
     }

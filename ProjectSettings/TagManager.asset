@@ -7,6 +7,17 @@ TagManager:
   - SpawnPoint
   - NPC
   - Obstacle
+  - TargetPoint
+  - FinishPoint
+  - Ground
+  - Void
+  - Wall
+  - Wall_low
+  - Wall_high
+  - Border
+  - Undefined
+  - Sensor_void
+  - Waypoint
   layers:
   - Default
   - TransparentFX
@@ -16,9 +27,9 @@ TagManager:
   - UI
   - Ground
   - Grabable
-  - 
-  - 
-  - 
+  - Point
+  - Obstacle
+  - Character
   - 
   - 
   - 

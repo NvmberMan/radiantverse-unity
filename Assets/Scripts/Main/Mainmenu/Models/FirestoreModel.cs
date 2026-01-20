@@ -34,7 +34,7 @@ namespace Main.Mainmenu
             {
                 if (task.IsCompletedSuccessfully)
                 {
-                    Debug.Log($"{collection} successfully saved!");
+                    //Debug.Log($"{collection} successfully saved!");
                 }
                 else
                 {
@@ -53,7 +53,7 @@ namespace Main.Mainmenu
             {
                 if (task.IsCompletedSuccessfully)
                 {
-                    Debug.Log($"PlayerStats updated!");
+                    //Debug.Log($"PlayerStats updated!");
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace Main.Mainmenu
             {
                 if (task.IsCompletedSuccessfully)
                 {
-                    Debug.Log($"UserData updated!");
+                    //Debug.Log($"UserData updated!");
                 }
                 else
                 {
@@ -249,8 +249,18 @@ namespace Main.Mainmenu
 
             InventoryData data = new InventoryData
             {
-                UnlockedAccessories = new List<string> { "body/body_default", "head/head_default" }, // Skin awal
-                SelectedSkins = new List<string> { "body/body_default", "head/head_default" },
+                UnlockedAccessories = new List<string> { 
+                    "Component/Faces/Boy", 
+                    "Component/Hairs/Type1",
+                    "Component/Pants/Sporty-short-blue", 
+                    "Component/Shirts/Sporty-blue"
+                },
+                SelectedSkins = new List<string> {
+                    "Component/Faces/Boy", 
+                    "Component/Hairs/Type1", 
+                    "Component/Pants/Sporty-short-blue", 
+                    "Component/Shirts/Sporty-blue"
+                },
                 UnlockedAchievements = new List<string>()
             };
 
@@ -267,6 +277,21 @@ namespace Main.Mainmenu
                 { "SelectedSkins", newSkins }
             };
             SaveInventoryData(uid, updates);
+        }
+
+        public static void UnlockAchievement(string achievementId)
+        {
+            if (PlayerLocalData.inventoryData.UnlockedAchievements.Contains(achievementId)) return;
+
+            PlayerLocalData.inventoryData.UnlockedAchievements.Add(achievementId);
+
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            DocumentReference docRef = FirebaseFirestore.DefaultInstance.Collection("inventoryData").Document(uid);
+
+            docRef.UpdateAsync("UnlockedAchievements", FieldValue.ArrayUnion(achievementId))
+                .ContinueWithOnMainThread(task => {
+                    if (task.IsCompletedSuccessfully) Debug.Log($"Cloud Updated: {achievementId}");
+                });
         }
     }
 }
