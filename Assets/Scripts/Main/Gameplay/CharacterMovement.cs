@@ -1,4 +1,4 @@
-using Spine.Unity;
+﻿using Spine.Unity;
 using UnityEngine;
 
 namespace Main.Gameplay
@@ -25,9 +25,15 @@ namespace Main.Gameplay
 
         [HideInInspector] public Rigidbody rb;
         public bool _isGrounded;
+        public bool _isFreeze;
         private float nextJumpTime = 0f;
         private string currentAnimation = "";
         private bool _wasGrounded;
+
+        [Header("Slope Settings")]
+        [SerializeField] float maxSlopeAngle = 45f;
+        private Vector3 slopeNormal;
+
 
         public float Acceleration
         {
@@ -52,35 +58,113 @@ namespace Main.Gameplay
                 StopMoving();
         }
 
+        //void CheckGround()
+        //{
+        //    _wasGrounded = _isGrounded;
+
+        //    Vector3 origin = groundDetectorPoint.position;
+        //    Vector3 halfExtents = groundBoxSize * 0.5f;
+
+        //    // 1️⃣ CEK kalau sudah menyentuh tanah (overlap)
+        //    bool grounded = Physics.CheckBox(
+        //        origin,
+        //        halfExtents,
+        //        Quaternion.identity,
+        //        groundLayer
+        //    );
+
+        //    // 2️⃣ Kalau belum kena, lakukan BoxCast ke bawah (untuk jarak kecil)
+        //    if (!grounded)
+        //    {
+        //        RaycastHit hit;
+        //        grounded = Physics.BoxCast(
+        //            origin,
+        //            halfExtents,
+        //            Vector3.down,
+        //            out hit,
+        //            Quaternion.identity,
+        //            groundCheckDistance,
+        //            groundLayer
+        //        );
+        //    }
+
+        //    _isGrounded = grounded;
+
+        //    // Landing sound
+        //    if (_isGrounded && !_wasGrounded)
+        //    {
+        //        AudioManager.Instance.PlaySFX("Landing");
+        //    }
+        //}
+
         void CheckGround()
         {
             _wasGrounded = _isGrounded;
 
             Vector3 origin = groundDetectorPoint.position;
+            Vector3 halfExtents = groundBoxSize * 0.5f;
 
-            // BoxCast downward
-            RaycastHit hit;
-            bool grounded = Physics.BoxCast(
+            bool grounded = Physics.CheckBox(
                 origin,
-                groundBoxSize * 0.5f,
-                Vector3.down,
-                out hit,
+                halfExtents,
                 Quaternion.identity,
-                groundCheckDistance,
                 groundLayer
             );
 
-            _isGrounded = grounded;
+            RaycastHit hit;
 
+            // Kalau belum kena dari CheckBox, lakukan BoxCast
+            if (!grounded)
+            {
+                grounded = Physics.BoxCast(
+                    origin,
+                    halfExtents,
+                    Vector3.down,
+                    out hit,
+                    Quaternion.identity,
+                    groundCheckDistance,
+                    groundLayer
+                );
+            }
+            else
+            {
+                // Kalau CheckBox sudah grounded, kita tetap perlu normal tanah
+                Physics.Raycast(origin, Vector3.down, out hit, groundCheckDistance + 0.5f, groundLayer);
+            }
+
+            if (grounded)
+            {
+                if (hit.collider != null)
+                {
+                    slopeNormal = hit.normal;
+
+                    // Hitung sudut kemiringan tanah
+                    float slopeAngle = Vector3.Angle(slopeNormal, Vector3.up);
+
+                    // selama tidak lebih curam dari batas → tetap grounded
+                    _isGrounded = slopeAngle <= maxSlopeAngle;
+                }
+                else
+                {
+                    _isGrounded = true;
+                }
+            }
+            else
+            {
+                _isGrounded = false;
+            }
+
+            // Landing SFX
             if (_isGrounded && !_wasGrounded)
             {
                 AudioManager.Instance.PlaySFX("Landing");
             }
         }
 
+
         public void MoveToDir(Vector3 direction)
         {
-            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused) return;
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused || _isFreeze) return;
 
             Vector3 vel = rb.linearVelocity;
 

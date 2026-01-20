@@ -51,15 +51,15 @@ namespace Main.Gameplay
                 GlobalEnvironment.instance.RefreshTargetPoints();
                 spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
 
-                RacePositionSystemWaypoint.instance.allRacers.Add(playerTransform.GetComponent<RacerProgress>());
+                RacePositionSystemWaypoint.Instance.allRacers.Add(playerTransform.GetComponent<RacerProgress>());
 
                 for (int i = 0; i < spawnPoints.Length - 1; i++)
                 {
                     GameObject AiAgent = Instantiate(aiAgentPrefab);
-                    RacePositionSystemWaypoint.instance.allRacers.Add(AiAgent.GetComponent<RacerProgress>());
+                    RacePositionSystemWaypoint.Instance.allRacers.Add(AiAgent.GetComponent<RacerProgress>());
                 }
 
-                RacePositionSystemWaypoint.instance.SetupPositionAllRacer();
+                RacePositionSystemWaypoint.Instance.SetupPositionAllRacer();
 
                 GameplayController gameplayController = MenuManager.instance.GetController<GameplayController>();
                 gameplayController.Activate("gameplay gui");
@@ -84,15 +84,15 @@ namespace Main.Gameplay
             GlobalEnvironment.instance.RefreshTargetPoints();
             spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
 
-            RacePositionSystemWaypoint.instance.allRacers.Add(playerTransform.GetComponent<RacerProgress>());
+            RacePositionSystemWaypoint.Instance.allRacers.Add(playerTransform.GetComponent<RacerProgress>());
 
             for(int i = 0; i < spawnPoints.Length - 1; i++)
             {
                 GameObject AiAgent = Instantiate(aiAgentPrefab);
-                RacePositionSystemWaypoint.instance.allRacers.Add(AiAgent.GetComponent<RacerProgress>());
+                RacePositionSystemWaypoint.Instance.allRacers.Add(AiAgent.GetComponent<RacerProgress>());
             }
 
-            RacePositionSystemWaypoint.instance.SetupPositionAllRacer();
+            RacePositionSystemWaypoint.Instance.SetupPositionAllRacer();
 
             yield return new WaitForSeconds(0.5f);
             loadingMapPreviewController.SetLoadingProgress(80);

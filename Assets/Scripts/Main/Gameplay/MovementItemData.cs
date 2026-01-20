@@ -12,6 +12,17 @@ namespace Main.Gameplay
         [Header("Duration (Pickup Only)")]
         public float duration = 10f;
 
+        [Header("Camera Effect")]
+        public bool useCameraShake = true;
+        public float shakeStrength = 0.4f;
+
+        [Header("Post Processing")]
+        public bool usePostProcess = true;
+        [ColorUsage(true, true)]
+        public Color effectColor = Color.cyan;
+
+
+
         // ============================
         // APPLY EFFECT
         // ============================
@@ -33,14 +44,31 @@ namespace Main.Gameplay
         // ============================
         public void ApplyWithDuration(CharacterMovement movement, MonoBehaviour runner)
         {
+            if (useCameraShake && CameraShake.Instance != null)
+            {
+                CameraShake.Instance.ShakeForDuration(shakeStrength, duration);
+            }
+
+            if (usePostProcess && PostProcessController.Instance != null)
+            {
+                PostProcessController.Instance.PlayEffect(duration, effectColor);
+            }
+
+
+
             runner.StartCoroutine(EffectRoutine(movement));
         }
+
+
 
         private IEnumerator EffectRoutine(CharacterMovement movement)
         {
             Apply(movement);
+
             yield return new WaitForSeconds(duration);
+
             Remove(movement);
         }
+
     }
 }
