@@ -193,7 +193,7 @@ namespace Main.Gameplay.AI
                 AddReward(-5f);
                 EndEpisode();
             }
-            else if (other.gameObject.tag == "TargetPoint")
+            else if (other.gameObject.tag == "TargetPoint" || other.gameObject.tag == "FinishPoint")
             {
                 TargetPoint point = other.GetComponent<TargetPoint>();
 
