@@ -18,6 +18,7 @@ TagManager:
   - Undefined
   - Sensor_void
   - Waypoint
+  - 'FX_Overlay '
   layers:
   - Default
   - TransparentFX
@@ -54,6 +55,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 'FX_Overlay '
+    uniqueID: 939848801
     locked: 0
   m_RenderingLayers:
   - Default
