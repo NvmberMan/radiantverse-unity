@@ -18,6 +18,7 @@ TagManager:
   - Undefined
   - Sensor_void
   - Waypoint
+  - Car
   layers:
   - Default
   - TransparentFX
