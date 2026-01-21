@@ -12,6 +12,13 @@ public class DebugManager : MonoBehaviour
     private float deltaTime = 0.0f;
     private float timer;
 
+    private void Awake()
+    {
+        QualitySettings.vSyncCount = 0;
+
+        Application.targetFrameRate = 60;
+    }
+
     void Update()
     {
         deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
