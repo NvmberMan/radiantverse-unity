@@ -33,7 +33,7 @@ namespace Main.Gameplay
         [Header("Slope Settings")]
         [SerializeField] float maxSlopeAngle = 45f;
         private Vector3 slopeNormal;
-
+        private Vector3 prevScale;
 
         public float Acceleration
         {
@@ -46,6 +46,11 @@ namespace Main.Gameplay
             base.Awake();
             rb = GetComponent<Rigidbody>();
             rb.freezeRotation = true;
+        }
+
+        private void Start()
+        {
+            prevScale = skeletonAnimation.transform.localScale;
         }
 
         protected override void Update()
@@ -162,7 +167,7 @@ namespace Main.Gameplay
         }
 
 
-        public void MoveToDir(Vector3 direction)
+        public void MoveToDir(Vector3 direction, float horizontalInput = 1)
         {
             if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused || _isFreeze) return;
 
@@ -176,6 +181,15 @@ namespace Main.Gameplay
             rb.linearVelocity = vel;
 
             SetAnimation(walkAnimation, true);
+
+            if (horizontalInput > 0.01f)
+            {
+                skeletonAnimation.transform.localScale = new Vector3(Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
+            }
+            else if (horizontalInput < -0.01f)
+            {
+                skeletonAnimation.transform.localScale = new Vector3(-Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
+            }
         }
 
         public void StopMoving()

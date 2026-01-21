@@ -34,8 +34,6 @@ public class AIEntity : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.useGravity = true;
-        rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
     }
 

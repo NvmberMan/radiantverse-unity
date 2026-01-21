@@ -174,12 +174,12 @@
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize.Cube",
-                "value": "{\"m_Value\":{\"x\":0.6916952133178711,\"y\":0.18637143075466157,\"z\":0.5932177901268005}}"
+                "value": "{\"m_Value\":{\"x\":0.8330016136169434,\"y\":0.6223172545433044,\"z\":2.180375814437866}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize.Arch",
-                "value": "{\"m_Value\":{\"x\":-9.650047302246094,\"y\":2.931619882583618,\"z\":-1.6005799770355225}}"
+                "value": "{\"m_Value\":{\"x\":-5.2148919105529789,\"y\":2.5337209701538088,\"z\":-4.233274459838867}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -189,12 +189,12 @@
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize.Plane",
-                "value": "{\"m_Value\":{\"x\":2.4518327713012697,\"y\":0.0,\"z\":-2.535813570022583}}"
+                "value": "{\"m_Value\":{\"x\":3.051161527633667,\"y\":0.0,\"z\":-3.282392740249634}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize.Cylinder",
-                "value": "{\"m_Value\":{\"x\":-0.3951073884963989,\"y\":0.9270284175872803,\"z\":-0.3951074182987213}}"
+                "value": "{\"m_Value\":{\"x\":0.3584423363208771,\"y\":1.381685495376587,\"z\":0.3262065649032593}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",

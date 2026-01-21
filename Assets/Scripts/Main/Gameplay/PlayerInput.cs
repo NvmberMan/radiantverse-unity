@@ -47,7 +47,7 @@ namespace Main.Gameplay
 
             if (dir.magnitude > 0.1f)
             {
-                CharacterMovement.MoveToDir(dir);
+                CharacterMovement.MoveToDir(dir, h);
             }
             else
             {
