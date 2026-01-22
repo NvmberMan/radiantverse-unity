@@ -19,6 +19,7 @@ TagManager:
   - Sensor_void
   - Waypoint
   - 'FX_Overlay '
+  - Car
   layers:
   - Default
   - TransparentFX
