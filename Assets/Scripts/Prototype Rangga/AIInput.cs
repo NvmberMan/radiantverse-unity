@@ -90,11 +90,19 @@ namespace Main.Gameplay.AI
                 AddReward(-0.01f);
             }
 
-            Vector3 moveDir = Vector3.zero;
-            moveDir.x = actions.DiscreteActions[1] == 1 ? 1 : (actions.DiscreteActions[1] == 2 ? -1 : 0);
-            moveDir.z = actions.DiscreteActions[2] == 1 ? 1 : (actions.DiscreteActions[2] == 2 ? -1 : 0);
+            float hInput = actions.DiscreteActions[1] == 1 ? 1f : (actions.DiscreteActions[1] == 2 ? -1f : 0f);
+            float vInput = actions.DiscreteActions[2] == 1 ? 1f : (actions.DiscreteActions[2] == 2 ? -1f : 0f);
 
-            CharacterMovement.MoveToDir(moveDir.normalized);
+            Vector3 moveDir = new Vector3(hInput, 0, vInput).normalized;
+
+            if (moveDir.magnitude > 0.1f)
+            {
+                CharacterMovement.MoveToDir(moveDir, hInput);
+            }
+            else
+            {
+                CharacterMovement.StopMoving();
+            }
 
             float currentDistance = Vector3.Distance(transform.position, currentTarget.position);
             float diff = previousDistanceToTarget - currentDistance;
