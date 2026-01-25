@@ -5,7 +5,7 @@ public class GlobalEnvironment : MonoBehaviour
 {
     public static GlobalEnvironment instance;
 
-    [HideInInspector] public TargetPoint[] targetPoints;
+     public TargetPoint[] targetPoints;
 
     private void Awake()
     {

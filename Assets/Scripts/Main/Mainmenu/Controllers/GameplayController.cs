@@ -33,6 +33,15 @@ namespace Main.Mainmenu
         public float mobileRotationMultiplier = 180f;
         public Joystick joystick;
 
+        [Header("Zoom Settings")]
+        public float zoomSpeedPC = 5f;
+        public float zoomSpeedMobile = 0.01f;
+        public float minZoom = 2f;
+        public float maxZoom = 15f;
+        public float zoomSmoothing = 10f;
+        private float targetZoom;
+        private float currentZoom;
+
         [Header("UI")]
         public Slider sensitivitySlider;
 
@@ -64,6 +73,12 @@ namespace Main.Mainmenu
             playerInputJoystick = GameManager.Instance.playerTransform
                 .GetComponent<PlayerInputJoystick>();
 
+            if (GameManager.Instance.orbitalFollow != null)
+            {
+                targetZoom = GameManager.Instance.orbitalFollow.RadialAxis.Value;
+                currentZoom = targetZoom;
+            }
+
             LoadSensitivity();
             SetupSlider();
         }
@@ -91,8 +106,11 @@ namespace Main.Mainmenu
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
 
-                    if(!GameManager.Instance.isPaused)
+                    if (!GameManager.Instance.isPaused)
+                    {
                         HandleMobileCamera();
+                        HandleZoom();
+                    }
 
                     break;
 
@@ -112,9 +130,51 @@ namespace Main.Mainmenu
                     }
 
                     if (!GameManager.Instance.isPaused)
+                    {
                         HandlePCCamera();
+                        HandleZoom();
+                    }
                     break;
             }
+
+            if (!GameManager.Instance.isPaused)
+            {
+                currentZoom = Mathf.Lerp(currentZoom, targetZoom, Time.deltaTime * zoomSmoothing);
+                GameManager.Instance.orbitalFollow.RadialAxis.Value = currentZoom;
+            }
+        }
+
+        void HandleZoom()
+        {
+            if (cameraMode == CameraControlMode.PC)
+            {
+                float scroll = Input.GetAxis("Mouse ScrollWheel");
+                if (scroll != 0)
+                {
+                    ApplyZoom(-scroll * zoomSpeedPC);
+                }
+            }
+            else if (cameraMode == CameraControlMode.Mobile && Input.touchCount == 2)
+            {
+                // Logika Pinch to Zoom
+                Touch touch0 = Input.GetTouch(0);
+                Touch touch1 = Input.GetTouch(1);
+
+                Vector2 touch0PrevPos = touch0.position - touch0.deltaPosition;
+                Vector2 touch1PrevPos = touch1.position - touch1.deltaPosition;
+
+                float prevMagnitude = (touch0PrevPos - touch1PrevPos).magnitude;
+                float currentMagnitude = (touch0.position - touch1.position).magnitude;
+
+                float difference = currentMagnitude - prevMagnitude;
+                ApplyZoom(-difference * zoomSpeedMobile);
+            }
+        }
+
+        void ApplyZoom(float increment)
+        {
+            targetZoom += increment;
+            targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
         }
 
         void HandleMobileCamera()
@@ -123,11 +183,9 @@ namespace Main.Mainmenu
             {
                 Touch touch = Input.GetTouch(i);
 
-                // Abaikan jari yang berada di area Joystick (sisi kiri)
                 if (touch.position.x < Screen.width * cameraAreaStart)
                     continue;
 
-                // Jika jari ada di area kamera (sisi kanan)
                 if (touch.phase == TouchPhase.Began)
                 {
                     lastInputPos = touch.position;

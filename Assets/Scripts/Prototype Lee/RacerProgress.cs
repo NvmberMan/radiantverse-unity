@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 namespace Main.Gameplay
 {
@@ -7,23 +6,50 @@ namespace Main.Gameplay
     {
         [Header("Progress Info")]
         public int currentWaypointIndex = 0;
-        public float distanceToNextWaypoint;
+        public float progressValue; // SATU angka untuk rank
 
-        [Header("Waypoint References")]
-        public Transform nextWaypoint;
+        private Transform currentWaypoint;
+        private Transform nextWaypoint;
+        public bool hasFinished = false; // baru: flag finish
 
         private void Start()
         {
-            UpdateNextWaypoint();
+            UpdateWaypoints();
         }
 
         private void Update()
         {
-            if (nextWaypoint != null)
+            UpdateProgressValue();
+        }
+
+        void UpdateProgressValue()
+        {
+            if (hasFinished)
             {
-                distanceToNextWaypoint =
-                    Vector3.Distance(transform.position, nextWaypoint.position);
+                // Tetap gunakan max progress, tapi jangan hilangkan dari ranking
+                progressValue = RacePositionSystemWaypoint.Instance.allWaypoints.Count + 1;
+                return;
             }
+
+            if (currentWaypoint == null || nextWaypoint == null)
+            {
+                progressValue = currentWaypointIndex;
+                return;
+            }
+
+            // logika continuous progress
+            Vector3 a = currentWaypoint.position;
+            Vector3 b = nextWaypoint.position;
+            Vector3 p = transform.position;
+
+            Vector3 segmentDir = (b - a);
+            float segmentLength = segmentDir.magnitude;
+            segmentDir.Normalize();
+
+            float projectedDistance = Vector3.Dot(p - a, segmentDir);
+            float segmentProgress = Mathf.Clamp01(projectedDistance / segmentLength);
+
+            progressValue = currentWaypointIndex + segmentProgress;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -33,26 +59,30 @@ namespace Main.Gameplay
             Waypoint wp = other.GetComponent<Waypoint>();
             if (wp == null) return;
 
-            // HANYA waypoint yang sesuai index sekarang yang boleh menaikkan progress
-            if (wp.waypointIndex == currentWaypointIndex)
+            if (wp.waypointIndex == currentWaypointIndex + 1)
             {
                 currentWaypointIndex++;
-                UpdateNextWaypoint();
+                UpdateWaypoints();
+
+                // Jika melewati waypoint terakhir → finish
+                if (nextWaypoint == null)
+                {
+                    hasFinished = true;
+                }
             }
         }
 
-        private void UpdateNextWaypoint()
+        void UpdateWaypoints()
         {
-            if (currentWaypointIndex < RacePositionSystemWaypoint.instance.allWaypoints.Count)
-            {
-                nextWaypoint = RacePositionSystemWaypoint.instance.allWaypoints[currentWaypointIndex].transform;
-            }
-            else
-            {
-                // Semua waypoint sudah dilewati
-                nextWaypoint = null;
-                distanceToNextWaypoint = 0f;
-            }
+            var wps = RacePositionSystemWaypoint.Instance.allWaypoints;
+
+            currentWaypoint = currentWaypointIndex < wps.Count
+                ? wps[currentWaypointIndex].transform
+                : null;
+
+            nextWaypoint = currentWaypointIndex + 1 < wps.Count
+                ? wps[currentWaypointIndex + 1].transform
+                : null;
         }
     }
 }
