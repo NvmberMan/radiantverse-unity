@@ -143,15 +143,26 @@ namespace Main.Gameplay
 
             SetAnimation(walkAnimation, true);
 
-            if (horizontalInput > 0.01f)
-            {
-                skeletonAnimation.transform.localScale = new Vector3(Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
-            }
-            else if (horizontalInput < -0.01f)
-            {
-                skeletonAnimation.transform.localScale = new Vector3(-Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
-            }
+            //if (horizontalInput > 0.01f)
+            //{
+            //    skeletonAnimation.transform.localScale = new Vector3(Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
+            //}
+            //else if (horizontalInput < -0.01f)
+            //{
+            //    skeletonAnimation.transform.localScale = new Vector3(-Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
+            //}
+
+            Flip(horizontalInput);
         }
+
+        void Flip(float horizontalInput)
+        {
+            if (horizontalInput > 0.01f)
+                skeletonAnimation.Skeleton.ScaleX = 1;
+            else if (horizontalInput < -0.01f)
+                skeletonAnimation.Skeleton.ScaleX = -1;
+        }
+
 
         public void StopMoving()
         {
