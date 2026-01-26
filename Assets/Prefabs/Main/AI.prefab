@@ -485,7 +485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8442baef3ccd242873247ff0c8dfee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterMovement
-  skeletonAnimation: {fileID: 0}
   itemDetectorRange: 1
   destroyTime: 0.5
   itemDetectorOffset: {x: 0, y: 0, z: 0}
@@ -505,7 +504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef53634a371ae949a60b77de2f45696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterItem
-  skeletonAnimation: {fileID: 0}
   acceleration: 2
   airAcceleration: 2
   jumpForce: 3
@@ -586,7 +584,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: f1a69828e1e8f6447b1d94ef8656186b, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 2
+  m_BehaviorType: 1
   m_BehaviorName: MoveToGoal
   TeamId: 0
   m_UseChildSensors: 1
@@ -607,7 +605,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 20000
+  MaxStep: 50000
   currentTarget: {fileID: 0}
   checkpointIndex: 0
   raySensorRoot: {fileID: 1147178553098697474}
@@ -642,8 +640,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Demonstrations.DemonstrationRecorder
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: Demo02
-  DemonstrationDirectory: Demo
+  DemonstrationName: Demo01
+  DemonstrationDirectory: Demo/Arena3
 --- !u!114 &5698412810927231878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,7 +669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeacfacdbc126024d910e42621f82775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCustomization
-  skeletonAnimation: {fileID: 0}
   skinSource: 1
   manualSkins:
   - Component/Hairs/Type4

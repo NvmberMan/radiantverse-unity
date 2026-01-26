@@ -585,6 +585,8 @@ MonoBehaviour:
   jumpAnimation: Run
   rb: {fileID: 0}
   _isGrounded: 1
+  _isFreeze: 0
+  maxSlopeAngle: 45
 --- !u!114 &1404514488036837324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,8 +614,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cef07e7c74c9847a6f51d9793bbc49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputJoystick
-  joystick: {fileID: 0}
-  cameraTransform: {fileID: 0}
 --- !u!114 &8639560532452943504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,7 +626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563dcdfd8226e554a839ab8822a06532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
-  cameraTransform: {fileID: 0}
 --- !u!114 &8068450461898297385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,7 +650,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: f1a69828e1e8f6447b1d94ef8656186b, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 2
+  m_BehaviorType: 0
   m_BehaviorName: MoveToGoal
   TeamId: 0
   m_UseChildSensors: 1
@@ -672,7 +671,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 20000
+  MaxStep: 50000
   currentTarget: {fileID: 0}
   checkpointIndex: 0
   raySensorRoot: {fileID: 2817397948852249957}
@@ -722,19 +721,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.RacerProgress
   currentWaypointIndex: 0
-  distanceToNextWaypoint: 0
-  allWaypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  nextWaypoint: {fileID: 0}
+  progressValue: 0
+  hasFinished: 0
 --- !u!114 &595405871636053706
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -190,6 +190,7 @@ namespace Main.Gameplay.AI
             else if (other.gameObject.tag == "Wall_low")
             {
                 AddReward(-1f);
+                EndEpisode();
             }
             else if (other.gameObject.tag == "Wall_high")
             {
@@ -220,6 +221,11 @@ namespace Main.Gameplay.AI
             else if (collision.gameObject.tag == "Wall_low")
             {
                 AddReward(-1f);
+            }
+            else if (collision.gameObject.tag == "Sensor_void")
+            {
+                AddReward(-5f);
+                EndEpisode();
             }
         }
     }

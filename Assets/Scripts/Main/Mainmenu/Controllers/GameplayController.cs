@@ -17,7 +17,7 @@ namespace Main.Mainmenu
         public CameraControlMode cameraMode = CameraControlMode.Mobile;
 
         [Header("Mobile Settings")]
-        [Range(0.3f, 0.7f)]
+        [Range(0, 1f)]
         public float cameraAreaStart = 0.5f;
 
         [Header("Sensitivity (Shared)")]
@@ -46,6 +46,7 @@ namespace Main.Mainmenu
         public Slider sensitivitySlider;
 
         private Vector2 lastInputPos;
+        private bool isCameraTouchActive = false;
         private CharacterMovement characterMovement;
         private PlayerInput playerInput;
         private PlayerInputJoystick playerInputJoystick;
@@ -154,11 +155,29 @@ namespace Main.Mainmenu
                     ApplyZoom(-scroll * zoomSpeedPC);
                 }
             }
-            else if (cameraMode == CameraControlMode.Mobile && Input.touchCount == 2)
+            else if (cameraMode == CameraControlMode.Mobile && Input.touchCount >= 2)
             {
-                // Logika Pinch to Zoom
-                Touch touch0 = Input.GetTouch(0);
-                Touch touch1 = Input.GetTouch(1);
+                float boundary = Screen.width * cameraAreaStart;
+
+                Touch? t0 = null;
+                Touch? t1 = null;
+
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    Touch t = Input.GetTouch(i);
+
+                    if (t.position.x >= boundary)
+                    {
+                        if (t0 == null) t0 = t;
+                        else if (t1 == null) t1 = t;
+                    }
+                }
+
+                if (t0 == null || t1 == null)
+                    return;
+
+                Touch touch0 = t0.Value;
+                Touch touch1 = t1.Value;
 
                 Vector2 touch0PrevPos = touch0.position - touch0.deltaPosition;
                 Vector2 touch1PrevPos = touch1.position - touch1.deltaPosition;
@@ -169,6 +188,7 @@ namespace Main.Mainmenu
                 float difference = currentMagnitude - prevMagnitude;
                 ApplyZoom(-difference * zoomSpeedMobile);
             }
+
         }
 
         void ApplyZoom(float increment)
@@ -179,27 +199,47 @@ namespace Main.Mainmenu
 
         void HandleMobileCamera()
         {
+            Touch? cameraTouch = null;
+            float boundary = Screen.width * cameraAreaStart;
+
+            // Cari touch di area kamera
             for (int i = 0; i < Input.touchCount; i++)
             {
-                Touch touch = Input.GetTouch(i);
-
-                if (touch.position.x < Screen.width * cameraAreaStart)
-                    continue;
-
-                if (touch.phase == TouchPhase.Began)
+                Touch t = Input.GetTouch(i);
+                if (t.position.x >= boundary)
                 {
-                    lastInputPos = touch.position;
+                    cameraTouch = t;
+                    break;
                 }
-                else if (touch.phase == TouchPhase.Moved)
-                {
-                    Vector2 delta = touch.position - lastInputPos;
-                    lastInputPos = touch.position;
+            }
 
-                    RotateCameraMobile(NormalizeDelta(delta));
-                }
-                break;
+            if (cameraTouch == null)
+            {
+                isCameraTouchActive = false;
+                return;
+            }
+
+            Touch touch = cameraTouch.Value;
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                isCameraTouchActive = true;
+                lastInputPos = touch.position;
+            }
+            else if (touch.phase == TouchPhase.Moved && isCameraTouchActive)
+            {
+                Vector2 delta = touch.position - lastInputPos;
+                lastInputPos = touch.position;
+
+                RotateCameraMobile(NormalizeDelta(delta));
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                isCameraTouchActive = false;
             }
         }
+
+
 
         void HandlePCCamera()
         {
