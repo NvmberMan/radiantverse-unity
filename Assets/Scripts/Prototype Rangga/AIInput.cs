@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Main.Gameplay.AI
 {
-    public class AIInput : Agent
+    public class AIInput : Agent, ICurriculumLearning
     {
         public Transform currentTarget;
         public int checkpointIndex;
@@ -227,6 +227,16 @@ namespace Main.Gameplay.AI
                 AddReward(-5f);
                 EndEpisode();
             }
+        }
+
+        public void SetTargetPoint(int target)
+        {
+            //checkpointIndex = target;
+        }
+
+        public void SetFinishPoint(int target)
+        {
+            //throw new System.NotImplementedException();
         }
     }
 }

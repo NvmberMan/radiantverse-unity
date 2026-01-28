@@ -386,7 +386,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4978789283003907585}
-  - component: {fileID: 5493711970471727866}
   - component: {fileID: 2767465497317419471}
   - component: {fileID: 2878748201819248826}
   - component: {fileID: 6461774600327725160}
@@ -399,6 +398,7 @@ GameObject:
   - component: {fileID: 3925470910067092494}
   - component: {fileID: 5698412810927231878}
   - component: {fileID: 8381566973344170393}
+  - component: {fileID: 1671772115488746646}
   m_Layer: 10
   m_Name: AI
   m_TagString: NPC
@@ -425,27 +425,6 @@ Transform:
   - {fileID: 4376947322304012867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5493711970471727866
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5268295388888470089}
-  m_Material: {fileID: 13400000, guid: e1835ce63d878d749a24e65fe9f3c1b4, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.08, y: 0.505032, z: 0.11}
-  m_Center: {x: 0, y: 0.23751602, z: 0.04}
 --- !u!54 &2767465497317419471
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -521,6 +500,8 @@ MonoBehaviour:
   _isGrounded: 1
   _isFreeze: 0
   maxSlopeAngle: 45
+  stepHeight: 0.3
+  stepSmooth: 0.1
 --- !u!114 &7643371693369167167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,7 +565,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: f1a69828e1e8f6447b1d94ef8656186b, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: MoveToGoal
   TeamId: 0
   m_UseChildSensors: 1
@@ -641,7 +622,7 @@ MonoBehaviour:
   Record: 0
   NumStepsToRecord: 0
   DemonstrationName: Demo01
-  DemonstrationDirectory: Demo/Arena3
+  DemonstrationDirectory: Demo
 --- !u!114 &5698412810927231878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,6 +657,29 @@ MonoBehaviour:
   - Component/Shirts/Kemeja&dasi-hitam
   - Component/Pants/Cream-formal
   - Component/Shoes/Black-formal
+--- !u!136 &1671772115488746646
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268295388888470089}
+  m_Material: {fileID: 13400000, guid: e1835ce63d878d749a24e65fe9f3c1b4, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.09
+  m_Height: 0.56
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.26, z: 0.03}
 --- !u!1 &6955356081537224181
 GameObject:
   m_ObjectHideFlags: 0

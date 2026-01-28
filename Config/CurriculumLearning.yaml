@@ -23,10 +23,10 @@ behaviors:
         gamma: 0.99
       gail:
         strength: 0.6
-        demo_path: Demo/Demo02.demo
+        demo_path: Demo/Demo01_0.demo
     behavioral_cloning:
       strength: 0.6
-      demo_path: Demo/Demo02.demo
+      demo_path: Demo/Demo01_0.demo
     max_steps: 1500000
     time_horizon: 64
     summary_freq: 10000

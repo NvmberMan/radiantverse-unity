@@ -99942,6 +99942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
 --- !u!1 &840295487
 GameObject:
   m_ObjectHideFlags: 0
@@ -215011,6 +215012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
 --- !u!1 &1602932562
 GameObject:
   m_ObjectHideFlags: 0
@@ -241296,6 +241298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
 --- !u!1001 &1903883510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -253046,6 +253049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
 --- !u!43 &1964937239
 Mesh:
   m_ObjectHideFlags: 0
@@ -260238,6 +260242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
 --- !u!1001 &2027036057
 PrefabInstance:
   m_ObjectHideFlags: 0

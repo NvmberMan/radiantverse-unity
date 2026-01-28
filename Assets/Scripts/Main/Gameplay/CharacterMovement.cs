@@ -35,6 +35,10 @@ namespace Main.Gameplay
         private Vector3 slopeNormal;
         private Vector3 prevScale;
 
+        [Header("Step Offset Settings")]
+        [SerializeField] float stepHeight = 0.3f;
+        [SerializeField] float stepSmooth = 0.1f;
+
         public float Acceleration
         {
             get => acceleration;

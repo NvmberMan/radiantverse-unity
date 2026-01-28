@@ -20,7 +20,7 @@ namespace Main.Gameplay
         private void OnTriggerEnter(Collider other)
         {
             if (detector == Detector.Collision) return;
-            if (!other.CompareTag("Player")) return;
+            if (!other.CompareTag("Player") && !other.CompareTag("NPC")) return;
 
             behavior?.OnPlayerHit(other.gameObject);
         }
@@ -29,7 +29,7 @@ namespace Main.Gameplay
         {
             if (detector == Detector.Trigger) return;
 
-            if (collision.gameObject.tag != "Player") return;
+            if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "NPC") return;
 
             behavior?.OnPlayerHit(collision.gameObject);
         }
