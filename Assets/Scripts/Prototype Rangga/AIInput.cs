@@ -10,6 +10,7 @@ namespace Main.Gameplay.AI
     {
         public Transform currentTarget;
         public int checkpointIndex;
+        public int wayIndex;
 
         [SerializeField] private Transform raySensorRoot;
         [SerializeField] private LayerMask groundMask;
@@ -36,7 +37,7 @@ namespace Main.Gameplay.AI
 
             var env = GlobalEnvironment.instance;
 
-            if (env.targetPoints == null || env.targetPoints.Length == 0)
+            if (env.ways[wayIndex].targetPoints == null || env.ways[wayIndex].targetPoints.Length == 0)
             {
                 Debug.LogError("TargetPoints belum diinisialisasi");
                 return;
@@ -49,7 +50,7 @@ namespace Main.Gameplay.AI
             }
 
             checkpointIndex = 0;
-            currentTarget = env.targetPoints[0].transform;
+            currentTarget = env.ways[wayIndex].targetPoints[0].transform;
 
             CharacterSpawn.RespawnToStartPoint();
 
@@ -68,45 +69,59 @@ namespace Main.Gameplay.AI
 
         public override void CollectObservations(VectorSensor sensor)
         {
+            // Observasi 1: Status Grounded (1 bool)
             sensor.AddObservation(CharacterMovement._isGrounded);
+
+            // Observasi 2: Velocity Lokal (3 float)
+            // Menggunakan InverseTransformDirection agar AI tahu kecepatannya relatif terhadap arah hadapnya
             sensor.AddObservation(transform.InverseTransformDirection(CharacterMovement.rb.linearVelocity));
 
             if (currentTarget != null)
             {
                 Vector3 relativeTargetPos = transform.InverseTransformPoint(currentTarget.position);
-                sensor.AddObservation(relativeTargetPos);
+
+                // Observasi 3: Arah ke target yang dinormalisasi (Sangat membantu GAIL/Demo)
+                sensor.AddObservation(relativeTargetPos.normalized);
+
+                // Observasi 4: Jarak relatif (diskalakan agar nilainya tidak terlalu besar/outlier)
+                sensor.AddObservation(relativeTargetPos.magnitude / 20f);
             }
             else
             {
                 sensor.AddObservation(Vector3.zero);
+                sensor.AddObservation(0f);
             }
         }
 
         public override void OnActionReceived(ActionBuffers actions)
         {
+            // Action 0: Jump
             if (actions.DiscreteActions[0] == 1)
             {
                 CharacterMovement.Jump();
-                AddReward(-0.01f);
             }
 
+            // Action 1 & 2: Movement
             Vector3 moveDir = Vector3.zero;
             moveDir.x = actions.DiscreteActions[1] == 1 ? 1 : (actions.DiscreteActions[1] == 2 ? -1 : 0);
             moveDir.z = actions.DiscreteActions[2] == 1 ? 1 : (actions.DiscreteActions[2] == 2 ? -1 : 0);
 
             CharacterMovement.MoveToDir(moveDir.normalized);
 
+            // Reward Logic
             float currentDistance = Vector3.Distance(transform.position, currentTarget.position);
             float diff = previousDistanceToTarget - currentDistance;
 
-            AddReward(diff * 0.05f);
-
-            if (currentDistance < previousDistanceToTarget)
+            // Berikan reward jika mendekat ke target
+            if (diff > 0)
             {
+                AddReward(diff * 0.8f);
                 previousDistanceToTarget = currentDistance;
             }
 
-            AddReward(-0.002f);
+            // Time Penalty (Agar AI efisien dan tidak diam saja)
+            // Nilainya kecil agar tidak mematikan motivasi eksplorasi
+            AddReward(-0.001f);
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
@@ -153,51 +168,52 @@ namespace Main.Gameplay.AI
         {
             checkpointIndex++;
 
-            if (checkpointIndex < GlobalEnvironment.instance.targetPoints.Length)
+            if (checkpointIndex < GlobalEnvironment.instance.ways[wayIndex].targetPoints.Length)
             {
-                currentTarget = GlobalEnvironment.instance.targetPoints[checkpointIndex].transform;
+                currentTarget = GlobalEnvironment.instance.ways[wayIndex].targetPoints[checkpointIndex].transform;
 
                 previousDistanceToTarget = Vector3.Distance(
                     transform.position,
                     currentTarget.position
                 );
 
-                AddReward(5f);
+                // Reward besar karena berhasil mencapai checkpoint
+                AddReward(10f);
             }
             else
             {
-                AddReward(10f);
-                //CharacterMovement._isFreeze = true;
+                // Reward finish
+                AddReward(20f);
                 EndEpisode();
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Wall")
+            if (other.gameObject.CompareTag("Wall"))
+            {
+                AddReward(-1.0f); // Penalti tabrak tapi tidak langsung mati (opsional)
+                EndEpisode();
+            }
+            else if (other.gameObject.CompareTag("Wall_low"))
+            {
+                AddReward(-0.5f);
+            }
+            else if (other.gameObject.CompareTag("Wall_high"))
+            {
+                AddReward(-2.0f);
+                EndEpisode();
+            }
+            else if (other.gameObject.CompareTag("Sensor_void"))
             {
                 AddReward(-5f);
                 EndEpisode();
             }
-            else if (other.gameObject.tag == "Wall_low")
-            {
-                AddReward(-1f);
-            }
-            else if (other.gameObject.tag == "Wall_high")
-            {
-                AddReward(-0.3f);
-                EndEpisode();
-            }
-            else if (other.gameObject.tag == "Sensor_void")
-            {
-                AddReward(-5f);
-                EndEpisode();
-            }
-            else if (other.gameObject.tag == "TargetPoint" || other.gameObject.tag == "FinishPoint")
+            else if (other.gameObject.CompareTag("TargetPoint") || other.gameObject.CompareTag("FinishPoint"))
             {
                 TargetPoint point = other.GetComponent<TargetPoint>();
 
-                if (point.targetIndex == checkpointIndex)
+                if (point != null && point.targetIndex == checkpointIndex)
                     AdvanceToNextTarget();
             }
         }
@@ -205,13 +221,13 @@ namespace Main.Gameplay.AI
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.tag == "Wall")
+            if (collision.gameObject.CompareTag("Wall"))
             {
-                AddReward(-5f);
+                AddReward(-1.0f);
             }
-            else if (collision.gameObject.tag == "Wall_low")
+            else if (collision.gameObject.CompareTag("Wall_low"))
             {
-                AddReward(-1f);
+                AddReward(-0.5f);
             }
         }
     }
