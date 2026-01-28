@@ -67,45 +67,6 @@ namespace Main.Gameplay
                 StopMoving();
         }
 
-        //void CheckGround()
-        //{
-        //    _wasGrounded = _isGrounded;
-
-        //    Vector3 origin = groundDetectorPoint.position;
-        //    Vector3 halfExtents = groundBoxSize * 0.5f;
-
-        //    // 1️⃣ CEK kalau sudah menyentuh tanah (overlap)
-        //    bool grounded = Physics.CheckBox(
-        //        origin,
-        //        halfExtents,
-        //        Quaternion.identity,
-        //        groundLayer
-        //    );
-
-        //    // 2️⃣ Kalau belum kena, lakukan BoxCast ke bawah (untuk jarak kecil)
-        //    if (!grounded)
-        //    {
-        //        RaycastHit hit;
-        //        grounded = Physics.BoxCast(
-        //            origin,
-        //            halfExtents,
-        //            Vector3.down,
-        //            out hit,
-        //            Quaternion.identity,
-        //            groundCheckDistance,
-        //            groundLayer
-        //        );
-        //    }
-
-        //    _isGrounded = grounded;
-
-        //    // Landing sound
-        //    if (_isGrounded && !_wasGrounded)
-        //    {
-        //        AudioManager.Instance.PlaySFX("Landing");
-        //    }
-        //}
-
         void CheckGround()
         {
             _wasGrounded = _isGrounded;
@@ -194,7 +155,18 @@ namespace Main.Gameplay
             //{
             //    skeletonAnimation.transform.localScale = new Vector3(-Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
             //}
+
+            Flip(horizontalInput);
         }
+
+        void Flip(float horizontalInput)
+        {
+            if (horizontalInput > 0.01f)
+                skeletonAnimation.Skeleton.ScaleX = 1;
+            else if (horizontalInput < -0.01f)
+                skeletonAnimation.Skeleton.ScaleX = -1;
+        }
+
 
         public void StopMoving()
         {

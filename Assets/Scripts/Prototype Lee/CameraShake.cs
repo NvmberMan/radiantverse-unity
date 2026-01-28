@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using UnityEngine;
 using Unity.Cinemachine;
-using UnityEngine;
+using System.Collections;
 
 namespace Main.Gameplay
 {
@@ -8,39 +8,21 @@ namespace Main.Gameplay
     {
         public static CameraShake Instance;
 
-        private CinemachineImpulseSource impulseSource;
-        private Coroutine shakeRoutine;
+        private CinemachineImpulseSource impulse;
+        private Coroutine routine;
         private Transform cam;
 
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(gameObject);
-
-            impulseSource = GetComponent<CinemachineImpulseSource>();
-            cam = Camera.main.transform; // 🔥 penting
+            Instance = this;
+            impulse = GetComponent<CinemachineImpulseSource>();
+            cam = Camera.main.transform;
         }
 
-        private void Update()
+        public void ShakeForSeconds(float strength, float duration)
         {
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                ShakeForDuration(8, 4);
-            }
-        }
-
-        public void ShakeForDuration(float strength, float duration)
-        {
-            if (impulseSource == null) return;
-
-            if (shakeRoutine != null)
-                StopCoroutine(shakeRoutine);
-
-            Debug.Log("Shakinggg in " + duration.ToString());
-
-            shakeRoutine = StartCoroutine(ShakeRoutine(strength, duration));
+            StopShake();
+            routine = StartCoroutine(ShakeRoutine(strength, duration));
         }
 
         private IEnumerator ShakeRoutine(float strength, float duration)
@@ -50,15 +32,25 @@ namespace Main.Gameplay
 
             while (elapsed < duration)
             {
-                // 🔥 SHAKE DI CAMERA SPACE (BUKAN WORLD UP)
-                Vector3 shakeDir =
+                Vector3 dir =
                     cam.right * Random.Range(-1f, 1f) +
                     cam.up * Random.Range(-1f, 1f);
 
-                impulseSource.GenerateImpulse(shakeDir.normalized * strength);
+                impulse.GenerateImpulse(dir.normalized * strength);
 
                 elapsed += interval;
                 yield return new WaitForSecondsRealtime(interval);
+            }
+
+            routine = null;
+        }
+
+        public void StopShake()
+        {
+            if (routine != null)
+            {
+                StopCoroutine(routine);
+                routine = null;
             }
         }
     }
