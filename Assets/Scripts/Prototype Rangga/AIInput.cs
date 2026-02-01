@@ -106,11 +106,9 @@ namespace Main.Gameplay.AI
             moveDir.x = actions.DiscreteActions[1] == 1 ? 1 : (actions.DiscreteActions[1] == 2 ? -1 : 0);
             moveDir.z = actions.DiscreteActions[2] == 1 ? 1 : (actions.DiscreteActions[2] == 2 ? -1 : 0);
 
-            Vector3 moveDir = new Vector3(hInput, 0, vInput).normalized;
-
             if (moveDir.magnitude > 0.1f)
             {
-                CharacterMovement.MoveToDir(moveDir, hInput);
+                CharacterMovement.MoveToDir(moveDir, moveDir.x);
             }
             else
             {

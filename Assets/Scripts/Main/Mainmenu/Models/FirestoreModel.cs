@@ -210,7 +210,8 @@ namespace Main.Mainmenu
                 ArradiusDollar = 0,
                 Experience = 0,
                 Level = 0,
-                Rank = "Rookie"
+                DailyStreak = 0,
+                Rank = "Rookie",
             };
 
             docRef.SetAsync(data).ContinueWithOnMainThread(task =>

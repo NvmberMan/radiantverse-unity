@@ -1561,6 +1561,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!4 &35982512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8509341233875721931, guid: b5f4c90cc8d1d5544a164ed8caf38d9e, type: 3}
@@ -18310,6 +18312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &215620141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19940,6 +19943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &257016769
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22449,6 +22453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &263705445
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33754,6 +33759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &396059912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63004,6 +63010,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!1001 &509938121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86152,6 +86160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &803750566
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -104263,6 +104272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!1 &840295487
 GameObject:
   m_ObjectHideFlags: 0
@@ -173614,6 +173625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &1124568314
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -195202,6 +195214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!1001 &1325090611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -207449,6 +207463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &1375499153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -220530,6 +220545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &1517178210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -221998,6 +222014,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!4 &1568255473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 15233805414619763, guid: db30a0bd06c1c514fa6397c1fd79f415, type: 3}
@@ -223259,6 +223277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!1001 &1600587210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232461,6 +232481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &1658922145
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -251138,6 +251159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!1001 &1903883510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263259,6 +263282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!4 &1964465662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8763728818303653031, guid: 8c47b4630a9444d4e87c12da4f18bb8d, type: 3}
@@ -264688,6 +264713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &1997534477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -270544,6 +270570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!65 &2008443209
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -270610,6 +270637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!1001 &2011936210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -272520,6 +272549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.SpawnPoint
   isTaken: 0
+  nextTargetPointIndex: 0
+  finishTargetPointIndex: 5
 --- !u!1001 &2079554693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -299820,6 +299851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
 --- !u!1001 &8158430781591390469
 PrefabInstance:
   m_ObjectHideFlags: 0

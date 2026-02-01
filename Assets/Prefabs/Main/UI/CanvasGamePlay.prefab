@@ -37,6 +37,42 @@ RectTransform:
   m_AnchoredPosition: {x: 299.695, y: -94.276794}
   m_SizeDelta: {x: 600.83, y: 52.6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &112790390847161167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6857274436993284977}
+  m_Layer: 5
+  m_Name: Fixed Joystick Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6857274436993284977
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112790390847161167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3928459089405830039}
+  m_Father: {fileID: 8740448594994067628}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1069, y: -325}
+  m_SizeDelta: {x: 304.27667, y: 304.27673}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &182780634829108968
 GameObject:
   m_ObjectHideFlags: 0
@@ -3943,7 +3979,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8202028406716738792}
-  - {fileID: 3928459089405830039}
+  - {fileID: 6857274436993284977}
   - {fileID: 9191257373505460902}
   - {fileID: 139281581738298991}
   - {fileID: 9138294339346744621}
@@ -7859,13 +7895,21 @@ MonoBehaviour:
   - {fileID: 4774611117600644405}
   - {fileID: 1661942918056954609}
   cameraMode: 0
-  cameraAreaStart: 0.5
   baseSensitivity: 1
   pcRotationSpeed: 300
   mobileRotationMultiplier: 180
-  joystick: {fileID: 3928459089405830042}
-  orbitalFollow: {fileID: 0}
+  joystickMode: 0
+  fixedJoystick: {fileID: 0}
+  dynamicJoystick: {fileID: 0}
+  fixedJoystickArea: {fileID: 0}
+  dynamicJoystickArea: {fileID: 0}
+  zoomSpeedPC: 5
+  zoomSpeedMobile: 0.01
+  minZoom: 2
+  maxZoom: 15
+  zoomSmoothing: 10
   sensitivitySlider: {fileID: 7178108906065568035}
+  activeJoystick: {fileID: 0}
 --- !u!1 &6501833712352281122
 GameObject:
   m_ObjectHideFlags: 0
@@ -10172,8 +10216,6 @@ MonoBehaviour:
   - {fileID: 1108361612342186743}
   musicSlider: {fileID: 623862348633995120}
   sfxSlider: {fileID: 8733671081450089003}
-  voiceSlider: {fileID: 3076071429053435558}
-  ambienceSlider: {fileID: 7497953387973566332}
 --- !u!1 &9153580596910838772
 GameObject:
   m_ObjectHideFlags: 0
@@ -10578,7 +10620,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8740448594994067628}
+    m_TransformParent: {fileID: 6857274436993284977}
     m_Modifications:
     - target: {fileID: 2929252283123773937, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_Sprite
@@ -10658,11 +10700,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 287
+      value: 152.1383
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 285
+      value: 152.13837
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10718,14 +10760,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 2171434124494525029}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3928459089405830042 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
-  m_PrefabInstance: {fileID: 2171434124494525029}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

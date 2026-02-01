@@ -196,7 +196,7 @@ namespace Main.Gameplay
 
                 SetAnimation(jumpAnimation, false);
 
-                AudioManager.Instance.PlaySFX("Jump");
+                AudioManager.Instance.PlaySFXAtPoint("Jump", this.transform.position, 6);
             }
         }
 

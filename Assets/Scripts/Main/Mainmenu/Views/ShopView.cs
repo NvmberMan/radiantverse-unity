@@ -49,31 +49,51 @@ namespace Main.Mainmenu
             }
         }
 
+        //public void TryBuy(ShopItemData item)
+        //{
+        //    var stats = PlayerLocalData.playerStats;
+        //    if (stats.ArradiusDollar < item.price)
+        //    {
+        //        Debug.LogError("Money not enough!");
+        //        return;
+        //    }
+
+        //    stats.ArradiusDollar -= item.price;
+
+        //    if (item is CrateData crate)
+        //    {
+        //        MenuManager.instance.GetController<UniversalController>().ShowCratePopup(crate);
+
+
+        //    }
+        //    else if (item is AccessoryData accessory)
+        //    {
+        //        GrantAccessory(accessory);
+        //    }
+
+        //    UpdateDatabaseSync();
+        //    RefreshShopUI();
+        //}
+
         public void TryBuy(ShopItemData item)
         {
-            var stats = PlayerLocalData.playerStats;
-            if (stats.ArradiusDollar < item.price)
-            {
-                Debug.LogError("Money not enough!");
-                return;
-            }
-
-            stats.ArradiusDollar -= item.price;
-
-            if (item is CrateData crate)
-            {
-                MenuManager.instance.GetController<UniversalController>().ShowCratePopup(crate);
-
-
-            }
-            else if (item is AccessoryData accessory)
-            {
-                GrantAccessory(accessory);
-            }
-
-            UpdateDatabaseSync();
-            RefreshShopUI();
+            ShopPurchaseService.TryBuy(
+                item,
+                onSuccess: () =>
+                {
+                    RefreshShopUI();
+                },
+                onNotEnoughMoney: () =>
+                {
+                    Debug.LogError("Money not enough!");
+                },
+                onInvalidItem: () =>
+                {
+                    Debug.LogError("Invalid item!");
+                }
+            );
         }
+
 
         private void UpdateDatabaseSync()
         {
