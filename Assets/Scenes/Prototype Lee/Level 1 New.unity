@@ -238668,6 +238668,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5473445583367093144, guid: cae879ff874edbb42bae3dac7c5638ae, type: 3}
   m_PrefabInstance: {fileID: 1791441147}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1794670613
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1353297246969473373, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: powerUpParticle
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_Name
+      value: PowerUp - Bangun Pagi
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.096489996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.096489996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.096489996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.118
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148469612978441750, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
 --- !u!1001 &1798634254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -285917,6 +285990,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4336666569794685935, guid: 8e8d5b71a65252645987f68f5a785aaf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336666569794685935, guid: 8e8d5b71a65252645987f68f5a785aaf, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 963194228}
@@ -285924,6 +286001,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1541957434}
+    - target: {fileID: 5274783570765421737, guid: 8e8d5b71a65252645987f68f5a785aaf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5274783570765421737, guid: 8e8d5b71a65252645987f68f5a785aaf, type: 3}
       propertyPath: cameraTransform
       value: 
@@ -288067,6 +288148,7 @@ SceneRoots:
   - {fileID: 4019638842564682041}
   - {fileID: 1324268205407405806}
   - {fileID: 2104234482}
+  - {fileID: 1794670613}
   - {fileID: 987429262}
   - {fileID: 29812007}
   - {fileID: 462660505}

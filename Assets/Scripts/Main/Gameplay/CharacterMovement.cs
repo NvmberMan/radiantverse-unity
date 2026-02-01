@@ -143,15 +143,6 @@ namespace Main.Gameplay
 
             SetAnimation(walkAnimation, true);
 
-            //if (horizontalInput > 0.01f)
-            //{
-            //    skeletonAnimation.transform.localScale = new Vector3(Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
-            //}
-            //else if (horizontalInput < -0.01f)
-            //{
-            //    skeletonAnimation.transform.localScale = new Vector3(-Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
-            //}
-
             Flip(horizontalInput);
         }
 
