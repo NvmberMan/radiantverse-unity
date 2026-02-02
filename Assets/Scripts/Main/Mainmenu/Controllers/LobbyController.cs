@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Main.Mainmenu.GameplayController;
 
 
 namespace Main.Mainmenu
@@ -10,29 +11,44 @@ namespace Main.Mainmenu
     public class LobbyController : Controller
     {
         [SerializeField] private Animator dailyRewardAnimator;
-        [Header("Slider UI Elements")]
-        [SerializeField] private Slider musicSlider;
-        [SerializeField] private Slider sfxSlider;
+
+        private SettingView settingView;
 
         private void Start()
         {
-            LoadSliderValues();
-
-            musicSlider.onValueChanged.AddListener((val) => {
-                AudioManager.Instance.SetVolume(AudioManager.MUSIC_KEY, val);
-            });
-
-            sfxSlider.onValueChanged.AddListener((val) => {
-                AudioManager.Instance.SetVolume(AudioManager.SFX_KEY, val);
-            });
+            settingView = GetView<SettingView>();
+            LoadVolumeValues();
+            LoadSensitivity();
+            LoadZoomSpeed();
+            LoadJoystickMode();
         }
 
-        private void LoadSliderValues()
+        #region Load Settings Data
+        void LoadSensitivity()
         {
-            musicSlider.value = PlayerPrefs.GetFloat(AudioManager.MUSIC_KEY, 0.75f);
-            sfxSlider.value = PlayerPrefs.GetFloat(AudioManager.SFX_KEY, 0.75f);
+            settingView.cameraSensitivySlider.value = PlayerPrefs.GetFloat(settingView.SENS_KEY, 1f);
         }
 
+        void LoadJoystickMode()
+        {
+            int savedMode = PlayerPrefs.GetInt(settingView.JOYSTICK_KEY, 0);
+            JoystickMode joystickMode = (JoystickMode)savedMode;
+            settingView.fixedCameraToggle.isOn = (joystickMode == JoystickMode.Fixed);
+        }
+
+        void LoadZoomSpeed()
+        {
+            settingView.zoomSpeedSlider.value = PlayerPrefs.GetFloat(settingView.ZOOM_MOBILE_KEY, 0.005f);
+        }
+        private void LoadVolumeValues()
+        {
+            settingView.musicSlider.value = PlayerPrefs.GetFloat(AudioManager.MUSIC_KEY, 0.75f);
+            settingView.sfxSlider.value = PlayerPrefs.GetFloat(AudioManager.SFX_KEY, 0.75f);
+        }
+
+        #endregion
+
+        #region Reward System
         public void CloseDailyRewad(float duration)
         {
             StartCoroutine(CloseDailyRewadIenumerator(duration));
@@ -44,5 +60,6 @@ namespace Main.Mainmenu
             yield return new WaitForSeconds(duration);
             Disactivate("daily reward");
         }
+        #endregion
     }
 }

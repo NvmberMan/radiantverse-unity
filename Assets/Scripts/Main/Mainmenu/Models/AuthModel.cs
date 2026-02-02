@@ -67,5 +67,36 @@ namespace Main.Mainmenu
             }
         }
 
+        public static async void ChangePassword(
+            string oldPassword,
+            string newPassword,
+            Action onSuccess,
+            Action<string> onError)
+        {
+            FirebaseUser user = AuthManager.instance.CurrentUser;
+
+            if (user == null)
+            {
+                onError?.Invoke("User belum login.");
+                return;
+            }
+
+            try
+            {
+                Credential credential =
+                    EmailAuthProvider.GetCredential(user.Email, oldPassword);
+
+                await user.ReauthenticateAsync(credential);
+
+                await user.UpdatePasswordAsync(newPassword);
+
+                onSuccess?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+
     }
 }
