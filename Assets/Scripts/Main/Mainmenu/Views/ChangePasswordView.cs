@@ -8,6 +8,7 @@ namespace Main.Mainmenu
     {
         public TMP_InputField oldPasswordField;
         public TMP_InputField newPasswordField;
+        [SerializeField] private GameObject oldPasswordGroup;
         public Button submitButton;
 
         private void Start()
@@ -18,6 +19,10 @@ namespace Main.Mainmenu
 
         private void OnEnable()
         {
+            bool isEmailUser = AuthModel.HasPasswordProvider();
+
+            oldPasswordGroup.SetActive(isEmailUser);
+
             oldPasswordField.text = "";
             newPasswordField.text = "";
         }

@@ -7019,7 +7019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &416934781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8221,7 +8221,7 @@ MonoBehaviour:
   eyeOpenSprite: {fileID: 21300000, guid: 96052959b211b524197e50d5140aac80, type: 3}
   eyeClosedSprite: {fileID: 21300000, guid: a01c3035661469645bbb63b9763f89af, type: 3}
   googleLoginBtn: {fileID: 1535138305}
-  webClientId: PASTE_YOUR_WEB_CLIENT_ID_HERE.apps.googleusercontent.com
+  webClientId: 230119757559-h7s33t3pl6j09a1760qlpe5622q6ce18.apps.googleusercontent.com
 --- !u!224 &464248487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26330,16 +26330,16 @@ MonoBehaviour:
           m_StringArgument: button click
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1604291723}
-        m_TargetAssemblyTypeName: LoginController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1604291725}
+        m_TargetAssemblyTypeName: Main.Mainmenu.Controller, Assembly-CSharp
+        m_MethodName: Direct
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: register
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1373761837
@@ -28181,6 +28181,8 @@ MonoBehaviour:
   confirmPassEyeIcon: {fileID: 1741613721}
   eyeOpenSprite: {fileID: 21300000, guid: 632c8ee16fbb0594aa0bbe2e20665535, type: 3}
   eyeClosedSprite: {fileID: 21300000, guid: 4cbc879550e5e374a925e2e0a84d6f3c, type: 3}
+  googleRegisterBtn: {fileID: 1847212228}
+  webClientId: 230119757559-h7s33t3pl6j09a1760qlpe5622q6ce18.apps.googleusercontent.com
 --- !u!1001 &1500261163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33737,7 +33739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1722986872
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38258,16 +38260,16 @@ MonoBehaviour:
           m_StringArgument: button click
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1604291723}
-        m_TargetAssemblyTypeName: LoginController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1604291725}
+        m_TargetAssemblyTypeName: Main.Mainmenu.Controller, Assembly-CSharp
+        m_MethodName: Direct
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: login
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1928287297

@@ -1,10 +1,12 @@
-using Firebase.Auth;
+﻿using Firebase.Auth;
+using Google;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI; // Penting untuk Button dan Image
+using Firebase.Extensions;
+
 
 namespace Main.Mainmenu
 {
@@ -25,6 +27,10 @@ namespace Main.Mainmenu
         [SerializeField] private Sprite eyeOpenSprite;
         [SerializeField] private Sprite eyeClosedSprite;
 
+        [Header("Google Sign Up")]
+        [SerializeField] Button googleRegisterBtn;
+        [SerializeField] string webClientId = "230119757559-h7s33t3pl6j09a1760qlpe5622q6ce18.apps.googleusercontent.com";
+
         private bool isPassVisible = false;
         private bool isConfirmPassVisible = false;
 
@@ -36,6 +42,10 @@ namespace Main.Mainmenu
 
             if (toggleConfirmPassBtn != null)
                 toggleConfirmPassBtn.onClick.AddListener(() => ToggleVisibility(ref isConfirmPassVisible, inputConfirmPassword, confirmPassEyeIcon));
+
+            if (googleRegisterBtn != null)
+                googleRegisterBtn.onClick.AddListener(SignUpWithGoogle);
+
         }
 
         private void ToggleVisibility(ref bool isVisible, TMP_InputField input, Image icon)
@@ -76,6 +86,117 @@ namespace Main.Mainmenu
                 });
         }
 
+        public void SignUpWithGoogle()
+        {
+            View loadingView = MenuManager.instance.GetController<UniversalController>().GetView("loading");
+            loadingView.Show();
+
+            if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer)
+            {
+                loadingView.Hide();
+                ErrorView errorView = MenuManager.instance.GetController<UniversalController>().GetView<ErrorView>();
+                errorView.ErrorSetup("Failed to login!", "Please use mobile!");
+                errorView.Show();
+
+                return;
+            }
+
+            GoogleSignIn.Configuration = new GoogleSignInConfiguration
+            {
+                WebClientId = webClientId,
+                RequestIdToken = true,
+                UseGameSignIn = false,
+                RequestEmail = true,
+            };
+
+            GoogleSignIn.DefaultInstance.SignOut();
+
+            GoogleSignIn.DefaultInstance.SignIn().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    loadingView.Hide();
+                    Debug.LogError("Google Sign-In Faulted: " + task.Exception);
+
+                    ErrorView errorView = MenuManager.instance.GetController<UniversalController>().GetView<ErrorView>();
+                    errorView.ErrorSetup("Failed to login!", "");
+                    errorView.Show();
+                }
+                else if (task.IsCanceled)
+                {
+                    loadingView.Hide();
+                    Debug.Log("Google Sign-In Canceled");
+
+                    ErrorView errorView = MenuManager.instance.GetController<UniversalController>().GetView<ErrorView>();
+                    errorView.ErrorSetup("Google Sign-In Canceled", "");
+                    errorView.Show();
+                }
+                else
+                {
+                    loadingView.Hide();
+                    SignInWithFirebase(task.Result.IdToken);
+                }
+            });
+        }
+
+
+        private void SignInWithFirebase(string idToken)
+        {
+            Credential credential = GoogleAuthProvider.GetCredential(idToken, null);
+
+            AuthManager.instance.auth.SignInAndRetrieveDataWithCredentialAsync(credential).ContinueWith(task =>
+            {
+                if (task.IsFaulted || task.IsCanceled)
+                {
+                    Debug.LogError("Firebase Auth failed.");
+                    return;
+                }
+
+                FirebaseUser newUser = task.Result.User;
+                Debug.LogFormat("User signed in successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
+
+                // Kembali ke Main Thread Unity untuk menjalankan Coroutine
+                UnityMainThreadDispatcher.Instance.Enqueue(() =>
+                {
+                    //StartCoroutine(LoadAllPlayerDataCoroutine(newUser));
+                    StartCoroutine(CheckUserRegistrationStatus(newUser));
+                });
+            });
+        }
+
+        private IEnumerator CheckUserRegistrationStatus(FirebaseUser user)
+        {
+            bool checkDone = false;
+            bool isRegistered = false;
+
+            FirestoreModel.GetUserData(user,
+                onSuccess: (data) => {
+                    isRegistered = (data != null);
+                    checkDone = true;
+                },
+                onError: (error) => {
+                    isRegistered = false;
+                    checkDone = true;
+                }
+            );
+
+            while (!checkDone) yield return null;
+
+            if (isRegistered)
+            {
+                Debug.Log("User lama: Langsung loading data.");
+                LoginController loginController = MenuManager.instance.GetController<LoginController>();
+                StartCoroutine(loginController.LoadAllPlayerDataCoroutine(user));
+            }
+            else
+            {
+                Debug.Log("User baru: Jalankan proses inisialisasi (Registrasi).");
+                StartCoroutine(InitializeAllPlayerDataCoroutine(user));
+            }
+        }
+
+
+
         private bool ValidatePasswords()
         {
             string email = inputEmail.text;
@@ -110,7 +231,7 @@ namespace Main.Mainmenu
             return true;
         }
 
-        private IEnumerator InitializeAllPlayerDataCoroutine(FirebaseUser user)
+        public IEnumerator InitializeAllPlayerDataCoroutine(FirebaseUser user)
         {
             LoadingController loadingController = Controller.Get<LoadingController>();
             Direct("loading");

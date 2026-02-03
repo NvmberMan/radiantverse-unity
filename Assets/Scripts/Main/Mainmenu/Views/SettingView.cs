@@ -1,8 +1,6 @@
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 using static Main.Mainmenu.GameplayController;
-using static UnityEditor.SceneView;
 
 namespace Main.Mainmenu
 {
