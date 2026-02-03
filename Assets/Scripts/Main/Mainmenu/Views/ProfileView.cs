@@ -34,7 +34,8 @@ namespace Main.Mainmenu
             if (PlayerLocalData.userData != null)
             {
                 usernameView.text = PlayerLocalData.userData.Username.ToString();
-                emailView.text = PlayerLocalData.userData.Email.ToString();
+                // Menggunakan fungsi MaskEmail di sini
+                emailView.text = MaskEmail(PlayerLocalData.userData.Email.ToString());
             }
             else
             {
@@ -44,7 +45,8 @@ namespace Main.Mainmenu
                     PlayerLocalData.userData = data;
 
                     usernameView.text = data.Username;
-                    emailView.text = data.Email;
+                    // Dan di sini untuk callback dari Firestore
+                    emailView.text = MaskEmail(data.Email);
                 }, Debug.LogError);
             }
         }
@@ -117,6 +119,27 @@ namespace Main.Mainmenu
             FirestoreModel.UpdateSelectedSkins(AuthManager.instance.CurrentUser.UserId, currentSkins);
 
             ApplySkinsFromData();
+        }
+
+        private string MaskEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email) || !email.Contains("@"))
+                return email;
+
+            string[] parts = email.Split('@');
+            string namePart = parts[0];
+            string domainPart = parts[1];
+
+            if (namePart.Length <= 2)
+            {
+                // Jika nama email sangat pendek (misal: a@gmail.com), sensor sebagian
+                return namePart.Substring(0, 1) + "***@" + domainPart;
+            }
+            else
+            {
+                // Menampilkan 2 karakter pertama, lalu sisanya bintang
+                return namePart.Substring(0, 2) + "******@" + domainPart;
+            }
         }
     }
 }

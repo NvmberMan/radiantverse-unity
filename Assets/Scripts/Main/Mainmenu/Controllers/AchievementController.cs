@@ -44,6 +44,10 @@ namespace Main.Mainmenu
                     AchievementItemUI currentItem = item;
                     item.achievementDetailButton.onClick.AddListener(() => OpenDetail(currentItem));
                 }
+                else
+                {
+                    item.achievementDetailButton.onClick.AddListener(CloseDetail);
+                }
             }
         }
         private void OpenDetail(AchievementItemUI item)

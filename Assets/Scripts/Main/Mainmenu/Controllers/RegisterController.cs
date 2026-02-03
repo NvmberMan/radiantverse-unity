@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI; // Penting untuk Button dan Image
 
 namespace Main.Mainmenu
 {
@@ -14,12 +15,50 @@ namespace Main.Mainmenu
         [SerializeField] private TMP_InputField inputPassword;
         [SerializeField] private TMP_InputField inputConfirmPassword;
 
+        [Header("Password Visibility")]
+        [SerializeField] private Button togglePassBtn;
+        [SerializeField] private Image passEyeIcon;
+        [Space]
+        [SerializeField] private Button toggleConfirmPassBtn;
+        [SerializeField] private Image confirmPassEyeIcon;
+        [Space]
+        [SerializeField] private Sprite eyeOpenSprite;
+        [SerializeField] private Sprite eyeClosedSprite;
+
+        private bool isPassVisible = false;
+        private bool isConfirmPassVisible = false;
+
+        private void Start()
+        {
+            // Setup listener untuk tombol intip password
+            if (togglePassBtn != null)
+                togglePassBtn.onClick.AddListener(() => ToggleVisibility(ref isPassVisible, inputPassword, passEyeIcon));
+
+            if (toggleConfirmPassBtn != null)
+                toggleConfirmPassBtn.onClick.AddListener(() => ToggleVisibility(ref isConfirmPassVisible, inputConfirmPassword, confirmPassEyeIcon));
+        }
+
+        private void ToggleVisibility(ref bool isVisible, TMP_InputField input, Image icon)
+        {
+            isVisible = !isVisible;
+
+            input.contentType = isVisible ?
+                TMP_InputField.ContentType.Standard :
+                TMP_InputField.ContentType.Password;
+
+            input.ForceLabelUpdate();
+
+            if (icon != null && eyeOpenSprite != null && eyeClosedSprite != null)
+            {
+                icon.sprite = isVisible ? eyeOpenSprite : eyeClosedSprite;
+            }
+        }
+
         public void Register()
         {
             inputEmail.text = inputEmail.text.Trim();
 
             if (!ValidatePasswords()) return;
-
 
             AuthManager.instance.IsRegistering = true;
             View loadingView = MenuManager.instance.GetController<UniversalController>().GetView("loading");
@@ -43,29 +82,25 @@ namespace Main.Mainmenu
             string pass = inputPassword.text;
             string confirmPass = inputConfirmPassword.text;
 
-            // Cek Kosong
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pass))
             {
                 ShowError("Validation Error", "Email and Password cannot be empty!");
                 return false;
             }
 
-            // Validasi Format Email (Regex Standard)
             string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             if (!Regex.IsMatch(email, emailPattern))
             {
-                ShowError("Invalid Email", "Please enter a valid email address (e.g., name@example.com).");
+                ShowError("Invalid Email", "Please enter a valid email address.");
                 return false;
             }
 
-            // Cek Kecocokan Password
             if (pass != confirmPass)
             {
                 ShowError("Password Mismatch", "Passwords do not match.");
                 return false;
             }
 
-            // Cek Kekuatan Password (Minimal 6 karakter adalah syarat Firebase)
             if (pass.Length < 6)
             {
                 ShowError("Weak Password", "Password must be at least 6 characters long.");

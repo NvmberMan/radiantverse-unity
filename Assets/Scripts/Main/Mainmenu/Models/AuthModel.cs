@@ -1,4 +1,5 @@
 using Firebase.Auth;
+using Firebase.Extensions;
 using System;
 using UnityEngine;
 
@@ -96,6 +97,21 @@ namespace Main.Mainmenu
             {
                 onError?.Invoke(ex.Message);
             }
+        }
+
+        public static void SendPasswordReset(string email, Action onSuccess, Action<string> onError)
+        {
+            FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+            auth.SendPasswordResetEmailAsync(email).ContinueWithOnMainThread(task => {
+                if (task.IsCanceled || task.IsFaulted)
+                {
+                    onError?.Invoke("Failed to send reset email. Make sure the email is registered.");
+                }
+                else
+                {
+                    onSuccess?.Invoke();
+                }
+            });
         }
 
     }
