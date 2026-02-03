@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Kemeja & Dasi Tosca
   icon: {fileID: 21300000, guid: 63b1078bc8679e446bd34e44d3c9170a, type: 3}
   price: 0
-  spineSkinName: Component/Shirts/Kemeja&dasi-tosca
-  category: Shirts
+  spineSkinName: shirts/Kemeja&dasi-tosca
+  category: shirts

@@ -34,7 +34,8 @@ namespace Main.Mainmenu
 
                 item.achievementPreviewImage.sprite = item.achievementItem.iconPreview;
 
-                item.achievementPreviewImage.color = isUnlocked ? Color.white : Color.black;
+                item.achievementPreviewImage.color = isUnlocked ? Color.white : new Color(0, 0, 0, 0.5f);
+
 
                 item.achievementDetailButton.onClick.RemoveAllListeners();
 

@@ -1,59 +1,71 @@
-using UnityEngine;
 using Firebase.Auth;
-using TMPro;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using TMPro;
+using UnityEngine;
 
 namespace Main.Mainmenu
 {
     public class RegisterController : Controller
     {
-        [Header("Controller Variables")]
-        [SerializeField] TMP_InputField inputEmail;
-        [SerializeField] TMP_InputField inputPassword;
-        [SerializeField] TMP_InputField inputConfirmPassword;
+        [Header("UI References")]
+        [SerializeField] private TMP_InputField inputEmail;
+        [SerializeField] private TMP_InputField inputPassword;
+        [SerializeField] private TMP_InputField inputConfirmPassword;
 
         public void Register()
         {
-            if (!ValidatePasswords())
-            {
-                return;
-            }
+            inputEmail.text = inputEmail.text.Trim();
 
-            Activate("loading");
+            if (!ValidatePasswords()) return;
+
+
+            AuthManager.instance.IsRegistering = true;
+            View loadingView = MenuManager.instance.GetController<UniversalController>().GetView("loading");
+            loadingView.Show();
 
             AuthModel.RegisterUser(inputEmail.text, inputPassword.text,
-                onSuccess: (user) =>
-                {
-                    Debug.Log($"User registered: {user.Email}");
-                    Disactivate("loading");
+                onSuccess: (user) => {
+                    loadingView.Hide();
                     StartCoroutine(InitializeAllPlayerDataCoroutine(user));
                 },
-                onError: (error) =>
-                {
-                    Disactivate("loading");
-                    ErrorView errorView = (ErrorView)GetView("error");
-                    errorView.ErrorSetup("Failed to create new account!", error.ToString());
-                    Activate("error");
+                onError: (error) => {
+                    loadingView.Hide();
+                    AuthManager.instance.IsRegistering = false;
+                    ShowError("Registration Failed", error);
                 });
         }
 
         private bool ValidatePasswords()
         {
+            string email = inputEmail.text;
             string pass = inputPassword.text;
             string confirmPass = inputConfirmPassword.text;
 
-            if (string.IsNullOrEmpty(pass) || string.IsNullOrEmpty(confirmPass))
+            // Cek Kosong
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pass))
             {
-                ShowError("Validation Error", "Password fields cannot be empty!");
+                ShowError("Validation Error", "Email and Password cannot be empty!");
                 return false;
             }
 
+            // Validasi Format Email (Regex Standard)
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (!Regex.IsMatch(email, emailPattern))
+            {
+                ShowError("Invalid Email", "Please enter a valid email address (e.g., name@example.com).");
+                return false;
+            }
+
+            // Cek Kecocokan Password
             if (pass != confirmPass)
             {
-                ShowError("Password Mismatch", "Passwords do not match. Please try again.");
+                ShowError("Password Mismatch", "Passwords do not match.");
                 return false;
             }
 
+            // Cek Kekuatan Password (Minimal 6 karakter adalah syarat Firebase)
             if (pass.Length < 6)
             {
                 ShowError("Weak Password", "Password must be at least 6 characters long.");
@@ -63,76 +75,66 @@ namespace Main.Mainmenu
             return true;
         }
 
-        private void ShowError(string title, string message)
-        {
-            ErrorView errorView = (ErrorView)GetView("error");
-            errorView.ErrorSetup(title, message);
-            Activate("error");
-        }
-
         private IEnumerator InitializeAllPlayerDataCoroutine(FirebaseUser user)
         {
             LoadingController loadingController = Controller.Get<LoadingController>();
             Direct("loading");
 
-            const float MIN_DELAY_PER_ITEM = 0.2f;
             int loadedCount = 0;
             int totalItemsToLoad = 3;
 
-            loadingController.SetLoadingText("Preparing new account data...");
-
-            bool userDataCreated = false;
-            bool statsCreated = false;
-            bool inventoryCreated = false;
-
-            IEnumerator UpdateProgressAndCheckLobby()
-            {
-                loadedCount++;
-                int progress = (int)((float)loadedCount / totalItemsToLoad * 100);
-                loadingController.SetLoadingProgress(progress);
-                yield return new WaitForSeconds(MIN_DELAY_PER_ITEM);
-
-                if (userDataCreated && statsCreated && inventoryCreated)
-                {
-                    loadingController.SetLoadingText("Account setup completed!");
-                    loadingController.SetLoadingProgress(100);
-                    yield return new WaitForSeconds(0.5f);
-                    Direct("create username");
-                }
-            }
-
             loadingController.SetLoadingText("Creating User Profile...");
-            yield return StartCoroutine(GenerateUserData(user, () => { userDataCreated = true; }));
-            yield return StartCoroutine(UpdateProgressAndCheckLobby());
+            bool userDone = false;
+            FirestoreModel.InitializeUserData(user, (data) => {
+                PlayerLocalData.userData = data;
+                userDone = true;
+            });
+            while (!userDone) yield return null;
+            yield return StartCoroutine(UpdateProgress(loadingController, ++loadedCount, totalItemsToLoad));
 
-            loadingController.SetLoadingText("Creating Player Statistics...");
-            yield return StartCoroutine(GeneratePlayerStats(user, () => { statsCreated = true; }));
-            yield return StartCoroutine(UpdateProgressAndCheckLobby());
+            loadingController.SetLoadingText("Setting up stats...");
+            bool statsDone = false;
+            FirestoreModel.InitializePlayerStats(user, (stats) => {
+                PlayerLocalData.playerStats = stats;
+                statsDone = true;
+            });
+            while (!statsDone) yield return null;
+            yield return StartCoroutine(UpdateProgress(loadingController, ++loadedCount, totalItemsToLoad));
 
-            loadingController.SetLoadingText("Creating Inventory Data...");
-            yield return StartCoroutine(GenerateInventoryData(user, () => { inventoryCreated = true; }));
-            yield return StartCoroutine(UpdateProgressAndCheckLobby());
+            loadingController.SetLoadingText("Preparing inventory...");
+            bool invDone = false;
+            FirestoreModel.InitializeInventoryData(user, (inv) => {
+                PlayerLocalData.inventoryData = inv;
+                invDone = true;
+            });
+            while (!invDone) yield return null;
+            yield return StartCoroutine(UpdateProgress(loadingController, ++loadedCount, totalItemsToLoad));
+
+            loadingController.SetLoadingText("Account Ready!");
+            yield return new WaitForSeconds(0.8f);
+
+            AuthManager.instance.IsRegistering = false;
+            Direct("create username");
         }
 
-        private IEnumerator GenerateUserData(FirebaseUser user, System.Action onComplete)
+        private IEnumerator UpdateProgress(LoadingController ctrl, int count, int total)
         {
-            FirestoreModel.InitializeUserData(user);
-            yield return new WaitForSeconds(0.5f);
-            onComplete?.Invoke();
+            ctrl.SetLoadingProgress((int)((float)count / total * 100));
+            yield return new WaitForSeconds(0.2f);
         }
 
-        private IEnumerator GeneratePlayerStats(FirebaseUser user, System.Action onComplete)
+        private void ShowError(string title, string message)
         {
-            FirestoreModel.InitializePlayerStats(user);
-            yield return new WaitForSeconds(0.5f);
-            onComplete?.Invoke();
-        }
-
-        private IEnumerator GenerateInventoryData(FirebaseUser user, System.Action onComplete)
-        {
-            FirestoreModel.InitializeInventoryData(user);
-            yield return new WaitForSeconds(0.5f);
-            onComplete?.Invoke();
+            ErrorView errorView = MenuManager.instance.GetController<UniversalController>().GetView<ErrorView>();
+            if (errorView != null)
+            {
+                errorView.ErrorSetup(title, message);
+                errorView.Show();
+            }
+            else
+            {
+                Debug.LogError($"[RegisterController] ErrorView not found! {title}: {message}");
+            }
         }
     }
 }

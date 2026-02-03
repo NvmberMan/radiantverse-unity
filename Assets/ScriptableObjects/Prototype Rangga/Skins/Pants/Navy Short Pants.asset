@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Navy Short Pants
   icon: {fileID: 21300000, guid: e6a2fd95c4040d7409cd4adeb28b001a, type: 3}
   price: 0
-  spineSkinName: Component/Pants/Navy-short-pants
-  category: Pants
+  spineSkinName: pants/Navy-short-pants
+  category: pants

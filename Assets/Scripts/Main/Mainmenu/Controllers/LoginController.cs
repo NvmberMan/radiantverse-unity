@@ -28,26 +28,24 @@ namespace Main.Mainmenu
         }
         public void Login()
         {
-            Activate("loading");
+            View loadingView = MenuManager.instance.GetController<UniversalController>().GetView("loading");
+            loadingView.Show();
 
             AuthModel.LoginUser(
                 inputEmail.text,
                 inputPassword.text,
                 onSuccess: (user) =>
                 {
-                    Debug.Log($"Welcome, {user.Email}!");
-
-                    Disactivate("loading");
+                    loadingView.Hide();
 
                     StartCoroutine(LoadAllPlayerDataCoroutine(user));
                 },
                 onError: (errorMsg) =>
                 {
-                    Disactivate("loading");
+                    loadingView.Hide();
 
-                    ErrorView errorView = (ErrorView)GetView("error");
+                    ErrorView errorView = MenuManager.instance.GetController<UniversalController>().GetView<ErrorView>();
                     errorView.ErrorSetup("Failed to login!", errorMsg);
-
                     errorView.Show();
                 }
             );

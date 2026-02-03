@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Face 1
   icon: {fileID: 21300000, guid: 6406d7829e5a57f4e84852805319c328, type: 3}
   price: 0
-  spineSkinName: Component/Faces/Boy
-  category: Faces
+  spineSkinName: faces/Boy
+  category: faces
