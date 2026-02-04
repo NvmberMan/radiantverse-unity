@@ -1876,10 +1876,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1966959745}
-  - {fileID: 1164690691}
-  - {fileID: 1570588276}
-  - {fileID: 924098892}
+  - {fileID: 1128268119}
+  - {fileID: 1520281517}
+  - {fileID: 946059755}
+  - {fileID: 1011380493420317930}
   m_Father: {fileID: 1805333372}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2985,7 +2985,8 @@ GameObject:
   - component: {fileID: 212982170}
   - component: {fileID: 212982173}
   - component: {fileID: 212982172}
-  - component: {fileID: 212982171}
+  - component: {fileID: 212982175}
+  - component: {fileID: 212982174}
   m_Layer: 5
   m_Name: Boy
   m_TagString: Untagged
@@ -3013,47 +3014,6 @@ RectTransform:
   m_AnchoredPosition: {x: -272, y: -132}
   m_SizeDelta: {x: 440.6316, y: 569.8834}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &212982171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212982169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a98125502f715b4b83cfb77b434e436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Selectable
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.6627451, g: 0.92549026, b: 0.454902, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 212982172}
 --- !u!114 &212982172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3092,6 +3052,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212982169}
   m_CullTransparentMesh: 1
+--- !u!95 &212982174
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212982169}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c1bf8f7ea4278aa4e87dc1e463f7594d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &212982175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212982169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 3
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 212982172}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &230910704
 GameObject:
   m_ObjectHideFlags: 0
@@ -5582,7 +5608,6 @@ MonoBehaviour:
   mapSceneName: BLI-Tambud
   containerShowPosition: {x: 29, y: 11}
   mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
   clickButton: {fileID: 385480513}
 --- !u!114 &385480513
 MonoBehaviour:
@@ -5943,7 +5968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &416934781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6933,7 +6958,6 @@ MonoBehaviour:
   mapSceneName: BLI-Tambud
   containerShowPosition: {x: 29, y: 11}
   mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
   clickButton: {fileID: 464180555}
 --- !u!114 &464180555
 MonoBehaviour:
@@ -7903,7 +7927,6 @@ MonoBehaviour:
   mapSceneName: map-world2
   containerShowPosition: {x: -81, y: -30}
   mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
   clickButton: {fileID: 534447814}
 --- !u!114 &534447814
 MonoBehaviour:
@@ -11357,6 +11380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d8699edf572774787e713915621318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  IsDebug: 0
 --- !u!4 &751321858
 Transform:
   m_ObjectHideFlags: 0
@@ -12509,6 +12533,7 @@ MonoBehaviour:
   - {fileID: 1790713355}
   loadingTextView: {fileID: 1851179437}
   progressTextView: {fileID: 1052435298}
+  progressSliderView: {fileID: 0}
 --- !u!1 &834650051
 GameObject:
   m_ObjectHideFlags: 0
@@ -12680,7 +12705,6 @@ MonoBehaviour:
   mapSceneName: map-world2
   containerShowPosition: {x: -81, y: -30}
   mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
   clickButton: {fileID: 837685566}
 --- !u!114 &837685566
 MonoBehaviour:
@@ -13953,11 +13977,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::View
   id: base
   panel: {fileID: 920433931}
---- !u!224 &924098892 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8107979529889032721, guid: d945f50be77c55b4baa468a492661a29, type: 3}
-  m_PrefabInstance: {fileID: 946059754}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &942318414
 GameObject:
   m_ObjectHideFlags: 0
@@ -14295,6 +14314,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d945f50be77c55b4baa468a492661a29, type: 3}
+--- !u!224 &946059755 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4612639901462973947, guid: d945f50be77c55b4baa468a492661a29, type: 3}
+  m_PrefabInstance: {fileID: 946059754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &947767772
 GameObject:
   m_ObjectHideFlags: 0
@@ -18934,6 +18958,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d945f50be77c55b4baa468a492661a29, type: 3}
+--- !u!224 &1128268119 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4612639901462973947, guid: d945f50be77c55b4baa468a492661a29, type: 3}
+  m_PrefabInstance: {fileID: 1128268118}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1135820986
 GameObject:
   m_ObjectHideFlags: 0
@@ -19551,11 +19580,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164197540}
   m_CullTransparentMesh: 1
---- !u!224 &1164690691 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8107979529889032721, guid: d945f50be77c55b4baa468a492661a29, type: 3}
-  m_PrefabInstance: {fileID: 1128268118}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1168652745
 GameObject:
   m_ObjectHideFlags: 0
@@ -20563,6 +20587,10 @@ MonoBehaviour:
   viewList:
   - {fileID: 1665629913}
   - {fileID: 578867573}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  voiceSlider: {fileID: 0}
+  ambienceSlider: {fileID: 0}
 --- !u!1001 &1221402740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21188,7 +21216,6 @@ MonoBehaviour:
   mapSceneName: Tambud-Mall
   containerShowPosition: {x: 362, y: -181}
   mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
   clickButton: {fileID: 1289905816}
 --- !u!114 &1289905816
 MonoBehaviour:
@@ -22356,10 +22383,18 @@ MonoBehaviour:
   id: base
   panel: {fileID: 1401510794}
   skeletonGraphic: {fileID: 1982681153}
-  headPanel: {fileID: 270021236}
-  bodyPanel: {fileID: 486795164}
-  headContainer: {fileID: 731512979}
-  bodyContainer: {fileID: 1808199921}
+  accessoriesPanel: {fileID: 0}
+  facesPanel: {fileID: 0}
+  hairsPanel: {fileID: 0}
+  pantsPanel: {fileID: 0}
+  shirtsPanel: {fileID: 0}
+  shoesPanel: {fileID: 0}
+  accessoriesContainer: {fileID: 0}
+  facesContainer: {fileID: 0}
+  hairsContainer: {fileID: 0}
+  pantsContainer: {fileID: 0}
+  shirtsContainer: {fileID: 0}
+  shoesContainer: {fileID: 0}
   itemPrefab: {fileID: 7277202294947189578, guid: 76bf64a09b45b3a4ba73d60a6b56b881, type: 3}
   allAccessoryDatabase:
   - {fileID: 11400000, guid: 627b51374814c3a4393b5d06e06a97f6, type: 2}
@@ -23096,6 +23131,7 @@ MonoBehaviour:
   - {fileID: 467026890}
   inputEmail: {fileID: 0}
   inputPassword: {fileID: 0}
+  inputConfirmPassword: {fileID: 0}
 --- !u!1 &1505241126
 GameObject:
   m_ObjectHideFlags: 0
@@ -23601,6 +23637,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d945f50be77c55b4baa468a492661a29, type: 3}
+--- !u!224 &1520281517 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4612639901462973947, guid: d945f50be77c55b4baa468a492661a29, type: 3}
+  m_PrefabInstance: {fileID: 1520281516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1527254685
 GameObject:
   m_ObjectHideFlags: 0
@@ -24581,11 +24622,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563961982}
   m_CullTransparentMesh: 1
---- !u!224 &1570588276 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8107979529889032721, guid: d945f50be77c55b4baa468a492661a29, type: 3}
-  m_PrefabInstance: {fileID: 1520281516}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1574852918
 GameObject:
   m_ObjectHideFlags: 0
@@ -25715,13 +25751,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: e7bb0b04454d77743b5b6707996019fd, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 583070070}
+        m_TargetAssemblyTypeName: Main.Mainmenu.Controller, Assembly-CSharp
+        m_MethodName: Direct
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -28868,7 +28904,6 @@ MonoBehaviour:
   mapSceneName: RTB-BLI
   containerShowPosition: {x: 445, y: 225}
   mapPreview: {fileID: 0}
-  achievementPreview: {fileID: 0}
   clickButton: {fileID: 1857118641}
 --- !u!114 &1857118641
 MonoBehaviour:
@@ -30523,11 +30558,6 @@ MonoBehaviour:
           m_StringArgument: lobby
           m_BoolArgument: 0
         m_CallState: 2
---- !u!224 &1966959745 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8107979529889032721, guid: d945f50be77c55b4baa468a492661a29, type: 3}
-  m_PrefabInstance: {fileID: 1011380493420317929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1977252793
 GameObject:
   m_ObjectHideFlags: 0
@@ -31059,7 +31089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1993940604
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31445,6 +31475,7 @@ MonoBehaviour:
   mapNameText: {fileID: 786964476}
   mapDescriptionText: {fileID: 1767577598}
   startButton: {fileID: 463794597}
+  mapPreview: {fileID: 0}
 --- !u!1 &2010162547
 GameObject:
   m_ObjectHideFlags: 0
@@ -33193,6 +33224,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d945f50be77c55b4baa468a492661a29, type: 3}
+--- !u!224 &1011380493420317930 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4612639901462973947, guid: d945f50be77c55b4baa468a492661a29, type: 3}
+  m_PrefabInstance: {fileID: 1011380493420317929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2023266637433904919
 PrefabInstance:
   m_ObjectHideFlags: 0
