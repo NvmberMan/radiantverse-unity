@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Long White Sock
   icon: {fileID: 21300000, guid: 5cbc0dd25dadbec4fa735e3cbc194f46, type: 3}
   price: 30
-  spineSkinName: sock/long-white-sock
-  category: sock
+  spineSkinName: socks/long-white-sock
+  category: socks

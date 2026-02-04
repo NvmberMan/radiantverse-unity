@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Short Blue Sock
   icon: {fileID: 21300000, guid: 24c970a9a2cfe4b43bee856a5de10359, type: 3}
   price: 30
-  spineSkinName: sock/short-blue-sock
-  category: sock
+  spineSkinName: socks/short-blue-sock
+  category: socks
