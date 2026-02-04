@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 6398266447811478280}
   - component: {fileID: 6458166936427195695}
   m_Layer: 5
-  m_Name: AchievementPreview
+  m_Name: AchievementPreviewActive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

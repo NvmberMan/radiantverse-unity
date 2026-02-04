@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Round Glasses
   icon: {fileID: 21300000, guid: 4bf754cc2715f0646947effae07641a0, type: 3}
   price: 0
-  spineSkinName: Component/Accessories/Glasses-Type1
-  category: Accessories
+  spineSkinName: accessories/Glasses-Type1
+  category: accessories

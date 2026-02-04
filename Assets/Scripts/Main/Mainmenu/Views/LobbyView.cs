@@ -4,6 +4,7 @@ using Spine.Unity;
 using Spine.Unity.AttachmentTools;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,9 +17,21 @@ namespace Main.Mainmenu
         [SerializeField] private Slider experienceSlider;
         [SerializeField] private TMP_Text experienceText;
         [SerializeField] private TMP_Text levelText;
+
+        [Space(5)]
         public SkeletonGraphic skeletonGraphic;
+        public GameObject arradiusDollarCircleTargetAtractor;
+
 
         private FirebaseUser user;
+
+        private DailyRewardView dailyRewardView;
+
+        private void Awake()
+        {
+             dailyRewardView = MenuManager.instance.GetController<LobbyController>().GetView<DailyRewardView>();
+        }
+
         public override void Show()
         {
             base.Show();
@@ -54,6 +67,7 @@ namespace Main.Mainmenu
                 levelText.text = PlayerLocalData.playerStats.Level.ToString();
                 experienceSlider.value = PlayerLocalData.playerStats.Experience;
                 experienceText.text = PlayerLocalData.playerStats.Experience.ToString() + "/100";
+                dailyRewardView.dailyStreak = PlayerLocalData.playerStats.DailyStreak;
             }
             else
             {
@@ -65,6 +79,7 @@ namespace Main.Mainmenu
 
                     arradiusDollarView.text = stats.ArradiusDollar.ToString();
                     levelText.text = stats.Level.ToString();
+                    dailyRewardView.dailyStreak = stats.DailyStreak;
                     experienceSlider.value = stats.Experience;
                     experienceText.text = stats.Experience.ToString() + "/100";
                 }, Debug.LogError);

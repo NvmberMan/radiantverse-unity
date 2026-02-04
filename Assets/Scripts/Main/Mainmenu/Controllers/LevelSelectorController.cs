@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Main.Mainmenu {
     public class LevelSelectorController : Controller
@@ -39,5 +40,23 @@ namespace Main.Mainmenu {
         public string worldName;
         public GameObject worldObject;
         public List<Map> worldMap = new List<Map>();
+    }
+
+    [System.Serializable]
+    public class Map
+    {
+        [HideInInspector] public string worldId;
+
+        public string mapId;
+        public string mapName;
+        public string mapDescription;
+        public string mapSceneName;
+
+        [Space(10)]
+        public Vector2 containerShowPosition;
+        public Sprite mapPreview;
+
+        [Space(10)]
+        public Button clickButton;
     }
 }

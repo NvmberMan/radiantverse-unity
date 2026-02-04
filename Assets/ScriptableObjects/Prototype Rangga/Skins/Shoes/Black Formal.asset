@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Black Formal Shoes
   icon: {fileID: 21300000, guid: 6c3cfa0f171a88a4f8f062c20f33c7c2, type: 3}
   price: 0
-  spineSkinName: Component/Shoes/Black-formal
-  category: Shoes
+  spineSkinName: shoes/Black-formal
+  category: shoes

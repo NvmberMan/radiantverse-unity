@@ -1,4 +1,5 @@
 using Firebase.Auth;
+using Firebase.Extensions;
 using System;
 using UnityEngine;
 
@@ -66,6 +67,74 @@ namespace Main.Mainmenu
                 onError?.Invoke(ex.Message);
             }
         }
+
+        public static bool HasPasswordProvider()
+        {
+            FirebaseUser user = AuthManager.instance.CurrentUser;
+            if (user == null) return false;
+
+            foreach (var profile in user.ProviderData)
+            {
+                if (profile.ProviderId == "password") return true;
+            }
+            return false;
+        }
+
+        public static async void ChangePassword(
+            string oldPassword,
+            string newPassword,
+            Action onSuccess,
+            Action<string> onError)
+        {
+            FirebaseUser user = AuthManager.instance.CurrentUser;
+
+            if (user == null)
+            {
+                onError?.Invoke("User belum login.");
+                return;
+            }
+
+            try
+            {
+                // JIKA USER PUNYA PASSWORD (Login Email)
+                if (HasPasswordProvider())
+                {
+                    if (string.IsNullOrEmpty(oldPassword))
+                    {
+                        onError?.Invoke("Password lama harus diisi.");
+                        return;
+                    }
+                    Credential credential = EmailAuthProvider.GetCredential(user.Email, oldPassword);
+                    await user.ReauthenticateAsync(credential);
+                }
+
+                // UPDATE PASSWORD (Berlaku untuk user Email maupun Google)
+                // Untuk user Google, ini akan otomatis menambahkan metode login password ke akunnya
+                await user.UpdatePasswordAsync(newPassword);
+
+                onSuccess?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex.Message);
+            }
+        }
+
+        public static void SendPasswordReset(string email, Action onSuccess, Action<string> onError)
+        {
+            FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+            auth.SendPasswordResetEmailAsync(email).ContinueWithOnMainThread(task => {
+                if (task.IsCanceled || task.IsFaulted)
+                {
+                    onError?.Invoke("Failed to send reset email. Make sure the email is registered.");
+                }
+                else
+                {
+                    onSuccess?.Invoke();
+                }
+            });
+        }
+
 
     }
 }

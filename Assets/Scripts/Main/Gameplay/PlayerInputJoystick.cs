@@ -16,7 +16,13 @@ namespace Main.Gameplay
 
         private void Start()
         {
-            joystick = MenuManager.instance.GetController<GameplayController>().joystick;
+            joystick = MenuManager.instance.GetController<GameplayController>().activeJoystick;
+
+            MenuManager.instance.GetController<GameplayController>().OnChangeJoystickSystem += () =>
+            {
+                joystick = MenuManager.instance.GetController<GameplayController>().activeJoystick;
+            };
+
             cameraTransform = Camera.main.transform;
         }
 

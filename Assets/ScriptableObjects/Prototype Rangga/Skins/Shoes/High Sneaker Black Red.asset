@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: High Sneaker Black Red
   icon: {fileID: 21300000, guid: cfa5241b588096a48b8c5477d763c169, type: 3}
   price: 0
-  spineSkinName: Component/Shoes/High-sneaker-black-red
-  category: Shoes
+  spineSkinName: shoes/High-sneaker-black-red
+  category: shoes

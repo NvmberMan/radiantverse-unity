@@ -6,25 +6,15 @@ namespace Main.Gameplay
     {
         public MovementItemData itemData;
 
-        private void Awake()
-        {
-            if (itemData != null)
-            {
-
-                // 🔹 Nama mengikuti ScriptableObject
-                gameObject.name = $"Item_{itemData.name}";
-            }
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player")) return;
 
-            CharacterMovement movement = other.GetComponent<CharacterMovement>();
-            if (movement == null) return;
+            var controller = other.GetComponent<PlayerPowerUpController>();
+            if (controller == null) return;
 
-            itemData.ApplyWithDuration(movement, this);
-            //Destroy(gameObject);
+            controller.ApplyPowerUp(itemData);
+            Destroy(gameObject);
         }
     }
 }

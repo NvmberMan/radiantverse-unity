@@ -1,11 +1,12 @@
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalEnvironment : MonoBehaviour
 {
     public static GlobalEnvironment instance;
 
-     public TargetPoint[] targetPoints;
+    public List<Way> ways = new List<Way>();
+     
 
     private void Awake()
     {
@@ -23,8 +24,15 @@ public class GlobalEnvironment : MonoBehaviour
 
     public void RefreshTargetPoints()
     {
-        targetPoints = FindObjectsOfType<TargetPoint>()
-            .OrderBy(t => t.targetIndex)
-            .ToArray();
+        //targetPoints = FindObjectsOfType<TargetPoint>()
+        //    .OrderBy(t => t.targetIndex)
+        //    .ToArray();
     }
+}
+
+
+[System.Serializable]
+public class Way
+{
+    public TargetPoint[] targetPoints;
 }

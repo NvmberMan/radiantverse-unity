@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Hairs 4
   icon: {fileID: 21300000, guid: 4685021198617944d89c86f59495ee0d, type: 3}
   price: 0
-  spineSkinName: Component/Hairs/Type4
-  category: Hairs
+  spineSkinName: hairs/Type4
+  category: hairs

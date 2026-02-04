@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Sporty Aqua
   icon: {fileID: 21300000, guid: 2b4eb183e3bf55b4eb2a9d42d812f09d, type: 3}
   price: 0
-  spineSkinName: Component/Shoes/Sporty-aqua
-  category: Shoes
+  spineSkinName: shoes/Sporty-aqua
+  category: shoes
