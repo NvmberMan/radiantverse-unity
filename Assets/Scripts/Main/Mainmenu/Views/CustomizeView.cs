@@ -1,18 +1,20 @@
 using Firebase.Auth;
+using NUnit.Framework;
 using Spine;
 using Spine.Unity;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 namespace Main.Mainmenu
 {
     [System.Serializable]
     public class CustomizeCategory
     {
-        public string categoryName; // Contoh: "Faces", "Shirts"
+        public string categoryName;
         public NavbarItemButton navbarController;
-        // Tidak butuh panel/container sendiri lagi karena pakai yang global
     }
 
     public class CustomizeView : View
@@ -22,7 +24,7 @@ namespace Main.Mainmenu
 
         [Header("Global UI References")]
         public ScrollRect scrollRect;
-        public Transform itemContainer; // Cukup satu container untuk semua
+        public Transform itemContainer;
         public AccessoryItemUI itemPrefab;
 
         [Header("Flexible Categories")]
@@ -34,6 +36,14 @@ namespace Main.Mainmenu
 
         private List<string> draftSkins;
         private int currentCategoryIndex = 0;
+
+
+        private List<string> officeLook = new List<string>
+        {
+            "shoes/Black-formal",
+            "shirts/Kemeja&dasi-hitam",
+            "pants/Black-formal"
+        };
 
         private void Awake()
         {
@@ -114,7 +124,7 @@ namespace Main.Mainmenu
 
         public void OnItemClicked(string category, string skinName)
         {
-            int index = draftSkins.FindIndex(s => s.Contains("Component/" + category + "/"));
+            int index = draftSkins.FindIndex(s => s.Contains(category + "/"));
 
             if (index != -1) draftSkins[index] = skinName;
             else draftSkins.Add(skinName);
@@ -130,7 +140,17 @@ namespace Main.Mainmenu
             PlayerLocalData.inventoryData.SelectedSkins = new List<string>(draftSkins);
             string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
             FirestoreModel.UpdateSelectedSkins(uid, PlayerLocalData.inventoryData.SelectedSkins);
+
             saveButton.SetActive(false);
+
+            if (PlayerLocalData.playerStats != null)
+            {
+                if (IsOfficeLookEquipped(draftSkins) && !AchievementManager.Instance.CheckAchievement("9-to-5 Ready"))
+                {
+                    FirestoreModel.UnlockAchievement("9-to-5 Ready");
+                    MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("9-to-5 Ready");
+                }
+            }
         }
 
         public void RefreshCharacterPreview()
@@ -159,6 +179,18 @@ namespace Main.Mainmenu
             sortedA.Sort();
             sortedB.Sort();
             for (int i = 0; i < sortedA.Count; i++) if (sortedA[i] != sortedB[i]) return false;
+            return true;
+        }
+
+        private bool IsOfficeLookEquipped(List<string> currentEquipped)
+        {
+            foreach (string requiredSkin in officeLook)
+            {
+                if (!currentEquipped.Contains(requiredSkin))
+                {
+                    return false;
+                }
+            }
             return true;
         }
     }

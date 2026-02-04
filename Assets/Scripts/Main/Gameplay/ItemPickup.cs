@@ -10,6 +10,11 @@ namespace Main.Gameplay
         {
             if (!other.CompareTag("Player")) return;
 
+            if (other.CompareTag("Player"))
+            {
+                other.GetComponent<ItemCount>().GetItem(itemData.powerUpType == MovementPowerUpType.Sprint);
+            }
+
             var controller = other.GetComponent<PlayerPowerUpController>();
             if (controller == null) return;
 

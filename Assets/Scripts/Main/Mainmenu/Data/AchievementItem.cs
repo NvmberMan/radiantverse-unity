@@ -7,6 +7,7 @@ namespace Main.Mainmenu
     {
         public string id;
         public string achievementName;
+        [TextArea] public string hoverDescription;
         [TextArea] public string description;
         public Sprite iconPreview;
     }

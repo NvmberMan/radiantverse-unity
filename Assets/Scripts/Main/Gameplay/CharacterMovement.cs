@@ -1,4 +1,5 @@
 ﻿using Spine.Unity;
+using System;
 using UnityEngine;
 
 namespace Main.Gameplay
@@ -38,6 +39,8 @@ namespace Main.Gameplay
         [Header("Step Offset Settings")]
         [SerializeField] float stepHeight = 0.3f;
         [SerializeField] float stepSmooth = 0.1f;
+
+        public Action isJumping;
 
         public float Acceleration
         {
@@ -197,6 +200,8 @@ namespace Main.Gameplay
                 SetAnimation(jumpAnimation, false);
 
                 AudioManager.Instance.PlaySFXAtPoint("Jump", this.transform.position, 6);
+
+                isJumping?.Invoke();
             }
         }
 

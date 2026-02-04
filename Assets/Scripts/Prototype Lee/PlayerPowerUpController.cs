@@ -56,6 +56,9 @@ public class PlayerPowerUpController : MonoBehaviour
 
         movement.Acceleration = defaultAcceleration;
         StopVisual();
+
+        movement.GetComponent<ItemCount>().itemPowerCount = 0;
+        movement.GetComponent<ItemCount>().itemSlowerCount = 0;
     }
 
     // ============================

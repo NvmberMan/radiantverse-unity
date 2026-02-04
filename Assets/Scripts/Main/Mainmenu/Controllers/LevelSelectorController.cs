@@ -27,9 +27,39 @@ namespace Main.Mainmenu {
             World world = worldList.Find((t) => t.worldId == map.worldId);
             Map targetMap = world.worldMap.Find((t) => t.mapId == map.mapId);
 
-            MapDetailView mapDetail = (MapDetailView)GetView("map detail");
-            mapDetail.Show();
-            mapDetail.Setup(targetMap);
+
+            List<string> mapUnlocked = PlayerLocalData.playerStats.MapUnlocked;
+
+            bool unlocked = false;
+            foreach(string mapWorld in mapUnlocked)
+            {
+                string worldId = mapWorld.Split("__")[0];
+                string mapId = mapWorld.Split("__")[1];
+
+                Debug.Log($"{worldId}   {mapId}");
+
+                if (worldId == world.worldId)
+                {
+                    if(mapId == targetMap.mapId)
+                    {
+                        unlocked = true;
+                    }
+                }
+            }
+
+            if (unlocked)
+            {
+                MapDetailView mapDetail = (MapDetailView)GetView("map detail");
+                mapDetail.Show();
+                mapDetail.Setup(targetMap);
+            }
+            else
+            {
+                ErrorView errorView = MenuManager.instance.GetController<UniversalController>().GetView<ErrorView>();
+                errorView.ErrorSetup("Map is locked", "");
+                errorView.Show();
+            }
+
         }
     }
 

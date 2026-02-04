@@ -563,6 +563,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 535274181745051797}
     m_Modifications:
+    - target: {fileID: 2379892981926967068, guid: 5daacb6e79bc23b418be651087b85ac5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3670396363770166792, guid: 5daacb6e79bc23b418be651087b85ac5, type: 3}
       propertyPath: m_Name
       value: Sensor_vehicle_low
@@ -681,6 +685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sensor_vehicle_high (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8643018922880653297, guid: 8db5dfcac2114f64b983e2422063973d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -746,6 +754,10 @@ PrefabInstance:
     - target: {fileID: 7213326173912407781, guid: 8db5dfcac2114f64b983e2422063973d, type: 3}
       propertyPath: m_Name
       value: Sensor_vehicle_high
+      objectReference: {fileID: 0}
+    - target: {fileID: 8643018922880653297, guid: 8db5dfcac2114f64b983e2422063973d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
