@@ -862,11 +862,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 2bc3f2ba-b37d-40b2-b941-b0cf12ad4ea2
+  cloudProjectId: 06154880-5316-41c7-bf04-8fafb67d730a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: radiantverse-unity
-  organizationId: numberman3250
+  projectName: RadiantVerseV1
+  organizationId: nenkoi
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

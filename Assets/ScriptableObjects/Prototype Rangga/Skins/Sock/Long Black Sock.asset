@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Long Black Sock
   icon: {fileID: 21300000, guid: dd81c17dfd5c4e349b7e3d59c7ea7555, type: 3}
   price: 30
-  spineSkinName: sock/long-black-sock
-  category: sock
+  spineSkinName: socks/long-black-sock
+  category: socks

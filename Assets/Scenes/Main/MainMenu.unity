@@ -3123,8 +3123,7 @@ RectTransform:
   m_Children:
   - {fileID: 1655212611}
   - {fileID: 2017602829}
-  - {fileID: 914338003}
-  - {fileID: 2134237758}
+  - {fileID: 832999598}
   - {fileID: 1204032542}
   m_Father: {fileID: 1119616371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5469,12 +5468,28 @@ MonoBehaviour:
     worldMap:
     - worldId: 
       mapId: map-001
-      mapName: BTB
+      mapName: BTB - BLI
       mapDescription: Berangkat ke BLI
       mapSceneName: Level 1
       containerShowPosition: {x: 464, y: 91}
       mapPreview: {fileID: 21300000, guid: 5eefd9a697c6ade4a9e7153eb1a6d314, type: 3}
       clickButton: {fileID: 1857118641}
+    - worldId: 
+      mapId: map-002
+      mapName: BLI  - Tambud
+      mapDescription: Healing di tambud
+      mapSceneName: Level 2
+      containerShowPosition: {x: 594.7371, y: 115.6766}
+      mapPreview: {fileID: 21300000, guid: 5eefd9a697c6ade4a9e7153eb1a6d314, type: 3}
+      clickButton: {fileID: 464180555}
+    - worldId: 
+      mapId: map-003
+      mapName: Tambud - Aeon
+      mapDescription: Jalan-jalan ke Mall Aeon
+      mapSceneName: Level 3
+      containerShowPosition: {x: 705.7371, y: 153.6766}
+      mapPreview: {fileID: 21300000, guid: 5eefd9a697c6ade4a9e7153eb1a6d314, type: 3}
+      clickButton: {fileID: 837685566}
 --- !u!1 &300471175
 GameObject:
   m_ObjectHideFlags: 0
@@ -14491,6 +14506,70 @@ MonoBehaviour:
   loadingTextView: {fileID: 1851179437}
   progressTextView: {fileID: 1052435298}
   progressSliderView: {fileID: 934347108}
+--- !u!1 &832999597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 832999598}
+  - component: {fileID: 832999599}
+  m_Layer: 5
+  m_Name: Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &832999598
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832999597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 914338003}
+  - {fileID: 2134237758}
+  m_Father: {fileID: 159983026}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.00103, y: -7}
+  m_SizeDelta: {x: 646.53, y: 152.826}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &832999599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832999597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 9.95
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &835935763
 GameObject:
   m_ObjectHideFlags: 0
@@ -16165,11 +16244,11 @@ RectTransform:
   m_Children:
   - {fileID: 1874891088}
   - {fileID: 1148433072}
-  m_Father: {fileID: 159983026}
+  m_Father: {fileID: 832999598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 34}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 323.265, y: -36.025253}
   m_SizeDelta: {x: 495.6444, y: 70.8255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &914338004
@@ -17592,7 +17671,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ec1ba6f32a52044428e25d06818fc493, type: 2}
     - {fileID: 11400000, guid: abcdce4c91ed8214c9b072351f4e15d3, type: 2}
     - {fileID: 11400000, guid: 126c000ae3f5ebb4fb9097bdfa86e5bf, type: 2}
-  - categoryName: sock
+  - categoryName: socks
     navbarController: {fileID: 2047021057}
     itemDatabase:
     - {fileID: 11400000, guid: a407bd973ea41ff4d8917ceff56cf277, type: 2}
@@ -22061,6 +22140,7 @@ MonoBehaviour:
   panel: {fileID: 1119616370}
   oldPasswordField: {fileID: 914338004}
   newPasswordField: {fileID: 2134237759}
+  oldPasswordGroup: {fileID: 914338002}
   submitButton: {fileID: 1204032545}
 --- !u!114 &1119616376
 MonoBehaviour:
@@ -35579,7 +35659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1793770579
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40276,7 +40356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2010057621
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40299,7 +40379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1372, y: 149}
+  m_AnchoredPosition: {x: 1331, y: 167.68}
   m_SizeDelta: {x: -1273.4741, y: -335.3532}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2010057623
@@ -42093,11 +42173,11 @@ RectTransform:
   m_Children:
   - {fileID: 524116393}
   - {fileID: 86812811}
-  m_Father: {fileID: 159983026}
+  m_Father: {fileID: 832999598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -48}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 323.265, y: -116.80075}
   m_SizeDelta: {x: 495.6444, y: 70.8255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2134237759

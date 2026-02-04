@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Short White Sock
   icon: {fileID: 21300000, guid: be7c342b09152c94980a9e7ce1aaed79, type: 3}
   price: 30
-  spineSkinName: sock/short-white-sock
-  category: sock
+  spineSkinName: socks/short-white-sock
+  category: socks

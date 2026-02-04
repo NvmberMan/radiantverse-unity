@@ -569,7 +569,7 @@ MonoBehaviour:
   MaxStep: 50000
   currentTarget: {fileID: 0}
   checkpointIndex: 0
-  wayIndex: 1
+  wayIndex: 0
   raySensorRoot: {fileID: 1147178553098697474}
   groundMask:
     serializedVersion: 2
