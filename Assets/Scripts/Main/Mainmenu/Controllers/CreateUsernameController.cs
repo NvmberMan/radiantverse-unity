@@ -34,6 +34,8 @@ namespace Main.Mainmenu
 
         private void UpdateUsername(string newUsername)
         {
+            AuthManager.instance.IsRegistering = false;
+
             string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
             Dictionary<string, object> updates = new Dictionary<string, object>
@@ -42,13 +44,15 @@ namespace Main.Mainmenu
             };
 
             FirestoreModel.SaveUserData(uid, updates);
+            PlayerLocalData.userData.Username = newUsername;
 
             Direct("choose default character");
+            Debug.Log("direct");
         }
 
         private void ShowError(string title, string message)
         {
-            ErrorView errorView = (ErrorView)GetView("error");
+            ErrorView errorView = MenuManager.instance.GetController<UniversalController>().GetView<ErrorView>();
             errorView.ErrorSetup(title, message);
             errorView.Show();
         }

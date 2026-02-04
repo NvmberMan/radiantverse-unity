@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Green Shirt
   icon: {fileID: 21300000, guid: 9184e4ac139b91848b05d4a9226c63cc, type: 3}
   price: 0
-  spineSkinName: Component/Shirts/Green-shirt
-  category: Shirts
+  spineSkinName: shirts/Green-shirt
+  category: shirts

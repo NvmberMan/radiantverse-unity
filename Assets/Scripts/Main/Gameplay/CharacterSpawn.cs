@@ -35,6 +35,13 @@ namespace Main.Gameplay
                 spawnPoint = chosen.transform.position;
                 startPoint = chosen.transform.position;
                 transform.position = spawnPoint;
+
+                if(GetComponent<ICurriculumLearning>() != null)
+                {
+                    ICurriculumLearning curriculum = GetComponent<ICurriculumLearning>();
+                    curriculum.SetTargetPoint(chosen.nextTargetPointIndex);
+                    curriculum.SetFinishPoint(chosen.finishTargetPointIndex);
+                }
             }
             else
             {

@@ -21,6 +21,7 @@ namespace Main.Gameplay
         public bool isPaused = false;
         public int currentFinishRank = 1;
         public bool isTesting = false;
+        public bool isTraining = false;
 
         public Transform playerTransform;
         [SerializeField] private GameObject aiAgentPrefab;
@@ -32,6 +33,7 @@ namespace Main.Gameplay
 
         [Header("Cinemachine")]
         public CinemachineOrbitalFollow orbitalFollow;
+        public CinemachineCamera orbitalFollowAI;
         public PlayableDirector cinematicDirector;
 
 
@@ -57,6 +59,11 @@ namespace Main.Gameplay
                 {
                     GameObject AiAgent = Instantiate(aiAgentPrefab);
                     RacePositionSystemWaypoint.Instance.allRacers.Add(AiAgent.GetComponent<RacerProgress>());
+                }
+
+                if (isTraining)
+                {
+                    orbitalFollowAI.Follow = RacePositionSystemWaypoint.Instance.allRacers[1].transform;
                 }
 
                 RacePositionSystemWaypoint.Instance.SetupPositionAllRacer();

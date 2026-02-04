@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Vintage Glasses
   icon: {fileID: 21300000, guid: 4145d4fc6096b1b4c8f7295891b4b947, type: 3}
   price: 0
-  spineSkinName: Component/Accessories/Glasses-Type3
-  category: Accessories
+  spineSkinName: accessories/Glasses-Type3
+  category: accessories

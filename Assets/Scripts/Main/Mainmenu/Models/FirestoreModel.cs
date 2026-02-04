@@ -180,7 +180,7 @@ namespace Main.Mainmenu
         #endregion
 
         #region Initialize Data
-        public static void InitializeUserData(FirebaseUser user)
+        public static void InitializeUserData(FirebaseUser user, Action<UserData> onSuccess = null)
         {
             DocumentReference docRef = db.Collection("users").Document(user.UserId);
 
@@ -195,13 +195,16 @@ namespace Main.Mainmenu
             docRef.SetAsync(userData).ContinueWithOnMainThread(task =>
             {
                 if (task.IsCompletedSuccessfully)
-                    Debug.Log("User data created in Firestore!");
-                else
-                    Debug.LogError($"Failed to save data: {task.Exception}");
+                {
+                    Debug.Log("User data initialized in Firestore!");
+
+                    if(onSuccess != null)
+                        onSuccess?.Invoke(userData);
+                }
             });
         }
 
-        public static void InitializePlayerStats(FirebaseUser user)
+        public static void InitializePlayerStats(FirebaseUser user, Action<PlayerStats> onSuccess = null)
         {
             DocumentReference docRef = db.Collection("playerStats").Document(user.UserId);
 
@@ -210,15 +213,54 @@ namespace Main.Mainmenu
                 ArradiusDollar = 0,
                 Experience = 0,
                 Level = 0,
-                Rank = "Rookie"
+                DailyStreak = 0,
+                Rank = "Rookie",
             };
 
             docRef.SetAsync(data).ContinueWithOnMainThread(task =>
             {
                 if (task.IsCompletedSuccessfully)
+                {
                     Debug.Log("InventoryData created in Firestore!");
+
+                    if(onSuccess != null)
+                        onSuccess?.Invoke(data);
+                }
                 else
                     Debug.LogError($"Failed to save data: {task.Exception}");
+            });
+        }
+
+        public static void InitializeInventoryData(FirebaseUser user, Action<InventoryData> onSuccess = null)
+        {
+            DocumentReference docRef = db.Collection("inventoryData").Document(user.UserId);
+
+            InventoryData data = new InventoryData
+            {
+                UnlockedAccessories = new List<string> {
+                    "faces/Boy",
+                    "faces/Girl",
+                    "hairs/Type1",
+                    "pants/Sporty-short-blue",
+                    "shirts/Sporty-blue"
+                },
+                SelectedSkins = new List<string> {
+                    "faces/Boy",
+                    "hairs/Type1",
+                    "pants/Sporty-short-blue",
+                    "shirts/Sporty-blue"
+                },
+                UnlockedAchievements = new List<string>()
+            };
+
+            docRef.SetAsync(data).ContinueWithOnMainThread(task => {
+                if (task.IsCompletedSuccessfully) 
+                {
+                    Debug.Log("Inventory Initialized!");
+
+                    if (onSuccess != null)
+                            onSuccess?.Invoke(data);
+                }
             });
         }
 
@@ -243,31 +285,7 @@ namespace Main.Mainmenu
             });
         }
 
-        public static void InitializeInventoryData(FirebaseUser user)
-        {
-            DocumentReference docRef = db.Collection("inventoryData").Document(user.UserId);
-
-            InventoryData data = new InventoryData
-            {
-                UnlockedAccessories = new List<string> { 
-                    "Component/Faces/Boy", 
-                    "Component/Hairs/Type1",
-                    "Component/Pants/Sporty-short-blue", 
-                    "Component/Shirts/Sporty-blue"
-                },
-                SelectedSkins = new List<string> {
-                    "Component/Faces/Boy", 
-                    "Component/Hairs/Type1", 
-                    "Component/Pants/Sporty-short-blue", 
-                    "Component/Shirts/Sporty-blue"
-                },
-                UnlockedAchievements = new List<string>()
-            };
-
-            docRef.SetAsync(data).ContinueWithOnMainThread(task => {
-                if (task.IsCompletedSuccessfully) Debug.Log("Inventory Initialized!");
-            });
-        }
+        
         #endregion
 
         public static void UpdateSelectedSkins(string uid, List<string> newSkins)

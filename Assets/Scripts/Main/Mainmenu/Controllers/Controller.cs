@@ -24,6 +24,11 @@ namespace Main.Mainmenu
             return viewList.Find(x => x.id == targetId);
         }
 
+        public T GetView<T> () where T : View
+        {
+            return viewList.OfType<T>().FirstOrDefault();
+        }
+
         public virtual void Activate(string targetView)
         {
             var target = viewList.Find(view => view.id == targetView);

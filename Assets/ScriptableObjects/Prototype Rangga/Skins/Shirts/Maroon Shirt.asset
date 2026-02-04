@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Maroon Shirt
   icon: {fileID: 21300000, guid: b11c42611d2c6d643bf4a627ac9254e7, type: 3}
   price: 0
-  spineSkinName: Component/Shirts/Maroon-shirt
-  category: Shirts
+  spineSkinName: shirts/Maroon-shirt
+  category: shirts

@@ -20,6 +20,12 @@ TagManager:
   - Waypoint
   - 'FX_Overlay '
   - Car
+  - Sensor_car_low
+  - Sensor_car_high
+  - Sensor_bus_high
+  - Sensor_vehicle_low
+  - Sensor_vehicle_high
+  - Sensor_Car
   layers:
   - Default
   - TransparentFX
@@ -32,7 +38,7 @@ TagManager:
   - Point
   - Obstacle
   - Character
-  - 
+  - Barrier
   - 
   - 
   - 
