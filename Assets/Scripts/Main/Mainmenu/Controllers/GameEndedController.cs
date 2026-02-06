@@ -15,6 +15,8 @@ namespace Main.Mainmenu
         public float showRankDelay = 0f;
         public float showUnlockedMapDelay = 2f;
         public float showSummaryDelay = 2f;
+        public float showAchievementDelay = 2f;
+
         public void GameEnded(int rank)
         {
             GameManager.Instance.isPaused = true;
@@ -23,6 +25,19 @@ namespace Main.Mainmenu
 
         IEnumerator InitializedSummary(int rank)
         {
+            if (PlayerLocalData.inventoryData != null)
+            {
+                if (GameManager.Instance.playerTransform.GetComponent<ItemCount>().total == 0 && !AchievementManager.Instance.CheckAchievement("The Naturalist"))
+                {
+                    if (PlayerLocalData.inventoryData != null)
+                    {
+                        FirestoreModel.UnlockAchievement("The Naturalist");
+                        MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("The Naturalist");
+
+                        yield return new WaitForSeconds(showAchievementDelay);
+                    }
+                }
+            }
             yield return new WaitForSeconds(showRankDelay);
 
             RankPreviewView rankPreviewView = (RankPreviewView)GetView("rank preview");

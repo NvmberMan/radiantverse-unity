@@ -242,18 +242,27 @@ namespace Main.Mainmenu
 
             InventoryData data = new InventoryData
             {
+                Gender = 0,
                 UnlockedAccessories = new List<string> {
                     "faces/Boy",
-                    "faces/Girl",
-                    "hairs/Type1",
+                    "hairs/Ivy league",
                     "pants/Sporty-short-blue",
-                    "shirts/Sporty-blue"
+                    "shirts/Sporty-blue",
+                    "shoes/Sporty-aqua",
+                    "socks/long-white-sock",
+                    "faces/Girl",
+                    "hairs/ponytail with bangs",
+                    "pants/Sporty-short-pink",
+                    "shirts/Sporty pink",
+                    "shoes/Pink sport"
                 },
                 SelectedSkins = new List<string> {
                     "faces/Boy",
-                    "hairs/Type1",
+                    "hairs/Ivy league",
                     "pants/Sporty-short-blue",
-                    "shirts/Sporty-blue"
+                    "shirts/Sporty-blue",
+                    "shoes/Sporty-aqua",
+                    "socks/long-white-sock"
                 },
                 UnlockedAchievements = new List<string>()
             };
@@ -268,6 +277,8 @@ namespace Main.Mainmenu
                 }
             });
         }
+
+
 
         public static void CheckUsernameExists(string username, Action<bool> onResult)
         {
@@ -348,6 +359,24 @@ namespace Main.Mainmenu
                 db.Collection("playerStats").Document(uid)
                   .UpdateAsync("MapsWon", FieldValue.ArrayUnion(mapId));
             }
+        }
+
+        public static void SetGender(int gender)
+        {
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+
+            PlayerLocalData.inventoryData.Gender = gender;
+            db.Collection("inventoryData").Document(uid)
+                .UpdateAsync("Gender", gender).ContinueWithOnMainThread(task => {
+                    if (task.IsFaulted)
+                    {
+                        //Debug.LogError("Gagal update: " + task.Exception);
+                    }
+                    else
+                    {
+                        //Debug.Log("Update berhasil!");
+                    }
+                });
         }
 
         public static void AddExperience(int expGained)

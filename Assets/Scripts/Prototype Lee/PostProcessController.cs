@@ -17,6 +17,7 @@ namespace Main.Gameplay
 
         private void Awake()
         {
+            Debug.Log(gameObject.name);
             Instance = this;
 
             volume.profile.TryGet(out color);

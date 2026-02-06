@@ -22,14 +22,18 @@ namespace Main.Gameplay
                 itemSlowerCount++;
             }
 
-            if (itemPowerCount >= 3 && !AchievementManager.Instance.CheckAchievement("Chain Reaction"))
+            if (PlayerLocalData.inventoryData != null)
             {
-                if (PlayerLocalData.playerStats != null)
+                if (itemPowerCount >= 3 && !AchievementManager.Instance.CheckAchievement("Chain Reaction"))
                 {
-                    FirestoreModel.UnlockAchievement("Chain Reaction");
-                    MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Chain Reaction");
+                    if (PlayerLocalData.inventoryData != null)
+                    {
+                        FirestoreModel.UnlockAchievement("Chain Reaction");
+                        MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Chain Reaction");
+                    }
                 }
             }
+
         }
 
     }

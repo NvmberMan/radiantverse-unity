@@ -19,12 +19,15 @@ namespace Main.Gameplay
         {
             jumpCount++;
 
-            if (jumpCount >= 10 && !AchievementManager.Instance.CheckAchievement("Boing Boing!"))
+            if (PlayerLocalData.inventoryData != null)
             {
-                if (PlayerLocalData.playerStats != null)
+                if (jumpCount >= 10 && !AchievementManager.Instance.CheckAchievement("Boing Boing!"))
                 {
-                    FirestoreModel.UnlockAchievement("Boing Boing!");
-                    MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Boing Boing!");
+                    if (PlayerLocalData.playerStats != null)
+                    {
+                        FirestoreModel.UnlockAchievement("Boing Boing!");
+                        MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Boing Boing!");
+                    }
                 }
             }
         }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c0ce91817a695441a6fefabf774da2a, type: 3}
-  m_Name: Hairs 5
+  m_Name: Red shirt
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
-  displayName: Hairs 5
-  icon: {fileID: 21300000, guid: 68a587dcf0ebda84cb4b6d1e2dcc8a70, type: 3}
+  displayName: Red shirt
+  icon: {fileID: 21300000, guid: 7ea39d04423ccf145902c5c3a94b7b93, type: 3}
   price: 0
-  spineSkinName: hairs/Type5
-  category: hairs
+  spineSkinName: shirts/Red shirt
+  category: shirts

@@ -1,12 +1,9 @@
 using Firebase.Auth;
-using NUnit.Framework;
 using Spine;
 using Spine.Unity;
 using System.Collections.Generic;
-using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 namespace Main.Mainmenu
 {
@@ -37,6 +34,23 @@ namespace Main.Mainmenu
         private List<string> draftSkins;
         private int currentCategoryIndex = 0;
 
+        private List<string> blackListBoySkin = new()
+        {
+            "faces/Girl",
+            "hairs/ponytail with bangs",
+            "pants/Sporty-short-pink",
+            "shirts/Sporty pink",
+            "shoes/Pink sport",
+        };
+
+        private List<string> blackListGirlSkin = new()
+        {
+            "faces/Boy",
+            "hairs/Ivy league",
+            "pants/Sporty-short-blue",
+            "shirts/Sporty-blue",
+            "shoes/Sporty-aqua",
+        };
 
         private List<string> officeLook = new List<string>
         {
@@ -61,13 +75,42 @@ namespace Main.Mainmenu
             }
         }
 
+
         public override void Show()
         {
             base.Show();
             draftSkins = new List<string>(PlayerLocalData.inventoryData.SelectedSkins);
             saveButton.SetActive(false);
+            ApplySkinsFromData();
 
             SwitchCategory(0);
+        }
+
+        public void ApplySkinsFromData()
+        {
+            if (PlayerLocalData.inventoryData == null) return;
+
+            List<string> selected = PlayerLocalData.inventoryData.SelectedSkins;
+            CombineSkins(selected.ToArray());
+        }
+        public void CombineSkins(string[] skinNames)
+        {
+            var skeleton = skeletonGraphic.Skeleton;
+            Skin combinedSkin = new Skin("Combined");
+
+            foreach (string skinName in skinNames)
+            {
+                Skin sourceSkin = skeleton.Data.FindSkin(skinName);
+                if (sourceSkin != null)
+                    combinedSkin.AddSkin(sourceSkin);
+                else
+                    Debug.LogWarning($"Skin {skinName} tidak ditemukan di Atlas!");
+            }
+
+            skeleton.SetSkin(combinedSkin);
+            skeleton.SetSlotsToSetupPose();
+            skeletonGraphic.OverrideTexture = null;
+            skeletonGraphic.UpdateMesh();
         }
 
         public void SwitchCategory(int index)
@@ -104,8 +147,12 @@ namespace Main.Mainmenu
 
             string currentCatName = categories[currentCategoryIndex].categoryName;
 
+
             foreach (string unlockedID in PlayerLocalData.inventoryData.UnlockedAccessories)
             {
+                if (PlayerLocalData.inventoryData.Gender == 0 && blackListBoySkin.Contains(unlockedID)) continue;
+                if (PlayerLocalData.inventoryData.Gender == 1 && blackListGirlSkin.Contains(unlockedID)) continue;
+
                 AccessoryData data = allAccessoryDatabase.Find(x => x.spineSkinName == unlockedID);
 
                 if (data != null && data.category == currentCatName)
