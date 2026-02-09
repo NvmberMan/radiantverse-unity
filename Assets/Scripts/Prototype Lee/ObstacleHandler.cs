@@ -7,6 +7,8 @@ namespace Main.Gameplay
     {
         private IObstacleBehavior behavior;
 
+        public Detector detector;
+
         private void Awake()
         {
             behavior = GetComponent<IObstacleBehavior>();
@@ -17,9 +19,26 @@ namespace Main.Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player")) return;
+            if (detector == Detector.Collision) return;
+            if (!other.CompareTag("Player") && !other.CompareTag("NPC")) return;
 
             behavior?.OnPlayerHit(other.gameObject);
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (detector == Detector.Trigger) return;
+
+            if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "NPC") return;
+
+            behavior?.OnPlayerHit(collision.gameObject);
+        }
+    }
+
+    public enum Detector
+    {
+        Trigger,
+        Collision,
+        Both
     }
 }

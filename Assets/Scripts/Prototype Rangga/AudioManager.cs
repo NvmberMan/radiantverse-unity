@@ -22,8 +22,6 @@ public class AudioManager : MonoBehaviour
 
     public const string MUSIC_KEY = "MusicVol";
     public const string SFX_KEY = "SFXVol";
-    public const string VOICE_KEY = "VoiceVol";
-    public const string AMBIENCE_KEY = "AmbienceVol";
 
     private void Awake()
     {
@@ -64,6 +62,32 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlaySFXAtPoint(string soundName, Vector3 position, float spatialBlend = 1.0f)
+    {
+        if (soundDictionary.TryGetValue(soundName, out AudioClip clip))
+        {
+            GameObject tempGO = new GameObject("TempAudio_" + soundName);
+            tempGO.transform.position = position;
+
+            AudioSource source = tempGO.AddComponent<AudioSource>();
+            source.clip = clip;
+
+            source.outputAudioMixerGroup = sfxGroup;
+            source.spatialBlend = spatialBlend; 
+            source.minDistance = 1f; 
+            source.maxDistance = 20f;
+            source.rolloffMode = AudioRolloffMode.Logarithmic;
+
+            source.Play();
+
+            Destroy(tempGO, clip.length);
+        }
+        else
+        {
+            Debug.LogWarning("SFX: " + soundName + " tidak ditemukan!");
+        }
+    }
+
     public void PlayMusic(string soundName)
     {
         if (soundDictionary.TryGetValue(soundName, out AudioClip clip))
@@ -92,8 +116,6 @@ public class AudioManager : MonoBehaviour
     {
         SetVolume(MUSIC_KEY, PlayerPrefs.GetFloat(MUSIC_KEY, 0.75f));
         SetVolume(SFX_KEY, PlayerPrefs.GetFloat(SFX_KEY, 0.75f));
-        SetVolume(VOICE_KEY, PlayerPrefs.GetFloat(VOICE_KEY, 0.75f));
-        SetVolume(AMBIENCE_KEY, PlayerPrefs.GetFloat(AMBIENCE_KEY, 0.75f));
     }
 }
 

@@ -9,6 +9,9 @@ public class ShopItemUI : MonoBehaviour
     public Image itemIcon;
     public Button buyButton;
 
+    [Space(5)]
+    public GameObject ownedVisual;
+
     private ShopItemData itemData;
     private Main.Mainmenu.ShopView shopView;
 
@@ -26,8 +29,10 @@ public class ShopItemUI : MonoBehaviour
         }
         else
         {
-            priceText.text = isOwned ? "Owned" : data.price + " $";
+            priceText.text = data.price + " $";
             buyButton.interactable = !isOwned;
+
+            ownedVisual.SetActive(isOwned);
         }
 
         if (itemIcon != null) itemIcon.sprite = data.icon;

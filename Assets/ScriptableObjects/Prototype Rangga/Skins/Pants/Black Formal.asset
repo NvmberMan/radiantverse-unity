@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Black Formal
   icon: {fileID: 21300000, guid: c3b70837093c75149b7c97f4d60f1044, type: 3}
   price: 0
-  spineSkinName: Component/Pants/Black-formal
-  category: Pants
+  spineSkinName: pants/Black-formal
+  category: pants

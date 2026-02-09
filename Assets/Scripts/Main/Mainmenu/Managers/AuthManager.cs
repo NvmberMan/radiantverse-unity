@@ -19,6 +19,9 @@ namespace Main.Mainmenu
         public event Action OnUserLoggedOut;
 
 
+        public bool IsRegistering { get; set; } = false;
+
+
         private void Awake()
         {
             if (instance == null) instance = this;
@@ -65,6 +68,8 @@ namespace Main.Mainmenu
         {
             if (auth.CurrentUser != null)
             {
+                if (IsRegistering) return;
+
                 if (HasInitiallyLoaded) return;
 
                 try

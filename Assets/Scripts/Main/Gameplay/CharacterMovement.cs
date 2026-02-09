@@ -33,7 +33,11 @@ namespace Main.Gameplay
         [Header("Slope Settings")]
         [SerializeField] float maxSlopeAngle = 45f;
         private Vector3 slopeNormal;
+        private Vector3 prevScale;
 
+        [Header("Step Offset Settings")]
+        [SerializeField] float stepHeight = 0.3f;
+        [SerializeField] float stepSmooth = 0.1f;
 
         public float Acceleration
         {
@@ -48,6 +52,11 @@ namespace Main.Gameplay
             rb.freezeRotation = true;
         }
 
+        private void Start()
+        {
+            prevScale = skeletonAnimation.transform.localScale;
+        }
+
         protected override void Update()
         {
             base.Update();
@@ -57,45 +66,6 @@ namespace Main.Gameplay
             if (GameManager.Instance.isPaused)
                 StopMoving();
         }
-
-        //void CheckGround()
-        //{
-        //    _wasGrounded = _isGrounded;
-
-        //    Vector3 origin = groundDetectorPoint.position;
-        //    Vector3 halfExtents = groundBoxSize * 0.5f;
-
-        //    // 1️⃣ CEK kalau sudah menyentuh tanah (overlap)
-        //    bool grounded = Physics.CheckBox(
-        //        origin,
-        //        halfExtents,
-        //        Quaternion.identity,
-        //        groundLayer
-        //    );
-
-        //    // 2️⃣ Kalau belum kena, lakukan BoxCast ke bawah (untuk jarak kecil)
-        //    if (!grounded)
-        //    {
-        //        RaycastHit hit;
-        //        grounded = Physics.BoxCast(
-        //            origin,
-        //            halfExtents,
-        //            Vector3.down,
-        //            out hit,
-        //            Quaternion.identity,
-        //            groundCheckDistance,
-        //            groundLayer
-        //        );
-        //    }
-
-        //    _isGrounded = grounded;
-
-        //    // Landing sound
-        //    if (_isGrounded && !_wasGrounded)
-        //    {
-        //        AudioManager.Instance.PlaySFX("Landing");
-        //    }
-        //}
 
         void CheckGround()
         {
@@ -162,7 +132,7 @@ namespace Main.Gameplay
         }
 
 
-        public void MoveToDir(Vector3 direction)
+        public void MoveToDir(Vector3 direction, float horizontalInput = 1)
         {
             if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused || _isFreeze) return;
 
@@ -176,7 +146,18 @@ namespace Main.Gameplay
             rb.linearVelocity = vel;
 
             SetAnimation(walkAnimation, true);
+
+            Flip(horizontalInput);
         }
+
+        void Flip(float horizontalInput)
+        {
+            if (horizontalInput > 0.01f)
+                skeletonAnimation.Skeleton.ScaleX = 1;
+            else if (horizontalInput < -0.01f)
+                skeletonAnimation.Skeleton.ScaleX = -1;
+        }
+
 
         public void StopMoving()
         {
@@ -206,7 +187,7 @@ namespace Main.Gameplay
 
                 SetAnimation(jumpAnimation, false);
 
-                AudioManager.Instance.PlaySFX("Jump");
+                AudioManager.Instance.PlaySFXAtPoint("Jump", this.transform.position, 6);
             }
         }
 

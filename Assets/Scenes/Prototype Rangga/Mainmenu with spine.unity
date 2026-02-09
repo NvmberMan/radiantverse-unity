@@ -361,7 +361,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2093,7 +2094,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3493,10 +3495,38 @@ MonoBehaviour:
     worldName: Sentul City
     worldObject: {fileID: 619997085}
     worldMap:
-    - {fileID: 1857118640}
-    - {fileID: 464180554}
-    - {fileID: 1289905815}
-    - {fileID: 837685565}
+    - worldId: 
+      mapId: 
+      mapName: 
+      mapDescription: 
+      mapSceneName: 
+      containerShowPosition: {x: 0, y: 0}
+      mapPreview: {fileID: 0}
+      clickButton: {fileID: 0}
+    - worldId: 
+      mapId: 
+      mapName: 
+      mapDescription: 
+      mapSceneName: 
+      containerShowPosition: {x: 0, y: 0}
+      mapPreview: {fileID: 0}
+      clickButton: {fileID: 0}
+    - worldId: 
+      mapId: 
+      mapName: 
+      mapDescription: 
+      mapSceneName: 
+      containerShowPosition: {x: 0, y: 0}
+      mapPreview: {fileID: 0}
+      clickButton: {fileID: 0}
+    - worldId: 
+      mapId: 
+      mapName: 
+      mapDescription: 
+      mapSceneName: 
+      containerShowPosition: {x: 0, y: 0}
+      mapPreview: {fileID: 0}
+      clickButton: {fileID: 0}
 --- !u!1 &300471175
 GameObject:
   m_ObjectHideFlags: 0
@@ -6183,6 +6213,13 @@ MonoBehaviour:
   - {fileID: 1744756786}
   inputEmail: {fileID: 551917797}
   inputPassword: {fileID: 426047457}
+  rememberMeToggle: {fileID: 0}
+  togglePasswordBtn: {fileID: 0}
+  eyeIcon: {fileID: 0}
+  eyeOpenSprite: {fileID: 0}
+  eyeClosedSprite: {fileID: 0}
+  googleLoginBtn: {fileID: 0}
+  webClientId: 230119757559-h7s33t3pl6j09a1760qlpe5622q6ce18.apps.googleusercontent.com
 --- !u!224 &464248487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9443,6 +9480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d8699edf572774787e713915621318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  IsDebug: 0
 --- !u!4 &751321858
 Transform:
   m_ObjectHideFlags: 0
@@ -10465,6 +10503,7 @@ MonoBehaviour:
   - {fileID: 1790713355}
   loadingTextView: {fileID: 1851179437}
   progressTextView: {fileID: 1052435298}
+  progressSliderView: {fileID: 0}
 --- !u!1 &833968903
 GameObject:
   m_ObjectHideFlags: 0
@@ -11189,7 +11228,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -12350,42 +12390,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.ShopView
   id: base
   panel: {fileID: 943672611}
+  scrollRect: {fileID: 0}
   itemContainer: {fileID: 122683952}
   itemPrefab: {fileID: 6874447067155210259, guid: d945f50be77c55b4baa468a492661a29, type: 3}
   playerMoneyText: {fileID: 1514508167}
-  shopDatabase:
-  - {fileID: 11400000, guid: ec1ba6f32a52044428e25d06818fc493, type: 2}
-  - {fileID: 11400000, guid: abcdce4c91ed8214c9b072351f4e15d3, type: 2}
-  - {fileID: 11400000, guid: 126c000ae3f5ebb4fb9097bdfa86e5bf, type: 2}
-  - {fileID: 11400000, guid: f8a9f388e64db6a40b1c297496142665, type: 2}
-  - {fileID: 11400000, guid: fb2cc6515990a3c49b1fed15ed235a54, type: 2}
-  - {fileID: 11400000, guid: 75bb6055423905e429485f1e177134fd, type: 2}
-  - {fileID: 11400000, guid: 5d6f0d9d743bc234d922b43226f6ef9f, type: 2}
-  - {fileID: 11400000, guid: d2e02a8e27d7d8944a4aa3d3c45f58c4, type: 2}
-  - {fileID: 11400000, guid: 51dc06cced62b3e48ac63c6af368396c, type: 2}
-  - {fileID: 11400000, guid: 3487e4990eac4dd4d80a12dfee79418a, type: 2}
-  - {fileID: 11400000, guid: d360342a80c20124fabe3d0c26657f7b, type: 2}
-  - {fileID: 11400000, guid: 3c8b350857064694183ec5b133541584, type: 2}
-  - {fileID: 11400000, guid: f504be9b612265a4388b46cb49b514c8, type: 2}
-  - {fileID: 11400000, guid: 6c0b94f49dec4964f99fda0da09fd81e, type: 2}
-  - {fileID: 11400000, guid: 0534ad33d73c7c74eb1c167b04059067, type: 2}
-  - {fileID: 11400000, guid: b1edabd1c2b867346a7b3954fc7ed290, type: 2}
-  - {fileID: 11400000, guid: 5ef402438b2beb74e86595fd1c6d3b72, type: 2}
-  - {fileID: 11400000, guid: 15f5c4d09ff87fa439953b12217e60dc, type: 2}
-  - {fileID: 11400000, guid: c475cc07a08ffe5479367115a9908e41, type: 2}
-  - {fileID: 11400000, guid: 39f89ad5f1ffab74ea90e9e9262d2cf6, type: 2}
-  - {fileID: 11400000, guid: 2898bd7ba8ce9034ca80d0f5c02a6f1d, type: 2}
-  - {fileID: 11400000, guid: 5aee92ce8f7c48a48b6a63bdfd68b2e5, type: 2}
-  - {fileID: 11400000, guid: e6d8f02fe697c6449b0f0bb6913ea2a4, type: 2}
-  - {fileID: 11400000, guid: 39337d58f8b2e5241a5956021fffc2e9, type: 2}
-  - {fileID: 11400000, guid: 313f6801952be884b9af288cce641e8b, type: 2}
-  - {fileID: 11400000, guid: 598d8b7875975b04693448a8ffc01343, type: 2}
-  - {fileID: 11400000, guid: fde1bf03be460b54490b85de64121176, type: 2}
-  - {fileID: 11400000, guid: 2b51c70799f5f6e4ba71a3762b49bcf7, type: 2}
-  - {fileID: 11400000, guid: 6c6b0add6b28fef429901ea351086b7c, type: 2}
-  - {fileID: 11400000, guid: 4596635b1aa127649876758d286ab2fb, type: 2}
-  - {fileID: 11400000, guid: 242d97ef5f9e4184da62e54e89f8e1da, type: 2}
-  - {fileID: 11400000, guid: 96278e9cb637d6e4bac8598929163737, type: 2}
+  categories: []
 --- !u!1001 &946059754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13106,7 +13115,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -16934,6 +16944,7 @@ MonoBehaviour:
   viewList:
   - {fileID: 1665629913}
   - {fileID: 578867573}
+  dailyRewardAnimator: {fileID: 0}
 --- !u!1001 &1221402740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17564,7 +17575,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -18853,19 +18865,10 @@ MonoBehaviour:
   id: base
   panel: {fileID: 1401510794}
   skeletonGraphic: {fileID: 1746200597}
-  accessoriesPanel: {fileID: 1543455011}
-  facesPanel: {fileID: 270021236}
-  hairsPanel: {fileID: 486795164}
-  pantsPanel: {fileID: 1560022605}
-  shirtsPanel: {fileID: 995521598}
-  shoesPanel: {fileID: 215521526}
-  accessoriesContainer: {fileID: 2078645936}
-  facesContainer: {fileID: 731512979}
-  hairsContainer: {fileID: 1808199921}
-  pantsContainer: {fileID: 1967663603}
-  shirtsContainer: {fileID: 2094623752}
-  shoesContainer: {fileID: 1905263807}
+  scrollRect: {fileID: 0}
+  itemContainer: {fileID: 0}
   itemPrefab: {fileID: 7277202294947189578, guid: 76bf64a09b45b3a4ba73d60a6b56b881, type: 3}
+  categories: []
   allAccessoryDatabase:
   - {fileID: 11400000, guid: ec1ba6f32a52044428e25d06818fc493, type: 2}
   - {fileID: 11400000, guid: abcdce4c91ed8214c9b072351f4e15d3, type: 2}
@@ -20437,6 +20440,15 @@ MonoBehaviour:
   - {fileID: 467026890}
   inputEmail: {fileID: 1362960582}
   inputPassword: {fileID: 2123468758}
+  inputConfirmPassword: {fileID: 0}
+  togglePassBtn: {fileID: 0}
+  passEyeIcon: {fileID: 0}
+  toggleConfirmPassBtn: {fileID: 0}
+  confirmPassEyeIcon: {fileID: 0}
+  eyeOpenSprite: {fileID: 0}
+  eyeClosedSprite: {fileID: 0}
+  googleRegisterBtn: {fileID: 0}
+  webClientId: 230119757559-h7s33t3pl6j09a1760qlpe5622q6ce18.apps.googleusercontent.com
 --- !u!1 &1505241126
 GameObject:
   m_ObjectHideFlags: 0
@@ -22981,6 +22993,7 @@ MonoBehaviour:
   experienceText: {fileID: 19643178}
   levelText: {fileID: 129682479}
   skeletonGraphic: {fileID: 468022922}
+  arradiusDollarCircleTargetAtractor: {fileID: 0}
 --- !u!1 &1670824437
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,5 +15,5 @@ MonoBehaviour:
   displayName: Half Zip ARRADIUS
   icon: {fileID: 21300000, guid: 6e70610df54d7834e8e5b7e44c8ec232, type: 3}
   price: 0
-  spineSkinName: Component/Shirts/Half-zip-ARRADIUS
-  category: Shirts
+  spineSkinName: shirts/Half-zip-ARRADIUS
+  category: shirts

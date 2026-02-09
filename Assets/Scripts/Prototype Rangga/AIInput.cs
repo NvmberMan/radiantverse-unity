@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Main.Gameplay.AI
 {
-    public class AIInput : Agent
+    public class AIInput : Agent, ICurriculumLearning
     {
         public Transform currentTarget;
         public int checkpointIndex;
@@ -106,7 +106,14 @@ namespace Main.Gameplay.AI
             moveDir.x = actions.DiscreteActions[1] == 1 ? 1 : (actions.DiscreteActions[1] == 2 ? -1 : 0);
             moveDir.z = actions.DiscreteActions[2] == 1 ? 1 : (actions.DiscreteActions[2] == 2 ? -1 : 0);
 
-            CharacterMovement.MoveToDir(moveDir.normalized);
+            if (moveDir.magnitude > 0.1f)
+            {
+                CharacterMovement.MoveToDir(moveDir, moveDir.x);
+            }
+            else
+            {
+                CharacterMovement.StopMoving();
+            }
 
             // Reward Logic
             float currentDistance = Vector3.Distance(transform.position, currentTarget.position);
@@ -229,6 +236,21 @@ namespace Main.Gameplay.AI
             {
                 AddReward(-0.5f);
             }
+            else if (collision.gameObject.tag == "Sensor_void")
+            {
+                AddReward(-5f);
+                EndEpisode();
+            }
+        }
+
+        public void SetTargetPoint(int target)
+        {
+            //checkpointIndex = target;
+        }
+
+        public void SetFinishPoint(int target)
+        {
+            //throw new System.NotImplementedException();
         }
     }
 }

@@ -1,74 +1,49 @@
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
 namespace Main.Gameplay
 {
+    public enum MovementPowerUpType
+    {
+        Sprint,
+        Slow
+    }
+
     [CreateAssetMenu(menuName = "Item/Movement Item Data")]
     public class MovementItemData : ScriptableObject
     {
-        [Header("Movement Boost")]
-        public float speedBonus = 0f; // +30, +15, -20
+        [Header("Type")]
+        public MovementPowerUpType powerUpType;
 
-        [Header("Duration (Pickup Only)")]
-        public float duration = 10f;
+        [Header("Movement")]
+        public float speedBonus;
 
-        [Header("Camera Effect")]
+        [Header("Duration")]
+        public float duration = 5f;
+
+        [Header("Visual")]
+        public bool useParticle = true;
+
+        [Header("Camera")]
         public bool useCameraShake = true;
         public float shakeStrength = 0.4f;
 
-        [Header("Post Processing")]
+        [Header("Post Process")]
         public bool usePostProcess = true;
+
         [ColorUsage(true, true)]
         public Color effectColor = Color.cyan;
 
-
-
-        // ============================
-        // APPLY EFFECT
-        // ============================
+        // =====================
+        // APPLY / REMOVE
+        // =====================
         public void Apply(CharacterMovement movement)
         {
-            movement.Acceleration += speedBonus;
+            //movement.Acceleration += speedBonus;
         }
 
-        // ============================
-        // REMOVE EFFECT
-        // ============================
         public void Remove(CharacterMovement movement)
         {
-            movement.Acceleration -= speedBonus;
+            //movement.Acceleration -= speedBonus;
         }
-
-        // ============================
-        // PICKUP MODE (WITH TIMER)
-        // ============================
-        public void ApplyWithDuration(CharacterMovement movement, MonoBehaviour runner)
-        {
-            if (useCameraShake && CameraShake.Instance != null)
-            {
-                CameraShake.Instance.ShakeForDuration(shakeStrength, duration);
-            }
-
-            if (usePostProcess && PostProcessController.Instance != null)
-            {
-                PostProcessController.Instance.PlayEffect(duration, effectColor);
-            }
-
-
-
-            runner.StartCoroutine(EffectRoutine(movement));
-        }
-
-
-
-        private IEnumerator EffectRoutine(CharacterMovement movement)
-        {
-            Apply(movement);
-
-            yield return new WaitForSeconds(duration);
-
-            Remove(movement);
-        }
-
     }
 }

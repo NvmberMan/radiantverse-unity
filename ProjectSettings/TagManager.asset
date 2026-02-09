@@ -18,6 +18,14 @@ TagManager:
   - Undefined
   - Sensor_void
   - Waypoint
+  - 'FX_Overlay '
+  - Car
+  - Sensor_car_low
+  - Sensor_car_high
+  - Sensor_bus_high
+  - Sensor_vehicle_low
+  - Sensor_vehicle_high
+  - Sensor_Car
   layers:
   - Default
   - TransparentFX
@@ -30,7 +38,7 @@ TagManager:
   - Point
   - Obstacle
   - Character
-  - 
+  - Barrier
   - 
   - 
   - 
@@ -54,6 +62,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 'FX_Overlay '
+    uniqueID: 939848801
     locked: 0
   m_RenderingLayers:
   - Default
