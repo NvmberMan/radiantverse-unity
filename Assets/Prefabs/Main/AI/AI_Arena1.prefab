@@ -475,7 +475,8 @@ MonoBehaviour:
     m_Bits: 64
   idleAnimation: Idle
   walkAnimation: Run
-  jumpAnimation: Run
+  jumpAnimation: Jump
+  fallAnimation: Fall
   rb: {fileID: 0}
   _isGrounded: 1
   _isFreeze: 0
@@ -543,9 +544,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: eb73dbf5ed54c224cb7ada15dd9fe2bb, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 63d3cfca82a840f408e2e48fd40767f8, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: MoveToGoal
   TeamId: 0
   m_UseChildSensors: 1
@@ -632,12 +633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCustomization
   skinSource: 1
-  manualSkins:
-  - Component/Hairs/Type4
-  - Component/Faces/Boy
-  - Component/Shirts/Kemeja&dasi-hitam
-  - Component/Pants/Cream-formal
-  - Component/Shoes/Black-formal
+  nameCharacter: {fileID: 1808225368568227205}
 --- !u!136 &1671772115488746646
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -829,7 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: spine-unity::Spine.Unity.SkeletonAnimation
-  skeletonDataAsset: {fileID: 11400000, guid: a406bc3a79477d04993ad8b230e579a2, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
   initialSkinName: Template/Base-boy
   initialFlipX: 0
   initialFlipY: 0

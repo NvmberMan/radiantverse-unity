@@ -8,6 +8,7 @@ public class PlayerPowerUpController : MonoBehaviour
 
     private CharacterMovement movement;
     private float defaultAcceleration;
+    private float defaultAirAcceleration;
 
     private float timer;
     private bool isActive;
@@ -16,6 +17,7 @@ public class PlayerPowerUpController : MonoBehaviour
     {
         movement = GetComponent<CharacterMovement>();
         defaultAcceleration = movement.Acceleration;
+        defaultAirAcceleration = movement.AirAcceleration;
     }
 
     private void Update()
@@ -42,6 +44,7 @@ public class PlayerPowerUpController : MonoBehaviour
         timer = item.duration;
 
         movement.Acceleration = defaultAcceleration + item.speedBonus;
+        movement.AirAcceleration = defaultAirAcceleration + item.speedBonus;
 
         PlayVisual(item);
     }
@@ -55,6 +58,7 @@ public class PlayerPowerUpController : MonoBehaviour
         timer = 0f;
 
         movement.Acceleration = defaultAcceleration;
+        movement.AirAcceleration = defaultAirAcceleration;
         StopVisual();
 
         movement.GetComponent<ItemCount>().itemPowerCount = 0;

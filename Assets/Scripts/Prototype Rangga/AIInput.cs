@@ -132,7 +132,7 @@ namespace Main.Gameplay.AI
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
-        {
+        {   
             var discrete = actionsOut.DiscreteActions;
             discrete[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
 
