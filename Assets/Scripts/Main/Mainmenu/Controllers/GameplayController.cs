@@ -157,7 +157,7 @@ namespace Main.Mainmenu
                         Cursor.lockState = CursorLockMode.None;
                     }
 
-                    if (!GameManager.Instance.isPaused)
+                    if (!GameManager.Instance.isPaused && !GameManager.Instance.isCinematic)
                     {
                         HandlePCCamera();
                         HandleZoom();

@@ -10,9 +10,8 @@ namespace Main.Mainmenu
     [System.Serializable]
     public class CustomizeCategory
     {
-        public string categoryName; // Contoh: "Faces", "Shirts"
+        public string categoryName;
         public NavbarItemButton navbarController;
-        // Tidak butuh panel/container sendiri lagi karena pakai yang global
     }
 
     public class CustomizeView : View
@@ -22,7 +21,7 @@ namespace Main.Mainmenu
 
         [Header("Global UI References")]
         public ScrollRect scrollRect;
-        public Transform itemContainer; // Cukup satu container untuk semua
+        public Transform itemContainer;
         public AccessoryItemUI itemPrefab;
 
         [Header("Flexible Categories")]
@@ -34,6 +33,31 @@ namespace Main.Mainmenu
 
         private List<string> draftSkins;
         private int currentCategoryIndex = 0;
+
+        private List<string> blackListBoySkin = new()
+        {
+            "faces/Girl",
+            "hairs/ponytail with bangs",
+            "pants/Sporty-short-pink",
+            "shirts/Sporty pink",
+            "shoes/Pink sport",
+        };
+
+        private List<string> blackListGirlSkin = new()
+        {
+            "faces/Boy",
+            "hairs/Ivy league",
+            "pants/Sporty-short-blue",
+            "shirts/Sporty-blue",
+            "shoes/Sporty-aqua",
+        };
+
+        private List<string> officeLook = new List<string>
+        {
+            "shoes/Black-formal",
+            "shirts/Kemeja&dasi-hitam",
+            "pants/Black-formal"
+        };
 
         private void Awake()
         {
@@ -51,13 +75,42 @@ namespace Main.Mainmenu
             }
         }
 
+
         public override void Show()
         {
             base.Show();
             draftSkins = new List<string>(PlayerLocalData.inventoryData.SelectedSkins);
             saveButton.SetActive(false);
+            ApplySkinsFromData();
 
             SwitchCategory(0);
+        }
+
+        public void ApplySkinsFromData()
+        {
+            if (PlayerLocalData.inventoryData == null) return;
+
+            List<string> selected = PlayerLocalData.inventoryData.SelectedSkins;
+            CombineSkins(selected.ToArray());
+        }
+        public void CombineSkins(string[] skinNames)
+        {
+            var skeleton = skeletonGraphic.Skeleton;
+            Skin combinedSkin = new Skin("Combined");
+
+            foreach (string skinName in skinNames)
+            {
+                Skin sourceSkin = skeleton.Data.FindSkin(skinName);
+                if (sourceSkin != null)
+                    combinedSkin.AddSkin(sourceSkin);
+                else
+                    Debug.LogWarning($"Skin {skinName} tidak ditemukan di Atlas!");
+            }
+
+            skeleton.SetSkin(combinedSkin);
+            skeleton.SetSlotsToSetupPose();
+            skeletonGraphic.OverrideTexture = null;
+            skeletonGraphic.UpdateMesh();
         }
 
         public void SwitchCategory(int index)
@@ -94,8 +147,12 @@ namespace Main.Mainmenu
 
             string currentCatName = categories[currentCategoryIndex].categoryName;
 
+
             foreach (string unlockedID in PlayerLocalData.inventoryData.UnlockedAccessories)
             {
+                if (PlayerLocalData.inventoryData.Gender == 0 && blackListBoySkin.Contains(unlockedID)) continue;
+                if (PlayerLocalData.inventoryData.Gender == 1 && blackListGirlSkin.Contains(unlockedID)) continue;
+
                 AccessoryData data = allAccessoryDatabase.Find(x => x.spineSkinName == unlockedID);
 
                 if (data != null && data.category == currentCatName)
@@ -114,7 +171,7 @@ namespace Main.Mainmenu
 
         public void OnItemClicked(string category, string skinName)
         {
-            int index = draftSkins.FindIndex(s => s.Contains("Component/" + category + "/"));
+            int index = draftSkins.FindIndex(s => s.Contains(category + "/"));
 
             if (index != -1) draftSkins[index] = skinName;
             else draftSkins.Add(skinName);
@@ -130,7 +187,17 @@ namespace Main.Mainmenu
             PlayerLocalData.inventoryData.SelectedSkins = new List<string>(draftSkins);
             string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
             FirestoreModel.UpdateSelectedSkins(uid, PlayerLocalData.inventoryData.SelectedSkins);
+
             saveButton.SetActive(false);
+
+            if (PlayerLocalData.playerStats != null)
+            {
+                if (IsOfficeLookEquipped(draftSkins) && !AchievementManager.Instance.CheckAchievement("9-to-5 Ready"))
+                {
+                    FirestoreModel.UnlockAchievement("9-to-5 Ready");
+                    MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("9-to-5 Ready");
+                }
+            }
         }
 
         public void RefreshCharacterPreview()
@@ -159,6 +226,18 @@ namespace Main.Mainmenu
             sortedA.Sort();
             sortedB.Sort();
             for (int i = 0; i < sortedA.Count; i++) if (sortedA[i] != sortedB[i]) return false;
+            return true;
+        }
+
+        private bool IsOfficeLookEquipped(List<string> currentEquipped)
+        {
+            foreach (string requiredSkin in officeLook)
+            {
+                if (!currentEquipped.Contains(requiredSkin))
+                {
+                    return false;
+                }
+            }
             return true;
         }
     }

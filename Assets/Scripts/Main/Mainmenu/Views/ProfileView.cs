@@ -56,8 +56,11 @@ namespace Main.Mainmenu
             if (PlayerLocalData.playerStats != null)
             {
                 levelText.text = PlayerLocalData.playerStats.Level.ToString();
+                experienceSlider.minValue = ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Min;
+                experienceSlider.maxValue = ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Max;
                 experienceSlider.value = PlayerLocalData.playerStats.Experience;
-                experienceText.text = PlayerLocalData.playerStats.Experience.ToString() + "/100";
+
+                experienceText.text = PlayerLocalData.playerStats.Experience.ToString() + "/" + ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Max;
             }
             else
             {
@@ -68,8 +71,11 @@ namespace Main.Mainmenu
                     PlayerLocalData.playerStats = stats;
 
                     levelText.text = stats.Level.ToString();
-                    experienceSlider.value = stats.Experience;
-                    experienceText.text = stats.Experience.ToString() + "/100";
+                    experienceSlider.minValue = ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Min;
+                    experienceSlider.maxValue = ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Max;
+                    experienceSlider.value = PlayerLocalData.playerStats.Experience;
+
+                    experienceText.text = PlayerLocalData.playerStats.Experience.ToString() + "/" + ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Max;
                 }, Debug.LogError);
             }
         }

@@ -35,6 +35,8 @@ namespace Main.Gameplay
         public CinemachineOrbitalFollow orbitalFollow;
         public CinemachineCamera orbitalFollowAI;
         public PlayableDirector cinematicDirector;
+        [HideInInspector] public bool isCinematic = true;
+
 
 
         private void Awake()
@@ -82,6 +84,8 @@ namespace Main.Gameplay
 
         IEnumerator InitializeMap()
         {
+            isCinematic = true;
+
             LoadingMapPreviewController loadingMapPreviewController = MenuManager.instance.GetController<LoadingMapPreviewController>();
             loadingMapPreviewController.Activate("base");
             loadingMapPreviewController.SetLoadingProgress(50);
@@ -112,6 +116,8 @@ namespace Main.Gameplay
 
         public void OnCinematicFinished()
         {
+            isCinematic = false;
+
             GameplayController gameplayController = MenuManager.instance.GetController<GameplayController>();
             gameplayController.Activate("gameplay gui");
 

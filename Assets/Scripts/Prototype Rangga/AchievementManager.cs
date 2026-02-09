@@ -10,11 +10,19 @@ public class AchievementManager : MonoBehaviour
 
     public void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public AchievementItem GetAchievement(string id)
     {
         return achievementItems.Find(a => a.id == id);
+    }
+
+    public bool CheckAchievement(string id)
+    {
+        return PlayerLocalData.inventoryData.UnlockedAchievements.Contains(id);
     }
 }

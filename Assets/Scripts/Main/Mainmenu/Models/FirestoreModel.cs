@@ -3,7 +3,9 @@ using Firebase.Extensions;
 using Firebase.Firestore;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.LightTransport;
 
 namespace Main.Mainmenu
 {
@@ -212,7 +214,10 @@ namespace Main.Mainmenu
             {
                 ArradiusDollar = 0,
                 Experience = 0,
-                Level = 0,
+                Level = 1,
+                MapUnlocked = new List<string> {
+                    "world-001__map-001"
+                },
                 DailyStreak = 0,
                 Rank = "Rookie",
             };
@@ -237,18 +242,27 @@ namespace Main.Mainmenu
 
             InventoryData data = new InventoryData
             {
+                Gender = 0,
                 UnlockedAccessories = new List<string> {
                     "faces/Boy",
-                    "faces/Girl",
-                    "hairs/Type1",
+                    "hairs/Ivy league",
                     "pants/Sporty-short-blue",
-                    "shirts/Sporty-blue"
+                    "shirts/Sporty-blue",
+                    "shoes/Sporty-aqua",
+                    "socks/long-white-sock",
+                    "faces/Girl",
+                    "hairs/ponytail with bangs",
+                    "pants/Sporty-short-pink",
+                    "shirts/Sporty pink",
+                    "shoes/Pink sport"
                 },
                 SelectedSkins = new List<string> {
                     "faces/Boy",
-                    "hairs/Type1",
+                    "hairs/Ivy league",
                     "pants/Sporty-short-blue",
-                    "shirts/Sporty-blue"
+                    "shirts/Sporty-blue",
+                    "shoes/Sporty-aqua",
+                    "socks/long-white-sock"
                 },
                 UnlockedAchievements = new List<string>()
             };
@@ -263,6 +277,8 @@ namespace Main.Mainmenu
                 }
             });
         }
+
+
 
         public static void CheckUsernameExists(string username, Action<bool> onResult)
         {
@@ -311,5 +327,159 @@ namespace Main.Mainmenu
                     if (task.IsCompletedSuccessfully) Debug.Log($"Cloud Updated: {achievementId}");
                 });
         }
+
+        public static void UnlockMap(string mapId)
+        {
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            DocumentReference docRef = db.Collection("playerStats").Document(uid);
+
+            docRef.UpdateAsync("MapUnlocked", FieldValue.ArrayUnion(mapId))
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    if (!PlayerLocalData.playerStats.MapUnlocked.Contains(mapId))
+                    {
+                        PlayerLocalData.playerStats.MapUnlocked.Add(mapId);
+                    }
+                }
+                else
+                {
+                    Debug.LogError($"Gagal membuka map: {task.Exception}");
+                }
+            });
+        }
+
+        public static void RecordMapWin(string mapId)
+        {
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            if (!PlayerLocalData.playerStats.MapsWon.Contains(mapId))
+            {
+                PlayerLocalData.playerStats.MapsWon.Add(mapId);
+                db.Collection("playerStats").Document(uid)
+                  .UpdateAsync("MapsWon", FieldValue.ArrayUnion(mapId));
+            }
+        }
+
+        public static void SetGender(int gender)
+        {
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+
+            PlayerLocalData.inventoryData.Gender = gender;
+            db.Collection("inventoryData").Document(uid)
+                .UpdateAsync("Gender", gender).ContinueWithOnMainThread(task => {
+                    if (task.IsFaulted)
+                    {
+                        //Debug.LogError("Gagal update: " + task.Exception);
+                    }
+                    else
+                    {
+                        //Debug.Log("Update berhasil!");
+                    }
+                });
+        }
+
+        public static void AddExperience(int expGained)
+        {
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            var stats = PlayerLocalData.playerStats;
+
+            stats.Experience += expGained;
+
+            while (stats.Level < ExpManager.instance.expList.Count)
+            {
+                int maxExpForCurrentLevel = ExpManager.instance.expList[stats.Level-1].Max;
+
+                if (stats.Experience >= maxExpForCurrentLevel)
+                {
+                    stats.Experience -= maxExpForCurrentLevel;
+                    stats.Level++;
+                    Debug.Log($"Level Up! Sekarang Level: {stats.Level}");
+                }
+                else
+                {
+                    break; 
+                }
+            }
+
+            Dictionary<string, object> updates = new Dictionary<string, object>
+            {
+                { "Experience", stats.Experience },
+                { "Level", stats.Level }
+            };
+
+            db.Collection("playerStats").Document(uid)
+            .UpdateAsync(updates)
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                    Debug.Log("Experience & Level synced to Cloud!");
+                else
+                    Debug.LogError($"Sync EXP failed: {task.Exception}");
+            });
+        }
+
+        public static void AddArradiusDollar(int amount)
+        {
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+
+            PlayerLocalData.playerStats.ArradiusDollar += amount;
+
+            DocumentReference docRef = db.Collection("playerStats").Document(uid);
+
+            docRef.UpdateAsync("ArradiusDollar", FieldValue.Increment(amount))
+            .ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    Debug.Log($"Berhasil menambah {amount} ArradiusDollar ke Cloud!");
+                }
+                else
+                {
+                    Debug.LogError($"Gagal menambah ArradiusDollar: {task.Exception}");
+                }
+            });
+        }
+
+        public static void IncrementPlayerStat(string fieldName, int amount)
+        {
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            if (string.IsNullOrEmpty(uid)) return;
+
+            // 1. Update Local Data (menggunakan Reflection agar fleksibel)
+            if (PlayerLocalData.playerStats != null)
+            {
+                // Mencari property berdasarkan nama string (fieldName)
+                PropertyInfo prop = typeof(PlayerStats).GetProperty(fieldName);
+
+                if (prop != null && prop.PropertyType == typeof(int))
+                {
+                    int currentValue = (int)prop.GetValue(PlayerLocalData.playerStats);
+                    prop.SetValue(PlayerLocalData.playerStats, currentValue + amount);
+                    // Debug.Log($"Local Data Updated: {fieldName} is now {prop.GetValue(PlayerLocalData.playerStats)}");
+                }
+                else
+                {
+                    Debug.LogError($"Property '{fieldName}' tidak ditemukan di PlayerStats atau bukan tipe int!");
+                    return; // Keluar jika property tidak valid agar tidak error di Cloud
+                }
+            }
+
+            // 2. Update Cloud Data
+            db.Collection("playerStats").Document(uid)
+                .UpdateAsync(fieldName, FieldValue.Increment(amount))
+                .ContinueWithOnMainThread(task => {
+                    if (task.IsCompletedSuccessfully)
+                    {
+                        // Debug.Log($"Cloud Data Incremented: {fieldName} +{amount}");
+                    }
+                    else
+                    {
+                        Debug.LogError($"Failed to increment {fieldName} in Cloud: {task.Exception}");
+                    }
+                });
+        }
     }
+
+
 }

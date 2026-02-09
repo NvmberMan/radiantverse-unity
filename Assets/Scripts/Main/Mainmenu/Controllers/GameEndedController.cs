@@ -15,6 +15,8 @@ namespace Main.Mainmenu
         public float showRankDelay = 0f;
         public float showUnlockedMapDelay = 2f;
         public float showSummaryDelay = 2f;
+        public float showAchievementDelay = 2f;
+
         public void GameEnded(int rank)
         {
             GameManager.Instance.isPaused = true;
@@ -23,6 +25,19 @@ namespace Main.Mainmenu
 
         IEnumerator InitializedSummary(int rank)
         {
+            if (PlayerLocalData.inventoryData != null)
+            {
+                if (GameManager.Instance.playerTransform.GetComponent<ItemCount>().total == 0 && !AchievementManager.Instance.CheckAchievement("The Naturalist"))
+                {
+                    if (PlayerLocalData.inventoryData != null)
+                    {
+                        FirestoreModel.UnlockAchievement("The Naturalist");
+                        MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("The Naturalist");
+
+                        yield return new WaitForSeconds(showAchievementDelay);
+                    }
+                }
+            }
             yield return new WaitForSeconds(showRankDelay);
 
             RankPreviewView rankPreviewView = (RankPreviewView)GetView("rank preview");
@@ -34,6 +49,11 @@ namespace Main.Mainmenu
 
             if (reward.mapUnlockedName != null && reward.mapUnlockedName != "null")
             {
+                FirestoreModel.UnlockMap(reward.mapWorldKey);
+                FirestoreModel.AddExperience(reward.exp);
+                FirestoreModel.AddArradiusDollar(reward.arradiusDollar);
+                FirestoreModel.RecordMapWin(reward.mapWorldKey);
+
                 yield return new WaitForSeconds(showUnlockedMapDelay);
                 rankPreviewView.Hide();
 
@@ -45,7 +65,7 @@ namespace Main.Mainmenu
                 unlockedNewArenaView.Hide();
 
                 WinPopupView winPopupView = (WinPopupView)GetView("win popup");
-                winPopupView.UpdateSummary(reward.exp, reward.coin, reward.mapUnlockedName);
+                winPopupView.UpdateSummary(reward.exp, reward.arradiusDollar, reward.mapUnlockedName);
                 winPopupView.Show();
             }
             else
@@ -54,7 +74,7 @@ namespace Main.Mainmenu
                 rankPreviewView.Hide();
 
                 LosePopupView losePopupView = (LosePopupView)GetView("lose popup");
-                losePopupView.UpdateSummary(reward.exp, reward.coin, reward.rankPreviewImage);
+                losePopupView.UpdateSummary(reward.exp, reward.arradiusDollar, reward.rankPreviewImage);
                 losePopupView.Show();
             }
         }
@@ -75,11 +95,12 @@ namespace Main.Mainmenu
     {
         public int rank;
         public int exp;
-        public int coin;
+        public int arradiusDollar;
         public Sprite rankPreviewImage;
 
         [Header("Unlocked Arena")]
         public string mapUnlockedName = null;
+        public string mapWorldKey;
         public Sprite mapUnlockedImage;
     }
 }

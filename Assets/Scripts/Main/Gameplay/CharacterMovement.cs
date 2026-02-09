@@ -1,4 +1,5 @@
 ﻿using Spine.Unity;
+using System;
 using UnityEngine;
 
 namespace Main.Gameplay
@@ -38,6 +39,8 @@ namespace Main.Gameplay
         [Header("Step Offset Settings")]
         [SerializeField] float stepHeight = 0.3f;
         [SerializeField] float stepSmooth = 0.1f;
+
+        public Action isJumping;
 
         public float Acceleration
         {
@@ -147,15 +150,6 @@ namespace Main.Gameplay
 
             SetAnimation(walkAnimation, true);
 
-            //if (horizontalInput > 0.01f)
-            //{
-            //    skeletonAnimation.transform.localScale = new Vector3(Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
-            //}
-            //else if (horizontalInput < -0.01f)
-            //{
-            //    skeletonAnimation.transform.localScale = new Vector3(-Mathf.Abs(prevScale.x), prevScale.y, prevScale.z);
-            //}
-
             Flip(horizontalInput);
         }
 
@@ -197,6 +191,8 @@ namespace Main.Gameplay
                 SetAnimation(jumpAnimation, false);
 
                 AudioManager.Instance.PlaySFXAtPoint("Jump", this.transform.position, 6);
+
+                isJumping?.Invoke();
             }
         }
 
