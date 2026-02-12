@@ -179,6 +179,8 @@ namespace Main.Mainmenu
             bool isModified = !IsListEqual(draftSkins, PlayerLocalData.inventoryData.SelectedSkins);
             saveButton.SetActive(isModified);
 
+            AudioManager.Instance.PlaySFX("equip item");
+
             RefreshCharacterPreview();
         }
 

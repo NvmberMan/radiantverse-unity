@@ -25,6 +25,8 @@ namespace Main.Mainmenu
 
         IEnumerator InitializedSummary(int rank)
         {
+            AudioManager.Instance.PlaySFX("power up");
+
             if (PlayerLocalData.inventoryData != null)
             {
                 if (GameManager.Instance.playerTransform.GetComponent<ItemCount>().total == 0 && !AchievementManager.Instance.CheckAchievement("The Naturalist"))

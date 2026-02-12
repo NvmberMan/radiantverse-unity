@@ -36,7 +36,8 @@ namespace Main.Mainmenu
             if (currentTapCount < tapsRequired)
             {
                 if (animator != null) animator.SetTrigger("Shake");
-                Debug.Log($"Ketukan ke-{currentTapCount}. Butuh {tapsRequired - currentTapCount} lagi!");
+
+                AudioManager.Instance.PlaySFX("shake");
             }
             else
             {

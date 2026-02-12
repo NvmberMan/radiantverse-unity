@@ -46,6 +46,15 @@ public class PlayerPowerUpController : MonoBehaviour
         movement.Acceleration = defaultAcceleration + item.speedBonus;
         movement.AirAcceleration = defaultAirAcceleration + item.speedBonus;
 
+        if(item.powerUpType == MovementPowerUpType.Sprint)
+        {
+            AudioManager.Instance.PlaySFX("power up");
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX("power down");
+        }
+
         PlayVisual(item);
     }
 

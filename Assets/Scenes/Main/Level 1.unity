@@ -208922,7 +208922,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6873860582421299826, guid: b9fe1d71099cc0e4581dd4ca00c04b9e, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 8a960b45cfa2af041bac098abc866bad, type: 3}
+  m_Resource: {fileID: 8300000, guid: c9b65e1581bf20141bdf7197600064ec, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -321932,6 +321932,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasDebug
       objectReference: {fileID: 0}
+    - target: {fileID: 2939850203644560057, guid: 33a8b0f6a6005b749a23c7ef02c2d2f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6603331282746030964, guid: 33a8b0f6a6005b749a23c7ef02c2d2f4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -322169,6 +322173,10 @@ PrefabInstance:
     - target: {fileID: 7770880810202572507, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_Name
       value: CanvasGamePlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8867250277393100792, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -323760,6 +323768,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1354575685753961784, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+      propertyPath: soundLibrary.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354575685753961784, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+      propertyPath: soundLibrary.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 51d89b48607ffa045ae5861a7caecafd, type: 3}
+    - target: {fileID: 1354575685753961784, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+      propertyPath: soundLibrary.Array.data[7].name
+      value: button click
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354575685753961784, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+      propertyPath: soundLibrary.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c2087374771e51429786ef017e52ae0, type: 3}
+    - target: {fileID: 1354575685753961784, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+      propertyPath: soundLibrary.Array.data[8].name
+      value: finish
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354575685753961784, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+      propertyPath: soundLibrary.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 73993bce9a0761445bd7080849c4684a, type: 3}
+    - target: {fileID: 1354575685753961784, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+      propertyPath: soundLibrary.Array.data[9].name
+      value: power up
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354575685753961784, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+      propertyPath: soundLibrary.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 40f3e896fa49da447ad30597fd140c7c, type: 3}
+    - target: {fileID: 1354575685753961784, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+      propertyPath: soundLibrary.Array.data[10].name
+      value: power down
+      objectReference: {fileID: 0}
     - target: {fileID: 4614070248191787245, guid: c56105df437dde44cb114a40f6fce595, type: 3}
       propertyPath: ways.Array.size
       value: 2

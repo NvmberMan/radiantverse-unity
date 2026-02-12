@@ -52,6 +52,8 @@ namespace Main.Mainmenu {
                 MapDetailView mapDetail = (MapDetailView)GetView("map detail");
                 mapDetail.Show();
                 mapDetail.Setup(targetMap);
+
+                AudioManager.Instance.PlaySFX("button click");
             }
             else
             {

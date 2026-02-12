@@ -24,5 +24,7 @@ public class ItemDailyRewardArradiusDollar : ItemDailyReward
         Instantiate(ArradiusDollarAttractor, transform.parent.parent.transform).target = lobbyView.arradiusDollarCircleTargetAtractor.transform;
 
         lobbyView.RefreshPlayerStats();
+
+        AudioManager.Instance.PlaySFX("arradius dollar");
     }
 }

@@ -23,11 +23,14 @@ namespace Main.Gameplay
                 {
                     playerItemCount.itemSlowerCount = 0;
                     playerItemCount.itemPowerCount = 0;
+
                 }
                 else if (itemData.powerUpType == MovementPowerUpType.Slow && playerItemCount.itemPowerCount > 0)
                 {
                     playerItemCount.itemSlowerCount = 0;
                     playerItemCount.itemPowerCount = 0;
+
+                    Debug.Log("Pwer downn");
                 }
 
                 playerItemCount.GetItem(itemData.powerUpType == MovementPowerUpType.Sprint);

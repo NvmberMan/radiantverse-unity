@@ -20,5 +20,8 @@ public class ItemDailyRewardCrate : ItemDailyReward
 
             }
         );
+
+        AudioManager.Instance.PlaySFX("get gift");
+        Debug.Log("Get Gift");
     }
 }
