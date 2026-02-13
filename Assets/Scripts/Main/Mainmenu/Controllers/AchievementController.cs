@@ -14,7 +14,7 @@ namespace Main.Mainmenu
         public override void Activate(string targetView)
         {
             base.Activate(targetView);
-            FirestoreModel.UnlockAchievement("gravity-defier");
+            //FirestoreModel.UnlockAchievement("gravity-defier");
 
             RefreshUI();
         }
@@ -23,7 +23,7 @@ namespace Main.Mainmenu
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("gravity-defier");
+                MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("The Radiant");
             }
         }
 

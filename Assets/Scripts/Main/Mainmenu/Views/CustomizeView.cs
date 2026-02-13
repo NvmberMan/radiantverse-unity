@@ -52,11 +52,9 @@ namespace Main.Mainmenu
             "shoes/Sporty-aqua",
         };
 
-        private List<string> officeLook = new List<string>
+        private List<string> arradiusLook = new List<string>
         {
-            "shoes/Black-formal",
-            "shirts/Kemeja&dasi-hitam",
-            "pants/Black-formal"
+            "shirts/Half-zip-ARRADIUS",
         };
 
         private void Awake()
@@ -194,10 +192,10 @@ namespace Main.Mainmenu
 
             if (PlayerLocalData.playerStats != null)
             {
-                if (IsOfficeLookEquipped(draftSkins) && !AchievementManager.Instance.CheckAchievement("9-to-5 Ready"))
+                if (IsArradiusLookEquipped(draftSkins) && !AchievementManager.Instance.CheckAchievement("The Radiant"))
                 {
-                    FirestoreModel.UnlockAchievement("9-to-5 Ready");
-                    MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("9-to-5 Ready");
+                    FirestoreModel.UnlockAchievement("The Radiant");
+                    MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("The Radiant");
                 }
             }
         }
@@ -231,9 +229,9 @@ namespace Main.Mainmenu
             return true;
         }
 
-        private bool IsOfficeLookEquipped(List<string> currentEquipped)
+        private bool IsArradiusLookEquipped(List<string> currentEquipped)
         {
-            foreach (string requiredSkin in officeLook)
+            foreach (string requiredSkin in arradiusLook)
             {
                 if (!currentEquipped.Contains(requiredSkin))
                 {
