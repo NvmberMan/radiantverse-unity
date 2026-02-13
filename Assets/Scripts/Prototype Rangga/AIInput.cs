@@ -199,7 +199,7 @@ namespace Main.Gameplay.AI
         {
             if (other.gameObject.CompareTag("Wall"))
             {
-                AddReward(-1.0f); // Penalti tabrak tapi tidak langsung mati (opsional)
+                AddReward(-1.0f);
                 EndEpisode();
             }
             else if (other.gameObject.CompareTag("Wall_low"))
@@ -212,6 +212,11 @@ namespace Main.Gameplay.AI
                 EndEpisode();
             }
             else if (other.gameObject.CompareTag("Sensor_void"))
+            {
+                AddReward(-5f);
+                EndEpisode();
+            }
+            else if (other.gameObject.CompareTag("Car_Move"))
             {
                 AddReward(-5f);
                 EndEpisode();
@@ -237,6 +242,11 @@ namespace Main.Gameplay.AI
                 AddReward(-0.5f);
             }
             else if (collision.gameObject.tag == "Sensor_void")
+            {
+                AddReward(-5f);
+                EndEpisode();
+            }
+            else if (collision.gameObject.CompareTag("Car_Move"))
             {
                 AddReward(-5f);
                 EndEpisode();

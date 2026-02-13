@@ -11,7 +11,7 @@ behaviors:
       num_epoch: 3
       learning_rate_schedule: linear
     checkpoint_interval: 100000
-    keep_checkpoints: 25
+    keep_checkpoints: 50
     network_settings:
       normalize: true # Diaktifkan agar sensor raycast/posisi lebih stabil
       hidden_units: 256
@@ -20,18 +20,18 @@ behaviors:
       extrinsic:
         gamma: 0.99
         strength: 1.0
-      gail:
-        strength: 0.5 # Kekuatan pengaruh demo terhadap "gaya" lari AI
-        gamma: 0.99
-        demo_path: Demo/DemoArena1RightW.demo #sesuaikan demo
+      # gail:
+      #   strength: 0.5 # Kekuatan pengaruh demo terhadap "gaya" lari AI
+      #   gamma: 0.99
+      #   demo_path: Demo/DemoArena1RightW.demo #sesuaikan demo
       curiosity: # Tetap gunakan curiosity agar AI mau eksplorasi jalan pintas
         strength: 0.02
         gamma: 0.99
         learning_rate: 0.0003
-    behavioral_cloning:
-      strength: 0.5 # Memberitahu AI: "Lakukan apa yang dilakukan manusia di demo"
-      demo_path: Demo/DemoArena1RightW.demo #sesuaikan demo
-      steps: 1000000 # BC biasanya dominan di awal pelatihan saja
-    max_steps: 2000000
+    # behavioral_cloning:
+    #   strength: 0.5 # Memberitahu AI: "Lakukan apa yang dilakukan manusia di demo"
+    #   demo_path: Demo/DemoArena1RightW.demo #sesuaikan demo
+    #   steps: 1000000 # BC biasanya dominan di awal pelatihan saja
+    max_steps: 5000000
     time_horizon: 128 # Ditingkatkan agar AI bisa melihat korelasi aksi yang lebih panjang
     summary_freq: 5000
