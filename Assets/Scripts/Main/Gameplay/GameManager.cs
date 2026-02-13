@@ -122,6 +122,7 @@ namespace Main.Gameplay
 
             Controller helpController = MenuManager.instance.GetController("help");
             helpController.Activate("help");
+            Debug.Log(helpController.name);
         }
 
         private void ApplyRandomBrain(GameObject agentObj, int index)
