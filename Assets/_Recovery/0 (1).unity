@@ -3765,6 +3765,13 @@ MonoBehaviour:
   - {fileID: 1170483268}
   inputEmail: {fileID: 551917797}
   inputPassword: {fileID: 426047457}
+  rememberMeToggle: {fileID: 0}
+  togglePasswordBtn: {fileID: 0}
+  eyeIcon: {fileID: 0}
+  eyeOpenSprite: {fileID: 0}
+  eyeClosedSprite: {fileID: 0}
+  googleLoginBtn: {fileID: 0}
+  webClientId: 230119757559-h7s33t3pl6j09a1760qlpe5622q6ce18.apps.googleusercontent.com
 --- !u!224 &464248487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5419,6 +5426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d8699edf572774787e713915621318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  IsDebug: 0
 --- !u!4 &751321858
 Transform:
   m_ObjectHideFlags: 0
@@ -6254,6 +6262,7 @@ MonoBehaviour:
   - {fileID: 1790713355}
   loadingTextView: {fileID: 1851179437}
   progressTextView: {fileID: 1052435298}
+  progressSliderView: {fileID: 0}
 --- !u!1 &833968903
 GameObject:
   m_ObjectHideFlags: 0
@@ -10685,6 +10694,7 @@ MonoBehaviour:
   viewList:
   - {fileID: 1665629913}
   - {fileID: 578867573}
+  dailyRewardAnimator: {fileID: 0}
 --- !u!1 &1221851325
 GameObject:
   m_ObjectHideFlags: 0
@@ -12996,6 +13006,15 @@ MonoBehaviour:
   - {fileID: 1862091050}
   inputEmail: {fileID: 1362960582}
   inputPassword: {fileID: 2123468758}
+  inputConfirmPassword: {fileID: 0}
+  togglePassBtn: {fileID: 0}
+  passEyeIcon: {fileID: 0}
+  toggleConfirmPassBtn: {fileID: 0}
+  confirmPassEyeIcon: {fileID: 0}
+  eyeOpenSprite: {fileID: 0}
+  eyeClosedSprite: {fileID: 0}
+  googleRegisterBtn: {fileID: 0}
+  webClientId: 230119757559-h7s33t3pl6j09a1760qlpe5622q6ce18.apps.googleusercontent.com
 --- !u!224 &1499508664 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8107979529889032721, guid: 76bf64a09b45b3a4ba73d60a6b56b881, type: 3}
