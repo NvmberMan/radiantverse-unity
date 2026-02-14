@@ -56,9 +56,9 @@ public class EntitySpawner : MonoBehaviour
                 {
                     ai.SetSpeed(selectedEntity.customSpeed);
                 }
-            }
-        }
-    }
+             }
+         }
+     }
 
     SpawnableEntity GetWeightedRandomEntity()
     {
