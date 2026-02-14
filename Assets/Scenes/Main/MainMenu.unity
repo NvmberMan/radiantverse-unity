@@ -5754,7 +5754,7 @@ MonoBehaviour:
       lockedObj: {fileID: 1540864502}
     - worldId: 
       mapId: map-003
-      mapName: Mall
+      mapName: MallRush
       mapDescription: Centul City
       mapSceneName: Level 3
       containerShowPosition: {x: 350, y: 0}

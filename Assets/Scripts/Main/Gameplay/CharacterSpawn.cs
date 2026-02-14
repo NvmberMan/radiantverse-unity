@@ -70,7 +70,7 @@ namespace Main.Gameplay
         }
         public void RespawnToStartPoint()
         {
-            transform.position = spawnPoint;
+            transform.position = startPoint;
         }
     }
 }

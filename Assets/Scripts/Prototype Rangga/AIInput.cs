@@ -11,6 +11,7 @@ namespace Main.Gameplay.AI
         public Transform currentTarget;
         public int checkpointIndex;
         public int wayIndex;
+        public bool restartToCheckpoint = false;
 
         [SerializeField] private Transform raySensorRoot;
         [SerializeField] private LayerMask groundMask;
@@ -49,15 +50,22 @@ namespace Main.Gameplay.AI
                 return;
             }
 
-            checkpointIndex = 0;
-            currentTarget = env.ways[wayIndex].targetPoints[0].transform;
 
-            CharacterSpawn.RespawnToStartPoint();
+
+            if(restartToCheckpoint) {
+                CharacterSpawn.RespawnToCheckpoint();
+            }
+            else
+            {
+                checkpointIndex = 0;
+                CharacterSpawn.RespawnToStartPoint();
+            }
+            currentTarget = env.ways[wayIndex].targetPoints[checkpointIndex].transform;
 
             previousDistanceToTarget = Vector3.Distance(
-                transform.position,
-                currentTarget.position
-            );
+                    transform.position,
+                    currentTarget.position
+                );
         }
 
 
@@ -108,7 +116,7 @@ namespace Main.Gameplay.AI
 
             if (moveDir.magnitude > 0.1f)
             {
-                CharacterMovement.MoveToDir(moveDir, moveDir.x);
+                CharacterMovement.MoveToDir(moveDir.normalized, moveDir.x);
             }
             else
             {

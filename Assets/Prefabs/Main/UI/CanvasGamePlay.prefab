@@ -2581,7 +2581,7 @@ RectTransform:
   m_Father: {fileID: 3308764408137018146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3572,7 +3572,7 @@ MonoBehaviour:
   - rank: 1
     exp: 60
     arradiusDollar: 50
-    mapUnlockedName: BLI - RTB
+    mapUnlockedName: Wellbit
     mapWorldKey: world-001__map-002
     mapUnlockedImage: {fileID: 21300000, guid: 5d28cb110cd4c5f48b545626ccb72d80, type: 3}
   - rank: 2
@@ -9656,7 +9656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1433608848470061811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10911,7 +10911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6500095655692241898
 RectTransform:
   m_ObjectHideFlags: 0
