@@ -5735,27 +5735,33 @@ MonoBehaviour:
     - worldId: 
       mapId: map-001
       mapName: R2B
-      mapDescription: Berangkat ke BLI
+      mapDescription: Centul City
       mapSceneName: Level 1
       containerShowPosition: {x: -80, y: 240}
       mapPreview: {fileID: 21300000, guid: c780f7bffdd43444ba56d57f3536405f, type: 3}
       clickButton: {fileID: 906586954}
+      unlockedObj: {fileID: 1293013070}
+      lockedObj: {fileID: 1128482866}
     - worldId: 
       mapId: map-002
-      mapName: BLI  - Tambud
-      mapDescription: Hidup Sehat
+      mapName: Wellbit
+      mapDescription: Centul City
       mapSceneName: Level 2
       containerShowPosition: {x: -530, y: 110}
       mapPreview: {fileID: 21300000, guid: 5d28cb110cd4c5f48b545626ccb72d80, type: 3}
       clickButton: {fileID: 1495359261}
+      unlockedObj: {fileID: 162579298}
+      lockedObj: {fileID: 1540864502}
     - worldId: 
       mapId: map-003
-      mapName: Tambud - Aeon
-      mapDescription: Healing tapi ga hilang
+      mapName: Mall
+      mapDescription: Centul City
       mapSceneName: Level 3
       containerShowPosition: {x: 350, y: 0}
       mapPreview: {fileID: 21300000, guid: d8a48cea30584384fa912309bbada060, type: 3}
       clickButton: {fileID: 816761942}
+      unlockedObj: {fileID: 1552708231}
+      lockedObj: {fileID: 445574189}
 --- !u!1 &300471175
 GameObject:
   m_ObjectHideFlags: 0
@@ -8486,6 +8492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 445045039}
+  - component: {fileID: 445045040}
   m_Layer: 5
   m_Name: Level 3 Button
   m_TagString: Untagged
@@ -8514,6 +8521,20 @@ RectTransform:
   m_AnchoredPosition: {x: 350, y: -109}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &445045040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445045038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e646dce39e22a3449b8fed803ddfea2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelButton
+  LockedObject: {fileID: 445574189}
+  UnlockedObject: {fileID: 1552708231}
 --- !u!1 &445296446
 GameObject:
   m_ObjectHideFlags: 0
@@ -21567,6 +21588,7 @@ GameObject:
   - component: {fileID: 999000818}
   - component: {fileID: 999000820}
   - component: {fileID: 999000819}
+  - component: {fileID: 999000821}
   m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
@@ -21632,6 +21654,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999000817}
   m_CullTransparentMesh: 1
+--- !u!114 &999000821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999000817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 999000819}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1001152778
 GameObject:
   m_ObjectHideFlags: 0
@@ -25335,6 +25401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169511185}
+  - component: {fileID: 1169511186}
   m_Layer: 5
   m_Name: Level 1 Button
   m_TagString: Untagged
@@ -25363,6 +25430,20 @@ RectTransform:
   m_AnchoredPosition: {x: -141, y: 94}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1169511186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169511184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e646dce39e22a3449b8fed803ddfea2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  LockedObject: {fileID: 1128482866}
+  UnlockedObject: {fileID: 1293013070}
 --- !u!1 &1169735175
 GameObject:
   m_ObjectHideFlags: 0
@@ -32144,6 +32225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522179273}
+  - component: {fileID: 1522179274}
   m_Layer: 5
   m_Name: Level 2 Button
   m_TagString: Untagged
@@ -32172,6 +32254,20 @@ RectTransform:
   m_AnchoredPosition: {x: -619, y: -27}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1522179274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522179272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e646dce39e22a3449b8fed803ddfea2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelButton
+  LockedObject: {fileID: 445045038}
+  UnlockedObject: {fileID: 162579298}
 --- !u!1 &1524301385
 GameObject:
   m_ObjectHideFlags: 0
@@ -37235,6 +37331,7 @@ GameObject:
   - component: {fileID: 1693513638}
   - component: {fileID: 1693513640}
   - component: {fileID: 1693513639}
+  - component: {fileID: 1693513641}
   m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
@@ -37300,6 +37397,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693513637}
   m_CullTransparentMesh: 1
+--- !u!114 &1693513641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693513637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1693513639}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1703266519
 GameObject:
   m_ObjectHideFlags: 0

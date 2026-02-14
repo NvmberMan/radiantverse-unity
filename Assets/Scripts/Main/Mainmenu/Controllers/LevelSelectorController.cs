@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.LightTransport;
 using UnityEngine.UI;
 
 namespace Main.Mainmenu {
@@ -7,14 +8,38 @@ namespace Main.Mainmenu {
     {
         public List<World> worldList = new List<World>();
 
-        private void Start()
+
+
+        public override void Activate(string targetView)
         {
+            base.Activate(targetView);
+
+            List<string> mapUnlocked = PlayerLocalData.playerStats.MapUnlocked;
+
             foreach (World world in worldList)
             {
-                foreach(Map map in world.worldMap)
+                foreach (Map map in world.worldMap)
                 {
                     map.worldId = world.worldId;
 
+                    bool unlocked = false;
+
+                    foreach (string mapWorld in mapUnlocked)
+                    {
+                        string worldId = mapWorld.Split("__")[0];
+                        string mapId = mapWorld.Split("__")[1];
+
+                        if (worldId == world.worldId && mapId == map.mapId)
+                        {
+                            unlocked = true;
+                            break;
+                        }
+                    }
+
+                    map.unlockedObj.SetActive(unlocked);
+                    map.lockedObj.SetActive(!unlocked);
+
+                    map.clickButton.onClick.RemoveAllListeners();
                     map.clickButton.onClick.AddListener(() =>
                     {
                         ShowMapDetail(map);
@@ -22,6 +47,8 @@ namespace Main.Mainmenu {
                 }
             }
         }
+
+
         public void ShowMapDetail(Map map)
         {
             World world = worldList.Find((t) => t.worldId == map.worldId);
@@ -90,5 +117,7 @@ namespace Main.Mainmenu {
 
         [Space(10)]
         public Button clickButton;
+        public GameObject unlockedObj;
+        public GameObject lockedObj;
     }
 }

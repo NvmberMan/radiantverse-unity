@@ -17,15 +17,19 @@ namespace Main.Mainmenu
         public float showSummaryDelay = 2f;
         public float showAchievementDelay = 2f;
 
+        public GameObject GoalEffectView;
+
         public void GameEnded(int rank)
         {
             GameManager.Instance.isPaused = true;
             StartCoroutine(InitializedSummary(rank));
+
+            GoalEffectView.SetActive(true);
         }
 
         IEnumerator InitializedSummary(int rank)
         {
-            AudioManager.Instance.PlaySFX("power up");
+            AudioManager.Instance.PlaySFX("game finish");
 
             if (PlayerLocalData.inventoryData != null)
             {
@@ -46,15 +50,19 @@ namespace Main.Mainmenu
             RankReward reward = rankRewards.Find((r) => r.rank == rank);
 
             rankPreviewView.Show();
-            rankPreviewView.UpdatePreview(reward.rankPreviewImage);
+            rankPreviewView.UpdatePreview(rank);
 
 
             if (reward.mapUnlockedName != null && reward.mapUnlockedName != "null")
             {
-                FirestoreModel.UnlockMap(reward.mapWorldKey);
-                FirestoreModel.AddExperience(reward.exp);
-                FirestoreModel.AddArradiusDollar(reward.arradiusDollar);
-                FirestoreModel.RecordMapWin(reward.mapWorldKey);
+                if(PlayerLocalData.userData != null)
+                {
+                    FirestoreModel.UnlockMap(reward.mapWorldKey);
+                    FirestoreModel.AddExperience(reward.exp);
+                    FirestoreModel.AddArradiusDollar(reward.arradiusDollar);
+                    FirestoreModel.RecordMapWin(reward.mapWorldKey);
+                }
+
 
                 yield return new WaitForSeconds(showUnlockedMapDelay);
                 rankPreviewView.Hide();
@@ -62,6 +70,8 @@ namespace Main.Mainmenu
                 UnlockedNewArenaView unlockedNewArenaView = (UnlockedNewArenaView)GetView("unlocked new arena");
                 unlockedNewArenaView.UpdatePreview(reward.mapUnlockedImage);
                 unlockedNewArenaView.Show();
+                AudioManager.Instance.PlaySFX("level unlocked");
+
 
                 yield return new WaitForSeconds(showSummaryDelay);
                 unlockedNewArenaView.Hide();
@@ -69,6 +79,8 @@ namespace Main.Mainmenu
                 WinPopupView winPopupView = (WinPopupView)GetView("win popup");
                 winPopupView.UpdateSummary(reward.exp, reward.arradiusDollar, reward.mapUnlockedName);
                 winPopupView.Show();
+
+                GoalEffectView.SetActive(false);
             }
             else
             {
@@ -76,7 +88,7 @@ namespace Main.Mainmenu
                 rankPreviewView.Hide();
 
                 LosePopupView losePopupView = (LosePopupView)GetView("lose popup");
-                losePopupView.UpdateSummary(reward.exp, reward.arradiusDollar, reward.rankPreviewImage);
+                losePopupView.UpdateSummary(reward.exp, reward.arradiusDollar, rank);
                 losePopupView.Show();
             }
         }
@@ -98,7 +110,6 @@ namespace Main.Mainmenu
         public int rank;
         public int exp;
         public int arradiusDollar;
-        public Sprite rankPreviewImage;
 
         [Header("Unlocked Arena")]
         public string mapUnlockedName = null;
