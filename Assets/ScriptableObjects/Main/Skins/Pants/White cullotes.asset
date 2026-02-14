@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
   displayName: White Cullotes
   icon: {fileID: 21300000, guid: 35ebdf2e2c74b7747a95be90d1a5bf40, type: 3}
-  price: 0
+  price: 50
   spineSkinName: pants/White cullotes
   category: pants

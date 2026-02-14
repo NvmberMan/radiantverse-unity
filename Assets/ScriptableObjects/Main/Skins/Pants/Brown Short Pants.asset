@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
   displayName: Brown Short Pants
   icon: {fileID: 21300000, guid: 7634b73cd528d0041b4cf66056f9dbfd, type: 3}
-  price: 0
+  price: 50
   spineSkinName: pants/Brown short pants
   category: pants

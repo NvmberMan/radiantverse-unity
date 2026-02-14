@@ -19044,6 +19044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &215620141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22236,6 +22237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &257016769
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24746,6 +24748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &263705445
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36323,6 +36326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &396059912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37041,7 +37045,7 @@ PrefabInstance:
       objectReference: {fileID: 824849394}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_VersionIndex
-      value: 1577
+      value: 1583
       objectReference: {fileID: 0}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -87503,6 +87507,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sign (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2011006238139984236, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e748692a2e3e6ca4da2991e0fd0edc41, type: 2}
     - target: {fileID: 2749667696473940819, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -87513,7 +87521,7 @@ PrefabInstance:
       objectReference: {fileID: 1054921262}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_VersionIndex
-      value: 1577
+      value: 1583
       objectReference: {fileID: 0}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -90343,6 +90351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &803750566
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -186741,19 +186750,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.622
+      value: 33.507
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.552
+      value: 2.308
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 85.705
+      value: 85.981
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.84808254
+      value: 0.62762964
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalRotation.x
@@ -186761,7 +186770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.52986425
+      value: 0.7785121
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalRotation.z
@@ -186773,7 +186782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 63.993
+      value: 102.249
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -186783,6 +186792,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sign (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2011006238139984236, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 897abb859912b6f42956a301fa278b1e, type: 2}
     - target: {fileID: 2749667696473940819, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -186793,7 +186806,7 @@ PrefabInstance:
       objectReference: {fileID: 741422997}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_VersionIndex
-      value: 1577
+      value: 1583
       objectReference: {fileID: 0}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -188190,6 +188203,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sign (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2011006238139984236, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 46f46c31d93e94342931f7fcd83f96d4, type: 2}
     - target: {fileID: 2749667696473940819, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -188200,7 +188217,7 @@ PrefabInstance:
       objectReference: {fileID: 1406256589}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_VersionIndex
-      value: 1596
+      value: 1602
       objectReference: {fileID: 0}
     - target: {fileID: 8116463270550025252, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_Mesh
@@ -188707,6 +188724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &1124568314
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -224523,6 +224541,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sign (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2011006238139984236, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e748692a2e3e6ca4da2991e0fd0edc41, type: 2}
     - target: {fileID: 2749667696473940819, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -224533,7 +224555,7 @@ PrefabInstance:
       objectReference: {fileID: 891940586}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_VersionIndex
-      value: 1577
+      value: 1583
       objectReference: {fileID: 0}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -225126,6 +225148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &1375499153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -225935,7 +225958,7 @@ PrefabInstance:
       objectReference: {fileID: 298081298}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_VersionIndex
-      value: 1577
+      value: 1583
       objectReference: {fileID: 0}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -241023,10 +241046,10 @@ MonoBehaviour:
         z: 4.5185237
       Rotation:
         value:
-          x: 0.25853604
-          y: 0.34470448
-          z: -0.24939355
-          w: 0.8672606
+          x: 0.25853598
+          y: 0.3447045
+          z: -0.24939354
+          w: 0.8672605
     - Position:
         x: 16.385338
         y: -26.124718
@@ -241041,9 +241064,9 @@ MonoBehaviour:
         z: 4.5344057
       Rotation:
         value:
-          x: 0.25200424
-          y: 0.25922388
-          z: -0.05085415
+          x: 0.25200427
+          y: 0.25922385
+          z: -0.05085416
           w: 0.930973
     - Position:
         x: 22.997547
@@ -241059,9 +241082,9 @@ MonoBehaviour:
         z: 2.730148
       Rotation:
         value:
-          x: 0.33396077
+          x: 0.3339607
           y: 0.7616292
-          z: -0.12430457
+          z: -0.124304526
           w: 0.5412388
     - Position:
         x: 28.727463
@@ -241098,7 +241121,7 @@ MonoBehaviour:
           x: 0.28395298
           y: 0.62069255
           z: -0.27400076
-          w: 0.6775212
+          w: 0.67752117
     - Position:
         x: 41.90887
         y: -50.108536
@@ -241113,7 +241136,7 @@ MonoBehaviour:
         z: 2.3435917
       Rotation:
         value:
-          x: 0.5521981
+          x: 0.55219805
           y: 0.3486767
           z: 0.23679402
           w: 0.7193264
@@ -241133,8 +241156,8 @@ MonoBehaviour:
         value:
           x: 0.3940352
           y: 0.59535617
-          z: -0.08582795
-          w: 0.6949251
+          z: -0.085827984
+          w: 0.69492507
     - Position:
         x: 53.181915
         y: -59.503754
@@ -244817,6 +244840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &1517178210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -256322,6 +256346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sign (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2011006238139984236, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f73f44791c2bd94db05d6be7c327314, type: 2}
     - target: {fileID: 2749667696473940819, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -256332,7 +256360,7 @@ PrefabInstance:
       objectReference: {fileID: 938578164}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_VersionIndex
-      value: 1577
+      value: 1583
       objectReference: {fileID: 0}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -257297,6 +257325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &1658922145
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -259561,7 +259590,7 @@ PrefabInstance:
       objectReference: {fileID: 1720620255}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_VersionIndex
-      value: 1577
+      value: 1583
       objectReference: {fileID: 0}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -301005,6 +301034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &1997534477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -306862,6 +306892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!65 &2008443209
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -336350,10 +336381,10 @@ PrefabInstance:
     - target: {fileID: 6637567922210509495, guid: 8e8d5b71a65252645987f68f5a785aaf, type: 3}
       propertyPath: skeletonDataAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
+      objectReference: {fileID: 11400000, guid: 53c23b27457778d46ac81ec2d82573e5, type: 2}
     - target: {fileID: 8805963432222860398, guid: 8e8d5b71a65252645987f68f5a785aaf, type: 3}
       propertyPath: acceleration
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8805963432222860398, guid: 8e8d5b71a65252645987f68f5a785aaf, type: 3}
       propertyPath: fallAnimation
@@ -336365,7 +336396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8805963432222860398, guid: 8e8d5b71a65252645987f68f5a785aaf, type: 3}
       propertyPath: airAcceleration
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8805963432222860398, guid: 8e8d5b71a65252645987f68f5a785aaf, type: 3}
       propertyPath: groundLayer.m_Bits
@@ -336815,6 +336846,10 @@ PrefabInstance:
       propertyPath: GoalEffectView
       value: 
       objectReference: {fileID: 1808900716}
+    - target: {fileID: 5968028201704021134, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: cameraMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7038682512563627632, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -336894,6 +336929,10 @@ PrefabInstance:
     - target: {fileID: 7038682512563627632, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7743858178799246287, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7770880810202572507, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_Name
@@ -337218,7 +337257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9891372
+      value: 0.9986004
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalRotation.x
@@ -337226,7 +337265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.14699559
+      value: 0.05288963
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalRotation.z
@@ -337238,7 +337277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -16.906
+      value: 6.064
       objectReference: {fileID: 0}
     - target: {fileID: 112182745550535249, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -337248,6 +337287,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sign
       objectReference: {fileID: 0}
+    - target: {fileID: 2011006238139984236, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f73f44791c2bd94db05d6be7c327314, type: 2}
     - target: {fileID: 2749667696473940819, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -337258,7 +337301,7 @@ PrefabInstance:
       objectReference: {fileID: 1104242781}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_VersionIndex
-      value: 1577
+      value: 1583
       objectReference: {fileID: 0}
     - target: {fileID: 4844345565294156535, guid: 693183d27f0b5a941bee76a16e9ba865, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -338403,6 +338446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
   detector: 0
+  targetType: 2
 --- !u!1001 &8158430781591390469
 PrefabInstance:
   m_ObjectHideFlags: 0

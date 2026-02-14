@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
   displayName: Short Hair
   icon: {fileID: 21300000, guid: 16052baef96d80745aa12786b31473ec, type: 3}
-  price: 0
+  price: 35
   spineSkinName: hairs/short bob with bangs
   category: hairs

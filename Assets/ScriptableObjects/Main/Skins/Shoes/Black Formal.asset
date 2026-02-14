@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
   displayName: Black Formal Shoes
   icon: {fileID: 21300000, guid: 6440eaf9e8a05d84fb56c45d7d862f5e, type: 3}
-  price: 0
+  price: 60
   spineSkinName: shoes/Black-formal
   category: shoes

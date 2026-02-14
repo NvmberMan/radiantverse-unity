@@ -22,6 +22,8 @@ public class PlayerPowerUpController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.isPaused) return;
+
         if (!isActive) return;
 
         timer -= Time.deltaTime;

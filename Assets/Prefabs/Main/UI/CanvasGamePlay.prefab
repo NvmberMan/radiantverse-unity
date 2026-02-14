@@ -1738,6 +1738,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: button click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1025997719242544113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,7 +2593,7 @@ RectTransform:
   m_Father: {fileID: 3308764408137018146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3570,32 +3582,32 @@ MonoBehaviour:
   - {fileID: 4597053073380797033}
   rankRewards:
   - rank: 1
-    exp: 60
-    arradiusDollar: 50
-    mapUnlockedName: Wellbit
+    exp: 50
+    arradiusDollar: 40
+    mapUnlockedName: WellBit
     mapWorldKey: world-001__map-002
     mapUnlockedImage: {fileID: 21300000, guid: 5d28cb110cd4c5f48b545626ccb72d80, type: 3}
   - rank: 2
-    exp: 50
-    arradiusDollar: 40
-    mapUnlockedName: null
-    mapWorldKey: 
-    mapUnlockedImage: {fileID: 0}
-  - rank: 3
     exp: 40
     arradiusDollar: 30
     mapUnlockedName: null
     mapWorldKey: 
     mapUnlockedImage: {fileID: 0}
-  - rank: 4
+  - rank: 3
     exp: 30
     arradiusDollar: 20
     mapUnlockedName: null
     mapWorldKey: 
     mapUnlockedImage: {fileID: 0}
-  - rank: 5
+  - rank: 4
     exp: 20
     arradiusDollar: 10
+    mapUnlockedName: null
+    mapWorldKey: 
+    mapUnlockedImage: {fileID: 0}
+  - rank: 5
+    exp: 10
+    arradiusDollar: 5
     mapUnlockedName: null
     mapWorldKey: 
     mapUnlockedImage: {fileID: 0}
@@ -3893,7 +3905,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
@@ -7481,7 +7493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 65e98b9464fe69040947c22213c45095, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd4bc427202dddb44804cfea251047a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8045,6 +8057,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: button click
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &4672864281949530188
@@ -8665,7 +8689,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e9547f42d32c9b54db89230d5586c7d6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68558c39cd28c724f93b45f80ddc4f57, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8890,7 +8914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fd4bc427202dddb44804cfea251047a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 65e98b9464fe69040947c22213c45095, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -9656,7 +9680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1433608848470061811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10222,7 +10246,7 @@ MonoBehaviour:
   maxZoom: 1.5
   zoomSmoothing: 10
   sensitivitySlider: {fileID: 4028452340329457618}
-  joystickToggle: {fileID: 0}
+  joystickToggle: {fileID: 216828516717393177}
   zoomSpeedSlider: {fileID: 1551703002520109968}
   activeJoystick: {fileID: 0}
 --- !u!1 &6501833712352281122
@@ -10472,7 +10496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 68558c39cd28c724f93b45f80ddc4f57, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e9547f42d32c9b54db89230d5586c7d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -10911,7 +10935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6500095655692241898
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11197,6 +11221,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: button click
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7186659452094070970
@@ -13551,7 +13587,7 @@ GameObject:
   - component: {fileID: 3518937490776534366}
   - component: {fileID: 8535701311239289266}
   - component: {fileID: 5418914321721130296}
-  - component: {fileID: 4605964159601105113}
+  - component: {fileID: 3646483801401024463}
   m_Layer: 5
   m_Name: Base
   m_TagString: Untagged
@@ -13617,7 +13653,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4605964159601105113
+--- !u!114 &3646483801401024463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13626,11 +13662,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8754822274553229157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3437ac28440c2564eaab2c9d201b0c30, type: 3}
+  m_Script: {fileID: 11500000, guid: ef5ef653e6983d940b052a06f6367cb4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.View
+  m_EditorClassIdentifier: '::'
   id: base
   panel: {fileID: 8754822274553229157}
+  joystickToggle: {fileID: 216828516717393177}
 --- !u!1 &8831141181671267130
 GameObject:
   m_ObjectHideFlags: 0
@@ -13942,7 +13979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.PauseController
   id: pause
   viewList:
-  - {fileID: 4605964159601105113}
+  - {fileID: 3646483801401024463}
   musicSlider: {fileID: 5261726612336574958}
   sfxSlider: {fileID: 2747137749627463674}
 --- !u!1 &9057310222161057774

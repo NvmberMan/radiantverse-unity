@@ -1,5 +1,6 @@
-using UnityEngine;
+using Main.Gameplay;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EntitySpawner : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class EntitySpawner : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.isPaused)
+            return;
+
         timer += Time.deltaTime;
         if (timer >= spawnInterval)
         {

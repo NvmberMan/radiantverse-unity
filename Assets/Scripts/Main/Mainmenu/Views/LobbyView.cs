@@ -65,12 +65,6 @@ namespace Main.Mainmenu
                     FirestoreModel.UnlockAchievement("Ascension");
                     MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Ascension");
                 }
-
-                //if (PlayerLocalData.playerStats.Level >= 5 && !AchievementManager.Instance.CheckAchievement("Ascension"))
-                //{
-                //    FirestoreModel.UnlockAchievement("Ascension");
-                //    MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Ascension");
-                //}
             }
         }
 
@@ -87,6 +81,7 @@ namespace Main.Mainmenu
                 
                 experienceText.text = PlayerLocalData.playerStats.Experience.ToString() + "/" + ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Max;
                 dailyRewardView.dailyStreak = PlayerLocalData.playerStats.DailyStreak;
+                dailyRewardView.claimedDay = PlayerLocalData.playerStats.LastClaimedDay;
             }
             else
             {
@@ -99,6 +94,7 @@ namespace Main.Mainmenu
                     arradiusDollarView.text = stats.ArradiusDollar.ToString();
                     levelText.text = stats.Level.ToString();
                     dailyRewardView.dailyStreak = stats.DailyStreak;
+                    dailyRewardView.claimedDay = stats.LastClaimedDay;
 
                     experienceSlider.minValue = ExpManager.instance.expList[stats.Level - 1].Min;
                     experienceSlider.maxValue = ExpManager.instance.expList[stats.Level - 1].Max;

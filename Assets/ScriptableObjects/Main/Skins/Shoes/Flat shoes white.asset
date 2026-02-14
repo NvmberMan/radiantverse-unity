@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
   displayName: Flat shoes white
   icon: {fileID: 21300000, guid: 8341bd017959b3e4ea335f3e483c0517, type: 3}
-  price: 0
+  price: 60
   spineSkinName: shoes/Flat shoes white
   category: shoes

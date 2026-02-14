@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
   displayName: Cream Formal
   icon: {fileID: 21300000, guid: 106133ec27b4ef0428b9d4d0122806e7, type: 3}
-  price: 0
+  price: 50
   spineSkinName: pants/Cream-formal
   category: pants

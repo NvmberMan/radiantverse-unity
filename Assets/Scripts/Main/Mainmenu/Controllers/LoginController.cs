@@ -4,6 +4,7 @@ using Google;
 using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI; // Penting untuk Toggle dan Button
 
@@ -318,11 +319,18 @@ namespace Main.Mainmenu
         {
             bool done = false;
             FirestoreModel.GetPlayerStats(user,
-                data => { PlayerLocalData.playerStats = data; onSuccess(); done = true; },
+                data => {
+                    PlayerLocalData.playerStats = data; 
+                    onSuccess(); done = true;
+
+                    FirestoreModel.CheckDailyReward();
+                },
                 err => { onError(err); done = true; }
             );
             while (!done) { yield return null; }
         }
+
+
 
         private IEnumerator WaitForInventoryData(FirebaseUser user, System.Action onSuccess, System.Action<string> onError)
         {

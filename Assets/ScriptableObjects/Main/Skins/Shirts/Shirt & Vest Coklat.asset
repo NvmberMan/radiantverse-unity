@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AccessoryData
   displayName: Shirt & Vest Coklat
   icon: {fileID: 21300000, guid: a600129072fd5084284d0b101fd348dd, type: 3}
-  price: 0
+  price: 60
   spineSkinName: shirts/Shirt&vest-coklat
   category: shirts

@@ -124,6 +124,8 @@ GameObject:
   - component: {fileID: 2647163207561690517}
   - component: {fileID: 3660619171140402175}
   - component: {fileID: 2192317488107263710}
+  - component: {fileID: 8576747325490939575}
+  - component: {fileID: 187300751285884428}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Car_Move
@@ -224,6 +226,32 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: f211eaef26f10ca40814f80ffb5f0d38, type: 2}
+--- !u!114 &8576747325490939575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2181407667390717469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dfda4099a4ab04dab09966b17b400f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.RespawnObstacle
+--- !u!114 &187300751285884428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2181407667390717469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c429db05dacaf124badc0fa5696fce3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.ObstacleHandler
+  detector: 0
+  targetType: 0
 --- !u!1 &3830760563625493754
 GameObject:
   m_ObjectHideFlags: 0

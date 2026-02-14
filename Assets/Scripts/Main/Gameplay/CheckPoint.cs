@@ -8,6 +8,7 @@ namespace Main.Gameplay
     {
         private HashSet<GameObject> visitors = new HashSet<GameObject>();
         public int nextTargetPoint;
+        public int nextWayPoint;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -26,6 +27,7 @@ namespace Main.Gameplay
         private void RegisterCheckpoint(GameObject character)
         {
             CharacterSpawn spawner = character.GetComponent<CharacterSpawn>();
+            RacerProgress racerProgress = character.GetComponent<RacerProgress>();
 
             if (spawner != null)
             {
@@ -34,6 +36,11 @@ namespace Main.Gameplay
                 visitors.Add(character);
 
                 Debug.Log($"{character.name} (Tag: {character.tag}) berhasil ambil checkpoint.");
+            }
+
+            if(racerProgress != null)
+            {
+                racerProgress.resetWayPointIndex = nextWayPoint;
             }
         }
     }
