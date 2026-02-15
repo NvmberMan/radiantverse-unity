@@ -115,13 +115,15 @@ namespace Main.Mainmenu
             return false;
         }
 
-        public static async void ChangePassword(
+        // Gunakan Task, bukan void agar bisa di-await dengan benar
+        public static async Task ChangePassword(
             string oldPassword,
             string newPassword,
             Action onSuccess,
             Action<string> onError)
         {
-            FirebaseUser user = AuthManager.instance.CurrentUser;
+            // Ambil referensi user di awal
+            FirebaseUser user = AuthManager.instance?.CurrentUser;
 
             if (user == null)
             {
@@ -138,19 +140,62 @@ namespace Main.Mainmenu
                         onError?.Invoke("Old password is required.");
                         return;
                     }
+
+                    // Pastikan email tersedia
+                    if (string.IsNullOrEmpty(user.Email))
+                    {
+                        onError?.Invoke("User email not found.");
+                        return;
+                    }
+
                     Credential credential = EmailAuthProvider.GetCredential(user.Email, oldPassword);
+
+                    // Reauthenticate wajib dilakukan untuk operasi sensitif
                     await user.ReauthenticateAsync(credential);
                 }
 
+                // Lakukan update password
                 await user.UpdatePasswordAsync(newPassword);
 
+                // Tambahkan pengecekan null sebelum invoke callback
                 onSuccess?.Invoke();
+            }
+            catch (FirebaseException ex)
+            {
+                string userFriendlyMessage;
+
+                switch ((AuthError)ex.ErrorCode)
+                {
+                    case AuthError.WrongPassword:
+                        userFriendlyMessage = "The old password you entered is incorrect.";
+                        break;
+                    case AuthError.WeakPassword:
+                        userFriendlyMessage = "The new password is too weak. Please use a stronger combination of characters.";
+                        break;
+                    case AuthError.UserNotFound:
+                        userFriendlyMessage = "Account session not found. Please log in again.";
+                        break;
+                    case AuthError.NetworkRequestFailed:
+                        userFriendlyMessage = "Network error. Please check your internet connection and try again.";
+                        break;
+                    case AuthError.TooManyRequests:
+                        userFriendlyMessage = "Too many attempts. Please try again later.";
+                        break;
+                    default:
+                        userFriendlyMessage = "An error occurred while changing your password. Please try again later.";
+                        break;
+                }
+
+                onError?.Invoke(userFriendlyMessage);
             }
             catch (Exception ex)
             {
-                onError?.Invoke(ex.Message);
+                onError?.Invoke("A system error occurred. Please restart the application.");
+                Debug.LogError($"Technical Error: {ex.Message}");
             }
         }
+
+
 
         public static void SendPasswordReset(string email, Action onSuccess, Action<string> onError)
         {

@@ -11,10 +11,46 @@ namespace Main.Mainmenu
         [SerializeField] private GameObject oldPasswordGroup;
         public Button submitButton;
 
+        [Header("Password Visibility (New)")]
+        [SerializeField] private Button toggleOldPassBtn;
+        [SerializeField] private Image oldPassEyeIcon;
+        [Space]
+        [SerializeField] private Button toggleNewPassBtn;
+        [SerializeField] private Image newPassEyeIcon;
+        [Space]
+        [SerializeField] private Sprite eyeOpenSprite;
+        [SerializeField] private Sprite eyeClosedSprite;
+
+        private bool isOldPassVisible = false;
+        private bool isNewPassVisible = false;
+
         private void Start()
         {
             submitButton.onClick.AddListener(Submit);
 
+            // Setup listener untuk tombol intip password (Sama persis dengan Register)
+            if (toggleOldPassBtn != null)
+                toggleOldPassBtn.onClick.AddListener(() => ToggleVisibility(ref isOldPassVisible, oldPasswordField, oldPassEyeIcon));
+
+            if (toggleNewPassBtn != null)
+                toggleNewPassBtn.onClick.AddListener(() => ToggleVisibility(ref isNewPassVisible, newPasswordField, newPassEyeIcon));
+
+        }
+
+        private void ToggleVisibility(ref bool isVisible, TMP_InputField input, Image icon)
+        {
+            isVisible = !isVisible;
+
+            input.contentType = isVisible ?
+                TMP_InputField.ContentType.Standard :
+                TMP_InputField.ContentType.Password;
+
+            input.ForceLabelUpdate();
+
+            if (icon != null && eyeOpenSprite != null && eyeClosedSprite != null)
+            {
+                icon.sprite = isVisible ? eyeOpenSprite : eyeClosedSprite;
+            }
         }
 
         private void OnEnable()
@@ -50,20 +86,22 @@ namespace Main.Mainmenu
             AuthModel.ChangePassword(
                 oldPass,
                 newPass,
-                () =>
-                {
-                    HideLoading();
-                    submitButton.interactable = true;
-
-                    ShowSuccess("Password berhasil diganti!", "");
+                () => {
+                    // Gunakan dispatcher agar UI tidak crash/error null
+                    UnityMainThreadDispatcher.Instance.Enqueue(() => {
+                        HideLoading();
+                        submitButton.interactable = true;
+                        ShowSuccess("Password berhasil diganti!", "");
+                    });
                 },
-                (error) =>
-                {
-                    HideLoading();
-                    submitButton.interactable = true;
-
-                    ShowError("Gagal", error);
-                });
+                (error) => {
+                    UnityMainThreadDispatcher.Instance.Enqueue(() => {
+                        HideLoading();
+                        submitButton.interactable = true;
+                        ShowError("Gagal", error);
+                    });
+                }
+            );
         }
 
 
