@@ -207,6 +207,10 @@ namespace Main.Gameplay.AI
         {
             if (other.gameObject.CompareTag("Wall"))
             {
+                if (RemoteTestManager.Instance != null)
+                {
+                    RemoteTestManager.Instance.LogDeath();
+                }
                 AddReward(-1.0f);
                 //EndEpisode();
             }
@@ -216,16 +220,28 @@ namespace Main.Gameplay.AI
             }
             else if (other.gameObject.CompareTag("Wall_high"))
             {
+                if (RemoteTestManager.Instance != null)
+                {
+                    RemoteTestManager.Instance.LogDeath();
+                }
                 AddReward(-2.0f);
                 //EndEpisode();
             }
             else if (other.gameObject.CompareTag("Sensor_void"))
             {
+                if (RemoteTestManager.Instance != null)
+                {
+                    RemoteTestManager.Instance.LogDeath();
+                }
                 AddReward(-5f);
                 //EndEpisode();
             }
             else if (other.gameObject.CompareTag("Car_Move"))
             {
+                if (RemoteTestManager.Instance != null)
+                {
+                    RemoteTestManager.Instance.LogDeath();
+                }
                 AddReward(-5f);
                 EndEpisode();
             }
@@ -254,11 +270,19 @@ namespace Main.Gameplay.AI
             }
             else if (collision.gameObject.tag == "Sensor_void")
             {
+                if (RemoteTestManager.Instance != null)
+                {
+                    RemoteTestManager.Instance.LogDeath();
+                }
                 AddReward(-5f);
                 //EndEpisode();
             }
             else if (collision.gameObject.CompareTag("Car_Move"))
             {
+                if (RemoteTestManager.Instance != null)
+                {
+                    RemoteTestManager.Instance.LogDeath();
+                }
                 AddReward(-5f);
                 EndEpisode();
             }
