@@ -177,14 +177,19 @@ public class RemoteTestManager : MonoBehaviour
 
     }
 
-    public void QuitGame()
+    public void CloseReportPanel()
     {
-        Debug.Log("Quit Game Triggered"); // Cek di Console editor
-        Application.Quit();
+        // 1. Sembunyikan Panel Laporan
+        if (reportPanel) reportPanel.SetActive(false);
 
-        // Baris ini biar tombolnya jalan juga pas kita test di Unity Editor
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+        // 2. Kembalikan Waktu Game (Unfreeze)
+        // Penting: Karena di FinishTest kita set TimeScale = 0, kita harus balikin ke 1
+        Time.timeScale = 1;
+
+        // 3. (Opsional) Jika ingin kursor hilang lagi untuk main
+        // Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+
+        Debug.Log("Panel Report Ditutup, Game Dilanjutkan.");
     }
 }
