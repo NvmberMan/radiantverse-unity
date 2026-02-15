@@ -6,6 +6,7 @@ namespace Main.Gameplay
     {
         [Header("Progress Info")]
         public int currentWaypointIndex = 0;
+        public int resetWayPointIndex = 0;
         public float progressValue; // SATU angka untuk rank
 
         private Transform currentWaypoint;
@@ -70,6 +71,15 @@ namespace Main.Gameplay
                     hasFinished = true;
                 }
             }
+        }
+
+        public void ResetTargetWayPoint()
+        {
+            currentWaypointIndex = resetWayPointIndex;
+
+            hasFinished = false;
+
+            UpdateWaypoints();
         }
 
         void UpdateWaypoints()

@@ -67,10 +67,11 @@ namespace Main.Gameplay
         public void RespawnToCheckpoint()
         {
             transform.position = spawnPoint;
+            GetComponent<RacerProgress>().ResetTargetWayPoint();
         }
         public void RespawnToStartPoint()
         {
-            transform.position = spawnPoint;
+            transform.position = startPoint;
         }
     }
 }

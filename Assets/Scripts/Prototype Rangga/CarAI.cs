@@ -1,3 +1,4 @@
+using Main.Gameplay;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -39,6 +40,13 @@ public class AIEntity : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.Instance != null && GameManager.Instance.isPaused)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            return;
+        }
+
         if (waypoints == null || waypoints.Length == 0 || currentWaypointIndex >= waypoints.Length)
             return;
 

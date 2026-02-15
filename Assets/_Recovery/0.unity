@@ -1357,6 +1357,13 @@ MonoBehaviour:
   viewList: []
   inputEmail: {fileID: 0}
   inputPassword: {fileID: 0}
+  rememberMeToggle: {fileID: 0}
+  togglePasswordBtn: {fileID: 0}
+  eyeIcon: {fileID: 0}
+  eyeOpenSprite: {fileID: 0}
+  eyeClosedSprite: {fileID: 0}
+  googleLoginBtn: {fileID: 0}
+  webClientId: 230119757559-h7s33t3pl6j09a1760qlpe5622q6ce18.apps.googleusercontent.com
 --- !u!224 &464248487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1685,6 +1692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d8699edf572774787e713915621318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  IsDebug: 0
 --- !u!1 &631538008
 GameObject:
   m_ObjectHideFlags: 0
@@ -3248,6 +3256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LobbyController
   id: lobby
   viewList: []
+  dailyRewardAnimator: {fileID: 0}
 --- !u!1001 &1226145618
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,3 +1,6 @@
+using Firebase.Auth;
+using Main.Mainmenu;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemDailyReward : MonoBehaviour
@@ -28,5 +31,7 @@ public class ItemDailyReward : MonoBehaviour
     public virtual void ClaimReward()
     {
         OnClaim();
+
+        FirestoreModel.ClaimDailyReward();
     }
 }

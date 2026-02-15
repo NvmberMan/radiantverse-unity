@@ -134,8 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52deb3f89f0f3a49ba954a59825b3c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  achievementItem: {fileID: 11400000, guid: 01d2a3ad083ad6e4c9b4e3a3dd0f77ad, type: 2}
-  achievementDetailPosition: {x: -353, y: 50}
+  achievementItem: {fileID: 11400000, guid: b3cc7bbe71f3a934aa8984c0f57f4f0f, type: 2}
+  achievementDetailPosition: {x: -75, y: -258}
+  achievementLockedDetailPosition: {x: 0, y: 0}
   achievementPreviewImage: {fileID: 6458166936427195695}
   achievementDetailButton: {fileID: 8683999649436498164}
 --- !u!1 &7776883387666117658
@@ -172,8 +173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 44.298004}
+  m_SizeDelta: {x: 100, y: 142.504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6398266447811478280
 CanvasRenderer:
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1222590074, guid: 4d81d1c6e28ed3f4ebf6304a336946cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 04836fa9fbed6474891ea48195b130b9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -8,13 +8,13 @@ namespace Main.Mainmenu
     {
         public TMP_Text expText;
         public TMP_Text arradiusDollarText;
-        public Image rankImage;
+        public TMP_Text rankText;
 
-        public void UpdateSummary(int exp, int arradiusDollar, Sprite rankSprite)
+        public void UpdateSummary(int exp, int arradiusDollar, int rank)
         {
             expText.text = exp.ToString();
             arradiusDollarText.text = arradiusDollar.ToString();
-            rankImage.sprite = rankSprite;
+            rankText.text = rank.ToString();
         }
     }
 }

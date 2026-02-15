@@ -34,6 +34,7 @@ namespace Main.Mainmenu
             loadingMapPreviewController.Activate("base");
             loadingMapPreviewController.SetLoading(map.mapName, map.mapDescription, map.mapPreview, 20);
 
+            AudioManager.Instance.PlaySFX("start game");
             yield return new WaitForSeconds(1);
             SceneManager.LoadScene(map.mapSceneName);
         }

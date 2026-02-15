@@ -189,7 +189,7 @@ namespace Main.Gameplay
 
         public void Jump()
         {
-            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused) return;
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused || _isFreeze) return;
 
 
             if (_isGrounded && Time.time >= nextJumpTime)
@@ -214,7 +214,7 @@ namespace Main.Gameplay
             if (_isGrounded)
             {
                 // Logika saat di tanah
-                if (rb.linearVelocity.magnitude > 0.1f)
+                if (rb.linearVelocity.magnitude > 0.01f)
                     SetAnimation(walkAnimation, true);
                 else
                     SetAnimation(idleAnimation, true);

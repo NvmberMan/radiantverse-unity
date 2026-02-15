@@ -26,6 +26,7 @@ TagManager:
   - Sensor_vehicle_low
   - Sensor_vehicle_high
   - Sensor_Car
+  - Car_Move
   layers:
   - Default
   - TransparentFX

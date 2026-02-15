@@ -1,46 +1,81 @@
+using Firebase;
 using Firebase.Auth;
 using Firebase.Extensions;
 using System;
 using UnityEngine;
+using System.Threading.Tasks;
 
 
 namespace Main.Mainmenu
 {
     public static class AuthModel
     {
-        public static async void LoginUser(string email, string password, Action<FirebaseUser> onSuccess = null, Action<string> onError = null)
+        private const int TIMEOUT_MILLISECONDS = 10000;
+
+        public static async void LoginUser(
+            string email,
+            string password,
+            Action<FirebaseUser> onSuccess = null,
+            Action<string> onError = null)
         {
             try
             {
-                var result = await AuthManager.instance.auth.SignInWithEmailAndPasswordAsync(email, password);
-                FirebaseUser user = result.User;
+                // Membuat task Firebase
+                var loginTask = AuthManager.instance.auth.SignInWithEmailAndPasswordAsync(email, password);
 
-                Debug.Log($"Login successful: {user.Email}");
-                onSuccess?.Invoke(user);
+                // Membalapkan task Firebase dengan Task.Delay (Timeout)
+                var completedTask = await Task.WhenAny(loginTask, Task.Delay(TIMEOUT_MILLISECONDS));
+
+                if (completedTask == loginTask)
+                {
+                    // Jika login selesai tepat waktu
+                    AuthResult result = await loginTask;
+                    FirebaseUser user = result.User;
+                    Debug.Log($"Login successful: {user.Email}");
+                    onSuccess?.Invoke(user);
+                }
+                else
+                {
+                    // Jika Task.Delay yang selesai duluan (Timeout)
+                    onError?.Invoke("Connection timeout. Please check your internet.");
+                }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Login failed: {ex.Message}");
-                onError?.Invoke(ex.Message);
+                onError?.Invoke(GetAuthErrorMessage(ex));
             }
         }
 
-        public static async void RegisterUser(string email, string password, Action<FirebaseUser> onSuccess = null, Action<string> onError = null)
+        public static async void RegisterUser(
+            string email,
+            string password,
+            Action<FirebaseUser> onSuccess = null,
+            Action<string> onError = null)
         {
             try
             {
-                var result = await AuthManager.instance.auth.CreateUserWithEmailAndPasswordAsync(email, password);
-                FirebaseUser user = result.User;
+                var registerTask = AuthManager.instance.auth.CreateUserWithEmailAndPasswordAsync(email, password);
 
-                Debug.Log($"Account created successfully: {user.Email}");
-                onSuccess?.Invoke(user);
+                var completedTask = await Task.WhenAny(registerTask, Task.Delay(TIMEOUT_MILLISECONDS));
+
+                if (completedTask == registerTask)
+                {
+                    AuthResult result = await registerTask;
+                    FirebaseUser user = result.User;
+                    Debug.Log($"Account created successfully: {user.Email}");
+                    onSuccess?.Invoke(user);
+                }
+                else
+                {
+                    onError?.Invoke("Request timed out. Please try again.");
+                }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Registration failed: {ex.Message}");
-                onError?.Invoke(ex.Message);
+                onError?.Invoke(GetAuthErrorMessage(ex));
             }
         }
+
 
 
         public static void LogoutUser(Action onSuccess = null, Action<string> onError = null)
@@ -90,26 +125,23 @@ namespace Main.Mainmenu
 
             if (user == null)
             {
-                onError?.Invoke("User belum login.");
+                onError?.Invoke("User is not logged in.");
                 return;
             }
 
             try
             {
-                // JIKA USER PUNYA PASSWORD (Login Email)
                 if (HasPasswordProvider())
                 {
                     if (string.IsNullOrEmpty(oldPassword))
                     {
-                        onError?.Invoke("Password lama harus diisi.");
+                        onError?.Invoke("Old password is required.");
                         return;
                     }
                     Credential credential = EmailAuthProvider.GetCredential(user.Email, oldPassword);
                     await user.ReauthenticateAsync(credential);
                 }
 
-                // UPDATE PASSWORD (Berlaku untuk user Email maupun Google)
-                // Untuk user Google, ini akan otomatis menambahkan metode login password ke akunnya
                 await user.UpdatePasswordAsync(newPassword);
 
                 onSuccess?.Invoke();
@@ -133,6 +165,31 @@ namespace Main.Mainmenu
                     onSuccess?.Invoke();
                 }
             });
+        }
+
+        private static string GetFriendlyErrorMessage(AuthError errorCode)
+        {
+            return errorCode.ToString() switch
+            {
+                "MissingPassword" => "Please enter your password.",
+                "MissingEmail" => "Please enter your email address.",
+                "Failure" => "Invalid email or password. Please try again.",
+                _ => $"Authentication error: {errorCode}"
+            };
+        }
+
+        private static string GetAuthErrorMessage(Exception ex)
+        {
+            Exception baseException = ex.GetBaseException();
+            FirebaseException firebaseEx = baseException as FirebaseException;
+
+            if (firebaseEx != null)
+            {
+                AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+                return GetFriendlyErrorMessage(errorCode);
+            }
+
+            return "An unexpected error occurred.";
         }
 
 

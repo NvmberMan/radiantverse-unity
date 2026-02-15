@@ -170,19 +170,28 @@ namespace Main.Mainmenu
                         MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Shopaholic");
                     }
 
-                    if (spending >= 10 && !AchievementManager.Instance.CheckAchievement("Whale Spending"))
+                    if (spending >= 200 && !AchievementManager.Instance.CheckAchievement("Whale Spending"))
                     {
                         FirestoreModel.UnlockAchievement("Whale Spending");
                         MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Whale Spending");
                     }
+
+                    AudioManager.Instance.PlaySFX("arradius dollar");
                 },
                 onNotEnoughMoney: () =>
                 { 
                     MoneyNotEnoughView moneyNotEnoughView = MenuManager.instance.GetController<ShopController>().GetView<MoneyNotEnoughView>();
                     moneyNotEnoughView.Setup("Money not enough!");
                     moneyNotEnoughView.Show();
+
+                    AudioManager.Instance.PlaySFX("error");
                 },
-                onInvalidItem: () => Debug.LogError("Invalid item!")
+                onInvalidItem: () =>
+                {
+                    Debug.LogError("Invalid item!");
+                    AudioManager.Instance.PlaySFX("error");
+
+                }
             );
         }
     }

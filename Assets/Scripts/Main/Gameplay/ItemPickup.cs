@@ -15,7 +15,10 @@ namespace Main.Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player")) return;
+            if (!other.CompareTag("Player") && !other.CompareTag("NPC")) return;
+
+            var controller = other.GetComponent<BasePowerUpController>();
+            if (controller == null) return;
 
             if (other.CompareTag("Player"))
             {
@@ -23,18 +26,18 @@ namespace Main.Gameplay
                 {
                     playerItemCount.itemSlowerCount = 0;
                     playerItemCount.itemPowerCount = 0;
+
                 }
                 else if (itemData.powerUpType == MovementPowerUpType.Slow && playerItemCount.itemPowerCount > 0)
                 {
                     playerItemCount.itemSlowerCount = 0;
                     playerItemCount.itemPowerCount = 0;
+
+                    Debug.Log("Pwer downn");
                 }
 
                 playerItemCount.GetItem(itemData.powerUpType == MovementPowerUpType.Sprint);
             }
-
-            var controller = other.GetComponent<PlayerPowerUpController>();
-            if (controller == null) return;
 
             controller.ApplyPowerUp(itemData);
             Destroy(gameObject);

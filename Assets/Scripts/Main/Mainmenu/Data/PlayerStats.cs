@@ -11,8 +11,11 @@ namespace Main.Mainmenu
         [FirestoreProperty] public int Experience { get; set; }
         [FirestoreProperty] public int Level { get; set; }
         [FirestoreProperty] public int DailyStreak { get; set; }
+        [FirestoreProperty] public int LastClaimedDay { get; set; }
         [FirestoreProperty] public List<string> MapUnlocked { get; set; } = new();
         [FirestoreProperty] public string Rank { get; set; }
+
+        [FirestoreProperty] public Timestamp LastDailyClaim { get; set; }
 
 
         // Untuk 'Shopaholic'

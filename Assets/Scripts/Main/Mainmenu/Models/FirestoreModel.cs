@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.LightTransport;
 
 namespace Main.Mainmenu
 {
@@ -219,7 +218,9 @@ namespace Main.Mainmenu
                     "world-001__map-001"
                 },
                 DailyStreak = 0,
+                LastClaimedDay = -1,
                 Rank = "Rookie",
+                LastDailyClaim = Timestamp.GetCurrentTimestamp()
             };
 
             docRef.SetAsync(data).ContinueWithOnMainThread(task =>
@@ -278,6 +279,46 @@ namespace Main.Mainmenu
             });
         }
 
+        public static void CheckDailyReward()
+        {
+            var stats = PlayerLocalData.playerStats;
+            DateTime today = DateTime.UtcNow.Date;
+
+            DateTime lastClaim = stats.LastDailyClaim
+                .ToDateTime()
+                .Date;
+
+            int dayDiff = (today - lastClaim).Days;
+
+            if (dayDiff == 1)
+            {
+                stats.DailyStreak++;
+            }
+            else if (dayDiff > 1)
+            {
+                stats.DailyStreak = 0;
+                stats.LastClaimedDay = -1;
+            }
+            else
+            {
+                return; // hari yang sama, jangan ngapa-ngapain
+            }
+
+            stats.LastDailyClaim = Timestamp.GetCurrentTimestamp();
+
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+
+            FirebaseFirestore.DefaultInstance
+                .Collection("playerStats")
+                .Document(uid)
+                .UpdateAsync(new Dictionary<string, object>
+                {
+            { "DailyStreak", stats.DailyStreak },
+            { "LastDailyClaim", stats.LastDailyClaim },
+            {"LastClaimedDay", stats.LastClaimedDay }
+                });
+        }
+
 
 
         public static void CheckUsernameExists(string username, Action<bool> onResult)
@@ -301,7 +342,23 @@ namespace Main.Mainmenu
             });
         }
 
-        
+        public static void ClaimDailyReward()
+        {
+            var stats = PlayerLocalData.playerStats;
+
+            stats.LastClaimedDay++;
+
+            FirestoreModel.SavePlayerStats(
+                FirebaseAuth.DefaultInstance.CurrentUser.UserId,
+                new Dictionary<string, object>
+                {
+            { "LastClaimedDay", stats.LastClaimedDay }
+                }
+            );
+        }
+
+
+
         #endregion
 
         public static void UpdateSelectedSkins(string uid, List<string> newSkins)
@@ -440,6 +497,8 @@ namespace Main.Mainmenu
                 }
             });
         }
+
+
 
         public static void IncrementPlayerStat(string fieldName, int amount)
         {
