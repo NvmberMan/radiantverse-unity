@@ -465,8 +465,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef53634a371ae949a60b77de2f45696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterItem
-  acceleration: 2
-  airAcceleration: 2
+  acceleration: 2.2
+  airAcceleration: 2.2
   jumpForce: 3
   jumpCooldown: 0.2
   groundDetectorPoint: {fileID: 1605191079509509562}

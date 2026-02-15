@@ -33,6 +33,12 @@ namespace Main.Gameplay
 
         public void HandleMovementInput()
         {
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused)
+            {
+                CharacterMovement.StopMoving();
+                return;
+            }
+
             float h = joystick.Horizontal;
             float v = joystick.Vertical;
 

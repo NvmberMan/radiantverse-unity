@@ -39,7 +39,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3899920684367410040}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e1835ce63d878d749a24e65fe9f3c1b4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -82,9 +82,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5903685114313132332}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.08729039, y: -0.0027533898, z: 0.031406738, w: 0.9956839}
+  m_LocalRotation: {x: -0.087287314, y: -0.0027535085, z: 0.031405322, w: 0.9956842}
   m_LocalPosition: {x: 78.223, y: 15.216, z: 188.992}
-  m_LocalScale: {x: 1, y: 1, z: 0.8297}
+  m_LocalScale: {x: 1.4354075, y: 1.4910814, z: 1.832637}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2535666530197017863}
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3293
+  m_VersionIndex: 3350
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

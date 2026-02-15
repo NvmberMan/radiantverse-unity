@@ -25,6 +25,12 @@ namespace Main.Gameplay
 
         public void HandleMovementInput()
         {
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused)
+            {
+                CharacterMovement.StopMoving();
+                return;
+            }
+
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");
 

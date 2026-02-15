@@ -12,6 +12,7 @@ namespace Main.Mainmenu
     {
         public string categoryName;
         public NavbarItemButton navbarController;
+        public bool canBeEmpty;
     }
 
     public class CustomizeView : View
@@ -23,6 +24,7 @@ namespace Main.Mainmenu
         public ScrollRect scrollRect;
         public Transform itemContainer;
         public AccessoryItemUI itemPrefab;
+        public AccessoryItemUI unuseItemPrefab;
 
         [Header("Flexible Categories")]
         public List<CustomizeCategory> categories;
@@ -141,10 +143,23 @@ namespace Main.Mainmenu
         {
             if (PlayerLocalData.inventoryData == null) return;
 
+            // Bersihkan container
             foreach (Transform child in itemContainer) Destroy(child.gameObject);
 
-            string currentCatName = categories[currentCategoryIndex].categoryName;
+            CustomizeCategory currentCat = categories[currentCategoryIndex];
 
+            // --- LOGIKA TOMBOL UNUSE ---
+            if (currentCat.canBeEmpty)
+            {
+                AccessoryItemUI unuseBtn = Instantiate(unuseItemPrefab, itemContainer);
+                unuseBtn.itemNameText.text = "No " + currentCat.categoryName;
+                // Kita gunakan ID khusus atau string kosong untuk menandakan "lepas item"
+                // Setup tombol ini agar memanggil OnUnuseClicked
+                Button btn = unuseBtn.GetComponent<Button>();
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => OnUnuseClicked(currentCat.categoryName));
+            }
+            // ---------------------------
 
             foreach (string unlockedID in PlayerLocalData.inventoryData.UnlockedAccessories)
             {
@@ -153,7 +168,7 @@ namespace Main.Mainmenu
 
                 AccessoryData data = allAccessoryDatabase.Find(x => x.spineSkinName == unlockedID);
 
-                if (data != null && data.category == currentCatName)
+                if (data != null && data.category == currentCat.categoryName)
                 {
                     AccessoryItemUI newItem = Instantiate(itemPrefab, itemContainer);
                     newItem.Setup(data, this);
@@ -197,6 +212,22 @@ namespace Main.Mainmenu
                     FirestoreModel.UnlockAchievement("The Radiant");
                     MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("The Radiant");
                 }
+            }
+        }
+
+        public void OnUnuseClicked(string category)
+        {
+            int index = draftSkins.FindIndex(s => s.StartsWith(category + "/"));
+
+            if (index != -1)
+            {
+                draftSkins.RemoveAt(index);
+
+                bool isModified = !IsListEqual(draftSkins, PlayerLocalData.inventoryData.SelectedSkins);
+                saveButton.SetActive(isModified);
+
+                AudioManager.Instance.PlaySFX("equip item");
+                RefreshCharacterPreview();
             }
         }
 
