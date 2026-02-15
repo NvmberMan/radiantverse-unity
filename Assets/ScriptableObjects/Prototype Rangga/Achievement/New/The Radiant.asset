@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AchievementItem
   id: The Radiant
   achievementName: The Radiant
-  hoverDescription: '"Tampil rapi bahkan saat sedang balapan."'
-  description: Siap ngantor! Koleksi Office Look lengkap, kamu pelari paling formal.
+  hoverDescription: '"Show your true identity as a runner of light."'
+  description: Iconic Style! You look stunning in the official Arradius Half-Zip
+    Jacket.
   iconPreview: {fileID: 21300000, guid: 3dc9d00dfff48c04db1615381a2ada09, type: 3}

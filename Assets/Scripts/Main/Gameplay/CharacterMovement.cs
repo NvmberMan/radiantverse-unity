@@ -214,7 +214,7 @@ namespace Main.Gameplay
             if (_isGrounded)
             {
                 // Logika saat di tanah
-                if (rb.linearVelocity.magnitude > 0.1f)
+                if (rb.linearVelocity.magnitude > 0.01f)
                     SetAnimation(walkAnimation, true);
                 else
                     SetAnimation(idleAnimation, true);

@@ -15,7 +15,10 @@ namespace Main.Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player")) return;
+            if (!other.CompareTag("Player") && !other.CompareTag("NPC")) return;
+
+            var controller = other.GetComponent<BasePowerUpController>();
+            if (controller == null) return;
 
             if (other.CompareTag("Player"))
             {
@@ -35,9 +38,6 @@ namespace Main.Gameplay
 
                 playerItemCount.GetItem(itemData.powerUpType == MovementPowerUpType.Sprint);
             }
-
-            var controller = other.GetComponent<PlayerPowerUpController>();
-            if (controller == null) return;
 
             controller.ApplyPowerUp(itemData);
             Destroy(gameObject);

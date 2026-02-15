@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AchievementItem
   id: Shopaholic
   achievementName: Shopaholic
-  hoverDescription: '"Sering-seringlah mampir ke toko..."'
-  description: Borong habis! Kamu telah membeli 10 barang di Shop.
+  hoverDescription: '"Make frequent visits to the shop..."'
+  description: All out! You have purchased 10 items from the Shop.
   iconPreview: {fileID: 21300000, guid: 04836fa9fbed6474891ea48195b130b9, type: 3}

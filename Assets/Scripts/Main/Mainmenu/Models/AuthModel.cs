@@ -1,3 +1,4 @@
+using Firebase;
 using Firebase.Auth;
 using Firebase.Extensions;
 using System;
@@ -8,39 +9,48 @@ namespace Main.Mainmenu
 {
     public static class AuthModel
     {
-        public static async void LoginUser(string email, string password, Action<FirebaseUser> onSuccess = null, Action<string> onError = null)
+        public static async void LoginUser(
+            string email,
+            string password,
+            Action<FirebaseUser> onSuccess = null,
+            Action<string> onError = null)
         {
             try
             {
-                var result = await AuthManager.instance.auth.SignInWithEmailAndPasswordAsync(email, password);
-                FirebaseUser user = result.User;
+                var result = await AuthManager.instance.auth
+                    .SignInWithEmailAndPasswordAsync(email, password);
 
+                FirebaseUser user = result.User;
                 Debug.Log($"Login successful: {user.Email}");
                 onSuccess?.Invoke(user);
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Login failed: {ex.Message}");
-                onError?.Invoke(ex.Message);
+                onError?.Invoke(GetAuthErrorMessage(ex));
             }
         }
 
-        public static async void RegisterUser(string email, string password, Action<FirebaseUser> onSuccess = null, Action<string> onError = null)
+        public static async void RegisterUser(
+            string email,
+            string password,
+            Action<FirebaseUser> onSuccess = null,
+            Action<string> onError = null)
         {
             try
             {
-                var result = await AuthManager.instance.auth.CreateUserWithEmailAndPasswordAsync(email, password);
-                FirebaseUser user = result.User;
+                var result = await AuthManager.instance.auth
+                    .CreateUserWithEmailAndPasswordAsync(email, password);
 
+                FirebaseUser user = result.User;
                 Debug.Log($"Account created successfully: {user.Email}");
                 onSuccess?.Invoke(user);
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Registration failed: {ex.Message}");
-                onError?.Invoke(ex.Message);
+                onError?.Invoke(GetAuthErrorMessage(ex));
             }
         }
+
 
 
         public static void LogoutUser(Action onSuccess = null, Action<string> onError = null)
@@ -90,26 +100,23 @@ namespace Main.Mainmenu
 
             if (user == null)
             {
-                onError?.Invoke("User belum login.");
+                onError?.Invoke("User is not logged in.");
                 return;
             }
 
             try
             {
-                // JIKA USER PUNYA PASSWORD (Login Email)
                 if (HasPasswordProvider())
                 {
                     if (string.IsNullOrEmpty(oldPassword))
                     {
-                        onError?.Invoke("Password lama harus diisi.");
+                        onError?.Invoke("Old password is required.");
                         return;
                     }
                     Credential credential = EmailAuthProvider.GetCredential(user.Email, oldPassword);
                     await user.ReauthenticateAsync(credential);
                 }
 
-                // UPDATE PASSWORD (Berlaku untuk user Email maupun Google)
-                // Untuk user Google, ini akan otomatis menambahkan metode login password ke akunnya
                 await user.UpdatePasswordAsync(newPassword);
 
                 onSuccess?.Invoke();
@@ -133,6 +140,47 @@ namespace Main.Mainmenu
                     onSuccess?.Invoke();
                 }
             });
+        }
+
+        private static string GetFriendlyErrorMessage(AuthError errorCode)
+        {
+            switch (errorCode)
+            {
+                case AuthError.WrongPassword:
+                    return "Incorrect password. Please try again.";
+                case AuthError.UserNotFound:
+                    return "No account found with this email.";
+                case AuthError.InvalidEmail:
+                    return "Invalid email format.";
+                case AuthError.UserDisabled:
+                    return "This account has been disabled.";
+                case AuthError.TooManyRequests:
+                    return "Too many attempts. Please try again later.";
+                case AuthError.NetworkRequestFailed:
+                    return "Network error. Please check your internet connection.";
+                case AuthError.EmailAlreadyInUse:
+                    return "This email is already in use.";
+                case AuthError.WeakPassword:
+                    return "Password is too weak.";
+                case AuthError.OperationNotAllowed:
+                    return "This operation is not allowed.";
+                default:
+                    return "Authentication error: " + errorCode.ToString();
+            }
+        }
+
+        private static string GetAuthErrorMessage(Exception ex)
+        {
+            Exception baseException = ex.GetBaseException();
+            FirebaseException firebaseEx = baseException as FirebaseException;
+
+            if (firebaseEx != null)
+            {
+                AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+                return GetFriendlyErrorMessage(errorCode);
+            }
+
+            return "An unexpected error occurred.";
         }
 
 

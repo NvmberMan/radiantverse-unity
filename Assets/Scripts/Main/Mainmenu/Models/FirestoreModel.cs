@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.LightTransport;
 
 namespace Main.Mainmenu
 {
@@ -305,7 +304,7 @@ namespace Main.Mainmenu
                 return; // hari yang sama, jangan ngapa-ngapain
             }
 
-            stats.LastDailyClaim = Timestamp.FromDateTime(today.ToUniversalTime());
+            stats.LastDailyClaim = Timestamp.GetCurrentTimestamp();
 
             string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
 
@@ -315,7 +314,8 @@ namespace Main.Mainmenu
                 .UpdateAsync(new Dictionary<string, object>
                 {
             { "DailyStreak", stats.DailyStreak },
-            { "LastDailyClaim", stats.LastDailyClaim }
+            { "LastDailyClaim", stats.LastDailyClaim },
+            {"LastClaimedDay", stats.LastClaimedDay }
                 });
         }
 

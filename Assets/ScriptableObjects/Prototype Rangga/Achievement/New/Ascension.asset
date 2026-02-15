@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.AchievementItem
   id: Ascension
   achievementName: Ascension
-  hoverDescription: '"Teruslah berkembang dan raih potensi maksimal."'
-  description: Level Up! Kamu telah mencapai tonggak sejarah baru di level kelipatan
-    5.
+  hoverDescription: '"Keep growing and reach your maximum potential."'
+  description: Level Up! You've reached a new milestone at level multiples of 5.
   iconPreview: {fileID: 21300000, guid: a8cf29e20693ab34b86d612bdcdfdc38, type: 3}

@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 5698412810927231878}
   - component: {fileID: 8381566973344170393}
   - component: {fileID: 1671772115488746646}
+  - component: {fileID: -6207515743534104080}
   m_Layer: 10
   m_Name: AI_Arena1
   m_TagString: NPC
@@ -659,6 +660,18 @@ CapsuleCollider:
   m_Height: 0.56
   m_Direction: 1
   m_Center: {x: 0, y: 0.26, z: 0.03}
+--- !u!114 &-6207515743534104080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268295388888470089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db295dec2516e44b8f79293645a8b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Main.Gameplay.EnemyPowerUpController
 --- !u!1 &6955356081537224181
 GameObject:
   m_ObjectHideFlags: 0
