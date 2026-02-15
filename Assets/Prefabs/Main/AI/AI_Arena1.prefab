@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef53634a371ae949a60b77de2f45696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterItem
-  acceleration: 2
+  acceleration: 2.5
   airAcceleration: 2
   jumpForce: 3
   jumpCooldown: 0.2
@@ -805,7 +805,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 93592d3c35c0db948afb0d38dda1857c, type: 2}
+  - {fileID: 2100000, guid: 68abf8be256e7844db4c51df549afaed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

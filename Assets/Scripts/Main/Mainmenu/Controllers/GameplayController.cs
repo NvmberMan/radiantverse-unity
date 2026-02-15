@@ -312,7 +312,7 @@ namespace Main.Mainmenu
 
         #region Public Methods
         public void Jump() => characterMovement.Jump();
-        public void Pause() { MenuManager.instance.GetController<PauseController>().Activate("base"); GameManager.Instance.isPaused = true; }
+        public void Pause() { MenuManager.instance.GetController<PauseController>().Activate("base"); GameManager.Instance.isPaused = true; if (RemoteTestManager.Instance != null)  RemoteTestManager.Instance.LogPause(); }
         public void Resume() { MenuManager.instance.GetController<PauseController>().Disactivate("base"); GameManager.Instance.isPaused = false; }
         public void SetCameraModePC() => cameraMode = CameraControlMode.PC;
         public void SetCameraModeMobile() => cameraMode = CameraControlMode.Mobile;
