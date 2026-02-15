@@ -43,7 +43,7 @@ namespace Main.Mainmenu
 
         [Header("UI Elements")]
         public Slider sensitivitySlider;
-        public Toggle joystickToggle; // Toggle ini akan punya animasi
+        public Toggle joystickToggle; 
         public Slider zoomSpeedSlider;
 
         private Vector2 lastInputPos;
@@ -55,6 +55,7 @@ namespace Main.Mainmenu
         [HideInInspector] public Joystick activeJoystick;
         private RectTransform activeJoystickArea;
         public Action OnChangeJoystickSystem;
+        private int? joystickFingerId = null;
 
         private const string SENS_KEY = "CAMERA_SENSITIVITY";
         private const string JOYSTICK_KEY = "JOYSTICK_MODE";
@@ -84,34 +85,25 @@ namespace Main.Mainmenu
             LoadZoomSpeed();
             SetupZoomSlider();
 
-            // Inisialisasi Joystick & Tampilan Toggle
             SetupJoystick();
-            //InitJoystickToggleUI();
         }
-
-        //private void InitJoystickToggleUI()
-        //{
-        //    if (joystickToggle != null)
-        //    {
-        //        // Set nilai tanpa memicu trigger animasi "Switch" di awal
-        //        joystickToggle.isOn = (joystickMode == JoystickMode.Fixed);
-
-        //        Animator anim = joystickToggle.GetComponent<Animator>();
-        //        if (anim != null)
-        //        {
-        //            // Langsung set parameter "On" agar posisi handle benar sejak awal
-        //            anim.SetBool("On", joystickToggle.isOn);
-        //            Debug.Log($"aksldjfksjd: {joystickToggle.isOn}");
-        //        }
-
-        //        // Tambahkan listener untuk mendeteksi klik user
-        //        joystickToggle.onValueChanged.RemoveAllListeners();
-        //        joystickToggle.onValueChanged.AddListener(OnJoystickToggleChanged);
-        //    }
-        //}
 
         void Update()
         {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Touch t = Input.GetTouch(i);
+                if (t.phase == TouchPhase.Began && IsTouchOnJoystick(t.position))
+                {
+                    joystickFingerId = t.fingerId;
+                }
+                if (joystickFingerId != null && t.fingerId == joystickFingerId.Value)
+                {
+                    if (t.phase == TouchPhase.Ended || t.phase == TouchPhase.Canceled)
+                        joystickFingerId = null;
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (!GameManager.Instance.isPaused) Pause();
@@ -176,7 +168,8 @@ namespace Main.Mainmenu
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     Touch t = Input.GetTouch(i);
-                    if (IsTouchOnJoystick(t.position)) continue;
+                    //if (IsTouchOnJoystick(t.position)) continue;
+                    if (joystickFingerId != null && t.fingerId == joystickFingerId.Value) continue;
                     if (t0 == null) t0 = t; else if (t1 == null) t1 = t;
                 }
 
@@ -202,7 +195,9 @@ namespace Main.Mainmenu
             for (int i = 0; i < Input.touchCount; i++)
             {
                 Touch t = Input.GetTouch(i);
-                if (IsTouchOnJoystick(t.position)) continue;
+                //if (IsTouchOnJoystick(t.position)) continue;
+                if (joystickFingerId != null && t.fingerId == joystickFingerId.Value) continue;
+                if (t.phase == TouchPhase.Began && IsTouchOnJoystick(t.position)) continue;
                 cameraTouch = t; break;
             }
 

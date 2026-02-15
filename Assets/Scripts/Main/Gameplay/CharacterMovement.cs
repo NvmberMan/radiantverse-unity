@@ -189,7 +189,7 @@ namespace Main.Gameplay
 
         public void Jump()
         {
-            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused) return;
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused || _isFreeze) return;
 
 
             if (_isGrounded && Time.time >= nextJumpTime)

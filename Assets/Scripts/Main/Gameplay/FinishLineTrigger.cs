@@ -11,6 +11,7 @@ namespace Main.Gameplay
             if (other.CompareTag("Player") || other.CompareTag("NPC"))
             {
                 GameManager.Instance.OnFinishLineCrossed(other.gameObject);
+                other.GetComponent<CharacterMovement>()._isFreeze = true;
             }
         }
     }

@@ -21,7 +21,7 @@ namespace Main.Gameplay
 
             if (PlayerLocalData.inventoryData != null)
             {
-                if (jumpCount >= 10 && !AchievementManager.Instance.CheckAchievement("Boing Boing!"))
+                if (jumpCount >= 100 && !AchievementManager.Instance.CheckAchievement("Boing Boing!"))
                 {
                     if (PlayerLocalData.playerStats != null)
                     {

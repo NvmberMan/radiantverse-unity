@@ -3,12 +3,15 @@ using Firebase.Auth;
 using Firebase.Extensions;
 using System;
 using UnityEngine;
+using System.Threading.Tasks;
 
 
 namespace Main.Mainmenu
 {
     public static class AuthModel
     {
+        private const int TIMEOUT_MILLISECONDS = 10000;
+
         public static async void LoginUser(
             string email,
             string password,
@@ -17,12 +20,25 @@ namespace Main.Mainmenu
         {
             try
             {
-                var result = await AuthManager.instance.auth
-                    .SignInWithEmailAndPasswordAsync(email, password);
+                // Membuat task Firebase
+                var loginTask = AuthManager.instance.auth.SignInWithEmailAndPasswordAsync(email, password);
 
-                FirebaseUser user = result.User;
-                Debug.Log($"Login successful: {user.Email}");
-                onSuccess?.Invoke(user);
+                // Membalapkan task Firebase dengan Task.Delay (Timeout)
+                var completedTask = await Task.WhenAny(loginTask, Task.Delay(TIMEOUT_MILLISECONDS));
+
+                if (completedTask == loginTask)
+                {
+                    // Jika login selesai tepat waktu
+                    AuthResult result = await loginTask;
+                    FirebaseUser user = result.User;
+                    Debug.Log($"Login successful: {user.Email}");
+                    onSuccess?.Invoke(user);
+                }
+                else
+                {
+                    // Jika Task.Delay yang selesai duluan (Timeout)
+                    onError?.Invoke("Connection timeout. Please check your internet.");
+                }
             }
             catch (Exception ex)
             {
@@ -38,12 +54,21 @@ namespace Main.Mainmenu
         {
             try
             {
-                var result = await AuthManager.instance.auth
-                    .CreateUserWithEmailAndPasswordAsync(email, password);
+                var registerTask = AuthManager.instance.auth.CreateUserWithEmailAndPasswordAsync(email, password);
 
-                FirebaseUser user = result.User;
-                Debug.Log($"Account created successfully: {user.Email}");
-                onSuccess?.Invoke(user);
+                var completedTask = await Task.WhenAny(registerTask, Task.Delay(TIMEOUT_MILLISECONDS));
+
+                if (completedTask == registerTask)
+                {
+                    AuthResult result = await registerTask;
+                    FirebaseUser user = result.User;
+                    Debug.Log($"Account created successfully: {user.Email}");
+                    onSuccess?.Invoke(user);
+                }
+                else
+                {
+                    onError?.Invoke("Request timed out. Please try again.");
+                }
             }
             catch (Exception ex)
             {
@@ -144,29 +169,13 @@ namespace Main.Mainmenu
 
         private static string GetFriendlyErrorMessage(AuthError errorCode)
         {
-            switch (errorCode)
+            return errorCode.ToString() switch
             {
-                case AuthError.WrongPassword:
-                    return "Incorrect password. Please try again.";
-                case AuthError.UserNotFound:
-                    return "No account found with this email.";
-                case AuthError.InvalidEmail:
-                    return "Invalid email format.";
-                case AuthError.UserDisabled:
-                    return "This account has been disabled.";
-                case AuthError.TooManyRequests:
-                    return "Too many attempts. Please try again later.";
-                case AuthError.NetworkRequestFailed:
-                    return "Network error. Please check your internet connection.";
-                case AuthError.EmailAlreadyInUse:
-                    return "This email is already in use.";
-                case AuthError.WeakPassword:
-                    return "Password is too weak.";
-                case AuthError.OperationNotAllowed:
-                    return "This operation is not allowed.";
-                default:
-                    return "Authentication error: " + errorCode.ToString();
-            }
+                "MissingPassword" => "Please enter your password.",
+                "MissingEmail" => "Please enter your email address.",
+                "Failure" => "Invalid email or password. Please try again.",
+                _ => $"Authentication error: {errorCode}"
+            };
         }
 
         private static string GetAuthErrorMessage(Exception ex)

@@ -199,7 +199,7 @@ namespace Main.Gameplay.AI
             {
                 // Reward finish
                 AddReward(20f);
-                EndEpisode();
+                //EndEpisode();
             }
         }
 
@@ -208,7 +208,7 @@ namespace Main.Gameplay.AI
             if (other.gameObject.CompareTag("Wall"))
             {
                 AddReward(-1.0f);
-                EndEpisode();
+                //EndEpisode();
             }
             else if (other.gameObject.CompareTag("Wall_low"))
             {
@@ -217,24 +217,27 @@ namespace Main.Gameplay.AI
             else if (other.gameObject.CompareTag("Wall_high"))
             {
                 AddReward(-2.0f);
-                EndEpisode();
+                //EndEpisode();
             }
             else if (other.gameObject.CompareTag("Sensor_void"))
             {
                 AddReward(-5f);
-                EndEpisode();
+                //EndEpisode();
             }
             else if (other.gameObject.CompareTag("Car_Move"))
             {
                 AddReward(-5f);
                 EndEpisode();
             }
-            else if (other.gameObject.CompareTag("TargetPoint") || other.gameObject.CompareTag("FinishPoint"))
+            else if (other.gameObject.CompareTag("TargetPoint"))
             {
                 TargetPoint point = other.GetComponent<TargetPoint>();
 
                 if (point != null && point.targetIndex == checkpointIndex)
                     AdvanceToNextTarget();
+            }else if (other.gameObject.CompareTag("FinishPoint"))
+            {
+                AdvanceToNextTarget();
             }
         }
 
@@ -252,7 +255,7 @@ namespace Main.Gameplay.AI
             else if (collision.gameObject.tag == "Sensor_void")
             {
                 AddReward(-5f);
-                EndEpisode();
+                //EndEpisode();
             }
             else if (collision.gameObject.CompareTag("Car_Move"))
             {

@@ -170,7 +170,7 @@ namespace Main.Mainmenu
                         MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Shopaholic");
                     }
 
-                    if (spending >= 10 && !AchievementManager.Instance.CheckAchievement("Whale Spending"))
+                    if (spending >= 200 && !AchievementManager.Instance.CheckAchievement("Whale Spending"))
                     {
                         FirestoreModel.UnlockAchievement("Whale Spending");
                         MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Whale Spending");
