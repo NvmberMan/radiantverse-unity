@@ -221,6 +221,10 @@ namespace Main.Gameplay.AI
                 AddReward(-5f);
                 EndEpisode();
             }
+            else if (other.gameObject.CompareTag("Step_Stone"))
+            {
+                //AddReward(5.0f);
+            }
             else if (other.gameObject.CompareTag("TargetPoint") || other.gameObject.CompareTag("FinishPoint"))
             {
                 TargetPoint point = other.GetComponent<TargetPoint>();
@@ -250,6 +254,10 @@ namespace Main.Gameplay.AI
             {
                 AddReward(-5f);
                 EndEpisode();
+            }
+            else if (collision.gameObject.CompareTag("Step_Stone"))
+            {
+                //AddReward(5.0f);
             }
         }
 
