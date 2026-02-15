@@ -1,0 +1,1294 @@
+
+skeleton.png
+size: 2033,1797
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BASE/Boy-Head
+  rotate: false
+  xy: 950, 1503
+  size: 304, 292
+  orig: 304, 292
+  offset: 0, 0
+  index: -1
+BASE/Girl-Head
+  rotate: true
+  xy: 2, 673
+  size: 305, 293
+  orig: 305, 293
+  offset: 0, 0
+  index: -1
+BASE/L-foot-down
+  rotate: true
+  xy: 1332, 384
+  size: 95, 151
+  orig: 95, 151
+  offset: 0, 0
+  index: -1
+BASE/L-foot-up
+  rotate: false
+  xy: 1069, 494
+  size: 82, 155
+  orig: 82, 155
+  offset: 0, 0
+  index: -1
+BASE/L-hand-down
+  rotate: false
+  xy: 1791, 945
+  size: 59, 137
+  orig: 59, 137
+  offset: 0, 0
+  index: -1
+BASE/L-hand-up
+  rotate: false
+  xy: 953, 270
+  size: 61, 158
+  orig: 61, 158
+  offset: 0, 0
+  index: -1
+BASE/R-foot-down
+  rotate: false
+  xy: 864, 654
+  size: 106, 151
+  orig: 106, 151
+  offset: 0, 0
+  index: -1
+BASE/R-foot-up
+  rotate: false
+  xy: 673, 254
+  size: 94, 173
+  orig: 94, 173
+  offset: 0, 0
+  index: -1
+BASE/R-hand-down
+  rotate: false
+  xy: 671, 90
+  size: 60, 131
+  orig: 60, 131
+  offset: 0, 0
+  index: -1
+BASE/R-hand-up
+  rotate: false
+  xy: 1958, 1361
+  size: 66, 172
+  orig: 66, 172
+  offset: 0, 0
+  index: -1
+BASE/body
+  rotate: true
+  xy: 691, 1273
+  size: 180, 294
+  orig: 180, 294
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Acc/round-glassesAsset 33
+  rotate: true
+  xy: 1878, 1538
+  size: 257, 83
+  orig: 257, 84
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Acc/squared-glassesAsset 32
+  rotate: true
+  xy: 1963, 1535
+  size: 260, 68
+  orig: 260, 68
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Acc/vintage-glassesAsset 31
+  rotate: false
+  xy: 297, 650
+  size: 258, 76
+  orig: 258, 77
+  offset: 0, 1
+  index: -1
+BOY-CHAR/Down/Black-formal/Asset 92
+  rotate: false
+  xy: 972, 758
+  size: 180, 86
+  orig: 180, 86
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Black-formal/Asset 93
+  rotate: true
+  xy: 673, 691
+  size: 100, 189
+  orig: 100, 189
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Black-formal/Asset 94
+  rotate: true
+  xy: 1867, 1258
+  size: 84, 164
+  orig: 84, 164
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Black-formal/Asset 95
+  rotate: false
+  xy: 1417, 264
+  size: 82, 118
+  orig: 82, 118
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Black-formal/Asset 96
+  rotate: false
+  xy: 1955, 909
+  size: 71, 125
+  orig: 71, 125
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Blue-baggy-jeans/Asset 82
+  rotate: true
+  xy: 1778, 1084
+  size: 180, 85
+  orig: 180, 85
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Blue-baggy-jeans/Asset 83
+  rotate: false
+  xy: 859, 807
+  size: 111, 198
+  orig: 111, 198
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Blue-baggy-jeans/Asset 84
+  rotate: false
+  xy: 863, 252
+  size: 88, 175
+  orig: 88, 175
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Blue-baggy-jeans/Asset 85
+  rotate: false
+  xy: 1701, 532
+  size: 113, 124
+  orig: 113, 124
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Blue-baggy-jeans/Asset 86
+  rotate: true
+  xy: 1153, 291
+  size: 95, 130
+  orig: 95, 130
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Cream-formal/Asset 87
+  rotate: false
+  xy: 1519, 571
+  size: 180, 86
+  orig: 180, 86
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Cream-formal/Asset 88
+  rotate: true
+  xy: 1544, 840
+  size: 100, 189
+  orig: 100, 189
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Cream-formal/Asset 89
+  rotate: true
+  xy: 1332, 481
+  size: 84, 164
+  orig: 84, 164
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Cream-formal/Asset 90
+  rotate: true
+  xy: 733, 43
+  size: 82, 118
+  orig: 82, 118
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Cream-formal/Asset 91
+  rotate: true
+  xy: 1142, 218
+  size: 71, 125
+  orig: 71, 125
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Navy-short-pants/Asset 97
+  rotate: true
+  xy: 1709, 658
+  size: 180, 85
+  orig: 180, 85
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Navy-short-pants/Asset 98
+  rotate: false
+  xy: 1701, 420
+  size: 113, 110
+  orig: 113, 110
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Navy-short-pants/Asset 99
+  rotate: true
+  xy: 1928, 720
+  size: 90, 103
+  orig: 90, 103
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Sport-short-blue/Asset 100
+  rotate: false
+  xy: 673, 604
+  size: 180, 85
+  orig: 180, 85
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Sport-short-blue/Asset 101
+  rotate: true
+  xy: 848, 137
+  size: 113, 110
+  orig: 113, 110
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Sport-short-blue/Asset 102
+  rotate: false
+  xy: 1437, 39
+  size: 90, 102
+  orig: 90, 102
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Washed-baggy-jeans/Asset 77
+  rotate: true
+  xy: 982, 469
+  size: 180, 85
+  orig: 180, 85
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Washed-baggy-jeans/Asset 78
+  rotate: true
+  xy: 1353, 952
+  size: 111, 198
+  orig: 111, 198
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Washed-baggy-jeans/Asset 79
+  rotate: true
+  xy: 1153, 543
+  size: 88, 175
+  orig: 88, 175
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Washed-baggy-jeans/Asset 80
+  rotate: false
+  xy: 733, 127
+  size: 113, 124
+  orig: 113, 124
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Down/Washed-baggy-jeans/Asset 81
+  rotate: true
+  xy: 1285, 287
+  size: 95, 130
+  orig: 95, 130
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Hair/Asset 71
+  rotate: false
+  xy: 601, 1007
+  size: 292, 264
+  orig: 292, 264
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Hair/Asset 72
+  rotate: true
+  xy: 1488, 1266
+  size: 259, 189
+  orig: 259, 191
+  offset: 0, 2
+  index: -1
+BOY-CHAR/Hair/Asset 73
+  rotate: false
+  xy: 303, 1016
+  size: 296, 263
+  orig: 296, 263
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Hair/Asset 74
+  rotate: false
+  xy: 1570, 1541
+  size: 306, 254
+  orig: 306, 254
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Hair/Asset 75
+  rotate: false
+  xy: 1256, 1527
+  size: 312, 268
+  orig: 312, 268
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/Black-formal/kananAsset 109
+  rotate: false
+  xy: 2, 8
+  size: 117, 46
+  orig: 117, 46
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/Black-formal/kiriAsset 110
+  rotate: false
+  xy: 1894, 221
+  size: 103, 41
+  orig: 103, 41
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/High-sneaker-black-red/kananAsset 105
+  rotate: false
+  xy: 1269, 214
+  size: 116, 71
+  orig: 116, 71
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/High-sneaker-black-red/kiriAsset 106
+  rotate: false
+  xy: 1572, 312
+  size: 108, 66
+  orig: 108, 66
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/Navy-sandals/kananAsset 107
+  rotate: false
+  xy: 557, 630
+  size: 113, 50
+  orig: 113, 50
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/Navy-sandals/kiriAsset 108
+  rotate: false
+  xy: 1784, 144
+  size: 97, 42
+  orig: 97, 42
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/Sporty-aqua/kananAsset 111
+  rotate: false
+  xy: 1153, 388
+  size: 143, 65
+  orig: 143, 65
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Tosca sport/R
+  rotate: false
+  xy: 1153, 388
+  size: 143, 65
+  orig: 143, 65
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/Sporty-aqua/kiriAsset 112
+  rotate: false
+  xy: 977, 2
+  size: 122, 55
+  orig: 122, 55
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/walking-shoes-yellow-green/kananAsset 103
+  rotate: false
+  xy: 557, 682
+  size: 114, 44
+  orig: 114, 44
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Shoes/walking-shoes-yellow-green/kiriAsset 104
+  rotate: true
+  xy: 1749, 942
+  size: 104, 40
+  orig: 104, 40
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Long-socks/Black/kananAsset 114
+  rotate: true
+  xy: 1083, 389
+  size: 103, 68
+  orig: 103, 69
+  offset: 0, 1
+  index: -1
+BOY-CHAR/Socks/Long-socks/Black/kiriAsset 115
+  rotate: true
+  xy: 1083, 296
+  size: 91, 68
+  orig: 91, 68
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Long-socks/Cream/kananAsset 118
+  rotate: false
+  xy: 1928, 649
+  size: 103, 69
+  orig: 103, 69
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Long-socks/Cream/kiriAsset 119
+  rotate: false
+  xy: 1225, 2
+  size: 91, 68
+  orig: 91, 68
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Long-socks/White/kananAsset 116
+  rotate: false
+  xy: 1332, 72
+  size: 103, 69
+  orig: 103, 69
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Long-socks/White/kiriAsset 117
+  rotate: false
+  xy: 1318, 2
+  size: 91, 68
+  orig: 91, 68
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Short-socks/Blue/kananAsset 120
+  rotate: true
+  xy: 1653, 466
+  size: 103, 46
+  orig: 103, 46
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Short-socks/Blue/kiriAsset 121
+  rotate: false
+  xy: 1883, 141
+  size: 91, 40
+  orig: 91, 40
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Short-socks/Brown/kananAsset 124
+  rotate: false
+  xy: 1679, 180
+  size: 103, 46
+  orig: 103, 46
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Short-socks/Brown/kiriAsset 125
+  rotate: false
+  xy: 1784, 102
+  size: 91, 40
+  orig: 91, 40
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Short-socks/White/kananAsset 122
+  rotate: false
+  xy: 1679, 132
+  size: 103, 46
+  orig: 103, 46
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Socks/Short-socks/White/kiriAsset 123
+  rotate: false
+  xy: 1877, 99
+  size: 91, 40
+  orig: 91, 40
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Baju-barong/Asset 35
+  rotate: false
+  xy: 1167, 1036
+  size: 184, 212
+  orig: 184, 212
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Baju-barong/Asset 36
+  rotate: true
+  xy: 1894, 264
+  size: 64, 103
+  orig: 64, 103
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Baju-barong/Asset 37
+  rotate: true
+  xy: 565, 948
+  size: 57, 105
+  orig: 57, 105
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Baju-capy/Asset 38
+  rotate: false
+  xy: 673, 793
+  size: 184, 212
+  orig: 184, 212
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Baju-capy/Asset 39
+  rotate: true
+  xy: 1528, 148
+  size: 64, 103
+  orig: 64, 103
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Baju-capy/Asset 40
+  rotate: true
+  xy: 1810, 332
+  size: 57, 105
+  orig: 57, 105
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Cream-shirt/Asset 47
+  rotate: false
+  xy: 1962, 1147
+  size: 69, 109
+  orig: 69, 109
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Cream-shirt/Asset 48
+  rotate: false
+  xy: 1679, 1323
+  size: 186, 216
+  orig: 186, 216
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Cream-shirt/Asset 49
+  rotate: true
+  xy: 1927, 584
+  size: 63, 104
+  orig: 63, 104
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Green-shirt/Asset 58
+  rotate: false
+  xy: 297, 728
+  size: 186, 216
+  orig: 186, 216
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Green-shirt/Asset 59
+  rotate: false
+  xy: 1962, 1036
+  size: 69, 109
+  orig: 69, 109
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Green-shirt/Asset 60
+  rotate: true
+  xy: 1927, 519
+  size: 63, 104
+  orig: 63, 104
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Half-zip-ARRADIUS/Asset 50
+  rotate: true
+  xy: 1353, 1065
+  size: 199, 251
+  orig: 199, 251
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Half-zip-ARRADIUS/Asset 51
+  rotate: false
+  xy: 1867, 1344
+  size: 89, 192
+  orig: 89, 192
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Half-zip-ARRADIUS/Asset 53
+  rotate: false
+  xy: 906, 430
+  size: 74, 172
+  orig: 74, 172
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Kemeja&dasi-hitam/Asset 44
+  rotate: true
+  xy: 1816, 492
+  size: 69, 109
+  orig: 69, 109
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Kemeja&dasi-hitam/Asset 45
+  rotate: true
+  xy: 279, 42
+  size: 178, 194
+  orig: 178, 194
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Kemeja&dasi-hitam/Asset 46
+  rotate: true
+  xy: 1927, 454
+  size: 63, 104
+  orig: 63, 104
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Kemeja&dasi-tosca/Asset 41
+  rotate: true
+  xy: 1927, 389
+  size: 63, 104
+  orig: 63, 104
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Kemeja&dasi-tosca/Asset 42
+  rotate: true
+  xy: 475, 43
+  size: 178, 194
+  orig: 178, 194
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Kemeja&dasi-tosca/Asset 43
+  rotate: true
+  xy: 1260, 143
+  size: 69, 109
+  orig: 69, 109
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Maroon-shirt/Asset 61
+  rotate: false
+  xy: 485, 728
+  size: 186, 216
+  orig: 186, 216
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Maroon-shirt/Asset 62
+  rotate: true
+  xy: 1221, 72
+  size: 69, 109
+  orig: 69, 109
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Maroon-shirt/Asset 63
+  rotate: true
+  xy: 1682, 293
+  size: 63, 104
+  orig: 63, 104
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Shirt&vest-biru/Asset 67
+  rotate: false
+  xy: 972, 846
+  size: 178, 194
+  orig: 178, 194
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Shirt&vest-biru/Asset 68
+  rotate: true
+  xy: 1681, 228
+  size: 63, 104
+  orig: 63, 104
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Shirt&vest-biru/Asset 69
+  rotate: true
+  xy: 1371, 143
+  size: 69, 109
+  orig: 69, 109
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Shirt&vest-coklat/Asset 64
+  rotate: true
+  xy: 1152, 856
+  size: 178, 194
+  orig: 178, 194
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Shirt&vest-coklat/Asset 65
+  rotate: true
+  xy: 1788, 267
+  size: 63, 104
+  orig: 63, 104
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Shirt&vest-coklat/Asset 66
+  rotate: false
+  xy: 1501, 273
+  size: 69, 109
+  orig: 69, 109
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Sporty-blue/Left
+  rotate: true
+  xy: 1917, 330
+  size: 57, 105
+  orig: 57, 105
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Sporty-blue/Right
+  rotate: false
+  xy: 1529, 43
+  size: 64, 103
+  orig: 64, 103
+  offset: 0, 0
+  index: -1
+BOY-CHAR/Top/Sporty-blue/body
+  rotate: false
+  xy: 279, 436
+  size: 184, 212
+  orig: 184, 212
+  offset: 0, 0
+  index: -1
+OUTFIT/Accesories/Oval Glasses
+  rotate: true
+  xy: 465, 395
+  size: 253, 83
+  orig: 253, 84
+  offset: 0, 0
+  index: -1
+OUTFIT/Accesories/Squared Glasses
+  rotate: false
+  xy: 303, 946
+  size: 260, 68
+  orig: 260, 68
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Black cullotes/BOTTOMAsset 245
+  rotate: false
+  xy: 1816, 563
+  size: 109, 128
+  orig: 109, 128
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Black cullotes/BOTTOMAsset 246
+  rotate: true
+  xy: 1348, 846
+  size: 104, 194
+  orig: 104, 194
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Black cullotes/BOTTOMAsset 247
+  rotate: false
+  xy: 1154, 633
+  size: 181, 120
+  orig: 181, 120
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Black cullotes/BOTTOMAsset 248
+  rotate: false
+  xy: 1865, 1082
+  size: 95, 174
+  orig: 95, 174
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Black cullotes/BOTTOMAsset 249
+  rotate: false
+  xy: 1852, 947
+  size: 101, 133
+  orig: 101, 133
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Brown short pants/BOTTOMAsset 263
+  rotate: false
+  xy: 1342, 748
+  size: 183, 96
+  orig: 183, 96
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Brown short pants/BOTTOMAsset 264
+  rotate: false
+  xy: 1796, 693
+  size: 130, 117
+  orig: 130, 117
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Brown short pants/BOTTOMAsset 265
+  rotate: true
+  xy: 1816, 391
+  size: 99, 109
+  orig: 119, 109
+  offset: 11, 0
+  index: -1
+OUTFIT/Bottom/Cowboy jeans/BOTTOMAsset 258
+  rotate: true
+  xy: 853, 42
+  size: 93, 122
+  orig: 93, 122
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Cowboy jeans/BOTTOMAsset 259
+  rotate: true
+  xy: 1154, 755
+  size: 99, 186
+  orig: 99, 186
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Cowboy jeans/BOTTOMAsset 260
+  rotate: false
+  xy: 972, 651
+  size: 180, 105
+  orig: 180, 105
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Cowboy jeans/BOTTOMAsset 261
+  rotate: true
+  xy: 1519, 485
+  size: 84, 132
+  orig: 84, 132
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/Cowboy jeans/BOTTOMAsset 262
+  rotate: false
+  xy: 769, 253
+  size: 92, 174
+  orig: 92, 174
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/White cullotes/BOTTOMAsset 266
+  rotate: false
+  xy: 1008, 143
+  size: 88, 122
+  orig: 109, 128
+  offset: 20, 0
+  index: -1
+OUTFIT/Bottom/White cullotes/BOTTOMAsset 267
+  rotate: true
+  xy: 1553, 942
+  size: 104, 194
+  orig: 104, 194
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/White cullotes/BOTTOMAsset 268
+  rotate: false
+  xy: 1153, 455
+  size: 177, 86
+  orig: 181, 120
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/White cullotes/BOTTOMAsset 269
+  rotate: false
+  xy: 1852, 812
+  size: 101, 133
+  orig: 101, 133
+  offset: 0, 0
+  index: -1
+OUTFIT/Bottom/White cullotes/BOTTOMAsset 270
+  rotate: true
+  xy: 977, 59
+  size: 82, 127
+  orig: 95, 174
+  offset: 4, 29
+  index: -1
+OUTFIT/Bottom/White skirt/PREVIEWAsset 300
+  rotate: false
+  xy: 1262, 1268
+  size: 224, 257
+  orig: 224, 257
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/long oval with bangs/FRONTAsset 153 - Copy
+  rotate: false
+  xy: 895, 1042
+  size: 270, 206
+  orig: 270, 206
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/short bob with bangs/FRONTAsset 153 - Copy
+  rotate: false
+  xy: 895, 1042
+  size: 270, 206
+  orig: 270, 206
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/two tail/FRONTAsset 153 - Copy
+  rotate: false
+  xy: 895, 1042
+  size: 270, 206
+  orig: 270, 206
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/long oval/BACKAsset 158 - Copy
+  rotate: false
+  xy: 2, 1338
+  size: 305, 457
+  orig: 305, 457
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/long oval with bangs/BACKAsset 158
+  rotate: false
+  xy: 2, 1338
+  size: 305, 457
+  orig: 305, 457
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/long oval/FRONTAsset 152 - Copy
+  rotate: false
+  xy: 987, 1250
+  size: 273, 251
+  orig: 273, 251
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/shaggy/FRONTAsset 152
+  rotate: false
+  xy: 987, 1250
+  size: 273, 251
+  orig: 273, 251
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/short bob/FRONTAsset 152 - Copy - Copy
+  rotate: false
+  xy: 987, 1250
+  size: 273, 251
+  orig: 273, 251
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/ponytail with bangs/FRONTAsset 154
+  rotate: false
+  xy: 2, 354
+  size: 275, 317
+  orig: 275, 317
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/ponytail/BACKAsset 160
+  rotate: true
+  xy: 309, 1281
+  size: 154, 380
+  orig: 154, 380
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/ponytail with bangs/BACKAsset 160 - Copy
+  rotate: true
+  xy: 309, 1281
+  size: 154, 380
+  orig: 154, 380
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/ponytail/FRONTAsset 155
+  rotate: false
+  xy: 2, 56
+  size: 275, 296
+  orig: 275, 296
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/shaggy/BACKAsset 159
+  rotate: false
+  xy: 309, 1437
+  size: 330, 358
+  orig: 330, 358
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/short bob/BACKAsset 157
+  rotate: false
+  xy: 2, 980
+  size: 299, 356
+  orig: 299, 356
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/short bob with bangs/BACKAsset 157 - Copy
+  rotate: false
+  xy: 2, 980
+  size: 299, 356
+  orig: 299, 356
+  offset: 0, 0
+  index: -1
+OUTFIT/Hair/two tail/BACKAsset 156
+  rotate: false
+  xy: 641, 1455
+  size: 307, 340
+  orig: 307, 340
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Black Blue high sneakers/L
+  rotate: true
+  xy: 1164, 59
+  size: 98, 55
+  orig: 98, 55
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Black Blue high sneakers/R
+  rotate: false
+  xy: 1592, 380
+  size: 107, 60
+  orig: 107, 60
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Flat shoes black/L
+  rotate: true
+  xy: 1955, 812
+  size: 95, 36
+  orig: 95, 36
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Flat shoes black/R
+  rotate: false
+  xy: 1411, 3
+  size: 105, 34
+  orig: 105, 34
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Flat shoes red/L
+  rotate: true
+  xy: 1993, 813
+  size: 94, 36
+  orig: 94, 36
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Flat shoes red/R
+  rotate: false
+  xy: 1572, 214
+  size: 105, 34
+  orig: 105, 34
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Flat shoes white/L
+  rotate: false
+  xy: 1892, 183
+  size: 94, 36
+  orig: 94, 36
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Flat shoes white/R
+  rotate: false
+  xy: 1787, 231
+  size: 105, 34
+  orig: 105, 34
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Formal blue/L
+  rotate: false
+  xy: 1661, 32
+  size: 103, 41
+  orig: 103, 41
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Formal blue/R
+  rotate: false
+  xy: 121, 8
+  size: 117, 46
+  orig: 117, 46
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Formal brown/L
+  rotate: false
+  xy: 1787, 188
+  size: 103, 41
+  orig: 103, 41
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Formal brown/R
+  rotate: true
+  xy: 960, 151
+  size: 117, 46
+  orig: 117, 46
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Green White shoes/L
+  rotate: true
+  xy: 1735, 840
+  size: 100, 37
+  orig: 100, 37
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Green White shoes/R
+  rotate: true
+  xy: 1098, 182
+  size: 112, 42
+  orig: 112, 42
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Pink sport/L
+  rotate: false
+  xy: 1679, 1266
+  size: 123, 55
+  orig: 123, 55
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Pink sport/R
+  rotate: true
+  xy: 1016, 322
+  size: 145, 65
+  orig: 145, 65
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Red Black high sneakers/L
+  rotate: false
+  xy: 1661, 75
+  size: 98, 55
+  orig: 98, 55
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Red Black high sneakers/R
+  rotate: false
+  xy: 1701, 358
+  size: 107, 60
+  orig: 107, 60
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Tosca sport/L
+  rotate: false
+  xy: 1101, 2
+  size: 122, 55
+  orig: 122, 55
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/White Red shoes/L
+  rotate: false
+  xy: 240, 2
+  size: 101, 38
+  orig: 101, 38
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/White Red shoes/R
+  rotate: false
+  xy: 1387, 220
+  size: 112, 42
+  orig: 112, 42
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/White high sneakers/L
+  rotate: true
+  xy: 1106, 59
+  size: 98, 56
+  orig: 98, 56
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/White high sneakers/R
+  rotate: false
+  xy: 1572, 250
+  size: 107, 60
+  orig: 107, 60
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Yellow Pink Shoes/L
+  rotate: false
+  xy: 343, 2
+  size: 101, 38
+  orig: 101, 38
+  offset: 0, 0
+  index: -1
+OUTFIT/Shoes/Yellow Pink Shoes/R
+  rotate: false
+  xy: 1529, 442
+  size: 112, 41
+  orig: 112, 41
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Black t-shirt/TOPAsset 234
+  rotate: true
+  xy: 1016, 267
+  size: 53, 65
+  orig: 53, 65
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Black t-shirt/TOPAsset 236
+  rotate: true
+  xy: 1337, 567
+  size: 179, 180
+  orig: 179, 180
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Black t-shirt/TOPAsset 237
+  rotate: false
+  xy: 1633, 148
+  size: 44, 64
+  orig: 44, 64
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Brown polo/TOPAsset 231
+  rotate: false
+  xy: 1796, 864
+  size: 54, 79
+  orig: 54, 79
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Brown polo/TOPAsset 232
+  rotate: false
+  xy: 550, 429
+  size: 176, 173
+  orig: 176, 173
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Brown polo/TOPAsset 233
+  rotate: true
+  xy: 1501, 227
+  size: 44, 69
+  orig: 44, 69
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Green t-shirt/TOPAsset 238
+  rotate: true
+  xy: 1847, 44
+  size: 53, 65
+  orig: 53, 65
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Green t-shirt/TOPAsset 239
+  rotate: true
+  xy: 1527, 659
+  size: 179, 180
+  orig: 179, 180
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Green t-shirt/TOPAsset 240
+  rotate: true
+  xy: 1914, 53
+  size: 44, 64
+  orig: 44, 64
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Kebaya pink/TOPAsset 219
+  rotate: false
+  xy: 671, 9
+  size: 54, 79
+  orig: 54, 79
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Kebaya pink/TOPAsset 220
+  rotate: false
+  xy: 1606, 1048
+  size: 170, 216
+  orig: 170, 216
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Kebaya pink/TOPAsset 221
+  rotate: false
+  xy: 1482, 143
+  size: 44, 69
+  orig: 44, 69
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Purple polo/TOPAsset 228
+  rotate: true
+  xy: 1766, 46
+  size: 54, 79
+  orig: 54, 79
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Purple polo/TOPAsset 229
+  rotate: false
+  xy: 728, 429
+  size: 176, 173
+  orig: 176, 173
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Purple polo/TOPAsset 230
+  rotate: true
+  xy: 1914, 7
+  size: 44, 69
+  orig: 44, 69
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Red shirt/TOPAsset 222
+  rotate: true
+  xy: 1142, 159
+  size: 57, 116
+  orig: 57, 116
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Red shirt/TOPAsset 223
+  rotate: true
+  xy: 465, 223
+  size: 170, 206
+  orig: 170, 206
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Red shirt/TOPAsset 224
+  rotate: true
+  xy: 855, 604
+  size: 48, 107
+  orig: 48, 107
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Sporty pink/TOPAsset 216
+  rotate: false
+  xy: 1595, 43
+  size: 64, 103
+  orig: 64, 103
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Sporty pink/TOPAsset 217
+  rotate: false
+  xy: 279, 222
+  size: 184, 212
+  orig: 184, 212
+  offset: 0, 0
+  index: -1
+OUTFIT/Top/Sporty pink/TOPAsset 218
+  rotate: true
+  xy: 1485, 384
+  size: 56, 105
+  orig: 56, 105
+  offset: 0, 0
+  index: -1

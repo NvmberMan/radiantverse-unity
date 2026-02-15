@@ -1,4 +1,5 @@
 ﻿using Spine.Unity;
+using System;
 using UnityEngine;
 
 namespace Main.Gameplay
@@ -19,9 +20,10 @@ namespace Main.Gameplay
         [SerializeField] LayerMask groundLayer;
 
         [Header("Spine Settings")]
-        [SpineAnimation] public string idleAnimation = "idle";
-        [SpineAnimation] public string walkAnimation = "run";
-        [SpineAnimation] public string jumpAnimation = "jump";
+        [SpineAnimation] public string idleAnimation = "Idle";
+        [SpineAnimation] public string walkAnimation = "Run";
+        [SpineAnimation] public string jumpAnimation = "Jump";
+        [SpineAnimation] public string fallAnimation = "Fall";
 
         [HideInInspector] public Rigidbody rb;
         public bool _isGrounded;
@@ -39,10 +41,18 @@ namespace Main.Gameplay
         [SerializeField] float stepHeight = 0.3f;
         [SerializeField] float stepSmooth = 0.1f;
 
+        public Action isJumping;
+
         public float Acceleration
         {
             get => acceleration;
             set => acceleration = value;
+        }
+
+        public float AirAcceleration
+        {
+            get => airAcceleration;
+            set => airAcceleration = value;
         }
 
         protected override void Awake()
@@ -62,6 +72,9 @@ namespace Main.Gameplay
             base.Update();
 
             CheckGround();
+
+
+            HandleAnimations();
 
             if (GameManager.Instance.isPaused)
                 StopMoving();
@@ -145,7 +158,8 @@ namespace Main.Gameplay
 
             rb.linearVelocity = vel;
 
-            SetAnimation(walkAnimation, true);
+            //if(_isGrounded)
+            //    SetAnimation(walkAnimation, true);
 
             Flip(horizontalInput);
         }
@@ -169,12 +183,13 @@ namespace Main.Gameplay
 
             rb.linearVelocity = vel;
 
-            SetAnimation(idleAnimation, true);
+            //if (_isGrounded)
+            //    SetAnimation(idleAnimation, true);
         }
 
         public void Jump()
         {
-            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused) return;
+            if (!GameManager.Instance.isGameActive || GameManager.Instance.isPaused || _isFreeze) return;
 
 
             if (_isGrounded && Time.time >= nextJumpTime)
@@ -185,9 +200,36 @@ namespace Main.Gameplay
 
                 nextJumpTime = Time.time + jumpCooldown;
 
-                SetAnimation(jumpAnimation, false);
+                //if (_isGrounded)
+                //    SetAnimation(jumpAnimation, false);
 
                 AudioManager.Instance.PlaySFXAtPoint("Jump", this.transform.position, 6);
+
+                isJumping?.Invoke();
+            }
+        }
+
+        private void HandleAnimations()
+        {
+            if (_isGrounded)
+            {
+                // Logika saat di tanah
+                if (rb.linearVelocity.magnitude > 0.01f)
+                    SetAnimation(walkAnimation, true);
+                else
+                    SetAnimation(idleAnimation, true);
+            }
+            else
+            {
+                // Logika saat di udara
+                if (rb.linearVelocity.y > 0)
+                {
+                    SetAnimation(jumpAnimation, false);
+                }
+                else
+                {
+                    SetAnimation(fallAnimation, true); // Animasi jatuh biasanya di-loop
+                }
             }
         }
 

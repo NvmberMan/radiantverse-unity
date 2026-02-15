@@ -7,27 +7,32 @@ namespace Main.Mainmenu
 {
     public class ChooseDefaultCharacterController : Controller
     {
-        private List<string> defaultBoySkin = new()
+        [HideInInspector] public List<string> defaultBoySkin = new()
         {
             "faces/Boy",
-            "hairs/Type1",
+            "hairs/Ivy league",
             "pants/Sporty-short-blue",
-            "shirts/Sporty-blue"
+            "shirts/Sporty-blue",
+            "shoes/Sporty-aqua",
+            "socks/long-white-sock"
         };
 
-        private List<string> defaultGirlSkin = new()
+        [HideInInspector] public List<string> defaultGirlSkin = new()
         {
             "faces/Girl",
-            "hairs/Type1",
-            "pants/Sporty-short-blue",
-            "shirts/Sporty-blue"
+            "hairs/ponytail with bangs",
+            "pants/Sporty-short-pink",
+            "shirts/Sporty pink",
+            "shoes/Pink sport",
+            "socks/long-white-sock"
         };
 
         public void SelectGender(bool isMan)
         {
             string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            FirestoreModel.SetGender(isMan ? 0 : 1);
 
-            if(isMan)
+            if (isMan)
             {
                 PlayerLocalData.inventoryData.SelectedSkins = defaultBoySkin;
                 FirestoreModel.UpdateSelectedSkins(uid, PlayerLocalData.inventoryData.SelectedSkins);

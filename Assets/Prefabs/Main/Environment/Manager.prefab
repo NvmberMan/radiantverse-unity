@@ -56,6 +56,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1993248746642577063
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +129,18 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 00c9521dde79c1f428c88efe536e3ba1, type: 3}
   - name: Cheers
     clip: {fileID: 8300000, guid: 4bcc599060ce8e141bfafb52c292854f, type: 3}
+  - name: button click
+    clip: {fileID: 8300000, guid: 51d89b48607ffa045ae5861a7caecafd, type: 3}
+  - name: finish
+    clip: {fileID: 8300000, guid: 1c2087374771e51429786ef017e52ae0, type: 3}
+  - name: power up
+    clip: {fileID: 8300000, guid: 73993bce9a0761445bd7080849c4684a, type: 3}
+  - name: power down
+    clip: {fileID: 8300000, guid: 40f3e896fa49da447ad30597fd140c7c, type: 3}
+  - name: level unlocked
+    clip: {fileID: 8300000, guid: 6abc30e576aa48249b284e3fbd6bfb31, type: 3}
+  - name: game finish
+    clip: {fileID: 8300000, guid: dda9125e165a5cd4dbd244ad3e73b969, type: 3}
 --- !u!1 &2275927169699654206
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1084017942552413370}
   - component: {fileID: 8783860239970931969}
+  - component: {fileID: 8816705575601929138}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -167,9 +189,45 @@ MonoBehaviour:
   isGameActive: 0
   isPaused: 0
   currentFinishRank: 1
+  isTesting: 0
+  isTraining: 0
   playerTransform: {fileID: 0}
   aiAgentPrefab: {fileID: 5268295388888470089, guid: ae4d0af928fc39b47aa36bf650bc4fdf, type: 3}
   spawnPoints: []
+  orbitalFollow: {fileID: 0}
+  orbitalFollowAI: {fileID: 0}
+  cinematicDirector: {fileID: 0}
+  isCinematic: 1
+--- !u!114 &8816705575601929138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2275927169699654206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: a63533ff1b5a1da4b8f0fda3f42236f9, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8783860239970931969}
+          m_TargetAssemblyTypeName: Main.Gameplay.GameManager, Assembly-CSharp
+          m_MethodName: OnCinematicFinished
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2764110908839592223
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,8 +272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb39d692a643b34fba8bb986b82e7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  ActiveIndex: 0
+  ActiveIndex: -1
   ControllerList:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -264,7 +324,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5bbe3064fadd438b1e4077c64fd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  targetPoints: []
+  ways:
+  - targetPoints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - targetPoints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  aiData:
+  - characterName: Wildan
+    wayIndex: 0
+    brain: {fileID: 5022602860645237092, guid: 2608d0f4567934d43b91e9a883975db5, type: 3}
+    sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
+    skinConfigs:
+    - hairs/Curly top
+    - pants/Black-formal
+    - shirts/Kemeja&dasi-tosca
+    - socks/long-white-sock
+    - shoes/Black-formal
+    - faces/Boy
+  - characterName: Rangga
+    wayIndex: 0
+    brain: {fileID: 5022602860645237092, guid: b0abbc49f84d11c4999c8ad6a6ccfbc3, type: 3}
+    sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
+    skinConfigs:
+    - hairs/side fringe
+    - accessories/Oval Glasses
+    - faces/Boy
+    - pants/Blue-baggy-jeans
+    - shirts/Shirt&vest-coklat
+    - shoes/Tosca sport
+    - socks/long-white-sock
+  - characterName: Lee
+    wayIndex: 0
+    brain: {fileID: 5022602860645237092, guid: 08eb660ef0deb254995010f56563e2d9, type: 3}
+    sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
+    skinConfigs:
+    - hairs/Curtain cut
+    - shirts/Brown polo
+    - pants/Navy-short-pants
+    - faces/Boy
+    - socks/short-white-sock
+    - shoes/White high sneakers
+  - characterName: Randista
+    wayIndex: 1
+    brain: {fileID: 5022602860645237092, guid: 21c4b98abeeb10e4a872c6568a41bba8, type: 3}
+    sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
+    skinConfigs:
+    - hairs/Ivy league
+    - pants/Cream-formal
+    - shirts/Maroon-shirt
+    - shoes/Brown-formal
+    - socks/long-white-sock
+    - faces/Boy
+  - characterName: Grace
+    wayIndex: 1
+    brain: {fileID: 5022602860645237092, guid: 17bad271ceb7d4d41ae0c2b17b867ad7, type: 3}
+    sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
+    skinConfigs:
+    - hairs/ponytail
+    - accessories/Oval Glasses
+    - faces/Girl
+    - pants/White skirt
+    - shirts/Kebaya pink
+    - shoes/Flat shoes white
+  - characterName: Calvin
+    wayIndex: 1
+    brain: {fileID: 5022602860645237092, guid: 63d3cfca82a840f408e2e48fd40767f8, type: 3}
+    sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
+    skinConfigs:
+    - shirts/Cream-shirt
+    - pants/Black-cullotes
+    - shoes/White high sneakers
+    - faces/Boy
+    - hairs/Curtain cut
+    - socks/long-white-sock
 --- !u!1 &8379530398042428340
 GameObject:
   m_ObjectHideFlags: 0

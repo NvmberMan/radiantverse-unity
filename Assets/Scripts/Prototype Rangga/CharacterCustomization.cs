@@ -3,6 +3,7 @@ using Main.Mainmenu;
 using Spine;
 using Spine.Unity;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CharacterCustomization : CharacterSystem
@@ -15,10 +16,7 @@ public class CharacterCustomization : CharacterSystem
 
     [Header("Settings")]
     public SkinSource skinSource;
-
-    [Header("Manual Selection")]
-    [SpineSkin(dataField: "skeletonAnimation")]
-    public List<string> manualSkins = new List<string>();
+    public TMP_Text nameCharacter;
 
     private void Start()
     {
@@ -32,7 +30,7 @@ public class CharacterCustomization : CharacterSystem
 
         if (!Application.isPlaying)
         {
-            RefreshEditorSkin();
+            //RefreshEditorSkin();
         }
     }
 
@@ -44,23 +42,9 @@ public class CharacterCustomization : CharacterSystem
         {
             if (PlayerLocalData.inventoryData == null) return;
             skinsToApply = PlayerLocalData.inventoryData.SelectedSkins.ToArray();
-        }
-        else
-        {
-            skinsToApply = manualSkins.ToArray();
-        }
 
-        if (skinsToApply.Length > 0)
-        {
             CombineSkins(skinsToApply);
-        }
-    }
 
-    private void RefreshEditorSkin()
-    {
-        if (manualSkins != null && manualSkins.Count > 0)
-        {
-            CombineSkins(manualSkins.ToArray());
         }
     }
 

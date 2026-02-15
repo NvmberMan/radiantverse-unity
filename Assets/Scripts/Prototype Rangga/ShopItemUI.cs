@@ -24,12 +24,12 @@ public class ShopItemUI : MonoBehaviour
 
         if (data is Main.Mainmenu.CrateData)
         {
-            priceText.text = data.price + " $";
+            priceText.text = data.price.ToString();
             buyButton.interactable = true;
         }
         else
         {
-            priceText.text = data.price + " $";
+            priceText.text = data.price.ToString();
             buyButton.interactable = !isOwned;
 
             ownedVisual.SetActive(isOwned);

@@ -6,11 +6,27 @@ namespace Main.Mainmenu
 {
     public class RankPreviewView : View
     {
-        public Image rankImagePreview;
+        public TMP_Text rankView;
+        public TMP_Text subRankView;
 
-        public void UpdatePreview(Sprite image)
+        public void UpdatePreview(int rank)
         {
-            rankImagePreview.sprite = image;
+            rankView.text = rank.ToString();
+
+            if(rank == 1)
+            {
+                subRankView.text = "st";
+            }else if(rank == 2)
+            {
+                subRankView.text = "nd";
+            }else if(rank == 3)
+            {
+                subRankView.text = "rd";
+            }
+            else
+            {
+                subRankView.text = "th";
+            }
         }
     }
 }

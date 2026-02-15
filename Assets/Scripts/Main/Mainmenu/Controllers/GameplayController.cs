@@ -8,37 +8,23 @@ namespace Main.Mainmenu
 {
     public class GameplayController : Controller
     {
-        public enum CameraControlMode
-        {
-            Mobile,
-            PC
-        }
-
-        public enum JoystickMode
-        {
-            Fixed,
-            Dynamic
-        }
-
+        public enum CameraControlMode { Mobile, PC }
+        public enum JoystickMode { Fixed, Dynamic }
 
         [Header("Camera Mode")]
         public CameraControlMode cameraMode = CameraControlMode.Mobile;
 
         [Header("Sensitivity (Shared)")]
-        [Tooltip("Base sensitivity (slider controlled)")]
         public float baseSensitivity = 1f;
 
         [Header("PC Settings")]
-        [Tooltip("Rotation speed multiplier for PC")]
         public float pcRotationSpeed = 300f;
 
         [Header("Mobile Settings")]
-        [Tooltip("Rotation multiplier for Mobile")]
         public float mobileRotationMultiplier = 180f;
 
         [Header("Joystick Settings")]
         public JoystickMode joystickMode = JoystickMode.Fixed;
-
         public Joystick fixedJoystick;
         public Joystick dynamicJoystick;
 
@@ -55,9 +41,9 @@ namespace Main.Mainmenu
         private float targetZoom;
         private float currentZoom;
 
-        [Header("UI")]
+        [Header("UI Elements")]
         public Slider sensitivitySlider;
-        public Toggle joystickToggle;
+        public Toggle joystickToggle; 
         public Slider zoomSpeedSlider;
 
         private Vector2 lastInputPos;
@@ -66,10 +52,10 @@ namespace Main.Mainmenu
         private PlayerInput playerInput;
         private PlayerInputJoystick playerInputJoystick;
 
-
         [HideInInspector] public Joystick activeJoystick;
         private RectTransform activeJoystickArea;
         public Action OnChangeJoystickSystem;
+        private int? joystickFingerId = null;
 
         private const string SENS_KEY = "CAMERA_SENSITIVITY";
         private const string JOYSTICK_KEY = "JOYSTICK_MODE";
@@ -79,24 +65,13 @@ namespace Main.Mainmenu
         private void Awake()
         {
             LoadJoystickMode();
-            SetupJoystick();
-
-            if (joystickToggle != null)
-            {
-                joystickToggle.isOn = (joystickMode == JoystickMode.Fixed);
-            }
         }
 
         private void Start()
         {
-            characterMovement = GameManager.Instance.playerTransform
-                .GetComponent<CharacterMovement>();
-
-            playerInput = GameManager.Instance.playerTransform
-                .GetComponent<PlayerInput>();
-
-            playerInputJoystick = GameManager.Instance.playerTransform
-                .GetComponent<PlayerInputJoystick>();
+            characterMovement = GameManager.Instance.playerTransform.GetComponent<CharacterMovement>();
+            playerInput = GameManager.Instance.playerTransform.GetComponent<PlayerInput>();
+            playerInputJoystick = GameManager.Instance.playerTransform.GetComponent<PlayerInputJoystick>();
 
             if (GameManager.Instance.orbitalFollow != null)
             {
@@ -104,25 +79,35 @@ namespace Main.Mainmenu
                 currentZoom = targetZoom;
             }
 
+            // Inisialisasi Data & UI
             LoadSensitivity();
             SetupSlider();
-
             LoadZoomSpeed();
             SetupZoomSlider();
+
+            SetupJoystick();
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused)
+            for (int i = 0; i < Input.touchCount; i++)
             {
-                if (!GameManager.Instance.isPaused)
+                Touch t = Input.GetTouch(i);
+                if (t.phase == TouchPhase.Began && IsTouchOnJoystick(t.position))
                 {
-                    Pause();
+                    joystickFingerId = t.fingerId;
                 }
-                else
+                if (joystickFingerId != null && t.fingerId == joystickFingerId.Value)
                 {
-                    Resume();
+                    if (t.phase == TouchPhase.Ended || t.phase == TouchPhase.Canceled)
+                        joystickFingerId = null;
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (!GameManager.Instance.isPaused) Pause();
+                else Resume();
             }
 
             switch (cameraMode)
@@ -130,7 +115,6 @@ namespace Main.Mainmenu
                 case CameraControlMode.Mobile:
                     playerInput.enabled = false;
                     playerInputJoystick.enabled = true;
-
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
 
@@ -139,7 +123,6 @@ namespace Main.Mainmenu
                         HandleMobileCamera();
                         HandleZoom();
                     }
-
                     break;
 
                 case CameraControlMode.PC:
@@ -150,349 +133,190 @@ namespace Main.Mainmenu
                     {
                         Cursor.visible = false;
                         Cursor.lockState = CursorLockMode.Locked;
+                        if (!GameManager.Instance.isCinematic)
+                        {
+                            HandlePCCamera();
+                            HandleZoom();
+                        }
                     }
                     else
                     {
                         Cursor.visible = true;
                         Cursor.lockState = CursorLockMode.None;
                     }
-
-                    if (!GameManager.Instance.isPaused)
-                    {
-                        HandlePCCamera();
-                        HandleZoom();
-                    }
                     break;
             }
 
-            if (!GameManager.Instance.isPaused)
+            if (!GameManager.Instance.isPaused && GameManager.Instance.orbitalFollow != null)
             {
                 currentZoom = Mathf.Lerp(currentZoom, targetZoom, Time.deltaTime * zoomSmoothing);
                 GameManager.Instance.orbitalFollow.RadialAxis.Value = currentZoom;
             }
         }
 
-
-
+        #region Camera & Zoom Logic
         void HandleZoom()
         {
             if (cameraMode == CameraControlMode.PC)
             {
                 float scroll = Input.GetAxis("Mouse ScrollWheel");
-                if (scroll != 0)
-                {
-                    ApplyZoom(-scroll * zoomSpeedPC);
-                }
+                if (scroll != 0) ApplyZoom(-scroll * zoomSpeedPC);
             }
             else if (cameraMode == CameraControlMode.Mobile && Input.touchCount >= 2)
             {
-                Touch? t0 = null;
-                Touch? t1 = null;
-
+                Touch? t0 = null; Touch? t1 = null;
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     Touch t = Input.GetTouch(i);
-
-                    if (IsTouchOnJoystick(t.position))
-                        continue;
-
-                    if (t0 == null) t0 = t;
-                    else if (t1 == null) t1 = t;
+                    //if (IsTouchOnJoystick(t.position)) continue;
+                    if (joystickFingerId != null && t.fingerId == joystickFingerId.Value) continue;
+                    if (t0 == null) t0 = t; else if (t1 == null) t1 = t;
                 }
 
-                if (t0 == null || t1 == null)
-                    return;
-
-                Touch touch0 = t0.Value;
-                Touch touch1 = t1.Value;
-
-                Vector2 prev0 = touch0.position - touch0.deltaPosition;
-                Vector2 prev1 = touch1.position - touch1.deltaPosition;
-
-                float prevMag = (prev0 - prev1).magnitude;
-                float currMag = (touch0.position - touch1.position).magnitude;
-
-                float diff = currMag - prevMag;
-                ApplyZoom(-diff * zoomSpeedMobile);
+                if (t0 != null && t1 != null)
+                {
+                    Vector2 prev0 = t0.Value.position - t0.Value.deltaPosition;
+                    Vector2 prev1 = t1.Value.position - t1.Value.deltaPosition;
+                    float prevMag = (prev0 - prev1).magnitude;
+                    float currMag = (t0.Value.position - t1.Value.position).magnitude;
+                    ApplyZoom(-(currMag - prevMag) * zoomSpeedMobile);
+                }
             }
-
-
         }
 
         void ApplyZoom(float increment)
         {
-            targetZoom += increment;
-            targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
+            targetZoom = Mathf.Clamp(targetZoom + increment, minZoom, maxZoom);
         }
 
         void HandleMobileCamera()
         {
             Touch? cameraTouch = null;
-
             for (int i = 0; i < Input.touchCount; i++)
             {
                 Touch t = Input.GetTouch(i);
-
-                if (IsTouchOnJoystick(t.position))
-                    continue;
-
-                cameraTouch = t;
-                break;
+                //if (IsTouchOnJoystick(t.position)) continue;
+                if (joystickFingerId != null && t.fingerId == joystickFingerId.Value) continue;
+                if (t.phase == TouchPhase.Began && IsTouchOnJoystick(t.position)) continue;
+                cameraTouch = t; break;
             }
 
-            if (cameraTouch == null)
-            {
-                isCameraTouchActive = false;
-                return;
-            }
+            if (cameraTouch == null) { isCameraTouchActive = false; return; }
 
             Touch touch = cameraTouch.Value;
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                isCameraTouchActive = true;
-                lastInputPos = touch.position;
-            }
+            if (touch.phase == TouchPhase.Began) { isCameraTouchActive = true; lastInputPos = touch.position; }
             else if (touch.phase == TouchPhase.Moved && isCameraTouchActive)
             {
                 Vector2 delta = touch.position - lastInputPos;
                 lastInputPos = touch.position;
-
-                RotateCameraMobile(NormalizeDelta(delta));
+                RotateCameraMobile(new Vector2(delta.x / Screen.width, delta.y / Screen.height));
             }
-            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
-            {
-                isCameraTouchActive = false;
-            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) isCameraTouchActive = false;
         }
+
         void HandlePCCamera()
         {
-            float mouseX = Input.GetAxis("Mouse X");
-            float mouseY = Input.GetAxis("Mouse Y");
-
-            RotateCameraPC(new Vector2(mouseX, mouseY));
+            RotateCameraPC(new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")));
         }
 
         void RotateCameraPC(Vector2 delta)
         {
-            GameManager.Instance.orbitalFollow.HorizontalAxis.Value +=
-                delta.x * pcRotationSpeed * baseSensitivity * Time.deltaTime;
-
-            GameManager.Instance.orbitalFollow.VerticalAxis.Value -=
-                delta.y * pcRotationSpeed * baseSensitivity * Time.deltaTime;
-
+            GameManager.Instance.orbitalFollow.HorizontalAxis.Value += delta.x * pcRotationSpeed * baseSensitivity * Time.deltaTime;
+            GameManager.Instance.orbitalFollow.VerticalAxis.Value -= delta.y * pcRotationSpeed * baseSensitivity * Time.deltaTime;
             ClampVertical();
         }
 
-        void RotateCameraMobile(Vector2 normalizedDelta)
+        void RotateCameraMobile(Vector2 normDelta)
         {
-            GameManager.Instance.orbitalFollow.HorizontalAxis.Value +=
-                normalizedDelta.x * mobileRotationMultiplier * baseSensitivity;
-
-            GameManager.Instance.orbitalFollow.VerticalAxis.Value -=
-                normalizedDelta.y * mobileRotationMultiplier * baseSensitivity;
-
+            GameManager.Instance.orbitalFollow.HorizontalAxis.Value += normDelta.x * mobileRotationMultiplier * baseSensitivity;
+            GameManager.Instance.orbitalFollow.VerticalAxis.Value -= normDelta.y * mobileRotationMultiplier * baseSensitivity;
             ClampVertical();
         }
 
         void ClampVertical()
         {
-            GameManager.Instance.orbitalFollow.VerticalAxis.Value = Mathf.Clamp(
-                GameManager.Instance.orbitalFollow.VerticalAxis.Value,
-                GameManager.Instance.orbitalFollow.VerticalAxis.Range.x,
-                GameManager.Instance.orbitalFollow.VerticalAxis.Range.y
-            );
+            var axis = GameManager.Instance.orbitalFollow.VerticalAxis;
+            axis.Value = Mathf.Clamp(axis.Value, axis.Range.x, axis.Range.y);
         }
+        #endregion
 
-        Vector2 NormalizeDelta(Vector2 delta)
-        {
-            return new Vector2(
-                delta.x / Screen.width,
-                delta.y / Screen.height
-            );
-        }
-
-
-        #region Setup
+        #region Setup & Save/Load
         void SetupSlider()
         {
-            if (sensitivitySlider == null)
-                return;
-
-            sensitivitySlider.minValue = 0.2f;
-            sensitivitySlider.maxValue = 2.5f;
+            if (sensitivitySlider == null) return;
+            sensitivitySlider.minValue = 0.2f; sensitivitySlider.maxValue = 2.5f;
             sensitivitySlider.value = baseSensitivity;
-
             sensitivitySlider.onValueChanged.AddListener(OnSensitivityChanged);
         }
 
         void SetupJoystick()
         {
-            if (fixedJoystick != null)
-                fixedJoystick.gameObject.SetActive(false);
+            if (fixedJoystick != null) fixedJoystick.gameObject.SetActive(false);
+            if (dynamicJoystick != null) dynamicJoystick.gameObject.SetActive(false);
 
-            if (dynamicJoystick != null)
-                dynamicJoystick.gameObject.SetActive(false);
-
-            switch (joystickMode)
+            if (joystickMode == JoystickMode.Fixed)
             {
-                case JoystickMode.Fixed:
-                    activeJoystick = fixedJoystick;
-                    activeJoystickArea = fixedJoystickArea;
-                    if (fixedJoystick != null)
-                        fixedJoystick.gameObject.SetActive(true);
-                    break;
-
-                case JoystickMode.Dynamic:
-                    activeJoystick = dynamicJoystick;
-                    activeJoystickArea = dynamicJoystickArea;
-                    if (dynamicJoystick != null)
-                        dynamicJoystick.gameObject.SetActive(true);
-                    break;
+                activeJoystick = fixedJoystick;
+                activeJoystickArea = fixedJoystickArea;
+                if (fixedJoystick != null) fixedJoystick.gameObject.SetActive(true);
             }
-
+            else
+            {
+                activeJoystick = dynamicJoystick;
+                activeJoystickArea = dynamicJoystickArea;
+                if (dynamicJoystick != null) dynamicJoystick.gameObject.SetActive(true);
+            }
             OnChangeJoystickSystem?.Invoke();
         }
 
-
         void SetupZoomSlider()
         {
-            if (zoomSpeedSlider == null)
-                return;
-
-            zoomSpeedSlider.minValue = 0.0001f;
-            zoomSpeedSlider.maxValue = 0.01f;
-
-            zoomSpeedSlider.value =
-                cameraMode == CameraControlMode.PC
-                    ? zoomSpeedPC
-                    : zoomSpeedMobile;
-
+            if (zoomSpeedSlider == null) return;
+            zoomSpeedSlider.minValue = 0.0001f; zoomSpeedSlider.maxValue = 0.01f;
+            zoomSpeedSlider.value = (cameraMode == CameraControlMode.PC) ? zoomSpeedPC : zoomSpeedMobile;
             zoomSpeedSlider.onValueChanged.AddListener(OnZoomSpeedChanged);
-        }
-        #endregion
-
-        #region Save Data
-        void OnSensitivityChanged(float value)
-        {
-            baseSensitivity = value;
-            PlayerPrefs.SetFloat(SENS_KEY, baseSensitivity);
-            PlayerPrefs.Save();
         }
 
         public void OnJoystickToggleChanged(bool isOn)
         {
+            // Update Logika
             joystickMode = isOn ? JoystickMode.Fixed : JoystickMode.Dynamic;
-
             SetupJoystick();
-            SaveJoystickMode();
-        }
-
-        void OnZoomSpeedChanged(float value)
-        {
-            if (cameraMode == CameraControlMode.PC)
-                zoomSpeedPC = value;
-            else
-                zoomSpeedMobile = value;
-
-            SaveZoomSpeed();
-        }
-
-
-        void SaveJoystickMode()
-        {
             PlayerPrefs.SetInt(JOYSTICK_KEY, (int)joystickMode);
             PlayerPrefs.Save();
-        }
 
-        void SaveZoomSpeed()
-        {
-            PlayerPrefs.SetFloat(ZOOM_PC_KEY, zoomSpeedPC);
-            PlayerPrefs.SetFloat(ZOOM_MOBILE_KEY, zoomSpeedMobile);
-            PlayerPrefs.Save();
-        }
-
-        #endregion
-
-        #region Load Data
-        void LoadSensitivity()
-        {
-            baseSensitivity = PlayerPrefs.GetFloat(SENS_KEY, 1f);
-        }
-
-        void LoadJoystickMode()
-        {
-            int savedMode = PlayerPrefs.GetInt(JOYSTICK_KEY, 0); // default Fixed
-            joystickMode = (JoystickMode)savedMode;
-        }
-
-        void LoadZoomSpeed()
-        {
-            zoomSpeedPC = PlayerPrefs.GetFloat(ZOOM_PC_KEY, zoomSpeedPC);
-            zoomSpeedMobile = PlayerPrefs.GetFloat(ZOOM_MOBILE_KEY, zoomSpeedMobile);
-        }
-        #endregion
-
-
-
-        public void Jump()
-        {
-            characterMovement.Jump();
-        }
-
-        public void Pause()
-        {
-            MenuManager.instance.GetController<PauseController>()
-                .Activate("base");
-
-            GameManager.Instance.isPaused = true;
-        }
-
-        public void Resume()
-        {
-            MenuManager.instance.GetController<PauseController>()
-                .Disactivate("base");
-
-            GameManager.Instance.isPaused = false;
-        }
-
-        public void SetCameraModePC()
-        {
-            cameraMode = CameraControlMode.PC;
-        }
-
-        public void SetCameraModeMobile()
-        {
-            cameraMode = CameraControlMode.Mobile;
-        }
-
-        bool IsTouchOnJoystick(Vector2 screenPos)
-        {
-            if (activeJoystickArea == null)
-                return false;
-
-            return RectTransformUtility.RectangleContainsScreenPoint(
-                activeJoystickArea,
-                screenPos,
-                null
-            );
-        }
-
-
-        void OnDrawGizmos()
-        {
-            if (activeJoystickArea == null) return;
-
-            Gizmos.color = Color.green;
-
-            Vector3[] corners = new Vector3[4];
-            activeJoystickArea.GetWorldCorners(corners);
-
-            for (int i = 0; i < 4; i++)
+            // Update Animasi (Sama persis dengan SettingView)
+            if (joystickToggle != null)
             {
-                Gizmos.DrawLine(corners[i], corners[(i + 1) % 4]);
+                Animator anim = joystickToggle.GetComponent<Animator>();
+                if (anim != null)
+                {
+                    anim.SetTrigger("Switch");
+                    anim.SetBool("On", isOn);
+                }
             }
         }
 
+        void OnSensitivityChanged(float value) { baseSensitivity = value; PlayerPrefs.SetFloat(SENS_KEY, value); PlayerPrefs.Save(); }
+        void OnZoomSpeedChanged(float value) { if (cameraMode == CameraControlMode.PC) zoomSpeedPC = value; else zoomSpeedMobile = value; SaveZoomSpeed(); }
+        void SaveZoomSpeed() { PlayerPrefs.SetFloat(ZOOM_PC_KEY, zoomSpeedPC); PlayerPrefs.SetFloat(ZOOM_MOBILE_KEY, zoomSpeedMobile); PlayerPrefs.Save(); }
+        void LoadSensitivity() => baseSensitivity = PlayerPrefs.GetFloat(SENS_KEY, 1f);
+        void LoadJoystickMode() => joystickMode = (JoystickMode)PlayerPrefs.GetInt(JOYSTICK_KEY, 0);
+        void LoadZoomSpeed() { zoomSpeedPC = PlayerPrefs.GetFloat(ZOOM_PC_KEY, 5f); zoomSpeedMobile = PlayerPrefs.GetFloat(ZOOM_MOBILE_KEY, 0.01f); }
+        #endregion
+
+        #region Public Methods
+        public void Jump() => characterMovement.Jump();
+        public void Pause() { MenuManager.instance.GetController<PauseController>().Activate("base"); GameManager.Instance.isPaused = true; if (RemoteTestManager.Instance != null)  RemoteTestManager.Instance.LogPause(); }
+        public void Resume() { MenuManager.instance.GetController<PauseController>().Disactivate("base"); GameManager.Instance.isPaused = false; }
+        public void SetCameraModePC() => cameraMode = CameraControlMode.PC;
+        public void SetCameraModeMobile() => cameraMode = CameraControlMode.Mobile;
+
+        bool IsTouchOnJoystick(Vector2 screenPos)
+        {
+            if (activeJoystickArea == null) return false;
+            return RectTransformUtility.RectangleContainsScreenPoint(activeJoystickArea, screenPos, null);
+        }
+        #endregion
     }
 }

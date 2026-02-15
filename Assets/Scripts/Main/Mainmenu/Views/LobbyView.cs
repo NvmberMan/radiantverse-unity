@@ -57,6 +57,15 @@ namespace Main.Mainmenu
                     usernameView.text = data.Username;
                 }, Debug.LogError);
             }
+
+            if(PlayerLocalData.playerStats != null)
+            {
+                if (PlayerLocalData.playerStats.Level >= 5 && !AchievementManager.Instance.CheckAchievement("Ascension"))
+                {
+                    FirestoreModel.UnlockAchievement("Ascension");
+                    MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Ascension");
+                }
+            }
         }
 
         public void RefreshPlayerStats()
@@ -65,9 +74,14 @@ namespace Main.Mainmenu
             {
                 arradiusDollarView.text = PlayerLocalData.playerStats.ArradiusDollar.ToString();
                 levelText.text = PlayerLocalData.playerStats.Level.ToString();
+
+                experienceSlider.minValue = ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Min;
+                experienceSlider.maxValue = ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Max;
                 experienceSlider.value = PlayerLocalData.playerStats.Experience;
-                experienceText.text = PlayerLocalData.playerStats.Experience.ToString() + "/100";
+                
+                experienceText.text = PlayerLocalData.playerStats.Experience.ToString() + "/" + ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Max;
                 dailyRewardView.dailyStreak = PlayerLocalData.playerStats.DailyStreak;
+                dailyRewardView.claimedDay = PlayerLocalData.playerStats.LastClaimedDay;
             }
             else
             {
@@ -80,8 +94,14 @@ namespace Main.Mainmenu
                     arradiusDollarView.text = stats.ArradiusDollar.ToString();
                     levelText.text = stats.Level.ToString();
                     dailyRewardView.dailyStreak = stats.DailyStreak;
+                    dailyRewardView.claimedDay = stats.LastClaimedDay;
+
+                    experienceSlider.minValue = ExpManager.instance.expList[stats.Level - 1].Min;
+                    experienceSlider.maxValue = ExpManager.instance.expList[stats.Level - 1].Max;
                     experienceSlider.value = stats.Experience;
-                    experienceText.text = stats.Experience.ToString() + "/100";
+
+
+                    experienceText.text = stats.Experience.ToString() + "/" + ExpManager.instance.expList[PlayerLocalData.playerStats.Level - 1].Max;
                 }, Debug.LogError);
             }
         }

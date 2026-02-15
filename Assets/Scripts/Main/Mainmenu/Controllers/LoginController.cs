@@ -2,8 +2,10 @@
 using Firebase.Extensions;
 using Google;
 using System.Collections;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI; // Penting untuk Toggle dan Button
 
@@ -59,15 +61,39 @@ namespace Main.Mainmenu
 
         public void Login()
         {
+            string email = inputEmail.text.Trim();
+            string password = inputPassword.text;
+
+            // 1. Local Validation Logic
+            if (string.IsNullOrEmpty(email))
+            {
+                ShowLocalError("Email required", "Please enter your email address.");
+                return;
+            }
+
+            // Standard email regex pattern
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (!Regex.IsMatch(email, emailPattern))
+            {
+                ShowLocalError("Invalid Format", "The email address is not formatted correctly.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(password))
+            {
+                ShowLocalError("Password required", "Please enter your password.");
+                return;
+            }
+
+            // 2. If validation passes, proceed to AuthModel
             View loadingView = MenuManager.instance.GetController<UniversalController>().GetView("loading");
             loadingView.Show();
 
-            // Simpan status "Remember Me" saat tombol login ditekan
             HandleRememberMeSelection();
 
             AuthModel.LoginUser(
-                inputEmail.text,
-                inputPassword.text,
+                email,
+                password,
                 onSuccess: (user) =>
                 {
                     loadingView.Hide();
@@ -76,11 +102,16 @@ namespace Main.Mainmenu
                 onError: (errorMsg) =>
                 {
                     loadingView.Hide();
-                    ErrorView errorView = MenuManager.instance.GetController<UniversalController>().GetView<ErrorView>();
-                    errorView.ErrorSetup("Failed to login!", errorMsg);
-                    errorView.Show();
+                    ShowLocalError("Failed to login!", errorMsg);
                 }
             );
+        }
+
+        private void ShowLocalError(string title, string message)
+        {
+            ErrorView errorView = MenuManager.instance.GetController<UniversalController>().GetView<ErrorView>();
+            errorView.ErrorSetup(title, message);
+            errorView.Show();
         }
 
         public void SignInWithGoogle()
@@ -318,11 +349,18 @@ namespace Main.Mainmenu
         {
             bool done = false;
             FirestoreModel.GetPlayerStats(user,
-                data => { PlayerLocalData.playerStats = data; onSuccess(); done = true; },
+                data => {
+                    PlayerLocalData.playerStats = data; 
+                    onSuccess(); done = true;
+
+                    FirestoreModel.CheckDailyReward();
+                },
                 err => { onError(err); done = true; }
             );
             while (!done) { yield return null; }
         }
+
+
 
         private IEnumerator WaitForInventoryData(FirebaseUser user, System.Action onSuccess, System.Action<string> onError)
         {

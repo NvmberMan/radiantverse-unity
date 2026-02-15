@@ -27,10 +27,10 @@ namespace Main.Mainmenu
         public List<ShopCategory> categories;
 
         private int currentCategoryIndex = 0;
+        private int spending = 0;
 
         private void Awake()
         {
-            // Menghubungkan semua tombol di list kategori secara dinamis
             for (int i = 0; i < categories.Count; i++)
             {
                 int index = i;
@@ -48,8 +48,8 @@ namespace Main.Mainmenu
         public override void Show()
         {
             base.Show();
-            // Default buka kategori pertama saat shop muncul
             SwitchCategory(0);
+            spending = 0;
         }
 
         public void SwitchCategory(int index)
@@ -58,10 +58,8 @@ namespace Main.Mainmenu
 
             currentCategoryIndex = index;
 
-            // Hentikan scroll yang sedang berjalan jika ada
             StopAllCoroutines();
 
-            // Reset scroll ke posisi paling kiri
             scrollRect.horizontalNormalizedPosition = 0;
 
             UpdateNavbarVisuals();
@@ -77,7 +75,6 @@ namespace Main.Mainmenu
                 {
                     bool isActive = (i == currentCategoryIndex);
 
-                    // Mengatur GameObject mana yang aktif berdasarkan pilihan
                     if (nav.ActivePreview != null) nav.ActivePreview.SetActive(isActive);
                     if (nav.DisactivePreview != null) nav.DisactivePreview.SetActive(!isActive);
                 }
@@ -86,17 +83,13 @@ namespace Main.Mainmenu
 
         public void RefreshShopUI()
         {
-            // Update tampilan uang pemain
             if (PlayerLocalData.playerStats != null)
                 playerMoneyText.text = PlayerLocalData.playerStats.ArradiusDollar.ToString() + " $";
 
-            // Hapus semua item lama di container
             foreach (Transform child in itemContainer) Destroy(child.gameObject);
 
-            // Ambil database dari kategori yang aktif
             List<ShopItemData> activeList = categories[currentCategoryIndex].itemDatabase;
 
-            // Spawn item baru
             foreach (var item in activeList)
             {
                 bool isOwned = CheckOwnership(item);
@@ -104,7 +97,6 @@ namespace Main.Mainmenu
                 newItem.Setup(item, this, isOwned);
             }
 
-            // Memaksa UI menghitung ulang ukurannya seketika
             Canvas.ForceUpdateCanvases();
             if (itemContainer.TryGetComponent<RectTransform>(out var rect))
             {
@@ -114,17 +106,10 @@ namespace Main.Mainmenu
 
         private bool CheckOwnership(ShopItemData item)
         {
-            // Cek kepemilikan (sesuaikan dengan list di PlayerLocalData kamu)
             if (item is AccessoryData acc)
                 return PlayerLocalData.inventoryData.UnlockedAccessories.Contains(acc.spineSkinName);
-
-            // Contoh jika ada tipe lain:
-            // if (item is OutfitData outfit) return PlayerLocalData.inventoryData.UnlockedOutfits.Contains(outfit.id);
-
             return false;
         }
-
-        // --- LOGIKA TOMBOL PANAH (SCROLL SNAP) ---
 
         public void NextItem() => MoveStep(1);
         public void PreviousItem() => MoveStep(-1);
@@ -136,7 +121,6 @@ namespace Main.Mainmenu
 
             float currentPos = scrollRect.horizontalNormalizedPosition;
 
-            // Menghitung target posisi berikutnya (snapping ke item terdekat)
             float targetPos = Mathf.Clamp01((Mathf.Round(currentPos / step) + direction) * step);
 
             StopAllCoroutines();
@@ -150,10 +134,8 @@ namespace Main.Mainmenu
             var layout = itemContainer.GetComponent<HorizontalLayoutGroup>();
             var itemRect = itemContainer.GetChild(0).GetComponent<RectTransform>();
 
-            // Jarak satu langkah = Lebar Item + Spacing
             float totalItemStep = itemRect.rect.width + layout.spacing;
 
-            // Area yang bisa digulir = Lebar Content - Lebar Viewport
             float totalScrollableWidth = itemContainer.GetComponent<RectTransform>().rect.width - scrollRect.viewport.rect.width;
 
             return (totalScrollableWidth <= 0) ? 0 : totalItemStep / totalScrollableWidth;
@@ -165,7 +147,7 @@ namespace Main.Mainmenu
             float startPos = scrollRect.horizontalNormalizedPosition;
             while (time < 1f)
             {
-                time += Time.deltaTime * 10f; // Kecepatan lerp
+                time += Time.deltaTime * 10f;
                 scrollRect.horizontalNormalizedPosition = Mathf.Lerp(startPos, target, time);
                 yield return null;
             }
@@ -176,14 +158,40 @@ namespace Main.Mainmenu
         {
             ShopPurchaseService.TryBuy(
                 item,
-                onSuccess: () => RefreshShopUI(),
+                onSuccess: () =>
+                {
+                    RefreshShopUI();
+                    FirestoreModel.IncrementPlayerStat("TotalItemsPurchased", 1);
+                    spending += item.price;
+
+                    if(PlayerLocalData.playerStats.TotalItemsPurchased >= 10 && !AchievementManager.Instance.CheckAchievement("Shopaholic"))
+                    {
+                        FirestoreModel.UnlockAchievement("Shopaholic");
+                        MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Shopaholic");
+                    }
+
+                    if (spending >= 200 && !AchievementManager.Instance.CheckAchievement("Whale Spending"))
+                    {
+                        FirestoreModel.UnlockAchievement("Whale Spending");
+                        MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Whale Spending");
+                    }
+
+                    AudioManager.Instance.PlaySFX("arradius dollar");
+                },
                 onNotEnoughMoney: () =>
                 { 
                     MoneyNotEnoughView moneyNotEnoughView = MenuManager.instance.GetController<ShopController>().GetView<MoneyNotEnoughView>();
                     moneyNotEnoughView.Setup("Money not enough!");
                     moneyNotEnoughView.Show();
+
+                    AudioManager.Instance.PlaySFX("error");
                 },
-                onInvalidItem: () => Debug.LogError("Invalid item!")
+                onInvalidItem: () =>
+                {
+                    Debug.LogError("Invalid item!");
+                    AudioManager.Instance.PlaySFX("error");
+
+                }
             );
         }
     }
