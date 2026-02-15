@@ -13,6 +13,8 @@ namespace Main.Gameplay
         private Transform nextWaypoint;
         public bool hasFinished = false; // baru: flag finish
 
+        public int finishRank = 0; // 0 = belum finish
+
         private void Start()
         {
             UpdateWaypoints();
@@ -28,7 +30,7 @@ namespace Main.Gameplay
             if (hasFinished)
             {
                 // Tetap gunakan max progress, tapi jangan hilangkan dari ranking
-                progressValue = RacePositionSystemWaypoint.Instance.allWaypoints.Count + 1;
+                //progressValue = RacePositionSystemWaypoint.Instance.allWaypoints.Count + 1;
                 return;
             }
 
