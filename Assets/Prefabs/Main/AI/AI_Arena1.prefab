@@ -623,6 +623,7 @@ MonoBehaviour:
   resetWayPointIndex: 0
   progressValue: 0
   hasFinished: 0
+  finishRank: 0
 --- !u!114 &8381566973344170393
 MonoBehaviour:
   m_ObjectHideFlags: 0

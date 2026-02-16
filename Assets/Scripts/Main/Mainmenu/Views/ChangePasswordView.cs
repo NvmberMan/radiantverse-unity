@@ -68,15 +68,17 @@ namespace Main.Mainmenu
             string oldPass = oldPasswordField.text;
             string newPass = newPasswordField.text;
 
-            if (string.IsNullOrEmpty(oldPass) || string.IsNullOrEmpty(newPass))
+            bool needsOldPassword = AuthModel.HasPasswordProvider();
+
+            if ((needsOldPassword && string.IsNullOrEmpty(oldPass)) || string.IsNullOrEmpty(newPass))
             {
-                ShowError("Gagal", "Password tidak boleh kosong");
+                ShowError("Failed", "Password fields cannot be empty.");
                 return;
             }
 
             if (newPass.Length < 6)
             {
-                ShowError("Gagal", "Password minimal 6 karakter");
+                ShowError("Failed", "Password must be at least 6 characters long.");
                 return;
             }
 
@@ -91,14 +93,14 @@ namespace Main.Mainmenu
                     UnityMainThreadDispatcher.Instance.Enqueue(() => {
                         HideLoading();
                         submitButton.interactable = true;
-                        ShowSuccess("Password berhasil diganti!", "");
+                        ShowSuccess("Success", "Your password has been updated successfully.");
                     });
                 },
                 (error) => {
                     UnityMainThreadDispatcher.Instance.Enqueue(() => {
                         HideLoading();
                         submitButton.interactable = true;
-                        ShowError("Gagal", error);
+                        ShowError("Failed", error);
                     });
                 }
             );
