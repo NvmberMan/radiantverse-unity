@@ -50,9 +50,15 @@ namespace Main.Gameplay.AI
                 return;
             }
 
+            if (CharacterMovement != null && CharacterMovement.rb != null)
+            {
+                CharacterMovement.rb.linearVelocity = Vector3.zero;
+                CharacterMovement.rb.angularVelocity = Vector3.zero;
+
+            }
 
 
-            if(restartToCheckpoint) {
+            if (restartToCheckpoint) {
                 CharacterSpawn.RespawnToCheckpoint();
             }
             else
@@ -60,12 +66,15 @@ namespace Main.Gameplay.AI
                 checkpointIndex = 0;
                 CharacterSpawn.RespawnToStartPoint();
             }
-            currentTarget = env.ways[wayIndex].targetPoints[checkpointIndex].transform;
+            if (env.ways[wayIndex].targetPoints != null && checkpointIndex < env.ways[wayIndex].targetPoints.Length)
+            {
+                currentTarget = env.ways[wayIndex].targetPoints[checkpointIndex].transform;
+            }
 
-            previousDistanceToTarget = Vector3.Distance(
-                    transform.position,
-                    currentTarget.position
-                );
+            if(currentTarget != null)
+            {
+                previousDistanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
+            }
         }
 
 
@@ -199,7 +208,9 @@ namespace Main.Gameplay.AI
             {
                 // Reward finish
                 AddReward(20f);
-                //EndEpisode();
+                restartToCheckpoint = false;
+                checkpointIndex = 0;
+                EndEpisode();
             }
         }
 
@@ -212,7 +223,7 @@ namespace Main.Gameplay.AI
                     RemoteTestManager.Instance.LogDeath();
                 }
                 AddReward(-1.0f);
-                //EndEpisode();
+                EndEpisode();
             }
             else if (other.gameObject.CompareTag("Wall_low"))
             {
@@ -225,7 +236,7 @@ namespace Main.Gameplay.AI
                     RemoteTestManager.Instance.LogDeath();
                 }
                 AddReward(-2.0f);
-                //EndEpisode();
+                EndEpisode();
             }
             else if (other.gameObject.CompareTag("Sensor_void"))
             {
@@ -234,7 +245,7 @@ namespace Main.Gameplay.AI
                     RemoteTestManager.Instance.LogDeath();
                 }
                 AddReward(-5f);
-                //EndEpisode();
+                EndEpisode();
             }
             else if (other.gameObject.CompareTag("Car_Move"))
             {
@@ -244,6 +255,14 @@ namespace Main.Gameplay.AI
                 }
                 AddReward(-5f);
                 EndEpisode();
+            }
+            else if (other.gameObject.CompareTag("Power_Down"))
+            {
+                AddReward(-2.5f);
+            }
+            else if (other.gameObject.CompareTag("Power_Up"))
+            {
+                AddReward(2.5f);
             }
             else if (other.gameObject.CompareTag("TargetPoint"))
             {
@@ -275,7 +294,7 @@ namespace Main.Gameplay.AI
                     RemoteTestManager.Instance.LogDeath();
                 }
                 AddReward(-5f);
-                //EndEpisode();
+                EndEpisode();
             }
             else if (collision.gameObject.CompareTag("Car_Move"))
             {
@@ -285,6 +304,14 @@ namespace Main.Gameplay.AI
                 }
                 AddReward(-5f);
                 EndEpisode();
+            }
+            else if (collision.gameObject.CompareTag("Power_Down"))
+            {
+                AddReward(-3.5f);
+            }
+            else if (collision.gameObject.CompareTag("Power_Up"))
+            {
+                AddReward(2.5f);
             }
         }
 

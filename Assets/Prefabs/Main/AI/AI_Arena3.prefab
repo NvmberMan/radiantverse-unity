@@ -477,6 +477,7 @@ MonoBehaviour:
   idleAnimation: Idle
   walkAnimation: Run
   jumpAnimation: Run
+  fallAnimation: Fall
   rb: {fileID: 0}
   _isGrounded: 1
   _isFreeze: 0
@@ -571,6 +572,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   checkpointIndex: 0
   wayIndex: 0
+  restartToCheckpoint: 0
   raySensorRoot: {fileID: 1147178553098697474}
   groundMask:
     serializedVersion: 2
@@ -618,8 +620,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.RacerProgress
   currentWaypointIndex: 0
+  resetWayPointIndex: 0
   progressValue: 0
   hasFinished: 0
+  finishRank: 0
 --- !u!114 &8381566973344170393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,12 +637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCustomization
   skinSource: 1
-  manualSkins:
-  - Component/Hairs/Type4
-  - Component/Faces/Boy
-  - Component/Shirts/Kemeja&dasi-hitam
-  - Component/Pants/Cream-formal
-  - Component/Shoes/Black-formal
+  nameCharacter: {fileID: 0}
 --- !u!136 &1671772115488746646
 CapsuleCollider:
   m_ObjectHideFlags: 0

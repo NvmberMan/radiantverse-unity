@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4470031808368763461}
   m_Layer: 7
   m_Name: PowerDown (Arena 1) - Tidur Terus
-  m_TagString: Untagged
+  m_TagString: Power_Down
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
