@@ -1,3 +1,4 @@
+using Main.Mainmenu;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,12 +14,16 @@ public class ShopItemUI : MonoBehaviour
     public GameObject ownedVisual;
 
     private ShopItemData itemData;
-    private Main.Mainmenu.ShopView shopView;
+
+    BuyConfirmationView buyConfirmationView;
+    private void Start()
+    {
+        buyConfirmationView = MenuManager.instance.GetController<ShopController>().GetView<BuyConfirmationView>();
+    }
 
     public void Setup(ShopItemData data, Main.Mainmenu.ShopView view, bool isOwned)
     {
         itemData = data;
-        shopView = view;
 
         itemNameText.text = data.displayName;
 
@@ -38,6 +43,12 @@ public class ShopItemUI : MonoBehaviour
         if (itemIcon != null) itemIcon.sprite = data.icon;
 
         buyButton.onClick.RemoveAllListeners();
-        buyButton.onClick.AddListener(() => shopView.TryBuy(itemData));
+
+        buyButton.onClick.AddListener(() => {
+                buyConfirmationView.Show();
+                buyConfirmationView.SetupButton(itemData);
+            }
+        );
+
     }
 }

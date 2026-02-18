@@ -164,7 +164,7 @@ namespace Main.Mainmenu
                     FirestoreModel.IncrementPlayerStat("TotalItemsPurchased", 1);
                     spending += item.price;
 
-                    if(PlayerLocalData.playerStats.TotalItemsPurchased >= 10 && !AchievementManager.Instance.CheckAchievement("Shopaholic"))
+                    if (PlayerLocalData.playerStats.TotalItemsPurchased >= 10 && !AchievementManager.Instance.CheckAchievement("Shopaholic"))
                     {
                         FirestoreModel.UnlockAchievement("Shopaholic");
                         MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("Shopaholic");
@@ -177,9 +177,11 @@ namespace Main.Mainmenu
                     }
 
                     AudioManager.Instance.PlaySFX("arradius dollar");
+
+                    MenuManager.instance.GetController<ShopController>().GetView<BuyConfirmationView>().Hide();
                 },
                 onNotEnoughMoney: () =>
-                { 
+                {
                     MoneyNotEnoughView moneyNotEnoughView = MenuManager.instance.GetController<ShopController>().GetView<MoneyNotEnoughView>();
                     moneyNotEnoughView.Setup("Money not enough!");
                     moneyNotEnoughView.Show();
@@ -192,6 +194,7 @@ namespace Main.Mainmenu
                     AudioManager.Instance.PlaySFX("error");
 
                 }
+
             );
         }
     }
