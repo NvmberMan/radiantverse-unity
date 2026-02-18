@@ -12,6 +12,7 @@ namespace Main.Mainmenu
         public Slider cameraSensitivySlider;
         public Slider zoomSpeedSlider;
         public Toggle fixedCameraToggle;
+        public Button exitButton;
 
         [HideInInspector] public string SENS_KEY = "CAMERA_SENSITIVITY";
         [HideInInspector] public string JOYSTICK_KEY = "JOYSTICK_MODE";
@@ -33,6 +34,11 @@ namespace Main.Mainmenu
             fixedCameraToggle.onValueChanged.AddListener(OnJoystickToggleChanged);
 
             zoomSpeedSlider.onValueChanged.AddListener(OnZoomSpeedChanged);
+
+            exitButton.onClick.AddListener(() =>
+            {
+                MenuManager.instance.GetController<UniversalController>().GetView<ExitPopupView>().Show();
+            });
         }
 
         private void OnEnable()

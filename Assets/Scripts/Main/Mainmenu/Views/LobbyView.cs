@@ -1,4 +1,5 @@
 using Firebase.Auth;
+using Main.Gameplay;
 using Spine;
 using Spine.Unity;
 using Spine.Unity.AttachmentTools;
@@ -41,6 +42,13 @@ namespace Main.Mainmenu
             RefreshUserdata();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                MenuManager.instance.GetController<LobbyController>().Activate("settings");
+            }
+        }
         public void RefreshUserdata()
         {
             if (PlayerLocalData.userData != null)

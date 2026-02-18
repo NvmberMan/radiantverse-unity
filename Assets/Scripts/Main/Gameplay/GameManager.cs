@@ -221,6 +221,24 @@ namespace Main.Gameplay
 
 
 
+        //public void OnFinishLineCrossed(GameObject racer)
+        //{
+        //    if (finishedRacers.Contains(racer)) return;
+
+        //    finishedRacers.Add(racer);
+
+        //    int finishRank = currentFinishRank;
+        //    currentFinishRank++;
+
+        //    if (racer.CompareTag("Player"))
+        //    {
+        //        isGameActive = false;
+
+        //        gameEndedController.GameEnded(finishRank);
+        //    }
+        //}
+
+
         public void OnFinishLineCrossed(GameObject racer)
         {
             if (finishedRacers.Contains(racer)) return;
@@ -230,13 +248,21 @@ namespace Main.Gameplay
             int finishRank = currentFinishRank;
             currentFinishRank++;
 
+            // 🔥 SINKRONKAN ke RacerProgress
+            RacerProgress rp = racer.GetComponent<RacerProgress>();
+            if (rp != null)
+            {
+                rp.finishRank = finishRank;
+                rp.hasFinished = true;
+            }
+
             if (racer.CompareTag("Player"))
             {
                 isGameActive = false;
-
                 gameEndedController.GameEnded(finishRank);
             }
         }
+
     }
 
 

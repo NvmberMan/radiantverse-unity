@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using Main.Mainmenu;
 
@@ -8,6 +8,9 @@ namespace Main.Gameplay
     {
         public static RacePositionSystemWaypoint Instance;
 
+        private bool isPlayerFinished = false;
+        private int finalRank = -1;
+
         [Header("Racers")]
         public List<RacerProgress> allRacers = new List<RacerProgress>();
 
@@ -15,6 +18,7 @@ namespace Main.Gameplay
         public List<Waypoint> allWaypoints = new List<Waypoint>();
 
         private GameplayGUIView gameplayGUIView;
+
 
         private void Awake()
         {
@@ -39,11 +43,32 @@ namespace Main.Gameplay
             }
         }
 
+        //void UpdateRanking()
+        //{
+        //    if (isPlayerFinished) return; // kalau sudah finish, stop update rank
+
+        //    allRacers.Sort((a, b) =>
+        //        b.progressValue.CompareTo(a.progressValue));
+
+        //    int playerRank =
+        //        allRacers.FindIndex(r =>
+        //            r.transform == GameManager.Instance.playerTransform) + 1;
+
+        //    gameplayGUIView.UpdateRank(playerRank, allRacers.Count);
+        //}
+
         void UpdateRanking()
         {
-            // ranking tetap update walau ada racer yang finish
             allRacers.Sort((a, b) =>
-                b.progressValue.CompareTo(a.progressValue));
+            {
+                if (a.finishRank > 0 && b.finishRank > 0)
+                    return a.finishRank.CompareTo(b.finishRank);
+
+                if (a.finishRank > 0) return -1;
+                if (b.finishRank > 0) return 1;
+
+                return b.progressValue.CompareTo(a.progressValue);
+            });
 
             int playerRank =
                 allRacers.FindIndex(r =>
@@ -51,5 +76,7 @@ namespace Main.Gameplay
 
             gameplayGUIView.UpdateRank(playerRank, allRacers.Count);
         }
+
+
     }
 }

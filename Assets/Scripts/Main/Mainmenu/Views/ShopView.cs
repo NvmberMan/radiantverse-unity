@@ -84,7 +84,7 @@ namespace Main.Mainmenu
         public void RefreshShopUI()
         {
             if (PlayerLocalData.playerStats != null)
-                playerMoneyText.text = PlayerLocalData.playerStats.ArradiusDollar.ToString() + " $";
+                playerMoneyText.text = PlayerLocalData.playerStats.ArradiusDollar.ToString();
 
             foreach (Transform child in itemContainer) Destroy(child.gameObject);
 

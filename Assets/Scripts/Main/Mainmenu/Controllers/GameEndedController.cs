@@ -49,20 +49,27 @@ namespace Main.Mainmenu
             RankPreviewView rankPreviewView = (RankPreviewView)GetView("rank preview");
             RankReward reward = rankRewards.Find((r) => r.rank == rank);
 
+            if (reward == null && rankRewards.Count > 0)
+            {
+                reward = rankRewards[rankRewards.Count - 1];
+            }
+
             rankPreviewView.Show();
             rankPreviewView.UpdatePreview(rank);
 
+            if (PlayerLocalData.playerStats != null)
+            {
+                FirestoreModel.AddExperience(reward.exp);
+                FirestoreModel.AddArradiusDollar(reward.arradiusDollar);
+            }
 
             if (reward.mapUnlockedName != null && reward.mapUnlockedName != "null")
             {
-                if(PlayerLocalData.userData != null)
+                if(PlayerLocalData.inventoryData != null)
                 {
                     FirestoreModel.UnlockMap(reward.mapWorldKey);
-                    FirestoreModel.AddExperience(reward.exp);
-                    FirestoreModel.AddArradiusDollar(reward.arradiusDollar);
                     FirestoreModel.RecordMapWin(reward.mapWorldKey);
                 }
-
 
                 yield return new WaitForSeconds(showUnlockedMapDelay);
                 rankPreviewView.Hide();
