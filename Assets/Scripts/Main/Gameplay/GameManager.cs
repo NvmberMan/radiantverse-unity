@@ -19,6 +19,7 @@ namespace Main.Gameplay
         [Header("Game State")]
         public bool isGameActive = true;
         public bool isPaused = false;
+        public bool isGameEnded = false;
         public int currentFinishRank = 1;
         public bool isTesting = false;
         public bool isTraining = false;
@@ -260,6 +261,7 @@ namespace Main.Gameplay
             {
                 isGameActive = false;
                 gameEndedController.GameEnded(finishRank);
+                isGameEnded = true;
             }
         }
 
