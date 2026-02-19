@@ -47,24 +47,25 @@
 
 
 using UnityEngine;
-using System.Collections; // Dibutuhkan untuk Coroutine
 
 namespace Main.Gameplay
 {
     public class ItemPickup : MonoBehaviour
     {
         public MovementItemData itemData;
-        public float respawnTime = 5f; // Waktu tunggu sebelum respawn
 
         private ItemCount playerItemCount;
-        private Collider itemCollider;
-        private MeshRenderer itemRenderer; // Ganti dengan komponen visual kamu jika bukan MeshRenderer
+        private PowerUpSpawner mySpawner; // Menyimpan referensi ke spawner
 
         private void Start()
         {
             playerItemCount = GameManager.Instance.playerTransform.GetComponent<ItemCount>();
-            itemCollider = GetComponent<Collider>();
-            itemRenderer = GetComponent<MeshRenderer>(); // Ambil komponen visual
+        }
+
+        // Fungsi ini dipanggil otomatis oleh PowerUpSpawner saat spawn
+        public void SetSpawner(PowerUpSpawner spawner)
+        {
+            mySpawner = spawner;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -93,30 +94,14 @@ namespace Main.Gameplay
 
             controller.ApplyPowerUp(itemData);
 
-            // Panggil fungsi Respawn daripada Destroy
-            StartCoroutine(RespawnSequence());
-        }
+            // 1. Lapor ke Spawner untuk mulai hitung mundur memunculkan item baru
+            if (mySpawner != null)
+            {
+                mySpawner.StartRespawnTimer();
+            }
 
-        private IEnumerator RespawnSequence()
-        {
-            // 1. Sembunyikan item (Matikan visual dan collider)
-            ToggleItemState(false);
-
-            // 2. Tunggu selama beberapa detik
-            yield return new WaitForSeconds(respawnTime);
-
-            // 3. Munculkan kembali
-            ToggleItemState(true);
-        }
-
-        private void ToggleItemState(bool state)
-        {
-            if (itemCollider != null) itemCollider.enabled = state;
-            if (itemRenderer != null) itemRenderer.enabled = state;
-
-            // Jika item kamu punya partikel atau objek anak (child objects), 
-            // kamu bisa pakai ini sebagai alternatif:
-            // transform.GetChild(0).gameObject.SetActive(state);
+            // 2. Hancurkan item ini secara permanen
+            Destroy(gameObject);
         }
     }
 }

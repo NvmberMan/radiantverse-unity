@@ -72,15 +72,51 @@
                 "auxillary_file_paths": [
                     "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-523446.pt"
                 ]
+            },
+            {
+                "steps": 599990,
+                "file_path": "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-599990.onnx",
+                "reward": 187.23194194381887,
+                "creation_time": 1771470385.3373961,
+                "auxillary_file_paths": [
+                    "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-599990.pt"
+                ]
+            },
+            {
+                "steps": 626344,
+                "file_path": "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-626344.onnx",
+                "reward": null,
+                "creation_time": 1771470616.2596214,
+                "auxillary_file_paths": [
+                    "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-626344.pt"
+                ]
+            },
+            {
+                "steps": 679190,
+                "file_path": "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-679190.onnx",
+                "reward": 197.85022462041755,
+                "creation_time": 1771471143.0027533,
+                "auxillary_file_paths": [
+                    "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-679190.pt"
+                ]
+            },
+            {
+                "steps": 696281,
+                "file_path": "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-696281.onnx",
+                "reward": 205.96312160001082,
+                "creation_time": 1771471298.1002784,
+                "auxillary_file_paths": [
+                    "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-696281.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 523446,
+            "steps": 696281,
             "file_path": "results\\RV_A1_Power_System_01\\MoveToGoal.onnx",
-            "reward": 189.32200132608415,
-            "creation_time": 1771431059.0573711,
+            "reward": 205.96312160001082,
+            "creation_time": 1771471298.1002784,
             "auxillary_file_paths": [
-                "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-523446.pt"
+                "results\\RV_A1_Power_System_01\\MoveToGoal\\MoveToGoal-696281.pt"
             ]
         }
     },

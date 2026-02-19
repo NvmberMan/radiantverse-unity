@@ -311,7 +311,7 @@ namespace Main.Gameplay.AI
             }
             else if (collision.gameObject.CompareTag("Power_Up"))
             {
-                AddReward(2.5f);
+                AddReward(3.5f);
             }
         }
 
