@@ -4,13 +4,112 @@ using Firebase.Firestore;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Main.Mainmenu
 {
     public static class FirestoreModel
     {
         private static FirebaseFirestore db => FirebaseFirestore.DefaultInstance;
+
+        private const string TimeApiUrl = "https://worldtimeapi.org/api/timezone/Etc/UTC";
+
+        [Serializable]
+        public class WorldTimeResponse
+        {
+            public string utc_datetime;
+        }
+
+        public static async Task<DateTime> GetServerTime()
+        {
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(TimeApiUrl))
+            {
+                try
+                {
+                    var operation = webRequest.SendWebRequest();
+                    while (!operation.isDone) await Task.Yield();
+
+                    if (webRequest.result == UnityWebRequest.Result.Success)
+                    {
+                        WorldTimeResponse data = JsonUtility.FromJson<WorldTimeResponse>(webRequest.downloadHandler.text);
+                        return DateTime.Parse(data.utc_datetime).ToUniversalTime();
+                    }
+                    else
+                    {
+                        //Debug.LogError("API Gagal. Periksa internet.");
+                        return DateTime.UtcNow;
+                    }
+                }
+                catch
+                {
+                    return DateTime.UtcNow;
+                }
+            }
+        }
+
+        public static async void CheckDailyReward()
+        {
+            DateTime verifiedNow = await FirestoreModel.GetServerTime();
+            if (verifiedNow == DateTime.MinValue)
+            {
+                Debug.LogError("TIDAK BISA KLAIM: Gagal verifikasi waktu server. Cek koneksi internet kamu!");
+                return;
+            }
+
+            DateTime today = verifiedNow.Date;
+            var stats = PlayerLocalData.playerStats;
+
+            DateTime lastClaim = stats.LastDailyClaim.ToDateTime().ToUniversalTime().Date;
+            int dayDiff = (today - lastClaim).Days;
+
+            if (dayDiff == 1)
+            {
+                stats.DailyStreak++;
+
+                if (stats.DailyStreak > 7)
+                {
+                    stats.DailyStreak = 0;
+                    stats.LastClaimedDay = -1; 
+                }
+            }
+            else if (dayDiff > 1)
+            {
+                stats.DailyStreak = 0;
+                stats.LastClaimedDay = -1;
+            }
+            else
+            {
+                Debug.Log("Sudah klaim hari ini atau manipulasi waktu terdeteksi.");
+                return;
+            }
+
+            stats.LastDailyClaim = Timestamp.FromDateTime(verifiedNow);
+
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+
+            try
+            {
+                await FirebaseFirestore.DefaultInstance
+                    .Collection("playerStats")
+                    .Document(uid)
+                    .UpdateAsync(new Dictionary<string, object>
+                    {
+                    { "DailyStreak", stats.DailyStreak },
+                    { "LastDailyClaim", stats.LastDailyClaim },
+                    { "LastClaimedDay", stats.LastClaimedDay }
+                    });
+
+                Debug.Log("Daily Reward Sukses diperbarui!");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Gagal koneksi ke Firebase: " + e.Message);
+            }
+        }
+
+
 
         #region Save full document
         public static void SaveUserData(FirebaseUser user, UserData data)
@@ -278,47 +377,6 @@ namespace Main.Mainmenu
                 }
             });
         }
-
-        public static void CheckDailyReward()
-        {
-            var stats = PlayerLocalData.playerStats;
-            DateTime today = DateTime.UtcNow.Date;
-
-            DateTime lastClaim = stats.LastDailyClaim
-                .ToDateTime()
-                .Date;
-
-            int dayDiff = (today - lastClaim).Days;
-
-            if (dayDiff == 1)
-            {
-                stats.DailyStreak++;
-            }
-            else if (dayDiff > 1)
-            {
-                stats.DailyStreak = 0;
-                stats.LastClaimedDay = -1;
-            }
-            else
-            {
-                return; // hari yang sama, jangan ngapa-ngapain
-            }
-
-            stats.LastDailyClaim = Timestamp.GetCurrentTimestamp();
-
-            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-
-            FirebaseFirestore.DefaultInstance
-                .Collection("playerStats")
-                .Document(uid)
-                .UpdateAsync(new Dictionary<string, object>
-                {
-            { "DailyStreak", stats.DailyStreak },
-            { "LastDailyClaim", stats.LastDailyClaim },
-            {"LastClaimedDay", stats.LastClaimedDay }
-                });
-        }
-
 
 
         public static void CheckUsernameExists(string username, Action<bool> onResult)
