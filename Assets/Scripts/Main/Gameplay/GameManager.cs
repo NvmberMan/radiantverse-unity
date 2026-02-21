@@ -11,7 +11,6 @@ using UnityEngine.Playables;
 
 namespace Main.Gameplay
 {
-
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
@@ -30,13 +29,11 @@ namespace Main.Gameplay
         [HideInInspector] public GameObject[] spawnPoints;
         private GameEndedController gameEndedController;
 
-
         [Header("Cinemachine")]
         public CinemachineOrbitalFollow orbitalFollow;
         public CinemachineCamera orbitalFollowAI;
         public PlayableDirector cinematicDirector;
         [HideInInspector] public bool isCinematic = true;
-
 
         private void Awake()
         {
@@ -46,13 +43,11 @@ namespace Main.Gameplay
 
         private void Start()
         {
-
             GlobalEnvironment.instance.ShuffleAIData();
-
             Time.timeScale = 1;
             gameEndedController = MenuManager.instance.GetController<GameEndedController>();
 
-            if(isTesting)
+            if (isTesting)
             {
                 GlobalEnvironment.instance.RefreshTargetPoints();
                 spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
@@ -81,19 +76,18 @@ namespace Main.Gameplay
                 finishedRacers.Clear();
             }
             else
+            {
                 StartCoroutine(InitializeMap());
+            }
         }
-
 
         IEnumerator InitializeMap()
         {
             isCinematic = true;
 
-
             LoadingMapPreviewController loadingMapPreviewController = MenuManager.instance.GetController<LoadingMapPreviewController>();
             loadingMapPreviewController.Activate("base");
             loadingMapPreviewController.SetLoadingProgress(50);
-
 
             // spawn agent
             GlobalEnvironment.instance.RefreshTargetPoints();
@@ -101,12 +95,10 @@ namespace Main.Gameplay
 
             RacePositionSystemWaypoint.Instance.allRacers.Add(playerTransform.GetComponent<RacerProgress>());
 
-            for(int i = 0; i < spawnPoints.Length - 1; i++)
+            for (int i = 0; i < spawnPoints.Length - 1; i++)
             {
                 GameObject AiAgent = Instantiate(aiAgentPrefab);
-
                 ApplyRandomBrain(AiAgent, i);
-
                 RacePositionSystemWaypoint.Instance.allRacers.Add(AiAgent.GetComponent<RacerProgress>());
             }
 
@@ -137,9 +129,29 @@ namespace Main.Gameplay
             {
                 AIData selectedData = GlobalEnvironment.instance.aiData[index];
 
+                // Selalu gunakan otak yang paling bagus (Pro) dari ScriptableObject Anda
                 bp.Model = selectedData.brain;
 
-                if (aiInput != null) aiInput.wayIndex = selectedData.wayIndex;
+                if (aiInput != null)
+                {
+                    aiInput.wayIndex = selectedData.wayIndex;
+
+                    // --- LOGIKA DYNAMIC DIFFICULTY (PERSONALISASI) ---
+                    // 1. Ambil skill asli pemain (Default 0.5 jika belum ada histori)
+                    float basePlayerSkill = 0.5f;
+                    if (PlayerSkillManager.Instance != null)
+                    {
+                        basePlayerSkill = PlayerSkillManager.Instance.GetPlayerSkill();
+                    }
+
+                    // 2. Acak kepintaran bot di sekitar skill pemain (Rentang -0.2 sampai +0.2)
+                    // Contoh: Jika skill pemain 0.6, bot akan punya skill acak antara 0.4 sampai 0.8
+                    float randomOffset = UnityEngine.Random.Range(-0.2f, 0.2f);
+                    float finalBotSkill = basePlayerSkill + randomOffset;
+
+                    // 3. Pastikan angkanya tidak tembus batas 0.0 - 1.0
+                    aiInput.playerSkillLevel = Mathf.Clamp(finalBotSkill, 0f, 1f);
+                }
 
                 if (customization != null)
                 {
@@ -174,18 +186,14 @@ namespace Main.Gameplay
                 (CountDownView)gameplayController.GetView("countdown");
 
             countDownView.Show();
-
             int countdownValue = 3;
 
             while (countdownValue > 0)
             {
                 countDownView.UpdateText(countdownValue.ToString());
-                if (countdownValue == 3)
-                    AudioManager.Instance.PlaySFX("3");
-                if (countdownValue == 2)
-                    AudioManager.Instance.PlaySFX("2");
-                if (countdownValue == 1)
-                    AudioManager.Instance.PlaySFX("1");
+                if (countdownValue == 3) AudioManager.Instance.PlaySFX("3");
+                if (countdownValue == 2) AudioManager.Instance.PlaySFX("2");
+                if (countdownValue == 1) AudioManager.Instance.PlaySFX("1");
 
                 yield return StartCoroutine(WaitForSecondsRealtimeWithPause(0.5f));
                 countdownValue--;
@@ -194,6 +202,7 @@ namespace Main.Gameplay
             AudioManager.Instance.PlaySFX("Go!");
             AudioManager.Instance.PlaySFX("Cheers");
             countDownView.UpdateText("GO!");
+
             isGameActive = true;
             currentFinishRank = 1;
             finishedRacers.Clear();
@@ -210,34 +219,11 @@ namespace Main.Gameplay
             while (timeLeft > 0f)
             {
                 yield return new WaitWhile(() => isPaused);
-
                 float delta = Mathf.Min(Time.unscaledDeltaTime, timeLeft);
                 timeLeft -= delta;
-
                 yield return null;
             }
         }
-
-
-
-
-        //public void OnFinishLineCrossed(GameObject racer)
-        //{
-        //    if (finishedRacers.Contains(racer)) return;
-
-        //    finishedRacers.Add(racer);
-
-        //    int finishRank = currentFinishRank;
-        //    currentFinishRank++;
-
-        //    if (racer.CompareTag("Player"))
-        //    {
-        //        isGameActive = false;
-
-        //        gameEndedController.GameEnded(finishRank);
-        //    }
-        //}
-
 
         public void OnFinishLineCrossed(GameObject racer)
         {
@@ -248,7 +234,6 @@ namespace Main.Gameplay
             int finishRank = currentFinishRank;
             currentFinishRank++;
 
-            // 🔥 SINKRONKAN ke RacerProgress
             RacerProgress rp = racer.GetComponent<RacerProgress>();
             if (rp != null)
             {
@@ -260,10 +245,25 @@ namespace Main.Gameplay
             {
                 isGameActive = false;
                 gameEndedController.GameEnded(finishRank);
+
+                if (PlayerSkillManager.Instance != null)
+                {
+                    // isWin = true jika juara 1, false jika tidak juara 1
+                    bool isWin = (finishRank == 1);
+
+                    // Ambil data stuckCount dari RemoteTestManager (jika ada), kalau tidak anggap 0
+                    int currentStuckCount = 0;
+                    if (RemoteTestManager.Instance != null)
+                    {
+                        // Anda harus menambahkan public int GetStuckCount() di RemoteTestManager
+                        // Tapi untuk sementara kita hardcode 0 dulu kalau belum dibikin
+                        // currentStuckCount = RemoteTestManager.Instance.stuckCount; 
+                    }
+
+                    // Laporkan datanya!
+                    PlayerSkillManager.Instance.RecordMatchResult(isWin, currentStuckCount);
+                }
             }
         }
-
     }
-
-
 }

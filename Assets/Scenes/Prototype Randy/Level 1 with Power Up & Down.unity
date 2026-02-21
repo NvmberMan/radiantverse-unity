@@ -1877,7 +1877,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1 &40915398
 GameObject:
   m_ObjectHideFlags: 0
@@ -11420,7 +11421,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1001 &131500384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12726,7 +12728,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1001 &175193618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21376,7 +21379,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1001 &227988331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26126,7 +26130,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!43 &310037992
 Mesh:
   m_ObjectHideFlags: 0
@@ -28674,7 +28679,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!114 &339198658 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5968028201704021134, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
@@ -67000,7 +67006,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1001 &515589237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108224,7 +108231,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1 &829641924
 GameObject:
   m_ObjectHideFlags: 0
@@ -109158,7 +109166,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1001 &841913744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111663,7 +111672,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!43 &852145836
 Mesh:
   m_ObjectHideFlags: 0
@@ -113558,7 +113568,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!114 &898381691 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2625789508853086100, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
@@ -189155,7 +189166,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1001 &1110467790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191632,7 +191644,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1001 &1167660203
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191758,7 +191771,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!43 &1169271870
 Mesh:
   m_ObjectHideFlags: 0
@@ -208979,7 +208993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1220894570
 Transform:
   m_ObjectHideFlags: 0
@@ -226525,7 +226539,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1001 &1397123584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227175,7 +227190,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!43 &1399102576
 Mesh:
   m_ObjectHideFlags: 0
@@ -241213,7 +241229,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1 &1471577867 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4419698256271275909, guid: 37085c45bf8269745a144d401c167b70, type: 3}
@@ -248172,7 +248189,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!43 &1598128257
 Mesh:
   m_ObjectHideFlags: 0
@@ -261650,7 +261668,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1001 &1711301047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -273696,7 +273715,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!43 &1781436788
 Mesh:
   m_ObjectHideFlags: 0
@@ -285213,7 +285233,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!43 &1813976711
 Mesh:
   m_ObjectHideFlags: 0
@@ -299969,7 +299990,8 @@ MonoBehaviour:
   - {fileID: 2906560013330183935, guid: 186c65b2bcdccb245ae7684a1680eeca, type: 3}
   - {fileID: 8141804049613538204, guid: 01b4e7f53d22d02469d7d185bcba49b6, type: 3}
   - {fileID: 1626634911494494217, guid: d7975342d6735d7488527f16f383785f, type: 3}
-  respawnDelay: 5
+  respawnDelay: 10
+  itemLifetime: 15
 --- !u!1 &1957652962
 GameObject:
   m_ObjectHideFlags: 0
@@ -340109,7 +340131,7 @@ MonoBehaviour:
     - shoes/Black-formal
     - faces/Boy
   - characterName: Rangga
-    wayIndex: 0
+    wayIndex: 1
     brain: {fileID: 5022602860645237092, guid: b0abbc49f84d11c4999c8ad6a6ccfbc3, type: 3}
     sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
     skinConfigs:
@@ -340143,7 +340165,7 @@ MonoBehaviour:
     - socks/long-white-sock
     - faces/Boy
   - characterName: Calvin
-    wayIndex: 1
+    wayIndex: 0
     brain: {fileID: 5022602860645237092, guid: 63d3cfca82a840f408e2e48fd40767f8, type: 3}
     sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
     skinConfigs:
@@ -340165,7 +340187,7 @@ MonoBehaviour:
     - shirts/Green-t-shirt
     - shoes/Green White shoes
   - characterName: Agnes
-    wayIndex: 1
+    wayIndex: 0
     brain: {fileID: 5022602860645237092, guid: 21c4b98abeeb10e4a872c6568a41bba8, type: 3}
     sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
     skinConfigs:
@@ -340198,7 +340220,7 @@ MonoBehaviour:
     - hairs/long oval with bangs
     - socks/short-white-sock
   - characterName: Bioline
-    wayIndex: 0
+    wayIndex: 1
     brain: {fileID: 5022602860645237092, guid: b0abbc49f84d11c4999c8ad6a6ccfbc3, type: 3}
     sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
     skinConfigs:
@@ -340264,7 +340286,7 @@ MonoBehaviour:
     - hairs/Curtain cut
     - socks/long-black-sock
   - characterName: Theo
-    wayIndex: 0
+    wayIndex: 1
     brain: {fileID: 5022602860645237092, guid: b0abbc49f84d11c4999c8ad6a6ccfbc3, type: 3}
     sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
     skinConfigs:
@@ -340275,7 +340297,7 @@ MonoBehaviour:
     - hairs/buzzcut
     - socks/long-black-sock
   - characterName: Adel
-    wayIndex: 1
+    wayIndex: 0
     brain: {fileID: 5022602860645237092, guid: 21c4b98abeeb10e4a872c6568a41bba8, type: 3}
     sourceAsset: {fileID: 11400000, guid: 00aed71e05600994fafb2111914ecdaa, type: 2}
     skinConfigs:

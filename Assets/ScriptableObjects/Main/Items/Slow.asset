@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Slow
   m_EditorClassIdentifier: Assembly-CSharp::MovementItemData
   powerUpType: 1
-  speedBonus: -1
+  speedBonus: 0.5
   duration: 8
   useParticle: 1
   useCameraShake: 1

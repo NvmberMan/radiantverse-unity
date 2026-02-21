@@ -16,6 +16,10 @@ namespace Main.Gameplay.AI
         [SerializeField] private Transform raySensorRoot;
         [SerializeField] private LayerMask groundMask;
 
+        // --- TAMBAHAN DDA (DYNAMIC DIFFICULTY) ---
+        [Header("Dynamic Difficulty")]
+        [Range(0f, 1f)]
+        public float playerSkillLevel; // 0.0 = Pemain Pemula, 1.0 = Pemain Pro
 
         private CharacterMovement CharacterMovement;
         private CharacterSpawn CharacterSpawn;
@@ -30,6 +34,10 @@ namespace Main.Gameplay.AI
 
         public override void OnEpisodeBegin()
         {
+            // --- TAMBAHAN DDA ---
+            // Saat training, kita acak skill lawan agar AI belajar semua tingkat kesulitan
+            playerSkillLevel = UnityEngine.Random.Range(0f, 1f);
+
             if (GlobalEnvironment.instance == null)
             {
                 Debug.LogError("GlobalEnvironment.instance NULL");
@@ -54,11 +62,10 @@ namespace Main.Gameplay.AI
             {
                 CharacterMovement.rb.linearVelocity = Vector3.zero;
                 CharacterMovement.rb.angularVelocity = Vector3.zero;
-
             }
 
-
-            if (restartToCheckpoint) {
+            if (restartToCheckpoint)
+            {
                 CharacterSpawn.RespawnToCheckpoint();
             }
             else
@@ -66,17 +73,17 @@ namespace Main.Gameplay.AI
                 checkpointIndex = 0;
                 CharacterSpawn.RespawnToStartPoint();
             }
+
             if (env.ways[wayIndex].targetPoints != null && checkpointIndex < env.ways[wayIndex].targetPoints.Length)
             {
                 currentTarget = env.ways[wayIndex].targetPoints[checkpointIndex].transform;
             }
 
-            if(currentTarget != null)
+            if (currentTarget != null)
             {
                 previousDistanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
             }
         }
-
 
         private void FixedUpdate()
         {
@@ -86,25 +93,29 @@ namespace Main.Gameplay.AI
 
         public override void CollectObservations(VectorSensor sensor)
         {
-            // Observasi 1: Status Grounded (1 bool)
+            // --- TAMBAHAN DDA ---
+            // Observasi 0: Beritahu AI seberapa jago lawannya (1 float)
+            sensor.AddObservation(playerSkillLevel);
+
+            // Observasi 1: Status Grounded (1 bool = 1 float)
             sensor.AddObservation(CharacterMovement._isGrounded);
 
             // Observasi 2: Velocity Lokal (3 float)
-            // Menggunakan InverseTransformDirection agar AI tahu kecepatannya relatif terhadap arah hadapnya
             sensor.AddObservation(transform.InverseTransformDirection(CharacterMovement.rb.linearVelocity));
 
             if (currentTarget != null)
             {
                 Vector3 relativeTargetPos = transform.InverseTransformPoint(currentTarget.position);
 
-                // Observasi 3: Arah ke target yang dinormalisasi (Sangat membantu GAIL/Demo)
+                // Observasi 3: Arah ke target (3 float)
                 sensor.AddObservation(relativeTargetPos.normalized);
 
-                // Observasi 4: Jarak relatif (diskalakan agar nilainya tidak terlalu besar/outlier)
+                // Observasi 4: Jarak relatif (1 float)
                 sensor.AddObservation(relativeTargetPos.magnitude / 20f);
             }
             else
             {
+                // Harus balance jumlah observasinya jika target null (3 float + 1 float)
                 sensor.AddObservation(Vector3.zero);
                 sensor.AddObservation(0f);
             }
@@ -136,35 +147,30 @@ namespace Main.Gameplay.AI
             float currentDistance = Vector3.Distance(transform.position, currentTarget.position);
             float diff = previousDistanceToTarget - currentDistance;
 
-            // Berikan reward jika mendekat ke target
             if (diff > 0)
             {
                 AddReward(diff * 0.8f);
                 previousDistanceToTarget = currentDistance;
             }
 
-            // Time Penalty (Agar AI efisien dan tidak diam saja)
-            // Nilainya kecil agar tidak mematikan motivasi eksplorasi
-            AddReward(-0.001f);
+            // --- TAMBAHAN DDA (Time Penalty) ---
+            // Jika lawan pemula (0.0), penalty waktu kecil (-0.001f). 
+            // Jika lawan pro (1.0), penalty waktu besar (-0.005f) agar AI ngebut.
+            float dynamicTimePenalty = Mathf.Lerp(-0.001f, -0.005f, playerSkillLevel);
+            AddReward(dynamicTimePenalty);
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
-        {   
+        {
             var discrete = actionsOut.DiscreteActions;
             discrete[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
-
             discrete[1] = (int)Input.GetAxisRaw("Horizontal") == 1 ? 1 : ((int)Input.GetAxisRaw("Horizontal") == -1 ? 2 : 0);
             discrete[2] = (int)Input.GetAxisRaw("Vertical") == 1 ? 1 : ((int)Input.GetAxisRaw("Vertical") == -1 ? 2 : 0);
         }
 
         private void UpdateGroundNormal()
         {
-            if (Physics.Raycast(
-                transform.position + Vector3.up * 0.2f,
-                Vector3.down,
-                out RaycastHit hit,
-                2f,
-                groundMask))
+            if (Physics.Raycast(transform.position + Vector3.up * 0.2f, Vector3.down, out RaycastHit hit, 2f, groundMask))
             {
                 groundNormal = hit.normal;
             }
@@ -176,16 +182,12 @@ namespace Main.Gameplay.AI
 
         private void AlignRaySensorToGround()
         {
-            Vector3 forwardOnGround =
-                Vector3.ProjectOnPlane(transform.forward, groundNormal).normalized;
+            Vector3 forwardOnGround = Vector3.ProjectOnPlane(transform.forward, groundNormal).normalized;
 
             if (forwardOnGround.sqrMagnitude < 0.001f)
                 return;
 
-            raySensorRoot.rotation = Quaternion.LookRotation(
-                forwardOnGround,
-                groundNormal
-            );
+            raySensorRoot.rotation = Quaternion.LookRotation(forwardOnGround, groundNormal);
         }
 
         private void AdvanceToNextTarget()
@@ -195,18 +197,11 @@ namespace Main.Gameplay.AI
             if (checkpointIndex < GlobalEnvironment.instance.ways[wayIndex].targetPoints.Length)
             {
                 currentTarget = GlobalEnvironment.instance.ways[wayIndex].targetPoints[checkpointIndex].transform;
-
-                previousDistanceToTarget = Vector3.Distance(
-                    transform.position,
-                    currentTarget.position
-                );
-
-                // Reward besar karena berhasil mencapai checkpoint
+                previousDistanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
                 AddReward(10f);
             }
             else
             {
-                // Reward finish
                 AddReward(20f);
                 restartToCheckpoint = false;
                 checkpointIndex = 0;
@@ -218,10 +213,7 @@ namespace Main.Gameplay.AI
         {
             if (other.gameObject.CompareTag("Wall"))
             {
-                if (RemoteTestManager.Instance != null)
-                {
-                    RemoteTestManager.Instance.LogDeath();
-                }
+                if (RemoteTestManager.Instance != null) RemoteTestManager.Instance.LogDeath();
                 AddReward(-1.0f);
                 EndEpisode();
             }
@@ -231,51 +223,38 @@ namespace Main.Gameplay.AI
             }
             else if (other.gameObject.CompareTag("Wall_high"))
             {
-                if (RemoteTestManager.Instance != null)
-                {
-                    RemoteTestManager.Instance.LogDeath();
-                }
+                if (RemoteTestManager.Instance != null) RemoteTestManager.Instance.LogDeath();
                 AddReward(-2.0f);
                 EndEpisode();
             }
-            else if (other.gameObject.CompareTag("Sensor_void"))
+            else if (other.gameObject.CompareTag("Sensor_void") || other.gameObject.CompareTag("Car_Move"))
             {
-                if (RemoteTestManager.Instance != null)
-                {
-                    RemoteTestManager.Instance.LogDeath();
-                }
-                AddReward(-5f);
-                EndEpisode();
-            }
-            else if (other.gameObject.CompareTag("Car_Move"))
-            {
-                if (RemoteTestManager.Instance != null)
-                {
-                    RemoteTestManager.Instance.LogDeath();
-                }
+                if (RemoteTestManager.Instance != null) RemoteTestManager.Instance.LogDeath();
                 AddReward(-5f);
                 EndEpisode();
             }
             else if (other.gameObject.CompareTag("Power_Down"))
             {
-                AddReward(-2.5f);
+                // --- TAMBAHAN DDA (Punishment) ---
+                // Lawan pemula = AI kurang peduli kena Power Down (-2f)
+                // Lawan pro = AI sangat takut kena Power Down (-5f)
+                float dynPunishment = Mathf.Lerp(-2.0f, -5.0f, playerSkillLevel);
+                AddReward(dynPunishment);
             }
             else if (other.gameObject.CompareTag("Power_Up"))
             {
-                AddReward(2.5f);
+                AddReward(5f);
             }
             else if (other.gameObject.CompareTag("TargetPoint"))
             {
                 TargetPoint point = other.GetComponent<TargetPoint>();
-
-                if (point != null && point.targetIndex == checkpointIndex)
-                    AdvanceToNextTarget();
-            }else if (other.gameObject.CompareTag("FinishPoint"))
+                if (point != null && point.targetIndex == checkpointIndex) AdvanceToNextTarget();
+            }
+            else if (other.gameObject.CompareTag("FinishPoint"))
             {
                 AdvanceToNextTarget();
             }
         }
-
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -287,42 +266,25 @@ namespace Main.Gameplay.AI
             {
                 AddReward(-0.5f);
             }
-            else if (collision.gameObject.tag == "Sensor_void")
+            else if (collision.gameObject.CompareTag("Sensor_void") || collision.gameObject.CompareTag("Car_Move"))
             {
-                if (RemoteTestManager.Instance != null)
-                {
-                    RemoteTestManager.Instance.LogDeath();
-                }
-                AddReward(-5f);
-                EndEpisode();
-            }
-            else if (collision.gameObject.CompareTag("Car_Move"))
-            {
-                if (RemoteTestManager.Instance != null)
-                {
-                    RemoteTestManager.Instance.LogDeath();
-                }
+                if (RemoteTestManager.Instance != null) RemoteTestManager.Instance.LogDeath();
                 AddReward(-5f);
                 EndEpisode();
             }
             else if (collision.gameObject.CompareTag("Power_Down"))
             {
-                AddReward(-3.5f);
+                // --- TAMBAHAN DDA (Punishment) ---
+                float dynPunishment = Mathf.Lerp(-2.0f, -5.0f, playerSkillLevel);
+                AddReward(dynPunishment);
             }
             else if (collision.gameObject.CompareTag("Power_Up"))
             {
-                AddReward(3.5f);
+                AddReward(5f);
             }
         }
 
-        public void SetTargetPoint(int target)
-        {
-            //checkpointIndex = target;
-        }
-
-        public void SetFinishPoint(int target)
-        {
-            //throw new System.NotImplementedException();
-        }
+        public void SetTargetPoint(int target) { }
+        public void SetFinishPoint(int target) { }
     }
 }
