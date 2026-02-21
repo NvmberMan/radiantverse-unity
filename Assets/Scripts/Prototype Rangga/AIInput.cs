@@ -36,7 +36,10 @@ namespace Main.Gameplay.AI
         {
             // --- TAMBAHAN DDA ---
             // Saat training, kita acak skill lawan agar AI belajar semua tingkat kesulitan
-            playerSkillLevel = UnityEngine.Random.Range(0f, 1f);
+            if(PlayerSkillManager.Instance != null)
+                playerSkillLevel = PlayerSkillManager.Instance.currentPlayerSkill;
+            else
+                playerSkillLevel = UnityEngine.Random.Range(0f, 1f);
 
             if (GlobalEnvironment.instance == null)
             {
@@ -205,7 +208,7 @@ namespace Main.Gameplay.AI
                 AddReward(20f);
                 restartToCheckpoint = false;
                 checkpointIndex = 0;
-                EndEpisode();
+                //EndEpisode();
             }
         }
 
@@ -215,7 +218,7 @@ namespace Main.Gameplay.AI
             {
                 if (RemoteTestManager.Instance != null) RemoteTestManager.Instance.LogDeath();
                 AddReward(-1.0f);
-                EndEpisode();
+                //EndEpisode();
             }
             else if (other.gameObject.CompareTag("Wall_low"))
             {
@@ -225,13 +228,13 @@ namespace Main.Gameplay.AI
             {
                 if (RemoteTestManager.Instance != null) RemoteTestManager.Instance.LogDeath();
                 AddReward(-2.0f);
-                EndEpisode();
+                //EndEpisode();
             }
             else if (other.gameObject.CompareTag("Sensor_void") || other.gameObject.CompareTag("Car_Move"))
             {
                 if (RemoteTestManager.Instance != null) RemoteTestManager.Instance.LogDeath();
                 AddReward(-5f);
-                EndEpisode();
+                //EndEpisode();
             }
             else if (other.gameObject.CompareTag("Power_Down"))
             {

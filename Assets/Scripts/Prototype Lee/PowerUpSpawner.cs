@@ -61,11 +61,11 @@ public class PowerUpSpawner : MonoBehaviour
         }
 
         // 4. Mulai / Reset Timer Kedaluwarsa
-        if (lifetimeCoroutine != null)
-        {
-            StopCoroutine(lifetimeCoroutine);
-        }
-        lifetimeCoroutine = StartCoroutine(ItemLifetimeRoutine());
+        //if (lifetimeCoroutine != null)
+        //{
+        //    StopCoroutine(lifetimeCoroutine);
+        //}
+        //lifetimeCoroutine = StartCoroutine(ItemLifetimeRoutine());
     }
 
     // --- COROUTINE 1: JIKA ITEM DICUEKIN ---

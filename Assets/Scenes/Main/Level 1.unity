@@ -36842,6 +36842,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+--- !u!114 &420587270 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8783860239970931969, guid: c56105df437dde44cb114a40f6fce595, type: 3}
+  m_PrefabInstance: {fileID: 8291401128035414320}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46f0ac79036b76041a61e303b2797f88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Main.Gameplay.GameManager
 --- !u!43 &421113937
 Mesh:
   m_ObjectHideFlags: 0
@@ -337601,6 +337612,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 300835273432832645, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 300835273432832645, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 300835273432832645, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 420587270}
+    - target: {fileID: 300835273432832645, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 300835273432832645, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SkipCinematic
+      objectReference: {fileID: 0}
+    - target: {fileID: 300835273432832645, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Main.Gameplay.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 300835273432832645, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 930445795942628143, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_Maskable
       value: 1

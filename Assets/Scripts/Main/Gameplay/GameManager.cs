@@ -117,6 +117,28 @@ namespace Main.Gameplay
             Debug.Log(helpController.name);
         }
 
+        public void SkipCinematic()
+        {
+            // 1. Ambil referensi ke Cinemachine Brain (biasanya di Main Camera)
+            var brain = Camera.main.GetComponent<CinemachineBrain>();
+
+            // 2. Matikan director dan nyalakan kamera gameplay
+            cinematicDirector.Stop();
+            cinematicDirector.gameObject.SetActive(false);
+            orbitalFollow.gameObject.SetActive(true);
+
+            // 3. Paksa potong blend yang sedang berjalan
+            if (brain != null)
+            {
+                brain.ActiveBlend = null;
+            }
+
+            // 4. Lakukan Warp agar damping tidak narik kamera dari posisi lama
+            orbitalFollow.ForceCameraPosition(playerTransform.position, playerTransform.rotation);
+
+            OnCinematicFinished();
+        }
+
         private void ApplyRandomBrain(GameObject agentObj, int index)
         {
             if (GlobalEnvironment.instance.aiData == null || index >= GlobalEnvironment.instance.aiData.Count) return;
