@@ -15,7 +15,7 @@ namespace Main.Gameplay
                     RemoteTestManager.Instance.LogFinish();
                 }
                 GameManager.Instance.OnFinishLineCrossed(other.gameObject);
-                other.GetComponent<CharacterMovement>()._isFreeze = true;
+                //other.GetComponent<CharacterMovement>()._isFreeze = true;
             }
         }
     }

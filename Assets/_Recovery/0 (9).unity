@@ -337503,30 +337503,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 930445795942628143, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
-      propertyPath: m_Maskable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 930445795942628143, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1835148373765514051, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
-      propertyPath: m_Maskable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1835148373765514051, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2021155171040675660, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
-      propertyPath: m_Maskable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2021155171040675660, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2199573268524874496, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: GoalEffectView
       value: 
@@ -337550,10 +337526,6 @@ PrefabInstance:
     - target: {fileID: 2199573268524874496, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: rankRewards.Array.data[5].mapUnlockedName
       value: null
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114328187973542395, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3287237273701949107, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_IsActive
@@ -337674,14 +337646,6 @@ PrefabInstance:
     - target: {fileID: 7104533221665899608, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7526547405767718188, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
-      propertyPath: m_Maskable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7526547405767718188, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7743858178799246287, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_fontStyle

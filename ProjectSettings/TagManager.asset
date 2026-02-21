@@ -27,6 +27,9 @@ TagManager:
   - Sensor_vehicle_high
   - Sensor_Car
   - Car_Move
+  - Step_Stone
+  - Power_Down
+  - Power_Up
   layers:
   - Default
   - TransparentFX
