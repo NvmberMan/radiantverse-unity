@@ -1,6 +1,7 @@
 using Firebase.Auth;
 using Firebase.Extensions;
 using Firebase.Firestore;
+using Main.Gameplay;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -312,6 +313,7 @@ namespace Main.Mainmenu
             {
                 ArradiusDollar = 0,
                 Experience = 0,
+                PlayerSkillRating = PlayerSkillManager.Instance.startingSkill,
                 Level = 1,
                 MapUnlocked = new List<string> {
                     "world-001__map-001"
@@ -594,6 +596,26 @@ namespace Main.Mainmenu
                     {
                         Debug.LogError($"Failed to increment {fieldName} in Cloud: {task.Exception}");
                     }
+                });
+        }
+
+        public static void UpdatePlayerSkill(float newSkill)
+        {
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            if (string.IsNullOrEmpty(uid)) return;
+
+            // Update Local
+            if (PlayerLocalData.playerStats != null)
+            {
+                PlayerLocalData.playerStats.PlayerSkillRating = newSkill;
+            }
+
+            // Update Cloud
+            db.Collection("playerStats").Document(uid)
+                .UpdateAsync("PlayerSkillRating", newSkill)
+                .ContinueWithOnMainThread(task => {
+                    if (task.IsCompletedSuccessfully)
+                        Debug.Log($"[Cloud] Skill Rating synced: {newSkill:F2}");
                 });
         }
     }

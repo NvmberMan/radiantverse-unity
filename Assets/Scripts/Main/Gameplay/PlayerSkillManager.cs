@@ -29,7 +29,7 @@ namespace Main.Gameplay // Sesuaikan namespace jika diperlukan
         private Queue<MatchData> matchHistory = new Queue<MatchData>();
 
         [Header("Live Data (Hanya untuk dilihat di Inspector)")]
-        [SerializeField] private float currentPlayerSkill;
+        public float currentPlayerSkill;
 
         private void Awake()
         {
@@ -45,7 +45,7 @@ namespace Main.Gameplay // Sesuaikan namespace jika diperlukan
             }
 
             // Set nilai awal
-            currentPlayerSkill = startingSkill;
+            //currentPlayerSkill = startingSkill;
         }
 
         // --- PANGGIL FUNGSI INI SETIAP KALI PEMAIN MENCAPAI GARIS FINISH ---
@@ -90,6 +90,8 @@ namespace Main.Gameplay // Sesuaikan namespace jika diperlukan
 
             // Pastikan nilai tidak keluar dari rentang 0.0 sampai 1.0
             currentPlayerSkill = Mathf.Clamp(currentPlayerSkill, 0f, 1f);
+
+            Main.Mainmenu.FirestoreModel.UpdatePlayerSkill(currentPlayerSkill);
 
             Debug.Log($"[ML SKILL UPDATE] Win Ratio: {w_Ratio:F2} | Clean Run: {c_Ratio:F2} | FINAL BOT DIFFICULTY: {currentPlayerSkill:F2}");
         }

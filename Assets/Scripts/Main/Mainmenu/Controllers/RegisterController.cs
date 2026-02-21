@@ -1,11 +1,12 @@
 ﻿using Firebase.Auth;
+using Firebase.Extensions;
 using Google;
+using Main.Gameplay;
 using System.Collections;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI; // Penting untuk Button dan Image
-using Firebase.Extensions;
 
 
 namespace Main.Mainmenu
@@ -252,6 +253,7 @@ namespace Main.Mainmenu
             bool statsDone = false;
             FirestoreModel.InitializePlayerStats(user, (stats) => {
                 PlayerLocalData.playerStats = stats;
+                PlayerSkillManager.Instance.currentPlayerSkill = stats.PlayerSkillRating;
                 statsDone = true;
             });
             while (!statsDone) yield return null;

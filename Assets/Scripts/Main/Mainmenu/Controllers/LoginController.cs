@@ -1,6 +1,7 @@
 ﻿using Firebase.Auth;
 using Firebase.Extensions;
 using Google;
+using Main.Gameplay;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -350,7 +351,9 @@ namespace Main.Mainmenu
             bool done = false;
             FirestoreModel.GetPlayerStats(user,
                 data => {
-                    PlayerLocalData.playerStats = data; 
+                    Debug.Log($"getting data {data.PlayerSkillRating}");
+                    PlayerLocalData.playerStats = data;
+                    PlayerSkillManager.Instance.currentPlayerSkill = data.PlayerSkillRating;
                     onSuccess(); done = true;
 
                     FirestoreModel.CheckDailyReward();

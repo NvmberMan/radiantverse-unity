@@ -10,6 +10,7 @@ namespace Main.Mainmenu
         [FirestoreProperty] public int ArradiusDollar { get; set; }
         [FirestoreProperty] public int Experience { get; set; }
         [FirestoreProperty] public int Level { get; set; }
+        [FirestoreProperty] public float PlayerSkillRating { get; set; }
         [FirestoreProperty] public int DailyStreak { get; set; }
         [FirestoreProperty] public int LastClaimedDay { get; set; }
         [FirestoreProperty] public List<string> MapUnlocked { get; set; } = new();
