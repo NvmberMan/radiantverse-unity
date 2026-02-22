@@ -1,42 +1,50 @@
-# Radiantverse Unity
+# 🌌 Radiantverse Unity: Next-Gen 2.5D Competitive Runner
 
-Selamat datang di proyek Unity **Radiantverse**! Proyek ini adalah aplikasi/game berbasis Unity yang memanfaatkan berbagai teknologi modern, mulai dari Machine Learning hingga integrasi layanan Backend.
+Welcome to the official repository of **Radiantverse**, an ambitious 2.5D competitive racing game built with Unity. Radiantverse redefines the runner genre by merging high-speed platforming with a sophisticated combat system and adaptive AI opponents.
 
-## 🚀 Fitur & Teknologi
+---
 
-Proyek ini dibangun menggunakan berbagai aset dan *package* unggulan:
-- **Unity Engine & URP**: Menggunakan Universal Render Pipeline (URP) untuk rendering grafis yang optimal dan berkualitas tinggi di berbagai platform.
-- **Machine Learning (ML-Agents)**: Terintegrasi dengan Unity ML-Agents untuk melatih model kecerdasan buatan (AI) secara *reinforcement learning*.
-- **Firebase & Google Sign-In**: Memiliki integrasi Firebase untuk layanan backend (Otentikasi, Database) serta kemudahan proses login menggunakan Google Sign-In.
-- **Spine 2D**: Memiliki dukungan animasi *skeletal* 2D (tulang) tingkat lanjut dengan menggunakan *package* Spine-Unity.
-- **Cinemachine & Timeline**: Digunakan untuk pengaturan dan pergerakan kamera dinamis serta urutan animasi atau cutscene.
-- **ProBuilder & Polybrush**: Peralatan (tools) untuk *whiteboxing*, pembuatan model 3D, dan desain level langsung di dalam editor Unity.
-- **Parse**: Terintegrasi dengan Parse Server / SDK sebagai alternatif koneksi backend-as-a-service (BaaS).
+## 🎮 Core Gameplay Experience
 
-## 📁 Struktur Proyek Utama
+Radiantverse isn't just about running; it's about mastery. The game features:
+* **High-Octane Competition**: Multi-lane 2.5D racing where every millisecond counts.
+* **Tactical Combat System**: Integrated offensive and defensive abilities, allowing players to disrupt opponents while maintaining momentum.
+* **Dynamic Obstacles**: Procedurally influenced level design that keeps every run fresh and challenging.
 
-Struktur penting di dalam folder `Assets/` diatur sebagai berikut:
-- **`AI Models/` & `ML-Agents/`**: Berisi konfigurasi dan hasil pelatihan (model) kecerdasan buatan.
-- **`Firebase/` & `GoogleSignIn/`**: Modul dan skrip untuk mengamankan otentikasi dan komunikasi data.
-- **`Scripts/`**: Kode sumber (*C# scripts*) untuk mekanik utama, logika permainan, dan pengaturan antarmuka.
-- **`Scenes/`**: Tempat penyimpanan keseluruhan status level atau tampilan yang bisa dijalankan secara spesifik.
-- **`Prefabs/`**: Objek permainan (*GameObject*) yang telah dikonfigurasi dan siap diletakkan berulang-ulang di scene.
-- **`Animation & Animator/`**: Sistem animasi untuk karakter, UI, maupun objek lainnya.
+---
 
-## 🛠️ Cara Memulai (Getting Started)
+## 🚀 Technical Stack & Architecture
 
-### Persyaratan Sistem
-- **Unity Hub** dan **Unity Editor** (sangat direkomendasikan untuk menggunakan versi yang setara ketika proyek dibuat untuk meminimalisasi konflik).
-- Akun Firebase (jika Anda bertugas menangani backend atau database sistem).
+### 1. Visuals & Animation
+* **URP (Universal Render Pipeline)**: Custom shaders and lighting optimized for high-performance mobile and PC rendering.
+* **Spine 2D Integration**: Advanced skeletal animation for fluid character transitions between running, attacking, and dodging.
+* **Cinemachine & Timeline**: Adaptive camera framing that zooms and pans dynamically based on player speed and combat intensity.
+* **ProBuilder & Polybrush**: Rapid level prototyping and "whiteboxing" directly within the Unity Editor for iterative design.
 
-### Instalasi & Menjalankan Proyek
-1. *Clone* atau *Download* arsip proyek ini ke mesin lokal Anda.
-2. Buka **Unity Hub**, pilih opsi **Open** -> **Add project from disk**, kemudian arahkan ke folder utama `radiantverse-unity`.
-3. Buka proyek tersebut. Unity akan mengambil beberapa waktu di awal untuk memproses aset dan meresolusi *packages* (Universal RP, Firebase, ML-Agents).
-4. Setelah terbuka, carilah *scene* yang Anda ingin jalankan di struktur direktori `Assets/Scenes/`. Klik 2 kali, lalu tekan tombol **Play** ▶️ di panel tengah atas Unity.
+### 2. Artificial Intelligence (ML-Agents)
+* **Reinforcement Learning**: Opponents are trained using **Unity ML-Agents** to simulate human-like competitive behavior.
+* **Curriculum Learning**: AI "Bot" agents undergo staged training to master complex maneuvers, from basic jumping to advanced combat tactics.
+* **Inference**: Pre-trained models (.onnx) are deployed for real-time, low-overhead AI competition.
 
-## 📝 Catatan Penting
-- **Konfigurasi Firebase:** Pastikan bahwa *file* kredensial seperti `google-services.json` (Android) atau `GoogleService-Info.plist` (iOS) sudah tersedia di folder yang sesuai dengan environment Anda sebelum melakukan proses *Build*.
+### 3. Backend & Services
+* **Firebase Ecosystem**: 
+    * **Authentication**: Secure login via Google Sign-In.
+    * **Realtime Database/Firestore**: Cloud-based player profiles, progression, and leaderboards.
+* **Parse Server SDK**: Utilized as a flexible Logic Layer for complex data relations and backend-as-a-service (BaaS) functionality.
 
-## 📄 Lisensi
-*(Mohon cantumkan/perbarui tipe lisensi proyek Anda di bagian ini)*
+---
+
+## 📁 Project Structure
+
+```text
+Assets/
+├── 🤖 ML-Agents/       # Neural network configurations, Brains, and .onnx models.
+├── ⚔️ Scripts/          # C# Source Code
+│   ├── Core/           # Game Managers and Singleton patterns.
+│   ├── FSM/            # Finite State Machine for Player/AI logic.
+│   ├── Combat/         # Damage dealers, hitboxes, and ability logic.
+│   └── UI/             # Responsive HUD and Menu systems.
+├── 🦴 Spine/            # Character skeletons, Atlases, and Animation Controllers.
+├── 🏗️ LevelDesign/     # Environment prefabs, materials, and ProBuilder data.
+├── 🔌 Integrations/    # Third-party SDKs (Firebase, GoogleSignIn, Parse).
+└── 🎬 Scenes/           # Main Menu, Training Grounds, and Competitive Levels.
