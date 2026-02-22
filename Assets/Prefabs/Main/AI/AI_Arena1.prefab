@@ -391,8 +391,6 @@ GameObject:
   - component: {fileID: 2767465497317419471}
   - component: {fileID: 6461774600327725160}
   - component: {fileID: 7643371693369167167}
-  - component: {fileID: 3654182364921670654}
-  - component: {fileID: 8285012030055370654}
   - component: {fileID: 2549937013338871165}
   - component: {fileID: 3981682476607720276}
   - component: {fileID: 6940522708693833003}
@@ -501,30 +499,6 @@ MonoBehaviour:
   fallThreshold: -15
   startPoint: {x: 0, y: 0, z: 0}
   spawnPoint: {x: 0, y: 0, z: 0}
---- !u!114 &3654182364921670654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5268295388888470089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43cef07e7c74c9847a6f51d9793bbc49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputJoystick
---- !u!114 &8285012030055370654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5268295388888470089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 563dcdfd8226e554a839ab8822a06532, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
 --- !u!114 &2549937013338871165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,7 +735,7 @@ Transform:
   m_GameObject: {fileID: 6955356081537224181}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.189, z: 50.8}
+  m_LocalPosition: {x: 0, y: 0.189, z: -0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
