@@ -230,11 +230,16 @@ namespace Main.Gameplay.AI
                 AddReward(-2.0f);
                 //EndEpisode();
             }
-            else if (other.gameObject.CompareTag("Sensor_void") || other.gameObject.CompareTag("Car_Move"))
+            else if (other.gameObject.CompareTag("Sensor_void"))
+            {
+                //if (RemoteTestManager.Instance != null) RemoteTestManager.Instance.LogDeath();
+                AddReward(-5f);
+                //EndEpisode();
+            }else if (other.gameObject.CompareTag("Car_Move"))
             {
                 if (RemoteTestManager.Instance != null) RemoteTestManager.Instance.LogDeath();
                 AddReward(-5f);
-                //EndEpisode();
+                EndEpisode();
             }
             else if (other.gameObject.CompareTag("Power_Down"))
             {

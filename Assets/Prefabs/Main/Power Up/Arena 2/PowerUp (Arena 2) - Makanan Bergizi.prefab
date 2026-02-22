@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 2355293033699754504}
   m_Layer: 7
   m_Name: PowerUp (Arena 2) - Makanan Bergizi
-  m_TagString: Untagged
+  m_TagString: Power_Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

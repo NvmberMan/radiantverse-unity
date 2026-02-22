@@ -574,7 +574,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   checkpointIndex: 0
   wayIndex: 0
-  restartToCheckpoint: 0
+  restartToCheckpoint: 1
   raySensorRoot: {fileID: 1147178553098697474}
   groundMask:
     serializedVersion: 2

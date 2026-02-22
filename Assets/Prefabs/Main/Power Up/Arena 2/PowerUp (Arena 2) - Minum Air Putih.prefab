@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5256675934453319736}
   m_Layer: 7
   m_Name: PowerUp (Arena 2) - Minum Air Putih
-  m_TagString: Untagged
+  m_TagString: Power_Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

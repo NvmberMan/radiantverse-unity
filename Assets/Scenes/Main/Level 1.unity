@@ -241764,10 +241764,10 @@ MonoBehaviour:
         z: 4.5185237
       Rotation:
         value:
-          x: 0.25853604
-          y: 0.34470448
-          z: -0.24939355
-          w: 0.8672606
+          x: 0.25853598
+          y: 0.3447045
+          z: -0.24939354
+          w: 0.8672605
     - Position:
         x: 16.385338
         y: -26.124718
@@ -241782,9 +241782,9 @@ MonoBehaviour:
         z: 4.5344057
       Rotation:
         value:
-          x: 0.25200424
-          y: 0.25922388
-          z: -0.05085415
+          x: 0.25200427
+          y: 0.25922385
+          z: -0.05085416
           w: 0.930973
     - Position:
         x: 22.997547
@@ -241800,9 +241800,9 @@ MonoBehaviour:
         z: 2.730148
       Rotation:
         value:
-          x: 0.33396077
+          x: 0.3339607
           y: 0.7616292
-          z: -0.12430457
+          z: -0.124304526
           w: 0.5412388
     - Position:
         x: 28.727463
@@ -241839,7 +241839,7 @@ MonoBehaviour:
           x: 0.28395298
           y: 0.62069255
           z: -0.27400076
-          w: 0.6775212
+          w: 0.67752117
     - Position:
         x: 41.90887
         y: -50.108536
@@ -241854,7 +241854,7 @@ MonoBehaviour:
         z: 2.3435917
       Rotation:
         value:
-          x: 0.5521981
+          x: 0.55219805
           y: 0.3486767
           z: 0.23679402
           w: 0.7193264
@@ -241874,8 +241874,8 @@ MonoBehaviour:
         value:
           x: 0.3940352
           y: 0.59535617
-          z: -0.08582795
-          w: 0.6949251
+          z: -0.085827984
+          w: 0.69492507
     - Position:
         x: 53.181915
         y: -59.503754
@@ -337701,6 +337701,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3439264628897964378, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3534836469756227571, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
