@@ -104,7 +104,7 @@ namespace Main.Mainmenu
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isCinematic)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (!GameManager.Instance.isPaused) Pause();
                 else Resume();
@@ -129,7 +129,7 @@ namespace Main.Mainmenu
                     playerInput.enabled = true;
                     playerInputJoystick.enabled = false;
 
-                    if (!GameManager.Instance.isPaused && !GameManager.Instance.isGameEnded || GameManager.Instance.isCinematic)
+                    if (!GameManager.Instance.isPaused)
                     {
                         Cursor.visible = false;
                         Cursor.lockState = CursorLockMode.Locked;

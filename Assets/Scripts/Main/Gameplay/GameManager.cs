@@ -16,7 +16,6 @@ namespace Main.Gameplay
         public static GameManager Instance;
 
         [Header("Game State")]
-        public bool isGameEnded = false;
         public bool isGameActive = true;
         public bool isPaused = false;
         public int currentFinishRank = 1;
@@ -266,7 +265,6 @@ namespace Main.Gameplay
 
             if (racer.CompareTag("Player"))
             {
-                isGameEnded = true;
                 isGameActive = false;
                 gameEndedController.GameEnded(finishRank);
 

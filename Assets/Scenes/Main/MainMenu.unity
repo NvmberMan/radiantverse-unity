@@ -8100,7 +8100,7 @@ GameObject:
   - component: {fileID: 416934783}
   - component: {fileID: 416934782}
   - component: {fileID: 416934781}
-  - component: {fileID: 416934786}
+  - component: {fileID: 416934784}
   - component: {fileID: 416934785}
   m_Layer: 5
   m_Name: BaseView
@@ -8175,6 +8175,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &416934784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416934780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3437ac28440c2564eaab2c9d201b0c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::View
+  id: base
+  panel: {fileID: 416934780}
 --- !u!114 &416934785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8191,20 +8205,6 @@ MonoBehaviour:
   - {fileID: 1784064240}
   - {fileID: 1638690235}
   - {fileID: 1550660773}
---- !u!114 &416934786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416934780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f08e89a9b6e7714f91f874716a71a8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.LoginView
-  id: base
-  panel: {fileID: 416934780}
 --- !u!1 &420282802
 GameObject:
   m_ObjectHideFlags: 0
@@ -9571,7 +9571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LoginController
   id: login
   viewList:
-  - {fileID: 416934786}
+  - {fileID: 416934784}
   inputEmail: {fileID: 1784064240}
   inputPassword: {fileID: 1638690235}
   rememberMeToggle: {fileID: 1334162785}
@@ -20772,7 +20772,7 @@ GameObject:
   - component: {fileID: 920433932}
   - component: {fileID: 920433934}
   - component: {fileID: 920433933}
-  - component: {fileID: 920433937}
+  - component: {fileID: 920433935}
   - component: {fileID: 920433936}
   m_Layer: 5
   m_Name: BaseView
@@ -20846,6 +20846,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920433931}
   m_CullTransparentMesh: 1
+--- !u!114 &920433935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920433931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3437ac28440c2564eaab2c9d201b0c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::View
+  id: base
+  panel: {fileID: 920433931}
 --- !u!114 &920433936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20863,20 +20877,6 @@ MonoBehaviour:
   - {fileID: 2000474805}
   - {fileID: 1570241181}
   - {fileID: 1054315728}
---- !u!114 &920433937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920433931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f87f0e595fed6646bbc08e701e02eac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.RegisterView
-  id: base
-  panel: {fileID: 920433931}
 --- !u!1 &921793854
 GameObject:
   m_ObjectHideFlags: 0
@@ -27832,7 +27832,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -82.943375}
+  m_AnchoredPosition: {x: 0, y: -82.94336}
   m_SizeDelta: {x: 0, y: -165.8873}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1164197542
@@ -34229,7 +34229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RegisterController
   id: register
   viewList:
-  - {fileID: 920433937}
+  - {fileID: 920433935}
   inputEmail: {fileID: 2006471509}
   inputPassword: {fileID: 2000474805}
   inputConfirmPassword: {fileID: 1570241181}
@@ -38060,7 +38060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.Controller
   id: menu
   viewList:
-  - {fileID: 1722986877}
+  - {fileID: 1722986873}
 --- !u!1 &1608078288
 GameObject:
   m_ObjectHideFlags: 0
@@ -41039,7 +41039,7 @@ GameObject:
   - component: {fileID: 1722986872}
   - component: {fileID: 1722986876}
   - component: {fileID: 1722986875}
-  - component: {fileID: 1722986877}
+  - component: {fileID: 1722986873}
   - component: {fileID: 1722986874}
   m_Layer: 5
   m_Name: BaseView
@@ -41071,6 +41071,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1722986873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722986871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3437ac28440c2564eaab2c9d201b0c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::View
+  id: base
+  panel: {fileID: 1722986871}
 --- !u!114 &1722986874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41124,20 +41138,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722986871}
   m_CullTransparentMesh: 1
---- !u!114 &1722986877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722986871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 388d71884a3256f44a9b4cbc20a2962f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.MenuView
-  id: base
-  panel: {fileID: 1722986871}
 --- !u!1 &1723090124
 GameObject:
   m_ObjectHideFlags: 0
