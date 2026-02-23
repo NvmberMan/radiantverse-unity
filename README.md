@@ -1,5 +1,9 @@
 # RadiantVerse (Unity) — Fuel Your Adrenaline in the World of RadiantVerse!
 
+<p align="center">
+  <img src="Docs/logo.png" alt="RadiantVerse Banner" width="100%">
+</p>
+
 Welcome to **RadiantVerse**, a competitive endless runner game where every second matters. Prepare your reflexes to face fast-paced, high-intensity running challenges filled with unpredictable obstacles.
 
 ## Why Should You Play RadiantVerse?
@@ -70,7 +74,7 @@ This project uses a specific Unity version, so it must be installed through the 
 1. Open your browser and go to:
    https://unity.com/releases/editor/archive
 2. Select the **Unity 6** tab.
-3. Locate **Unity 6000.0.21f1** (or the required Unity 6 version).
+3. Locate **Unity 6000.2.10f1** (or the required Unity 6 version).
 4. Click **Unity Hub** to start the installation.
 5. In the **Install Modules** window, make sure the following modules are enabled:
    - Android Build Support (SDK & NDK Tools)
@@ -93,7 +97,7 @@ cd radiantverse-unity
 2. Click **Add → Add project from disk**.
 3. Select the **radiantverse-unity** folder.
 4. Open the project.
-5. If prompted, select Unity version **6000.0.21f1**.
+5. If prompted, select Unity version **6000.2.10f1**.
 
 ### Import Process
 
