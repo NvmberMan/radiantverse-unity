@@ -337614,7 +337614,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 112790390847161167, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 300835273432832645, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -337706,11 +337706,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3534836469756227571, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4285977201531327594, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4650964456850985803, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: subRankView
@@ -337738,7 +337738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5968028201704021134, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: cameraMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6426504419919860941, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_IsActive
@@ -337747,6 +337747,10 @@ PrefabInstance:
     - target: {fileID: 6468959027170417226, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_text
       value: Beat the clock and go to BLI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577608038886505412, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7038682512563627632, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_Pivot.x
@@ -337850,7 +337854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8981651240962137203, guid: 352dbea249bd9aa43874edc2a244c3a7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
