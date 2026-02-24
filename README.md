@@ -1,4 +1,4 @@
-# RadiantVerse (Unity) — Fuel Your Adrenaline in the World of RadiantVerse!
+# RadiantVerse (Unity)
 
 <p align="center">
   <img src="Docs/logo.png" alt="RadiantVerse Banner" width="100%">
@@ -86,9 +86,10 @@ This project uses a specific Unity version, so it must be installed through the 
 
 Open **Terminal** or **Git Bash**, then run the following commands:
 
+```
 git clone https://github.com/NvmberMan/radiantverse-unity.git
 cd radiantverse-unity
-
+```
 ---
 
 ## 4. Opening the Project & Initialization
