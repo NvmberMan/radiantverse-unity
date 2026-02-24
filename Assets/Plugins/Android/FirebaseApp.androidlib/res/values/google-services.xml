@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://radiantverse-4ef89-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+  <string name="gcm_defaultSenderId" translatable="false">230119757559</string>
+  <string name="google_storage_bucket" translatable="false">radiantverse-4ef89.firebasestorage.app</string>
+  <string name="project_id" translatable="false">radiantverse-4ef89</string>
+  <string name="google_api_key" translatable="false">AIzaSyCxlhqKDCR6h8uMD_ThKZILv3jcU8UxP44</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCxlhqKDCR6h8uMD_ThKZILv3jcU8UxP44</string>
+  <string name="google_app_id" translatable="false">1:230119757559:android:5c0b7e02277296063525f2</string>
+  <string name="default_web_client_id" translatable="false">230119757559-h7s33t3pl6j09a1760qlpe5622q6ce18.apps.googleusercontent.com</string>
+</resources>

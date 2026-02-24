@@ -1,0 +1,275 @@
+using Firebase.Auth;
+using Spine;
+using Spine.Unity;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Main.Mainmenu
+{
+    [System.Serializable]
+    public class CustomizeCategory
+    {
+        public string categoryName;
+        public NavbarItemButton navbarController;
+        public bool canBeEmpty;
+    }
+
+    public class CustomizeView : View
+    {
+        [Header("Spine Components")]
+        public SkeletonGraphic skeletonGraphic;
+
+        [Header("Global UI References")]
+        public ScrollRect scrollRect;
+        public Transform itemContainer;
+        public AccessoryItemUI itemPrefab;
+        public AccessoryItemUI unuseItemPrefab;
+
+        [Header("Flexible Categories")]
+        public List<CustomizeCategory> categories;
+
+        [Header("Database & Settings")]
+        public List<AccessoryData> allAccessoryDatabase;
+        public GameObject saveButton;
+
+        private List<string> draftSkins;
+        private int currentCategoryIndex = 0;
+
+        private List<string> blackListBoySkin = new()
+        {
+            "faces/Girl",
+            "hairs/ponytail with bangs",
+            "pants/Sporty-short-pink",
+            "shirts/Sporty pink",
+            "shoes/Pink sport",
+        };
+
+        private List<string> blackListGirlSkin = new()
+        {
+            "faces/Boy",
+            "hairs/Ivy league",
+            "pants/Sporty-short-blue",
+            "shirts/Sporty-blue",
+            "shoes/Sporty-aqua",
+        };
+
+        private List<string> arradiusLook = new List<string>
+        {
+            "shirts/Half-zip-ARRADIUS",
+        };
+
+        private void Awake()
+        {
+            for (int i = 0; i < categories.Count; i++)
+            {
+                int index = i;
+                if (categories[i].navbarController != null)
+                {
+                    Button btn = categories[i].navbarController.GetComponent<Button>();
+                    if (btn != null)
+                    {
+                        btn.onClick.AddListener(() => SwitchCategory(index));
+                    }
+                }
+            }
+        }
+
+
+        public override void Show()
+        {
+            base.Show();
+            draftSkins = new List<string>(PlayerLocalData.inventoryData.SelectedSkins);
+            saveButton.SetActive(false);
+            ApplySkinsFromData();
+
+            SwitchCategory(0);
+        }
+
+        public void ApplySkinsFromData()
+        {
+            if (PlayerLocalData.inventoryData == null) return;
+
+            List<string> selected = PlayerLocalData.inventoryData.SelectedSkins;
+            CombineSkins(selected.ToArray());
+        }
+        public void CombineSkins(string[] skinNames)
+        {
+            var skeleton = skeletonGraphic.Skeleton;
+            Skin combinedSkin = new Skin("Combined");
+
+            foreach (string skinName in skinNames)
+            {
+                Skin sourceSkin = skeleton.Data.FindSkin(skinName);
+                if (sourceSkin != null)
+                    combinedSkin.AddSkin(sourceSkin);
+                else
+                    Debug.LogWarning($"Skin {skinName} tidak ditemukan di Atlas!");
+            }
+
+            skeleton.SetSkin(combinedSkin);
+            skeleton.SetSlotsToSetupPose();
+            skeletonGraphic.OverrideTexture = null;
+            skeletonGraphic.UpdateMesh();
+        }
+
+        public void SwitchCategory(int index)
+        {
+            if (index < 0 || index >= categories.Count) return;
+
+            currentCategoryIndex = index;
+
+            scrollRect.horizontalNormalizedPosition = 0;
+
+            UpdateNavbarVisuals();
+            RefreshUI();
+        }
+
+        private void UpdateNavbarVisuals()
+        {
+            for (int i = 0; i < categories.Count; i++)
+            {
+                var nav = categories[i].navbarController;
+                if (nav != null)
+                {
+                    bool isActive = (i == currentCategoryIndex);
+                    if (nav.ActivePreview != null) nav.ActivePreview.SetActive(isActive);
+                    if (nav.DisactivePreview != null) nav.DisactivePreview.SetActive(!isActive);
+                }
+            }
+        }
+
+        public void RefreshUI()
+        {
+            if (PlayerLocalData.inventoryData == null) return;
+
+            // Bersihkan container
+            foreach (Transform child in itemContainer) Destroy(child.gameObject);
+
+            CustomizeCategory currentCat = categories[currentCategoryIndex];
+
+            // --- LOGIKA TOMBOL UNUSE ---
+            if (currentCat.canBeEmpty)
+            {
+                AccessoryItemUI unuseBtn = Instantiate(unuseItemPrefab, itemContainer);
+                unuseBtn.itemNameText.text = "No " + currentCat.categoryName;
+                // Kita gunakan ID khusus atau string kosong untuk menandakan "lepas item"
+                // Setup tombol ini agar memanggil OnUnuseClicked
+                Button btn = unuseBtn.GetComponent<Button>();
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => OnUnuseClicked(currentCat.categoryName));
+            }
+            // ---------------------------
+
+            foreach (string unlockedID in PlayerLocalData.inventoryData.UnlockedAccessories)
+            {
+                if (PlayerLocalData.inventoryData.Gender == 0 && blackListBoySkin.Contains(unlockedID)) continue;
+                if (PlayerLocalData.inventoryData.Gender == 1 && blackListGirlSkin.Contains(unlockedID)) continue;
+
+                AccessoryData data = allAccessoryDatabase.Find(x => x.spineSkinName == unlockedID);
+
+                if (data != null && data.category == currentCat.categoryName)
+                {
+                    AccessoryItemUI newItem = Instantiate(itemPrefab, itemContainer);
+                    newItem.Setup(data, this);
+                }
+            }
+
+            Canvas.ForceUpdateCanvases();
+            if (itemContainer.TryGetComponent<RectTransform>(out var rect))
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
+            }
+        }
+
+        public void OnItemClicked(string category, string skinName)
+        {
+            int index = draftSkins.FindIndex(s => s.Contains(category + "/"));
+
+            if (index != -1) draftSkins[index] = skinName;
+            else draftSkins.Add(skinName);
+
+            bool isModified = !IsListEqual(draftSkins, PlayerLocalData.inventoryData.SelectedSkins);
+            saveButton.SetActive(isModified);
+
+            AudioManager.Instance.PlaySFX("equip item");
+
+            RefreshCharacterPreview();
+        }
+
+        public void SaveChanges()
+        {
+            PlayerLocalData.inventoryData.SelectedSkins = new List<string>(draftSkins);
+            string uid = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            FirestoreModel.UpdateSelectedSkins(uid, PlayerLocalData.inventoryData.SelectedSkins);
+
+            saveButton.SetActive(false);
+
+            if (PlayerLocalData.playerStats != null)
+            {
+                if (IsArradiusLookEquipped(draftSkins) && !AchievementManager.Instance.CheckAchievement("The Radiant"))
+                {
+                    FirestoreModel.UnlockAchievement("The Radiant");
+                    MenuManager.instance.GetController<UniversalController>().ShowAchievementUnlockedPopup("The Radiant");
+                }
+            }
+        }
+
+        public void OnUnuseClicked(string category)
+        {
+            int index = draftSkins.FindIndex(s => s.StartsWith(category + "/"));
+
+            if (index != -1)
+            {
+                draftSkins.RemoveAt(index);
+
+                bool isModified = !IsListEqual(draftSkins, PlayerLocalData.inventoryData.SelectedSkins);
+                saveButton.SetActive(isModified);
+
+                AudioManager.Instance.PlaySFX("equip item");
+                RefreshCharacterPreview();
+            }
+        }
+
+        public void RefreshCharacterPreview()
+        {
+            if (draftSkins == null || skeletonGraphic == null) return;
+
+            var skeleton = skeletonGraphic.Skeleton;
+            Skin combinedSkin = new Skin("CombinedPreview");
+
+            foreach (string skinName in draftSkins)
+            {
+                Skin sourceSkin = skeleton.Data.FindSkin(skinName);
+                if (sourceSkin != null) combinedSkin.AddSkin(sourceSkin);
+            }
+
+            skeleton.SetSkin(combinedSkin);
+            skeleton.SetSlotsToSetupPose();
+            skeletonGraphic.UpdateMesh();
+        }
+
+        private bool IsListEqual(List<string> a, List<string> b)
+        {
+            if (a.Count != b.Count) return false;
+            List<string> sortedA = new List<string>(a);
+            List<string> sortedB = new List<string>(b);
+            sortedA.Sort();
+            sortedB.Sort();
+            for (int i = 0; i < sortedA.Count; i++) if (sortedA[i] != sortedB[i]) return false;
+            return true;
+        }
+
+        private bool IsArradiusLookEquipped(List<string> currentEquipped)
+        {
+            foreach (string requiredSkin in arradiusLook)
+            {
+                if (!currentEquipped.Contains(requiredSkin))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+}

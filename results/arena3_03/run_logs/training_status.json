@@ -1,0 +1,29 @@
+{
+    "BotArena3": {
+        "checkpoints": [
+            {
+                "steps": 406712,
+                "file_path": "results\\arena3_03\\BotArena3\\BotArena3-406712.onnx",
+                "reward": -30.86953002539548,
+                "creation_time": 1769414848.971419,
+                "auxillary_file_paths": [
+                    "results\\arena3_03\\BotArena3\\BotArena3-406712.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 406712,
+            "file_path": "results\\arena3_03\\BotArena3.onnx",
+            "reward": -30.86953002539548,
+            "creation_time": 1769414848.971419,
+            "auxillary_file_paths": [
+                "results\\arena3_03\\BotArena3\\BotArena3-406712.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

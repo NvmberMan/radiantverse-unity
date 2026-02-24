@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aacd85a6694f29040aec468a67cc1a54, type: 3}
+  m_Name: Basic Accessories
+  m_EditorClassIdentifier: Assembly-CSharp::Main.Mainmenu.CrateData
+  displayName: Basic Accessories
+  icon: {fileID: 21300000, guid: efd20aa09f1a6864ea05be9fe514eade, type: 3}
+  price: 0
+  iconNoBackground: {fileID: 21300000, guid: 630669d809facb6439aacede31a569e4, type: 3}
+  rewardPool:
+  - {fileID: 11400000, guid: ec1ba6f32a52044428e25d06818fc493, type: 2}
+  - {fileID: 11400000, guid: abcdce4c91ed8214c9b072351f4e15d3, type: 2}
+  - {fileID: 11400000, guid: 126c000ae3f5ebb4fb9097bdfa86e5bf, type: 2}

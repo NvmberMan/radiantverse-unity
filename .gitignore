@@ -97,3 +97,9 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+Assets/External/Public Assets/ExternalDependencyManager/Editor/1.2.186/Google.IOSResolver.dll.meta
+Assets/External/Public Assets/ExternalDependencyManager/Editor/1.2.186/Google.JarResolver.dll.meta
+Assets/External/Public Assets/ExternalDependencyManager/Editor/1.2.186/Google.PackageManagerResolver.dll.meta
+Assets/External/Public Assets/ExternalDependencyManager/Editor/1.2.186/Google.VersionHandlerImpl.dll.meta
+Assets/External/Public Assets/ExternalDependencyManager/Editor/external-dependency-manager_version-1.2.186_manifest.txt.meta
+Assets/External/Public Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll.meta
