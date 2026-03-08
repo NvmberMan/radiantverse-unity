@@ -38,20 +38,11 @@ RadiantVerse has been deployed on multiple platforms:
 - **Google Play Store (Android)**  
   https://play.google.com/store/apps/details?id=com.arradius.radiantverse
 
-### Play Store Early Access Notice
+---
 
-RadiantVerse is currently available on **Google Play Store (Early Access)**.  
-At this stage, the game is **not yet publicly accessible to all users**.
+# Project Setup Guide
 
-To request access:
-1. Please submit your email address using the form below.
-2. Approved emails will be added to the Early Access tester list.
-3. You will receive access once your email has been registered.
-
-**Early Access Registration Form:**  
-https://forms.gle/sXoTnJ3oLQSdJG5Z6
-
-> Note: This Early Access phase is intended for testing, feedback collection, and gameplay improvements before the public release.
+If you want to open or develop this project locally, follow the setup guide below.
 
 ---
 
